@@ -25,6 +25,9 @@ scripts/link-skills.ps1          Windows PowerShell
 CLAUDE.md                        imports AGENTS.md for older Claude Code
 ```
 
+Other host directories (`.opencode/skills`, `.cursor/skills`, `.gemini/skills`)
+exist only when the link script was explicitly told to wire them.
+
 ## Invariants
 
 Breaking these breaks every host at once. Do not change them without an explicit
@@ -32,14 +35,14 @@ request.
 
 1. `.agents/skills/<name>/SKILL.md` is the only copy. Never duplicate a skill
    into a host-specific directory.
-2. `.claude/skills` and `.github/skills` are relative symlinks to
-   `../.agents/skills`. Never replace them with real directories and never commit
-   a copy of the tree.
-3. Symlink targets stay relative. Git must record both as mode `120000`.
-4. Never add `.agents/`, `.claude/skills`, or `.github/skills` to `.gitignore`.
-5. Do not add `.opencode/skills`, `.cursor/skills`, `.codex/skills`, or
-   `.gemini/skills`. Those hosts already read `.agents/skills`, and a second path
-   surfaces every skill twice.
+2. Every agent link is a relative symlink to `../.agents/skills`. Never replace
+   one with a real directory and never commit a copy of the tree.
+3. Symlink targets stay relative. Git must record every link as mode `120000`.
+4. Never add `.agents/` or any agent link to `.gitignore`.
+5. Default wiring is `claude` + `copilot`. `.opencode/skills`, `.cursor/skills`,
+   and `.gemini/skills` are opt-in, because those hosts already read
+   `.agents/skills` and a second path surfaces every skill twice. Never commit an
+   opt-in link without a reason.
 6. `name` matches the directory name exactly: lowercase kebab-case, 1-64 chars,
    no leading, trailing, or doubled hyphens.
 7. Frontmatter stays within the standard: `name`, `description`, `license`,
@@ -59,7 +62,7 @@ request.
 4. Add a bullet under "The skills" in `README.md` with what it does, what
    triggers it, and what it needs to run.
 5. Run the validation in the next section.
-6. No link work is needed: both links point at the whole directory.
+6. No link work is needed: the links point at the whole directory.
 
 ## Changing or removing a skill
 
@@ -89,7 +92,7 @@ exactly what a host advertises.
 - [ ] `description` states what, when, and the exclusions, within 1024 chars.
 - [ ] `SKILL.md` is under 500 lines and `skills-ref validate` passes.
 - [ ] The README bullet exists and matches the skill's real requirements.
-- [ ] `git ls-files -s` still shows `120000` for both links.
+- [ ] `git ls-files -s` still shows `120000` for every link.
 - [ ] `bash -n scripts/link-skills.sh` passes and both scripts report `ok`.
 - [ ] No secrets, `.env` files, or generated artifacts are staged.
 
@@ -101,15 +104,22 @@ exactly what a host advertises.
 - Add a host directory only when that host genuinely cannot read
   `.agents/skills`. When you do, add a link, a README row, and a `.gitignore`
   note.
-- Keep `link-skills.sh` and `link-skills.ps1` behaviourally identical: idempotent,
-  `--force`/`-Force` to replace, and self-healing for placeholder files left by a
-  `core.symlinks=false` checkout.
+- Keep `link-skills.sh` and `link-skills.ps1` behaviourally identical: the same
+  environment names and aliases, `claude` + `copilot` by default, `--all`/`-All`
+  for every host, `--force`/`-Force` to replace, and self-healing for placeholder
+  files left by a `core.symlinks=false` checkout.
 - Prefer portability over host-specific features, and describe limits in
   `compatibility` instead of assuming a capable runtime.
 
 ## Commands
 
 ```bash
-./scripts/link-skills.sh      # macOS, Linux, Git Bash, WSL
-./scripts/link-skills.ps1     # Windows PowerShell or pwsh
+./scripts/link-skills.sh                  # claude + copilot (default)
+./scripts/link-skills.sh cursor           # one host
+./scripts/link-skills.sh --all --force    # every host, replace anything odd
+```
+
+```powershell
+./scripts/link-skills.ps1 -All
+./scripts/link-skills.ps1 claude cursor -Force
 ```

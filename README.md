@@ -81,12 +81,13 @@ agent-skills/
 ```
 
 Adding a skill means creating `.agents/skills/<name>/SKILL.md` and a bullet in
-the list above. Nothing else — both links point at the whole directory, so every
+the list above. Nothing else — the links point at the whole directory, so every
 agent sees it immediately.
 
-Deliberately **not** created: `.opencode/skills`, `.cursor/skills`,
-`.codex/skills`, `.gemini/skills`. Each of those tools already reads
-`.agents/skills`, and a second path would surface the same skill twice.
+Not created by default: `.opencode/skills`, `.cursor/skills`, `.gemini/skills`.
+Each of those tools already reads `.agents/skills`, so a second path would
+surface the same skill twice. The link script can add one anyway when a host or
+CI job only looks at its native directory — name the environment or pass `--all`.
 
 ## Nuances per app
 
@@ -188,17 +189,33 @@ The links are relative, so the repo works after a clone at any path.
   content is byte-identical and hosts deduplicate by name or resolved real path,
   so it is harmless.
 
-Repair or recreate the links with the script for the platform:
+Wire the catalog with the script for the platform. With no arguments it wires
+`claude` and `copilot`, the two hosts that cannot rely on `.agents/skills`
+alone. Name environments to wire only those, or use `--all` for every host:
 
 ```bash
-./scripts/link-skills.sh      # macOS, Linux, Git Bash, WSL
+./scripts/link-skills.sh                    # claude + copilot
+./scripts/link-skills.sh cursor             # only .cursor/skills
+./scripts/link-skills.sh claude copilot cursor
+./scripts/link-skills.sh --all --force      # every host, replace anything odd
 ```
 
 ```powershell
-./scripts/link-skills.ps1     # Windows PowerShell or pwsh
+./scripts/link-skills.ps1                   # claude + copilot
+./scripts/link-skills.ps1 -All
+./scripts/link-skills.ps1 claude cursor -Force
 ```
 
-Both are idempotent, take a force flag (`--force` / `-Force`) to replace
+| Environment | Path wired |
+| --- | --- |
+| `claude` | `.claude/skills` |
+| `copilot` | `.github/skills` |
+| `opencode` | `.opencode/skills` |
+| `cursor` | `.cursor/skills` |
+| `gemini` | `.gemini/skills` |
+| `codex` | none — reads `.agents/skills` natively |
+
+Both scripts are idempotent, take a force flag (`--force` / `-Force`) to replace
 something unexpected, and heal the placeholder files left by a checkout without
 symlink support. Without a script, the equivalent is one command per link:
 
