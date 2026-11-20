@@ -21,8 +21,17 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
   - **Needs** interactive browser control with a browser already signed in to X.
     Local only — cloud, sandboxed, or headless sessions cannot run it.
 
-The repo has no build step and no package installs. To use a skill, copy its
-folder into your agent's skills directory:
+No build step, no package installs, and no need to copy anything by hand.
+
+**Easiest:** point your agent at this repository and tell it to get the skill.
+
+> Clone `<repo-url>` and install `<skill-name>` for me.
+
+The agent reads `.agents/skills/<skill-name>/SKILL.md` and copies the folder into
+whichever directory its own host reads. Ask it to run `scripts/link-skills.sh` if
+you want the whole catalog wired up instead of a single copied skill.
+
+**Manual:** copy the skill's folder into your agent's skills directory:
 
 | Agent | Copy the folder into | Also reads |
 | --- | --- | --- |
@@ -41,9 +50,9 @@ Keep the folder name as-is: the spec requires the frontmatter `name` to match it
 and that name is how each agent addresses the skill (`/<skill-name>`,
 `$<skill-name>`, or by description match).
 
-A `git clone` gives you the whole set wired up for every agent below. A ZIP
-download works too for individual skills — the skill folders themselves contain
-no symlinks.
+A clone gives you the whole set wired up for every agent. A ZIP download works
+for individual skills, since the skill folders themselves contain no symlinks —
+but the two agent links do not survive an archive.
 
 ## Why this layout
 
@@ -66,6 +75,8 @@ agent-skills/
 ├── scripts/
 │   ├── link-skills.sh                # recreates the links (macOS, Linux, Git Bash)
 │   └── link-skills.ps1               # recreates the links (Windows)
+├── AGENTS.md                         # repository rules for agents
+├── CLAUDE.md                         # imports AGENTS.md for older Claude Code
 └── README.md
 ```
 
@@ -215,3 +226,6 @@ the destination keeps its own layout:
 In the destination, copy `.agents/skills/` and recreate the links with
 `scripts/link-skills.sh` (macOS, Linux, Git Bash) or `scripts/link-skills.ps1`
 (Windows).
+
+Maintaining this repository? See [`AGENTS.md`](AGENTS.md) for the invariants,
+validation steps, and pre-commit checks.
