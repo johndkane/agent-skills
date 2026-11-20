@@ -4,9 +4,9 @@ Portable [Agent Skills](https://agentskills.io/specification) for AI assistants 
 coding agents, IDEs, CLIs, and cowork or desktop modes: Claude Code and Cowork,
 GitHub Copilot, OpenCode, Codex, Cursor, and Gemini CLI.
 
-A skill is task-scoped, not repo-scoped. `twitter-followback` is research and
-social work, not development. What a skill is for comes from its `description`,
-which is the only part an agent reads before deciding to load it.
+A skill is task-scoped, not repo-scoped: it may be a development workflow, a
+research task, or a desktop procedure. What a skill is for comes from its
+`description`, which is the only part an agent reads before deciding to load it.
 
 ## The skills
 
@@ -38,8 +38,8 @@ the skills enabled for your claude.ai account, so a skill has to be enabled ther
 rather than copied into a repository.
 
 Keep the folder name as-is: the spec requires the frontmatter `name` to match it,
-and that name is how each agent addresses the skill (`/twitter-followback`,
-`$twitter-followback`, or by description match).
+and that name is how each agent addresses the skill (`/<skill-name>`,
+`$<skill-name>`, or by description match).
 
 A `git clone` gives you the whole set wired up for every agent below. A ZIP
 download works too for individual skills — the skill folders themselves contain

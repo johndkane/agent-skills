@@ -1,11 +1,12 @@
 ---
 name: twitter-followback
 description: >-
-  Research and follow back legitimate followers on X (Twitter) — real people who
-  are actively posting, with bots, marketing, adult, crypto and impersonation
-  accounts filtered out, and every follow verified in the UI. Use when asked to
-  follow back followers, clean up a follow-back queue, or judge which followers
-  are worth following back. Not for mass-following, growth hacking, or unfollowing.
+  Research and follow back legitimate followers on X (Twitter): real people who
+  post actively, with bots, marketing, adult, crypto and impersonation accounts
+  filtered out, and every follow verified in the UI. Use when asked to follow
+  back followers or mutuals, review new followers, clean up a follow-back queue,
+  check whether a follower is a bot, or decide which followers are worth
+  following back. Not for mass-following, growth hacking, or unfollowing.
 compatibility: >-
   Needs an agent with interactive browser control and a browser session already
   signed in to X. Must run locally on the user's machine; cloud, sandboxed, or
