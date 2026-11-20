@@ -11,14 +11,18 @@ which is the only part an agent reads before deciding to load it.
 ## The skills
 
 Everything lives in **[`.agents/skills/`](.agents/skills)**. One folder per skill,
-each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`:
+each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
 
-| Skill | What it does |
-| --- | --- |
-| [`twitter-followback`](.agents/skills/twitter-followback/SKILL.md) | Researches followers on X and follows back only real, active people; filters bots, marketing, adult, crypto, and impersonation accounts. |
+- **[`twitter-followback`](.agents/skills/twitter-followback/SKILL.md)** —
+  researches followers on X and follows back only real, active people; filters
+  bots, marketing, adult, crypto, and impersonation accounts.
+  - **Triggers** on "follow back my followers", "clean up my follow-back queue",
+    or "which followers are worth following back".
+  - **Needs** interactive browser control with a browser already signed in to X.
+    Local only — cloud, sandboxed, or headless sessions cannot run it.
 
-No build step and no dependencies. To use a skill, copy its folder into your
-agent's skills directory:
+The repo has no build step and no package installs. To use a skill, copy its
+folder into your agent's skills directory:
 
 | Agent | Copy the folder into | Also reads |
 | --- | --- | --- |
@@ -64,8 +68,9 @@ agent-skills/
 └── README.md
 ```
 
-Adding a skill means creating `.agents/skills/<name>/SKILL.md`. Nothing else —
-both links point at the whole directory, so every agent sees it immediately.
+Adding a skill means creating `.agents/skills/<name>/SKILL.md` and a bullet in
+the list above. Nothing else — both links point at the whole directory, so every
+agent sees it immediately.
 
 Deliberately **not** created: `.opencode/skills`, `.cursor/skills`,
 `.codex/skills`, `.gemini/skills`. Each of those tools already reads
