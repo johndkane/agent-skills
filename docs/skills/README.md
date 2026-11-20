@@ -46,7 +46,7 @@ Reference sibling files by relative path from the skill root, one level deep fro
 2. Write the frontmatter and instructions.
 3. Add a row to the catalog table above and to [the root README](../../README.md).
 4. Validate with the reference implementation.
-5. Commit. No link work is needed.
+5. Stop and report the change; the human commits. No link work is needed.
 
 ## Validation
 

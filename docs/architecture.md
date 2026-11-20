@@ -56,7 +56,7 @@ One tree plus links keeps a single source of truth that every host reads.
 
 Git stores a symlink as a blob with mode `120000` and the target path as its
 content. That is why the target must be relative and why the mode is checked in
-the [pre-commit checks](../AGENTS.md#checks-before-committing).
+the [pre-handoff checks](../AGENTS.md#checks-before-handing-off).
 
 | Platform | Behaviour |
 | --- | --- |

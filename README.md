@@ -247,4 +247,4 @@ In the destination, copy `.agents/skills/` and recreate the links with
 (Windows).
 
 Maintaining this repository? See [`AGENTS.md`](AGENTS.md) for the invariants,
-validation steps, and pre-commit checks.
+validation steps, and pre-handoff checks.

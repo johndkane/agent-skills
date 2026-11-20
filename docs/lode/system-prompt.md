@@ -7,17 +7,19 @@ the code and the decisions; the agent owns the memory and the execution.
 
 - Method overview: <https://fjzeit.github.io/coding/lode-coding>
 - Reference implementation: <https://github.com/fjzeit/lode>
+- Canonical prompt:
+  <https://raw.githubusercontent.com/fjzeit/lode/refs/heads/main/prompts/SystemPrompt.txt>
 
-The full system prompt is reproduced below and included in
-[`AGENTS.md`](../../AGENTS.md#lode-coding), so every agent session in this
-repository starts with the method active.
+The prompt is embedded verbatim in
+[`AGENTS.md`](../../AGENTS.md#lode-coding) and below. It is embedded rather than
+linked so every session has the method without network access. When updating it,
+copy the canonical file unchanged; do not reword it.
 
 ## How this repository applies it
 
 - `lode/` is the agent's memory. `docs/` is the human wiki. Keep them separate.
 - `lode/tmp/` is git-ignored; session scraps belong there.
 - If the lode does not exist, the agent asks before creating it, per the prompt.
-- Lode files describe the current state of the system, never a changelog.
 
 ## System prompt
 

@@ -58,7 +58,7 @@ clone arrives without symlinks.
 .venv/bin/skills-ref validate .agents/skills/<name>
 ```
 
-Every skill must report `Valid skill` before you commit.
+Every skill must report `Valid skill` before the change is committed.
 
 ## Related
 

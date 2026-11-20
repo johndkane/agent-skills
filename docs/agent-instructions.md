@@ -23,10 +23,12 @@ does not read the content twice.
 - **Adding and changing skills** — the exact steps, including the README row and
   the folder/`name` pairing.
 - **Validation** — the `skills-ref` commands.
-- **Checks** — what to verify before committing.
+- **Checks** — what to verify before handing off.
+- **Git** — read-only by default: query allowed; writes only on explicit request.
 - **Direction** — how the catalog is meant to grow.
-- **Lode Coding** — the knowledge-management method described on the
-  [Lode page](lode/system-prompt.md).
+- **Lode Coding** — the upstream system prompt, embedded verbatim from
+  <https://raw.githubusercontent.com/fjzeit/lode/refs/heads/main/prompts/SystemPrompt.txt>
+  so it needs no network access. Explained on the [Lode page](lode/system-prompt.md).
 
 ## Editing instructions
 
@@ -37,6 +39,23 @@ does not read the content twice.
 - Do not duplicate the [skills pages](skills/README.md) or the
   [script reference](scripts.md) inside `AGENTS.md`. Link to them instead, so a
   rule has one home.
+- The Lode Coding prompt is the one exception: it is embedded verbatim, because
+  agents must have it in every session. Do not paraphrase it.
+
+## Git is read-only by default
+
+Agents may inspect history and state at any time. They change repository state
+only when the user explicitly asks for a write operation; a task request is not a
+commit request.
+
+- **Query any time:** `status`, `diff`, `log`, `show`, `ls-files`, `check-ignore`,
+  `blame`, `rev-parse`, `describe`.
+- **Only when asked:** `add`, `commit`, `push`, `pull`, `fetch`, `merge`,
+  `rebase`, `reset`, `checkout`, `switch`, `restore`, `stash`, `tag`, `clean`,
+  `branch` changes, `remote` changes, `config` writes, `init`, `worktree`.
+
+When work is done, report what should be committed and stop, unless the user
+asked for the commit.
 
 ## Docs and lode are different things
 
