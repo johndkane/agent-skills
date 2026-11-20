@@ -2,6 +2,9 @@
 # (AGENTS.md, CLAUDE.md, .claude/settings.json, .github/copilot-instructions.md)
 # stays tracked.
 #
+# Portable by design: copy or merge this file into any repository that hosts
+# these skills, so agent-generated state and secrets cannot be committed there.
+#
 # Do not add .agents/, .claude/skills, or .github/skills to this file. They are
 # the tracked skill tree and the links that expose it to each agent.
 

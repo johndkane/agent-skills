@@ -187,3 +187,21 @@ mkdir -p .claude .github
 ln -sfn ../.agents/skills .claude/skills
 ln -sfn ../.agents/skills .github/skills
 ```
+
+## Using this as a skeleton
+
+This repo is meant to be dropped into another project, not only used standalone.
+Alongside `.agents/skills/` and the two links, two files are worth taking even if
+the destination keeps its own layout:
+
+- **`.gitignore`** — protects the *target* repo, not only this one. Agents write
+  machine-local state (`.claude/settings.local.json`, `CLAUDE.local.md`,
+  `.claude/worktrees/`, Aider history, `.specstory/`) and `.env` files wherever
+  they run. If the destination already has a `.gitignore`, merge these rules
+  rather than replacing it, and carry over the warning: never ignore `.agents/`,
+  `.claude/skills`, or `.github/skills`.
+- **`.gitattributes`** — normalises line endings to LF, so skill files do not
+  flip between CRLF and LF depending on who checked them out.
+
+In the destination, copy `.agents/skills/` and recreate the links with
+`scripts/link-skills.ps1` or the `ln -sfn` pair above.
