@@ -77,6 +77,8 @@ agent-skills/
 ├── scripts/
 │   ├── link-skills.sh                # recreates the links (macOS, Linux, Git Bash)
 │   └── link-skills.ps1               # recreates the links (Windows)
+├── docs/                             # human wiki
+├── lode/                             # agent memory (Lode Coding)
 ├── AGENTS.md                         # repository rules for agents
 ├── CLAUDE.md                         # imports AGENTS.md for older Claude Code
 └── README.md

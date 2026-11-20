@@ -24,7 +24,7 @@ scripts/link-skills.sh           macOS, Linux, Git Bash, WSL
 scripts/link-skills.ps1          Windows PowerShell
 CLAUDE.md                        imports AGENTS.md for older Claude Code
 docs/                            human wiki (this file's companion)
-lode/                            agent memory, created on request (see Lode Coding below)
+lode/                            agent memory (see Lode Coding below)
 ```
 
 Other host directories (`.opencode/skills`, `.cursor/skills`, `.gemini/skills`)
@@ -222,6 +222,8 @@ if the lode/ does not exist, ask the user if you should create one.
 ### This repository
 
 - `docs/` is the human wiki. `lode/` is agent memory. Do not mix them.
+- The lode exists; start at `lode/lode-map.md` before exploring the repository.
+- The human-facing method page is `docs/lode-coding.md`.
 - `lode/tmp/` is git-ignored.
 - The Lode describes this repository: the canonical skill tree, the links, the
   scripts, and the rules in this file.

@@ -11,7 +11,7 @@ you can read in any order.
 | [Skills](skills/README.md) | The skill catalog, the spec rules, and how to add a skill |
 | [Scripts](scripts.md) | `link-skills.sh` and `link-skills.ps1`: environments, flags, behaviour |
 | [Agent instructions](agent-instructions.md) | `AGENTS.md`, `CLAUDE.md`, and how this repo is maintained |
-| [Lode Coding](lode/system-prompt.md) | The knowledge-management method and its full system prompt |
+| [Lode Coding](lode-coding.md) | The knowledge-management method and its full system prompt |
 | [Adopting this repo](adopting.md) | Using the repo as a skeleton in another project |
 
 ## Where things live
@@ -23,7 +23,7 @@ you can read in any order.
 scripts/                         link scripts for every platform
 docs/                            this wiki
 AGENTS.md                        repo rules loaded by agents
-lode/                            agent-owned project memory, when created (see Lode Coding)
+lode/                            agent-owned project memory (see Lode Coding)
 ```
 
 Two short rules explain the shape:
@@ -48,5 +48,5 @@ New to the repo: [Architecture](architecture.md) →
 [Skills](skills/README.md) → [Scripts](scripts.md).
 
 Maintaining it: [Agent instructions](agent-instructions.md) →
-[Lode Coding](lode/system-prompt.md) →
+[Lode Coding](lode-coding.md) →
 [Adopting this repo](adopting.md).

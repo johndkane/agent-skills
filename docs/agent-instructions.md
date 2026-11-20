@@ -28,7 +28,7 @@ does not read the content twice.
 - **Direction** — how the catalog is meant to grow.
 - **Lode Coding** — the upstream system prompt, embedded verbatim from
   <https://raw.githubusercontent.com/fjzeit/lode/refs/heads/main/prompts/SystemPrompt.txt>
-  so it needs no network access. Explained on the [Lode page](lode/system-prompt.md).
+  so it needs no network access. Explained on the [Lode page](lode-coding.md).
 
 ## Editing instructions
 
@@ -64,12 +64,14 @@ asked for the commit.
 | `docs/` | Humans | Explain the project to readers |
 | `lode/` | Agents | Persistent project memory across sessions |
 
+The lode starts at `lode/lode-map.md`.
+
 Do not move lode content into `docs/`, and do not turn `docs/` into an agent
 scratchpad. When the project changes, update the human docs for accuracy and the
 lode for agent recall.
 
 ## Related
 
-- [Lode Coding](lode/system-prompt.md) — the full system prompt
+- [Lode Coding](lode-coding.md) — the full system prompt
 - [Architecture](architecture.md) — the layout the invariants protect
 - [Skills](skills/README.md) — what agents add here
