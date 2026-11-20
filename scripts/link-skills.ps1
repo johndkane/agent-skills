@@ -72,8 +72,18 @@ foreach ($link in $links) {
             Remove-Item -LiteralPath $linkPath -Force
         }
         else {
-            if (-not $Force) {
-                Write-Warning ("{0} is a real directory, not a link. Re-run with -Force to replace it." -f $link.RelativePath)
+            # A checkout with core.symlinks=false writes the link target as a
+            # plain text file. That placeholder is safe to replace; anything
+            # else is left alone unless -Force is supplied.
+            $placeholder = $null
+            if (-not $item.PSIsContainer) {
+                $placeholder = (Get-Content -LiteralPath $linkPath -Raw -ErrorAction SilentlyContinue)
+                if ($placeholder) { $placeholder = ($placeholder -replace '\\', '/').Trim() }
+            }
+
+            $expectedText = $link.RelativeTarget -replace '\\', '/'
+            if (-not $Force -and $placeholder -ne $expectedText) {
+                Write-Warning ("{0} exists and is not a link. Re-run with -Force to replace it." -f $link.RelativePath)
                 continue
             }
 

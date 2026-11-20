@@ -141,6 +141,9 @@ The links are relative, so the repo works after a clone at any path.
   `git config core.symlinks` is `true`; if it is `false`, Git writes a text file
   containing `../.agents/skills` and no agent will find any skills. Linux and
   macOS check clones out correctly by default.
+- **If a clone came down without symlinks**, run `scripts/link-skills.ps1`. It
+  recognises those placeholder files and replaces them with real links without
+  needing `-Force`.
 - **Hosts that read both roots** (OpenCode, Cursor, Copilot) may enumerate a
   skill twice, once through a link and once through `.agents/skills`. The
   content is byte-identical and hosts deduplicate by name or resolved real path,
