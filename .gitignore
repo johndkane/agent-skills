@@ -1,0 +1,33 @@
+# Machine-local state created by agent harnesses. Shared configuration
+# (AGENTS.md, CLAUDE.md, .claude/settings.json, .github/copilot-instructions.md)
+# stays tracked.
+#
+# Do not add .agents/, .claude/skills, or .github/skills to this file. They are
+# the tracked skill tree and the links that expose it to each agent.
+
+# Claude Code
+CLAUDE.local.md
+.claude/*.local.json
+.claude/worktrees/
+.claude/agent-memory/
+
+# Aider history and tag cache
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v*/
+
+# SpecStory session history
+.specstory/
+
+# Agent-created worktrees outside the main checkout
+.agent-worktrees/
+
+# Local environment files agents tend to create
+.env
+.env.local
+.env.*.local
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
