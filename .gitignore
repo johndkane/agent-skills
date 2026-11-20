@@ -23,6 +23,9 @@ CLAUDE.local.md
 # SpecStory session history
 .specstory/
 
+# Lode session scraps (see docs/lode/system-prompt.md)
+lode/tmp/
+
 # Agent-created worktrees outside the main checkout
 .agent-worktrees/
 

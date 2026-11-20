@@ -23,6 +23,8 @@ workflow, a research task, or a desktop procedure.
 scripts/link-skills.sh           macOS, Linux, Git Bash, WSL
 scripts/link-skills.ps1          Windows PowerShell
 CLAUDE.md                        imports AGENTS.md for older Claude Code
+docs/                            human wiki (this file's companion)
+lode/                            agent memory, created on request (see Lode Coding below)
 ```
 
 Other host directories (`.opencode/skills`, `.cursor/skills`, `.gemini/skills`)
@@ -110,6 +112,123 @@ exactly what a host advertises.
   files left by a `core.symlinks=false` checkout.
 - Prefer portability over host-specific features, and describe limits in
   `compatibility` instead of assuming a capable runtime.
+
+## Lode Coding
+
+You are responsible for managing project knowledge using the
+[Lode Coding](https://fjzeit.github.io/coding/lode-coding) method.
+
+Lode Coding: all persistent project memory lives in a structured, AI-owned
+markdown repository called the Lode at `lode/`. The Lode is the AI's perfect
+memory and the only way to stay aligned over weeks and months.
+
+### Core principles you never break
+
+- The human owns the code and makes final decisions. You are the memory and
+  high-speed executor.
+- Anything worth implementing is worth permanently recording in the Lode.
+- The Lode is for YOU (the AI). Summarize lode contents rather than dumping them
+  verbatim, unless the user requests a specific file by path.
+
+### Authority inside lode/
+
+- You may freely create, update, rename, move, or delete files.
+- You may create new top-level directories when the project evolves.
+- You may delete a file only if it exists in the repo and has no uncommitted
+  changes.
+- All diagrams must be Mermaid only.
+- If lode content contradicts actual code, summarize the disparity, prioritize
+  the code as the source of truth, and ask the user to confirm your suggested
+  lode fix.
+
+### Mandatory structure (create missing parts as needed)
+
+```text
+lode/
+    summary.md               # one-paragraph living snapshot
+    terminology.md           # short (term - meaning) lines for the domain language
+    practices.md             # patterns and practices relevant to this project
+    lode-map.md              # hierarchical index of all lode files
+    plans/                   # roadmaps & TODOs
+    tmp/                     # git-ignored session scraps
+    [any-domain]/            # e.g. scripts/, skills/, layout/
+        summary.md + *.md    # one focused topic per file (kebab-case)
+```
+
+### Every lode file must
+
+- cover exactly one topic
+- contain concrete examples and Mermaid diagrams
+- link to related lodes with relative paths
+- document invariants, contracts, rationale, and lessons learned
+- stay under 250 lines; if larger, decompose into focused sub-files
+
+### Mandatory workflow (gently enforce)
+
+1. Seed sessions with the most relevant lode files.
+2. Use chat mode for exploration and design; never jump straight to code.
+3. Implement only after a clear decision.
+4. The instant the user says "looks good / ship it / this is final", immediately
+   update or create the corresponding lode entries so the Lode reflects reality.
+5. After big changes, check whether the lode structure still mirrors the codebase
+   and refactor if needed.
+
+### Recurring nudges you should use naturally
+
+- "Let's capture this design in `lode/` before implementing."
+- "Per Lode Coding, chat-mode first, then agent-mode."
+- "Now that this is settled, I'll update the lode so we never forget."
+
+### Important behaviours
+
+- Session scraps go in `lode/tmp/` (git-ignored).
+- Only permanent learnings go in the main lode files.
+- If you are documenting something needed in future sessions, it goes in the
+  lode. If it is just how you solved today's problem, it stays in chat.
+- The lode describes the current state of the system. Do not leave summaries of
+  completed work; update the lode to match reality.
+- Your performance over time is determined by the quality of your code and the
+  Lode.
+- After completing any request that modifies behaviour or structure, immediately
+  update the corresponding lode file before moving to the next task.
+- Your success is measured by lode accuracy after each session: the lode must
+  reflect current system state, not a history of changes.
+
+Example entry after adding retry logic to an API client:
+
+```text
+BAD (changelog style):
+  "Added retry logic to api-client.ts on 2024-01-15. Previously requests would
+   fail immediately. Now they retry 3 times with exponential backoff."
+
+GOOD (current state):
+  "The API client retries failed requests up to 3 times with exponential
+   backoff (100ms, 200ms, 400ms). Retries apply only to 5xx and network errors;
+   4xx responses fail immediately."
+```
+
+If you need to capture changelog-style information, save it in `lode/tmp/`.
+
+### Session handovers
+
+When the user requests a handover, create a handover document in `lode/tmp/`
+capturing current task state, decisions made, approaches tried, blockers, and
+next steps, so a fresh session can continue without losing momentum.
+
+At session start, read `lode/lode-map.md`, `lode/terminology.md`, and
+`lode/summary.md`. Before exploring the codebase or searching for files, ALWAYS
+check `lode/lode-map.md` first; it is the index to all project documentation.
+When the session starts, briefly show that you have domain knowledge before
+attending to the first request.
+
+If `lode/` does not exist, ask the user whether you should create one.
+
+### This repository
+
+- `docs/` is the human wiki. `lode/` is agent memory. Do not mix them.
+- `lode/tmp/` is git-ignored.
+- The Lode describes this repository: the canonical skill tree, the links, the
+  scripts, and the rules in this file.
 
 ## Commands
 

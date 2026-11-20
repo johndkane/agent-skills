@@ -8,6 +8,8 @@ A skill is task-scoped, not repo-scoped: it may be a development workflow, a
 research task, or a desktop procedure. What a skill is for comes from its
 `description`, which is the only part an agent reads before deciding to load it.
 
+Full documentation lives in [`docs/`](docs/README.md).
+
 ## The skills
 
 Everything lives in **[`.agents/skills/`](.agents/skills)**. One folder per skill,
