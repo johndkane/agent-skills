@@ -1,0 +1,6 @@
+# Keep the repository content LF so checkouts are identical across platforms.
+* text=auto eol=lf
+
+# Windows scripts are consumed by PowerShell, which accepts both; keep LF for
+# consistency with the rest of the repo.
+*.ps1 text eol=lf
