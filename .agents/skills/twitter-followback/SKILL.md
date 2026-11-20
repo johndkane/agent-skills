@@ -6,6 +6,10 @@ description: >-
   accounts filtered out, and every follow verified in the UI. Use when asked to
   follow back followers, clean up a follow-back queue, or judge which followers
   are worth following back. Not for mass-following, growth hacking, or unfollowing.
+compatibility: >-
+  Needs an agent with interactive browser control and a browser session already
+  signed in to X. Must run locally on the user's machine; cloud, sandboxed, or
+  headless sessions without browser access cannot complete it.
 ---
 
 # X/Twitter Follow-Back

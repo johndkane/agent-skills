@@ -1,7 +1,12 @@
 # Agent Skills
 
-Portable [Agent Skills](https://agentskills.io/specification) for coding agents —
-Claude Code, GitHub Copilot, OpenCode, Codex, Cursor, and Gemini CLI.
+Portable [Agent Skills](https://agentskills.io/specification) for AI assistants —
+coding agents, IDEs, CLIs, and cowork or desktop modes: Claude Code and Cowork,
+GitHub Copilot, OpenCode, Codex, Cursor, and Gemini CLI.
+
+A skill is task-scoped, not repo-scoped. `twitter-followback` is research and
+social work, not development. What a skill is for comes from its `description`,
+which is the only part an agent reads before deciding to load it.
 
 ## The skills
 
@@ -23,6 +28,10 @@ agent's skills directory:
 | OpenAI Codex | `.agents/skills/` (walks up to the repo root) | `~/.agents/skills/`, `/etc/codex/skills/` |
 | Cursor | `.cursor/skills/` or `.agents/skills/` | `~/.cursor/skills/`, `~/.agents/skills/`, `.claude/skills/` |
 | Gemini CLI | `.gemini/skills/` or `.agents/skills/` | `~/.gemini/skills/`, `~/.agents/skills/` |
+
+Some surfaces do not read a folder at all. Claude Cowork and cloud sessions load
+the skills enabled for your claude.ai account, so a skill has to be enabled there
+rather than copied into a repository.
 
 Keep the folder name as-is: the spec requires the frontmatter `name` to match it,
 and that name is how each agent addresses the skill (`/twitter-followback`,
@@ -88,6 +97,17 @@ Same files, different rules. These are the differences that actually bite.
 - `description` + `when_to_use` are truncated at 1,536 chars in the skill list.
 - Supports extra frontmatter the others ignore: `allowed-tools`,
   `disable-model-invocation`, `when_to_use`, `context: fork`, `paths`, `model`.
+
+**Claude Cowork and cloud sessions**
+
+- These do not read `~/.claude/skills` on your machine. They load the skills
+  enabled for your claude.ai account, synced to `~/.claude/skills/synced/`.
+- A repository's `.claude/skills` is not available in a project's cloud threads.
+  Desktop scheduled tasks run locally and do load local skills.
+- Synced skills are not executed with local privileges: `!` command injection,
+  `@` file references, and `${CLAUDE_PROJECT_DIR}` placeholders reach the model
+  as literal text in terminal and VS Code sessions. Write skills that still make
+  sense without them.
 
 **GitHub Copilot**
 
