@@ -64,7 +64,8 @@ agent-skills/
 ├── .github/
 │   └── skills -> ../.agents/skills   # GitHub Copilot
 ├── scripts/
-│   └── link-skills.ps1               # recreates the links
+│   ├── link-skills.sh                # recreates the links (macOS, Linux, Git Bash)
+│   └── link-skills.ps1               # recreates the links (Windows)
 └── README.md
 ```
 
@@ -162,25 +163,33 @@ The links are relative, so the repo works after a clone at any path.
 - **Windows** needs Developer Mode (or an elevated shell) to create symbolic
   links. `scripts/link-skills.ps1` falls back to directory junctions if symlinks
   are refused; junctions store absolute targets, so re-run it if the repo moves.
+- **macOS and Linux** allow symlinks without extra setup, so
+  `scripts/link-skills.sh` is all that is needed there. Git Bash and WSL on
+  Windows can run the same script.
 - **Git** stores the links as `120000` entries. Check that
   `git config core.symlinks` is `true`; if it is `false`, Git writes a text file
   containing `../.agents/skills` and no agent will find any skills. Linux and
   macOS check clones out correctly by default.
-- **If a clone came down without symlinks**, run `scripts/link-skills.ps1`. It
-  recognises those placeholder files and replaces them with real links without
-  needing `-Force`.
+- **If a clone came down without symlinks**, run either script. Both recognise
+  those placeholder files and replace them with real links without a force flag.
 - **Hosts that read both roots** (OpenCode, Cursor, Copilot) may enumerate a
   skill twice, once through a link and once through `.agents/skills`. The
   content is byte-identical and hosts deduplicate by name or resolved real path,
   so it is harmless.
 
-Repair or recreate the links:
+Repair or recreate the links with the script for the platform:
 
-```powershell
-pwsh ./scripts/link-skills.ps1
+```bash
+./scripts/link-skills.sh      # macOS, Linux, Git Bash, WSL
 ```
 
-On macOS or Linux the same result is one command per link:
+```powershell
+./scripts/link-skills.ps1     # Windows PowerShell or pwsh
+```
+
+Both are idempotent, take a force flag (`--force` / `-Force`) to replace
+something unexpected, and heal the placeholder files left by a checkout without
+symlink support. Without a script, the equivalent is one command per link:
 
 ```bash
 mkdir -p .claude .github
@@ -204,4 +213,5 @@ the destination keeps its own layout:
   flip between CRLF and LF depending on who checked them out.
 
 In the destination, copy `.agents/skills/` and recreate the links with
-`scripts/link-skills.ps1` or the `ln -sfn` pair above.
+`scripts/link-skills.sh` (macOS, Linux, Git Bash) or `scripts/link-skills.ps1`
+(Windows).
