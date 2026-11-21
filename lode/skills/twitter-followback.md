@@ -1,8 +1,9 @@
 # twitter-followback
 
 The catalog's browser-driven skill. It follows back real people on X and keeps
-its own run state between sessions. Canonical instructions:
-[`SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md); human page:
+its own run state between sessions. Instructions live in the skill's own
+`SKILL.md` (this checkout: [`twitter-followback/SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md));
+human page:
 [`docs/skills/twitter-followback.md`](../../docs/skills/twitter-followback.md).
 
 ## Invariants
@@ -15,6 +16,36 @@ its own run state between sessions. Canonical instructions:
 4. The live UI wins over saved state; a saved `followed` is not proof.
 5. State lives outside the repository, one file per signed-in account.
 6. Never unfollow, block, report, or message.
+7. Cadence jitter changes timing only, never verification or the challenge
+   handoff.
+
+## Cadence
+
+Timing is drawn from ranges, never fixed constants, so the run does not read as a
+metronome. The ranges are canonical in
+[`docs/skills/twitter-core.md`](../../docs/skills/twitter-core.md); `SKILL.md`
+restates them so a copied skill still works alone.
+
+```text
+wait(uniform(1.5, 4.0))                   # first read of a page
+move_to(control, moves=randint(2, 4)); wait(uniform(0.8, 2.5))
+click(control)
+poll(control, [2-4, 7-9, 14-16, 28-30])   # inside the settle window
+wait(uniform(4, 12))                      # before the next candidate
+```
+
+```mermaid
+flowchart LR
+    A[Read page] --> B[Move + hover]
+    B --> C[Click once]
+    C --> D[Settle window]
+    D --> E[Jittered pause]
+    E --> A
+```
+
+Jitter changes timing only. One click per control, the full settle window, the
+retry-once rule, and the challenge handoff stay exact. A captcha, checkpoint, or
+"verify it's you" prompt ends the run; pacing is not evasion.
 
 ## Run loop
 
@@ -42,16 +73,9 @@ flowchart TD
 %USERPROFILE%\.x-followback\<handle>.json   (Windows)
 ```
 
-```json
-{
-  "account": "@me",
-  "criteria": "recency<=30d; skip marketing/adult/crypto; protected=skip",
-  "scannedThrough": "@handle",
-  "queue": ["@erin"],
-  "processed": {"@alice": {"state": "followed", "on": "2026-11-21"}},
-  "followUps": [{"handle": "@carol", "checkOn": "2026-11-28"}]
-}
-```
+The schema, writing rules, and follow-up pass are the skill's
+[`references/state-file.md`](../../.agents/skills/twitter-followback/references/state-file.md);
+that file is authoritative and the body names it.
 
 States: `followed`, `already_following`, `skipped`, `pending`, `unverified`,
 `blocked`. `pending` is an outstanding follow request; `unverified` is a click

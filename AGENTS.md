@@ -47,13 +47,22 @@ request.
    opt-in link without a reason.
 6. `name` matches the directory name exactly: lowercase kebab-case, 1-64 chars,
    no leading, trailing, or doubled hyphens.
-7. Frontmatter stays within the standard: `name`, `description`, `license`,
-   `compatibility`, `metadata`, `allowed-tools`. Host-specific fields are allowed
-   but must never be load-bearing.
+7. Frontmatter stays within the standard: `name` (up to 64 chars), `description`
+   (up to 1024), `license`, `compatibility` (up to 500, only with real environment
+   requirements), `metadata` (string keys to string values), and `allowed-tools`
+   (experimental). Host-specific fields are allowed but must never be
+   load-bearing.
 8. The repository stays droppable into another project: no build step, no
    generated artifacts, no dependencies to install.
 9. Git writes require an explicit request from the user; reads are always fine.
    See [Git](#git).
+10. A skill is identified by its folder name and the `SKILL.md` inside it, never
+    by a host path. `.agents/skills` is this repository's one real copy, not a
+    required install location: a user may copy one folder into `.claude/skills`,
+    `.github/skills`, `.zcode/skills`, or any other host directory and it must
+    still work. Skill bodies reference only files inside their own folder, by
+    relative path; documentation links into `.agents/skills` are browsing
+    conveniences and must never be described as the skill's canonical location.
 
 ## Git
 
@@ -77,12 +86,17 @@ after an explicit instruction such as "commit this" or "push it".
 2. Write frontmatter with `name` equal to the folder and a `description` that
    says what the skill does, when to use it, and what it is not for. Front-load
    trigger words; some hosts shorten long descriptions.
-3. Keep the body under 500 lines. Move detail into `references/`, `scripts/`, or
-   `assets/` beside `SKILL.md` and reference them by relative path.
-4. Add a bullet under "The skills" in `README.md` with what it does, what
-   triggers it, and what it needs to run.
-5. Run the validation in the next section.
-6. No link work is needed: the links point at the whole directory.
+3. Follow the [skill design rules](#skill-design-rules): self-contained,
+   progressive disclosure, terse agent-first writing, size targets, and a
+   closing checklist.
+4. If the skill joins a family, follow [skill families](#skill-families) and
+   copy the shared behavior into the body.
+5. Ship the full set: a bullet under "The skills" in `README.md`, a row in
+   `docs/skills/README.md`, a page in `docs/skills/`, and a lode entry.
+6. Run the validation in the next section.
+7. Run the `skill-verify` skill and fix every failure (see
+   [Verifying skill changes](#verifying-skill-changes)).
+8. No link work is needed: the links point at the whole directory.
 
 ## Changing or removing a skill
 
@@ -91,6 +105,94 @@ after an explicit instruction such as "commit this" or "push it".
 - Remove by deleting the folder and its README bullet.
 - Never edit files through `.claude/skills` or `.github/skills`. They are links;
   edit the canonical path.
+
+## Skill design rules
+
+Apply these to every skill, new or changed. The reasoning is in
+[docs/skills/README.md](docs/skills/README.md); this is the testable rule set.
+
+### Portability
+
+- A skill is its folder: the folder name is the ID and `SKILL.md` is the entry
+  point. The install directory is never part of its identity. Installing means
+  copying that folder into whatever skills directory a host reads.
+- A copied skill must work with no other file from this repository. Body links
+  point only inside the folder (`references/…`, `scripts/…`, `assets/…`), never
+  to `docs/`, `lode/`, `AGENTS.md`, another skill, or a repository path.
+- A skill's docs page explains, not instructs: it opens with how to install the
+  folder and treats links into this repository as browsing conveniences, never
+  as the skill's location.
+- Runtime data never lives in the skill folder. Keep it outside the repository,
+  one file per user or account, with no secrets and no bulk personal data.
+- A skill must not depend on this repository's conventions. `AGENTS.md` governs
+  the repo; the skill must work where no `AGENTS.md` exists. The exception is a
+  repo-maintenance skill, which may check this layout but must still link only
+  inside its own folder.
+
+### Shape
+
+- Structure for progressive disclosure: `name` + `description` at startup, the
+  body on activation, `references/`, `scripts/`, and `assets/` only when the body
+  names them.
+- Aim for roughly 200–300 lines and under ~3,000 tokens; 500 lines and 5,000
+  tokens are the ceiling. Move dense material into focused reference files.
+- Reference files are flat, one level deep, `.md`, named for their content
+  (`state-file.md`, `ui-vocabulary.md`). One topic per file; no nested chains.
+- Executable helpers go in `scripts/`; static templates or data in `assets/`.
+- Name every resource in the body and say when to read or run it.
+- End with a short checklist of observable outcomes.
+
+### Writing
+
+- Write for an agent, not a reader: imperative bullets, tables, checklists.
+- Cut motivation prose, repeated rules, and restated examples before cutting a
+  rule. Concision never drops behavior.
+- Order the body: prerequisites and environment → confirm the brief → load state
+  → the work loop → verification and limits → persistence → report → safety →
+  checklist.
+- State a rule once, where the agent needs it. If safety requires a copy, keep
+  the copies identical.
+- Use exact labels, thresholds, and command forms. Replace "appropriate",
+  "reasonable", and "as needed" with a check or a number.
+
+### Behavior
+
+- Confirm the brief before acting: scope, exclusions, edge cases, budget.
+  Restate it; "use your judgment" still needs a stated rubric.
+- Observe the live environment before acting. A remembered UI, schema, or limit
+  is not evidence; re-read and record what was confirmed this run.
+- Verify before claiming. Report verified, unverified, skipped, and unreadable
+  outcomes separately; never claim success from memory or inference.
+- Persist progress and follow-ups outside the repository so long tasks resume.
+- Prefer a clean stop and hand-off over pushing through a limit.
+- Human-scale use only: no mass automation, volume scraping, or evading controls.
+
+## Skill families
+
+Some skills share behavior and form a family with one contract page. The X/Twitter
+skills are the current family; their contract is
+[`docs/skills/twitter-core.md`](docs/skills/twitter-core.md).
+
+- Agree shared behavior in the contract page, then copy it into every member's
+  body. Members never link to the contract.
+- One change updates the whole family: contract, every skill body, each docs page,
+  and the lode entry. Never leave the contract ahead of the members.
+- Members may not disagree on shared behavior. Settle it in the contract, then
+  apply it to every body.
+- Keep family rules specific. Browser control, exact-handle matching, cadence,
+  the settle window, throttling, protected accounts, and the `~/.x-<skill>/`
+  state shape belong to the X family, not to every skill.
+
+## Verifying skill changes
+
+Before reporting a skill creation or change as done, run the `skill-verify` skill
+([`.agents/skills/skill-verify/SKILL.md`](.agents/skills/skill-verify/SKILL.md)).
+It checks frontmatter, folder self-containment, size and layout, catalog wiring,
+and the reference validator, and reports pass/fail with evidence.
+
+Do not substitute a manual read of the checklist for the run. If the skill cannot
+run (no file or shell access), say so explicitly and fall back to the checklist
+in this file.
 
 ## Validation
 
@@ -106,11 +208,21 @@ On Windows use `.venv\Scripts\pip` and `.venv\Scripts\skills-ref.exe`.
 `validate` must report `Valid skill`. `read-properties` and `to-prompt` show
 exactly what a host advertises.
 
+Then run the `skill-verify` skill: it wraps the validator, the catalog wiring,
+the size and self-containment checks, and returns pass/fail evidence. The
+commands here remain the fallback if the skill cannot run.
+
 ## Checks before handing off
 
 - [ ] `name` matches the folder and is lowercase kebab-case.
 - [ ] `description` states what, when, and the exclusions, within 1024 chars.
-- [ ] `SKILL.md` is under 500 lines and `skills-ref validate` passes.
+- [ ] `skills-ref validate` passes for every touched skill.
+- [ ] `SKILL.md` is terse and behavior-complete: no motivation prose, no repeated
+      rules, roughly 3,000 tokens or less, and every detail file it names is one
+      level deep inside the skill folder.
+- [ ] An X/Twitter or other family change reached the contract page and every
+      member in the same change (see [Skill families](#skill-families)).
+- [ ] The `skill-verify` skill ran and reported every required check passing.
 - [ ] The README bullet exists and matches the skill's real requirements.
 - [ ] `git ls-files -s` still shows `120000` for every link.
 - [ ] `bash -n scripts/link-skills.sh` passes and both scripts report `ok`.
@@ -119,6 +231,10 @@ exactly what a host advertises.
 ## Direction
 
 - Grow the catalog one folder per skill. Never restructure the tree per skill.
+- Keep `SKILL.md` lean and terse: aim for ~200–300 lines and under ~3,000 tokens.
+  Grow `references/` with focused, one-level-deep files instead of letting the
+  body pass 500 lines or 5,000 tokens. Concision never drops a rule that changes
+  behavior.
 - Keep the README skill-agnostic above the list. Do not name a specific skill in
   the intro; the list is the catalog.
 - Add a host directory only when that host genuinely cannot read

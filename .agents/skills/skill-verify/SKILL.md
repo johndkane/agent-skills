@@ -1,0 +1,117 @@
+---
+name: skill-verify
+description: >-
+  Verify a skill in this repository before handoff: folder and name match,
+  frontmatter limits, self-containment, progressive disclosure and size,
+  reference layout, catalog wiring, and the reference validator. Use before
+  creating or changing any skill, or when asked to verify, review, check, or
+  audit a skill; reports pass/fail with file evidence and exact fixes. Not for
+  authoring skill content or auditing unrelated repositories.
+compatibility: >-
+  Requires local file read and shell access. The frontmatter validator is
+  .venv/skills-ref or skills-ref on PATH; without either, that check is manual
+  and reported as unverified.
+---
+
+# Skill Verify
+
+Run before handing off any skill creation or change. Report pass/fail with
+evidence; never mark a check passed from memory.
+
+## Rules
+
+- Read-only unless the user asked for fixes. Fixing a failure belongs to the
+  change under review, not to the check.
+- Cite evidence: path and line, or command output.
+- An unused optional folder is a pass; a missing required item is a fail.
+- A skill is its folder: resolve links and references from that root.
+- If a check cannot run, report it unverified, never passed.
+
+## Step 0 — Scope
+
+1. Resolve the repository root; do not assume the current directory.
+2. Skill folders: those named in the request, else directories under
+   `.agents/skills` that are untracked or modified per `git status --short`.
+3. Read each `SKILL.md` fully; note every path it references.
+
+## Step 1 — Frontmatter
+
+- `name` — present, 1–64 chars, `[a-z0-9-]`, no leading/trailing/double hyphen,
+  equal to the folder name.
+- `description` — present, 1–1024 chars, states what, when, and what it is not
+  for.
+- `compatibility` — optional, ≤500 chars, only real environment requirements.
+- `license`, `metadata` (string map), `allowed-tools` (experimental) only; no
+  host-specific field is load-bearing.
+
+Quote the advertised values; use the validator's `read-properties` when present.
+
+## Step 2 — Self-containment
+
+- Search the body for `../`, `docs/`, `lode/`, `AGENTS.md`, `.agents/`, and host
+  directories (`.claude/`, `.github/`, `.zcode/`, `.cursor/`, `.opencode/`,
+  `.gemini/`). A link or dependency is a fail. A repo-maintenance skill may name
+  these paths as things it checks, never as a resource it reads.
+- Every relative link and image resolves inside the skill folder.
+- Every referenced file is one level deep from `SKILL.md`; no nested chains.
+- No absolute local paths or `file://` links.
+- Runtime state points outside the folder, for example `~/.<name>/`.
+
+## Step 3 — Shape and size
+
+- Measure lines and estimate tokens as characters / 4. Pass at ≤300 lines and
+  ≤3,000 tokens; warn up to 500 lines / 5,000 tokens; fail above. State that the
+  token figure is an estimate.
+- `references/` files are flat `.md`, one topic each, named in the body with
+  when to read them.
+- `scripts/` files are self-contained or declare dependencies; `assets/` files
+  are static.
+- The body ends with a checklist and contains no motivation prose, repeated
+  rules, or restated examples.
+- A rule duplicated between the body and a reference is a fail; keep one copy.
+
+## Step 4 — Catalog wiring
+
+- A bullet under "The skills" in the root `README.md` with what it does, its
+  triggers, and what it needs.
+- A row in the catalog table in `docs/skills/README.md`.
+- A `docs/skills/<name>.md` page: install sentence, behavior, triggers,
+  requirements, safety, related links. It must not call the repository path
+  canonical.
+- `lode/skills/<name>.md` and a row in `lode/lode-map.md`.
+- Docs and lode describe current behavior, not a changelog.
+- New domain terms have a `lode/terminology.md` entry.
+
+## Step 5 — Validate
+
+From the repository root:
+
+1. Run `skills-ref validate .agents/skills/<name>` with
+   `.venv/Scripts/skills-ref.exe` on Windows, `.venv/bin/skills-ref` elsewhere,
+   else `skills-ref` on PATH. Require `Valid skill`.
+2. Run `read-properties` and compare with the frontmatter.
+3. Resolve every relative link in touched `docs/` and `lode/` files; report
+   missing targets.
+4. If links or scripts changed: `git ls-files -s` shows `120000` for
+   `.claude/skills` and `.github/skills`, and `bash -n scripts/link-skills.sh`
+   exits 0.
+5. Without a validator, mark it unverified and give the install command; do not
+   install silently.
+
+## Step 6 — Report
+
+- Table of check, result (pass / fail / unverified), and evidence.
+- Failures first, each with `file:line` and the exact fix.
+- List what could not be checked and why.
+- Pass only when every required check passes; otherwise state the remaining
+  action.
+- Re-run affected checks after a fix.
+
+## Checklist
+
+- [ ] Folder and `name` match; frontmatter within limits.
+- [ ] No repo or host path in the body; links stay inside the folder.
+- [ ] Size within target; references flat and named; closing checklist present.
+- [ ] README bullet, docs row and page, lode entry and map row.
+- [ ] Validator reports `Valid skill`; links resolve.
+- [ ] Report gives pass/fail with evidence.

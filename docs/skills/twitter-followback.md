@@ -4,7 +4,17 @@ Follows back the people behind an X account: real humans who follow the user,
 post actively, and pass a character check. Bots, brands, funnels, and guesses are
 skipped.
 
-Canonical instructions: [`SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md).
+Install by copying the `twitter-followback` folder into the skills directory your
+host reads; the `SKILL.md` inside it is the whole skill, and everything it
+references is inside the same folder. This page explains the skill and is not part
+of the install.
+
+Dense detail lives beside it in `references/` — the state schema, the follow-up
+pass, and the UI ladder — and is read only when `SKILL.md` points at it.
+
+It follows the [shared contract for X skills](twitter-core.md). Browse the
+instructions in this repository:
+[`twitter-followback/SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md).
 
 ## When it triggers
 
@@ -51,9 +61,13 @@ skip it before loading.
 8. **Handle timing and throttling** — a late click can land 15+ seconds later;
    never re-click inside the window. A real miss means throttled: wait, retry
    once, then stop for the run rather than looping.
-9. **Persist and report** — save the cursor, verdicts, and follow-up dates; report
-   new follows, pre-existing follows, pending requests, unverified clicks, and
-   skips separately.
+9. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
+   times are drawn from ranges so the run does not read as a metronome. The
+   jitter applies to timing only; verification and throttle rules stay exact,
+   and a challenge still ends the run.
+10. **Persist and report** — save the cursor, verdicts, and follow-up dates;
+    report new follows, pre-existing follows, pending requests, unverified
+    clicks, and skips separately.
 
 ## Protected accounts
 

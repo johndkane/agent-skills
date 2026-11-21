@@ -47,5 +47,43 @@ implement something is not a request to commit.
 names, defaults, force flag, and placeholder recovery. A change to one is a
 change to both.
 
+## One lesson, whole family
+
+Browser-driven X skills share one contract,
+[`docs/skills/twitter-core.md`](../docs/skills/twitter-core.md). A new lesson goes
+into the core first, then into every X skill, its docs page, and its lode entry
+in the same change.
+
+```text
+run -> lesson -> core -> every X skill body + docs page + lode
+```
+
+Reason: the family may not disagree on browser control, identity matching,
+timing, throttling, credentials, state shape, evidence, or reporting honesty.
+
+A skill folder is installed on its own, so no `SKILL.md` links to the core, the
+lode, `docs/`, or another skill. The lesson is copied into each skill body. The
+core is where it is decided, not where a runtime reads it.
+
+## Write for agents
+
+Skill bodies are runtime instructions, not documentation. Use terse imperatives,
+tables, and checklists; aim for ~200–300 lines and under ~3,000 tokens, with 500
+lines / 5,000 tokens as the ceiling. Cut motivation prose, repetition, and
+restated examples before cutting a rule. Dense detail lives in one-level-deep
+`references/` files that the body names.
+
+```mermaid
+flowchart LR
+    M["name + description"] --> B["SKILL.md body"]
+    B --> R["references / scripts / assets"]
+```
+
+## Verify through the skill
+
+Skill creation is not done until `skill-verify` runs and passes. The checklist in
+`AGENTS.md` is the fallback when file or shell access is missing, not the primary
+gate. A `pass` needs evidence; an unavailable check is `unverified`.
+
 Related: [layout](layout/summary.md), [skills](skills/summary.md),
 [scripts](scripts/summary.md).

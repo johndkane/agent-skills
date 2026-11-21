@@ -20,12 +20,33 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
   bots, marketing, adult, crypto, and impersonation accounts. Offers a policy for
   protected accounts, whose posts are unreadable and whose follow only reaches
   `Pending`, and keeps progress in a local state file so long queues and pending
-  requests resume across runs.
+  requests resume across runs. Paces itself at a jittered human cadence instead
+  of a fixed click rhythm.
   - **Triggers** on "follow back my followers", "clean up my follow-back queue",
     or "which followers are worth following back".
   - **Needs** interactive browser control with a browser already signed in to X,
     plus local file write for its state file. Local only — cloud, sandboxed, or
     headless sessions cannot run it.
+
+- **[`twitter-moot-radar`](.agents/skills/twitter-moot-radar/SKILL.md)** — asks
+  for your areas of interest, harvests what your mutuals follow, and suggests only
+  matching accounts, each with a quoted post, its permalink, the moots behind it,
+  and live proof you do not follow them yet. Nothing is followed without your
+  per-handle approval. Paces itself at the same jittered human cadence.
+  - **Triggers** on "find people I should follow", "who do my moots follow that I
+    don't?", or "build me a follow list from my network".
+  - **Needs** interactive browser control with a browser already signed in to X,
+    plus local file write for its state file. Local only — cloud, sandboxed, or
+    headless sessions cannot run it.
+
+- **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the repository's
+  verification gate: checks a skill's frontmatter, self-containment, size,
+  reference layout, and catalog wiring, then reports pass/fail with file
+  evidence.
+  - **Triggers** before handing off any skill creation or change, or on "verify
+    this skill", "check the skill", or "is this skill ready?".
+  - **Needs** local file read and shell access, plus `skills-ref` for frontmatter
+    validation.
 
 No build step, no package installs, and no need to copy anything by hand.
 
@@ -52,6 +73,10 @@ Some surfaces do not read a folder at all. Claude Cowork and cloud sessions load
 the skills enabled for your claude.ai account, so a skill has to be enabled there
 rather than copied into a repository.
 
+The folder is the install unit. Any other host that reads a skills directory works
+the same way — copy one folder into it, for example `.zcode/skills/`, and the
+skill's own `SKILL.md` supplies everything it needs.
+
 Keep the folder name as-is: the spec requires the frontmatter `name` to match it,
 and that name is how each agent addresses the skill (`/<skill-name>`,
 `$<skill-name>`, or by description match).
@@ -72,7 +97,13 @@ So the repo keeps one real copy and links the two gaps:
 agent-skills/
 ├── .agents/
 │   └── skills/                       # canonical source of truth
-│       └── twitter-followback/
+│       ├── twitter-followback/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       ├── twitter-moot-radar/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       └── skill-verify/
 │           └── SKILL.md
 ├── .claude/
 │   └── skills -> ../.agents/skills   # Claude Code
@@ -100,6 +131,9 @@ CI job only looks at its native directory — name the environment or pass `--al
 ## Nuances per app
 
 Same files, different rules. These are the differences that actually bite.
+Explicit invocation is one of them: Claude Code, Copilot, and Cursor use
+`/skill-name`, Codex uses `$skill-name`, and OpenCode uses `@skill-id` — its `/`
+menu is commands only. See [Invoking skills](docs/skills/invoking.md).
 
 **All hosts**
 
@@ -152,6 +186,8 @@ Same files, different rules. These are the differences that actually bite.
 - The skill ID is the path, not the frontmatter `name`, and it is case-sensitive.
 - A flat `skills/<name>.md` also works, but the directory form is needed for
   supporting files.
+- Invoke with `@skill-id` in the prompt. The `/` menu is for commands, not
+  skills; `/twitter-followback` will not match.
 
 **OpenAI Codex**
 

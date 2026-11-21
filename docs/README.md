@@ -9,6 +9,8 @@ you can read in any order.
 | --- | --- |
 | [Architecture](architecture.md) | Why there is one canonical tree and how each agent finds it |
 | [Skills](skills/README.md) | The skill catalog, the spec rules, and how to add a skill |
+| [Shared core for X skills](skills/twitter-core.md) | The contract every browser-driven X skill is built from |
+| [Invoking skills](skills/invoking.md) | Explicit syntax for each host, TUI, CLI, and app — and why `/` is not universal |
 | [Scripts](scripts.md) | `link-skills.sh` and `link-skills.ps1`: environments, flags, behaviour |
 | [Agent instructions](agent-instructions.md) | `AGENTS.md`, `CLAUDE.md`, and how this repo is maintained |
 | [Lode Coding](lode-coding.md) | The knowledge-management method and its full system prompt |

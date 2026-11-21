@@ -34,6 +34,9 @@ lode/tmp/
 .env.local
 .env.*.local
 
+# Local debug and session scraps
+/temp/
+
 # OS noise
 .DS_Store
 Thumbs.db

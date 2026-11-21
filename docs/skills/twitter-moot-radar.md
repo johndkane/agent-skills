@@ -1,0 +1,127 @@
+# twitter-moot-radar
+
+Suggests accounts to follow on X by listening to the user's mutuals. It asks for
+areas of interest, reads what each moot follows, and returns only accounts that
+match — each one carrying the quote that proves the match, the permalink, the
+moots who follow them, and a live check that the user does not already follow
+them.
+
+Install by copying the `twitter-moot-radar` folder into the skills directory your
+host reads; the `SKILL.md` inside it is the whole skill, and everything it
+references is inside the same folder. This page explains the skill and is not part
+of the install.
+
+Dense detail lives beside it in `references/` — the state schema and the
+suggestion card format — and is read only when `SKILL.md` points at it.
+
+It follows the [shared contract for X skills](twitter-core.md). Browse the
+instructions in this repository:
+[`twitter-moot-radar/SKILL.md`](../../.agents/skills/twitter-moot-radar/SKILL.md).
+
+## When it triggers
+
+- "find people I should follow"
+- "who do my moots follow that I don't?"
+- "find accounts like the ones I follow"
+- "build me a follow list from my network"
+- "what are people in my circles following?"
+
+It is explicitly **not** for mass-following, growth hacking, or unfollowing, and
+it does not follow anything without per-handle approval.
+
+## Requirements
+
+| Need | Why |
+| --- | --- |
+| Interactive browser control | Every read and action happens through the real UI |
+| A browser already signed in to X | The skill never handles credentials |
+| A local session | Cloud, sandboxed, and headless sessions cannot complete it |
+| Local file write | Keeps the moot roster, harvested sources, and verdicts in `~/.x-moot-radar/` |
+
+## How it works
+
+1. **Prove control** — confirm the browser relay and drive the signed-in session
+   before planning.
+2. **Learn the UI** — read the current labels for `Follow`, `Following`,
+   `Follows you`, and `Pending`, plus the row anatomy of a Following list.
+3. **Ask for interests** — 3–8 checkable areas, optional signal words,
+   strictness, an overlap bar, exclusions, moot scope, and a budget, all restated
+   before any harvesting.
+4. **Build the moot roster** — a moot is someone the user follows who follows
+   back, confirmed by the `Follows you` marker before their list is used. Moots
+   are ordered by how relevant their own topic is to the named interests.
+5. **Harvest Following lists** — collect handles with bio excerpts from moots'
+   Following tabs only, counting how many distinct moots follow each candidate.
+   Nothing is harvested from "Who to follow", Explore, or search.
+6. **Filter early** — drop obvious bots, brands, funnels, and already-decided
+   handles at the row level, so profile visits go to plausible people.
+7. **Research the shortlist** — bio, recent posts, recency, follower ratio, and
+   the live follow control. A candidate needs a quoted post or a stated bio line
+   that matches an interest.
+8. **Present with proof** — grouped by interest, ranked by overlap and evidence
+   strength, each line showing quote, date, permalink, moots, and follow state.
+   High-overlap candidates with no evidence go to a near-miss list.
+9. **Follow only on approval** — named handles only, with exact identity matching
+   and the family's settle-window verification.
+10. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
+    times are drawn from ranges so the run does not read as a metronome. The
+    jitter applies to timing only; verification and throttle rules stay exact,
+    and a challenge still ends the run.
+11. **Persist and report** — the roster and harvested graph survive interest
+    changes; ranking is redone instead of re-harvesting.
+
+## Why overlap is the signal
+
+A moot is a person the user already chose to follow and who chose them back, so
+their follows are a proxy for taste rather than for reach. Two or more moots
+following the same account is a meaningful coincidence; one moot is a lead. The
+skill ranks on that count, but never treats it as proof of an interest — only the
+candidate's own posts and bio can do that.
+
+## Proof standard
+
+Every suggestion must show:
+
+- a quoted post of 200 characters or fewer, with its date and permalink, or a bio
+  line that states the interest;
+- the moots who follow the account, by handle and count;
+- a live `Follow @handle` control reading, confirming the user does not already
+  follow them;
+- an optional `follows you` note, which is a bonus rather than a reason.
+
+If the posts are unreadable — a protected account — there is no suggestion. The
+account is reported as unreadable instead of guessed at.
+
+An empty result is a valid result: the skill reports the filtered counts and
+offers to widen the interests, lower the overlap bar, or extend the harvest rather
+than padding the list with weak matches.
+
+## Across runs
+
+State lives at `~/.x-moot-radar/<handle>.json`
+(`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), outside the repository.
+It holds the interest profile in force, confirmed moots with their topic, the
+harvested source sets, the per-moot cursor, the queue, and a verdict per handle.
+
+Moots and sources are interest-independent, so changing interests re-ranks the
+existing graph instead of re-reading it. A `suggested` verdict cools down for
+about 30 days unless new moots start following that account; `dismissed` is
+permanent unless the user asks to revisit.
+
+## Safety boundaries
+
+- Only the user's own account, only with the confirmed scope.
+- Nothing is followed without per-handle approval; no unfollow, block, report, or
+  message.
+- Never harvest from suggestion modules, Explore, or search results.
+- Hand off for login, 2FA, captcha, or payment, and never try to pass a challenge
+  to keep a run going.
+- Never describe a protected account's interests.
+- Stop and ask when identity, scope, or UI behaviour is unclear.
+
+## Related
+
+- [Shared core for X skills](twitter-core.md) — the family contract
+- [twitter-followback](twitter-followback.md) — the other X skill
+- [Skills catalog](README.md)
+- [Agent instructions](../agent-instructions.md)

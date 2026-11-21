@@ -22,6 +22,11 @@ does not read the content twice.
   links at mode `120000`, no host-specific copies, standard frontmatter.
 - **Adding and changing skills** — the exact steps, including the README row and
   the folder/`name` pairing.
+- **Skill design rules** — portability, progressive disclosure, terse writing,
+  runtime data, and behavior standards for every skill.
+- **Skill families** — one contract page, copied into every member body, updated
+  in one change.
+- **Verifying skill changes** — run the `skill-verify` skill before handoff.
 - **Validation** — the `skills-ref` commands.
 - **Checks** — what to verify before handing off.
 - **Git** — read-only by default: query allowed; writes only on explicit request.
