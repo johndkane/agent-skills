@@ -5,9 +5,9 @@ Open directions, not commitments. Keep entries short and remove them when done.
 ## Catalog
 
 - Grow the catalog one folder per skill. Never restructure the tree per skill.
-- Keep `SKILL.md` lean and terse: aim for ~200–300 lines and under ~3,000 tokens.
-  Grow `references/` with focused, one-level-deep files instead of letting the
-  body pass 500 lines or 5,000 tokens.
+- Keep `SKILL.md` lean and terse: pass at 500 lines and ~5,000 tokens, with
+  ~200–300 lines and ~3,000 tokens as the advisory aim. Grow `references/` with
+  focused, one-level-deep files instead of letting the body reach the pass line.
 - Keep the README skill-agnostic above the list. Do not name a specific skill in
   the intro; the list is the catalog.
 - Prefer portability over host-specific features, and describe limits in

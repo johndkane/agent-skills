@@ -98,9 +98,10 @@ Quote the advertised values; use the validator's `read-properties` when present.
 
 ## Step 3 — Shape and size
 
-- Measure lines and estimate tokens as characters / 4. Pass at ≤300 lines and
-  ≤3,000 tokens; warn up to 500 lines / 5,000 tokens; fail above. State that the
-  token figure is an estimate.
+- Measure lines and estimate tokens as characters / 4. Pass at ≤500 lines and
+  ≤5,000 tokens, the official recommendation; fail above. Treat the catalog's
+  200–300 line / ~3,000-token aim as advisory lean-up advice, never a failure.
+  State that the token figure is an estimate.
 - `references/` files are flat `.md`, one topic each, named in the body with
   when to read them.
 - `scripts/` files are self-contained or declare dependencies; `assets/` files
@@ -135,8 +136,8 @@ From the repository root:
    a hand read never replaces it.
 2. If `skill-validator` (agent-ecosystem) is already on `PATH`, run
    `skill-validator check <skill-folder>` and fold its structure, link, orphan,
-   and token findings into Steps 2 and 3. Its warnings are advisory against this
-   repository's stricter targets; never install it to make a check pass.
+   and token findings into Steps 2 and 3. Its findings are advisory; never
+   install it to make a check pass.
 3. Run `read-properties` and compare with the frontmatter.
 4. Resolve every relative link in touched `docs/` and `lode/` files; report
    missing targets.
@@ -161,7 +162,8 @@ From the repository root:
 - [ ] No repo or host path in the body; links stay inside the folder.
 - [ ] No real handles, names, emails, or private details; examples are placeholders.
 - [ ] Online skills carry no run data: no saved quotes, permalinks, screenshots, or state.
-- [ ] Size within target; references flat and named; closing checklist present.
+- [ ] Within 500 lines and ~5,000 tokens; references flat and named; closing
+      checklist present.
 - [ ] README bullet, docs row and page, lode entry and map row.
 - [ ] Group members carry a byte-identical shared copy; the index lists the group.
 - [ ] Validator reports `Valid skill`; links resolve.

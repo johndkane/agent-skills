@@ -8,6 +8,7 @@
 - **Repo-maintenance skill** — a skill that checks or changes this repository; it may name repo paths it checks, but still links only inside its own folder.
 - **Progressive disclosure** — loading `name` and `description` at startup, the `SKILL.md` body on activation, and `references/`, `scripts/`, or `assets/` files only when the body names them.
 - **Reference file** — a focused document under `references/` holding detail too dense for the body; named by `SKILL.md`, one level deep.
+- **Skill size pass line** — the official recommendation for a `SKILL.md` body: under 500 lines and ~5,000 tokens; the catalog's ~200–300 line / ~3,000-token aim is advisory only.
 - **Install copy** — one skill folder copied into a host's skills directory; it must work with no other file from this repository present.
 - **Skill identity** — the folder name plus the `SKILL.md` inside it; the directory a host installs it into is never part of its identity.
 - **Host** — an assistant or agent product that reads skills from disk.
@@ -26,9 +27,27 @@
 - **Docs audience** — one of `users/`, `operators/`, `developers/`, or `skills/` under `docs/`; each owns its detail, and other pages link to it.
 - **Lode** — `lode/`, this agent-owned memory and the home of project-specific guidance.
 - **Protected account** — an X account that hides its posts until it approves a follow request.
-- **Moot** — a person the user follows who follows back; the only source for `twitter-moot-radar`.
+- **Moot** — a person the user follows who follows back; a `twitter-moot-radar` source and one `twitter-compatibility` scope.
+- **Associated account** — a moot, a following-only account, or a followers-only account; the population `twitter-compatibility` scores.
+- **Compatibility scope** — `moots`, `following-only`, `followers-only`, or `all`, chosen up front; it filters the population without changing the score formula.
+- **Following-only** — an associated account the user follows that does not follow back.
+- **Followers-only** — an associated account that follows the user without a follow back.
+- **Category** — the per-target relationship label — `moot`, `following-only`, or `followers-only` — shown with a score but never scored itself.
+- **Visual evidence** — opt-in reading of images and video frames; off by default, 0 subject points when off, 1 or 2 when on, capped per area, and never enough for high confidence alone.
+- **Visual area** — an interest area whose primary evidence may be images; image-only items count 2 and cap at 12 instead of 1 and 6.
+- **Visual unavailable** — the flag when the model or browser tool cannot return readable image content; the run continues text-only.
 - **Overlap** — the count of distinct moots following a candidate; it ranks a suggestion, never proves an interest.
 - **Interest profile** — the user's named areas plus strictness, overlap bar, and exclusions; it gates and ranks suggestions.
+- **Compatibility score** — a 0–100 weighted total over a bounded sample of two feeds under one frozen rubric; arithmetic on counted items, never a prediction.
+- **Rubric** — the user's areas, signal terms, area weights, component weights, mode, and window; frozen per version, and a change makes earlier scores stale.
+- **Signal lexicon** — the confirmed lowercase terms per area that mark a match; the compatibility score's measuring instrument.
+- **Component score** — one of subject, conversation, format, voice, recency, or access, each a count-based 0–100 value.
+- **Confidence** — `high`, `medium`, `low`, `insufficient`, or `unreadable`, derived from the items and tabs read; shown beside a score, never folded into it.
+- **Source feed** — the signed-in user's own readable Posts, Replies, Media, and visible Likes, re-read every run.
+- **Target feed** — the scored account's public Posts, Replies, Media, and visible reposts for the scoring window.
+- **Bridge matrix** — the report table of interest areas by the top-scoring accounts.
+- **Entry point** — the newest matching post within 14 days that asks a question or invites a reply, with a suggested angle; never a sent message.
+- **Stale score** — a score older than 14 days or from a different rubric version; shown only as previous, never ranked.
 - **Source set** — the moots whose Following lists surfaced a candidate; it grows during a harvest and is reused across interest changes.
 - **Proof standard** — a quoted post or bio line with date and permalink, the moots behind it, and a live `Follow` control reading; no suggestion without it.
 - **Near miss** — a high-overlap candidate without readable interest evidence, listed separately so the user can overrule the rubric.

@@ -31,6 +31,7 @@ creating its central files.
 | --- | --- | --- |
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers | `~/.x-followback/` |
 | [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests | `~/.x-moot-radar/` |
+| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts, on chosen subjects and scope, with text-first or opt-in visual evidence | `~/.x-compatibility/` |
 
 The links above point at this repository's copy for browsing. A skill is its
 folder, so installing one means copying that folder into a host's skills
@@ -247,4 +248,5 @@ flowchart LR
 - [Skills catalog](README.md)
 - [twitter-followback](../users/twitter-followback.md)
 - [twitter-moot-radar](../users/twitter-moot-radar.md)
+- [twitter-compatibility](../users/twitter-compatibility.md)
 - [Agent instructions](../developers/agent-instructions.md)

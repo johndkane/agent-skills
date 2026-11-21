@@ -63,8 +63,10 @@ extensions.
 
 ## Shape
 
-- Aim for roughly 200–300 lines and under ~3,000 tokens; 500 lines and 5,000
-  tokens are the ceiling. Move dense material into focused reference files.
+- The pass line is the official recommendation: 500 lines and ~5,000 tokens. Aim
+  tighter, at roughly 200–300 lines and ~3,000 tokens, as advisory lean-up
+  guidance that never fails a skill. Move dense material into focused reference
+  files.
 - Reference files are flat, one level deep, `.md`, named for their content
   (`state-file.md`, `ui-vocabulary.md`). One topic per file; no nested chains.
 - Executable helpers go in `scripts/`; static templates or data in `assets/`.
@@ -162,8 +164,8 @@ cannot run.
 - [ ] `description` states what, when, and the exclusions, within 1024 chars.
 - [ ] `skills-ref validate` passes for every touched skill.
 - [ ] `SKILL.md` is terse and behavior-complete: no motivation prose, no repeated
-      rules, roughly 3,000 tokens or less, and every detail file it names is one
-      level deep inside the skill folder.
+      rules, within 500 lines and ~5,000 tokens (the official recommendation),
+      and every detail file it names is one level deep inside the skill folder.
 - [ ] A group change reached the central files, the index, and every member copy
       in the same change (see [groups](groups.md)).
 - [ ] A browser-action skill carries the proportional cadence from
@@ -179,12 +181,12 @@ cannot run.
 
 ## Catalog state
 
-The two X skills follow the progressive-disclosure shape: state schemas live in
-`references/state-file.md`, and the follow-back UI ladder and the suggestion card
-live in their own reference files. Their shared rules live in
-`references/twitter-shared.md`, copied verbatim from
+The X skills follow the progressive-disclosure shape: state schemas live in
+`references/state-file.md`, and the follow-back UI ladder, the suggestion card, and
+the compatibility scoring and report files live in their own references. Their
+shared rules live in `references/twitter-shared.md`, copied verbatim from
 [`docs/skills/twitter-shared.md`](../../docs/skills/twitter-shared.md); the group
-index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). Both
+index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). All
 open a run with a brief state line, link every handle and cited source in their
 output, and stop on an access failure instead of inferring state.
 
@@ -194,7 +196,9 @@ contract. `twitter-followback` is documented in
 `docs/users/twitter-followback.md` with its run-state contract in
 [twitter-followback.md](twitter-followback.md); `twitter-moot-radar` in
 `docs/users/twitter-moot-radar.md` with its entry in
-[twitter-moot-radar.md](twitter-moot-radar.md).
+[twitter-moot-radar.md](twitter-moot-radar.md); `twitter-compatibility` in
+`docs/users/twitter-compatibility.md` with its rubric entry in
+[twitter-compatibility.md](twitter-compatibility.md).
 
 Invocation syntax is host-specific: Claude Code, Copilot, and Cursor use
 `/skill-name`, OpenCode uses `@skill-id`, Codex uses `$skill-name`, and Gemini CLI

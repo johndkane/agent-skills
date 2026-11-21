@@ -20,6 +20,7 @@ agent-skills/
 │   └── skills/                       # canonical source of truth
 │       ├── twitter-followback/
 │       ├── twitter-moot-radar/
+│       ├── twitter-compatibility/
 │       └── skill-verify/
 ├── .claude/
 │   └── skills -> ../.agents/skills   # Claude Code

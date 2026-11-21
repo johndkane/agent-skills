@@ -146,4 +146,5 @@ check due follow-ups first. The live UI always wins over the file: a saved
 - [User guide](README.md)
 - [Getting skills](getting-skills.md)
 - [Using skills](invoking.md)
-- [twitter-moot-radar](twitter-moot-radar.md) — the other X skill
+- [twitter-moot-radar](twitter-moot-radar.md) — find accounts to follow through your mutuals
+- [twitter-compatibility](twitter-compatibility.md) — score who you interact with easily, and on what

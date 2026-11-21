@@ -35,6 +35,9 @@ agent-skills/
 │       ├── twitter-moot-radar/
 │       │   ├── SKILL.md
 │       │   └── references/
+│       ├── twitter-compatibility/
+│       │   ├── SKILL.md
+│       │   └── references/
 │       └── skill-verify/
 │           └── SKILL.md
 ├── .claude/

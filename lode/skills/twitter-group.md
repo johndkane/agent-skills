@@ -9,6 +9,7 @@ applies the group mechanics in [groups](groups.md).
 | --- | --- |
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers |
 | [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest matching accounts from the moot graph |
+| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility across associated-account scopes, text-first with opt-in visual evidence |
 
 ## Central files
 
@@ -39,8 +40,10 @@ flowchart LR
     C[twitter-core.md<br/>contract] --> S[twitter-shared.md<br/>operative rules]
     S --> F[followback<br/>references/twitter-shared.md]
     S --> M[moot-radar<br/>references/twitter-shared.md]
+    S --> X[compatibility<br/>references/twitter-shared.md]
     I[skill-groups.md<br/>index] --> F
     I --> M
+    I --> X
 ```
 
 ## Why copies, not links
@@ -53,4 +56,5 @@ reads at runtime.
 Related: [skills summary](summary.md), [group rules](groups.md),
 [twitter-followback](twitter-followback.md),
 [twitter-moot-radar](twitter-moot-radar.md),
+[twitter-compatibility](twitter-compatibility.md),
 [shared rules](../../docs/skills/twitter-shared.md).

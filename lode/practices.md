@@ -156,10 +156,10 @@ remain opt-in.
 ## Write for agents
 
 Skill bodies are runtime instructions, not documentation. Use terse imperatives,
-tables, and checklists; aim for ~200–300 lines and under ~3,000 tokens, with 500
-lines / 5,000 tokens as the ceiling. Cut motivation prose, repetition, and
-restated examples before cutting a rule. Dense detail lives in one-level-deep
-`references/` files that the body names.
+tables, and checklists. The pass line is the official recommendation: 500 lines
+and ~5,000 tokens; the ~200–300 line / ~3,000-token aim is advisory. Cut
+motivation prose, repetition, and restated examples before cutting a rule. Dense
+detail lives in one-level-deep `references/` files that the body names.
 
 ```mermaid
 flowchart LR

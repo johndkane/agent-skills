@@ -155,4 +155,5 @@ permanent unless the user asks to revisit.
 - [User guide](README.md)
 - [Getting skills](getting-skills.md)
 - [Using skills](invoking.md)
-- [twitter-followback](twitter-followback.md) — the other X skill
+- [twitter-followback](twitter-followback.md) — follow back real, active followers
+- [twitter-compatibility](twitter-compatibility.md) — score who you interact with easily, and on what

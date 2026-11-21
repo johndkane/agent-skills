@@ -10,6 +10,7 @@ without costing context on every prompt.
 | --- | --- | --- |
 | [`twitter-followback`](../users/twitter-followback.md) | Researches followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts; links handles and cited posts; stops on access failures; opens each run with its state summary | Local agent with browser control |
 | [`twitter-moot-radar`](../users/twitter-moot-radar.md) | Asks for your interests, reads what your mutuals follow, and suggests matching accounts with quoted proof and live follow status; every handle, moot, and quote is linked; stops on access failures; opens each run with its state summary | Local agent with browser control |
+| [`twitter-compatibility`](../users/twitter-compatibility.md) | Asks for the scope — moots, following-only, followers-only, or all associated accounts — and which subjects and factors matter; reads your feed and each target's posts, replies, reposts, and media, optionally reads image-only media when the session can view images, and scores interaction compatibility 0–100 with counted evidence, confidence, per-area breakdowns, and a replyable entry point; read-only, never acts on X | Local agent with browser control |
 | [`skill-verify`](skill-verify.md) | Checks a skill folder against the catalog rules — including personal-data safety for online skills — and reports pass/fail with evidence | Local agent with file and shell access |
 
 The full instructions for each skill live in its `SKILL.md`; these pages explain
@@ -67,10 +68,12 @@ Agents load a skill in three layers, so size is a design constraint:
 | Instructions | the whole `SKILL.md` body | When the skill activates |
 | Resources | files under `references/`, `scripts/`, `assets/` | Only when `SKILL.md` points at them |
 
-Keep the body terse and behavior-complete: roughly 200–300 lines and under
-~3,000 tokens. Write instructions, not an essay — imperative bullets, tables,
-and checklists; cut motivation prose, repeated rules, and restated examples
-before cutting a rule. 500 lines and 5,000 tokens are the ceiling, not the goal.
+Keep the body terse and behavior-complete. The official recommendation is under
+500 lines and ~5,000 tokens; that is the pass line. This catalog aims tighter, at
+roughly 200–300 lines and ~3,000 tokens, but the tighter aim is advisory and
+never fails a skill. Write instructions, not an essay — imperative bullets,
+tables, and checklists; cut motivation prose, repeated rules, and restated
+examples before cutting a rule.
 
 Past that, move dense material — schemas, long tables, vendor lore, worked
 examples — into `references/` and say when to read each file. Keep resource
@@ -99,10 +102,11 @@ the lode, or this wiki.
   the skill has real environment requirements), `metadata` (string keys to
   string values), and `allowed-tools` (experimental; support varies). Host-
   specific fields are ignored elsewhere and must never be load-bearing.
-- **Size** — aim for roughly 200–300 lines and under ~3,000 tokens; 500 lines
-  and ~5,000 tokens are the ceiling. Write terse instructions, not prose. Move
-  dense detail into `references/`, executable helpers into `scripts/`, and static
-  templates or data into `assets/`; name each file and when to read it.
+- **Size** — pass at under 500 lines and ~5,000 tokens, the official
+  recommendation. Aim tighter, at roughly 200–300 lines and ~3,000 tokens, as
+  advisory guidance. Write terse instructions, not prose. Move dense detail into
+  `references/`, executable helpers into `scripts/`, and static templates or data
+  into `assets/`; name each file and when to read it.
 - **Runtime needs** — declare them in `compatibility` instead of assuming a
   capable environment. A need the skill can proceed without, such as an optional
   state-file write, is a stated fallback, not a blocker: continue on session
@@ -153,9 +157,9 @@ python -m venv .venv
 
 On Windows use `.venv\Scripts\pip` and `.venv\Scripts\skills-ref.exe`.
 `validate` must print `Valid skill`. It checks the frontmatter and naming
-conventions, not the body: the 500-line / 5,000-token guidance and the
-one-level-deep links are review checks, not validator output. `read-properties`
-and `to-prompt` show what a host actually advertises.
+conventions, not the body: the official 500-line / ~5,000-token recommendation
+and the one-level-deep links are review checks, not validator output.
+`read-properties` and `to-prompt` show what a host actually advertises.
 
 ## Related
 
