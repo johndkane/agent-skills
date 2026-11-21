@@ -48,6 +48,9 @@ judgement and carries no inference; re-read it next run.
 - Keep short tags, not quotes. The quote lives in the report with its date and
   permalink; state holds handles, verdicts, dates, and short tags — no emails,
   addresses, or private details.
+- A focus account's verdict is recorded like any other, with `"focus": true` on
+  its entry. It needs no moot, source, or overlap entry; the next run may re-read
+  it when interests change.
 - Write after each harvested moot, at every stop, and before ending the run.
 - The file is memory, not proof: re-read the control and the profile next run.
 - If file write is refused or unavailable, keep the same structure in session

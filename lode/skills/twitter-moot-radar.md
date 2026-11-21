@@ -1,7 +1,8 @@
 # twitter-moot-radar
 
-The catalog's recommendation skill. It asks the user for interests, harvests what
-their mutuals follow, and returns matching accounts with quoted proof.
+The catalog's recommendation and account-assessment skill. It asks the user for
+interests, harvests what their mutuals follow, and returns matching accounts with
+quoted proof; or it assesses one account the user names, whatever its relationship.
 Instructions live in the skill's own `SKILL.md` (this checkout:
 [`twitter-moot-radar/SKILL.md`](../../.agents/skills/twitter-moot-radar/SKILL.md));
 human page:
@@ -13,12 +14,14 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 ## Invariants
 
 1. Interests come from the user and are restated as checkable areas before any
-   harvesting.
+   harvesting or assessment.
 2. Only mutuals' Following lists are harvested — never suggestion modules,
    Explore, search, or a moot's Followers tab.
 3. A moot is confirmed by the `Follows you` marker before their list is used;
    appearing in the Following list alone is not enough.
-4. Overlap is counted per distinct moot, and the default bar is two.
+4. Overlap is counted per distinct moot, and the default bar is two on a graph
+   run. A focus account needs no overlap; `0` is reported as context, never as a
+   shortfall.
 5. No suggestion without a quoted post or bio line, with its date and permalink.
 6. A protected account has unreadable posts, and a "potentially sensitive
    content" interstitial can replace a profile outright; either way no suggestion
@@ -47,18 +50,24 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
     is labelled, ranks below a quoted post, and caps that suggestion at medium
     confidence; profile images may flag spam or impersonation but never prove a real
     person or a sensitive trait, and a failed mode is `unavailable`, never a zero.
+15. A named account is a focus target: no roster or harvest, skip patterns become
+    cautions, and its follow-back state and moot overlap are context. The
+    interest-evidence gate still applies, and the report does not push the user
+    toward a different account because it is not a moot.
 
 ## Pipeline
 
 ```mermaid
 flowchart TD
-    I[Ask for interests] --> R[Build moot roster]
+    I[Confirm target + interests] --> T{Named focus account?}
+    T -- yes --> P[Research that account]
+    T -- no --> R[Build moot roster]
     R --> H[Harvest moots' Following lists]
     H --> F[Filter: overlap, skips, state]
-    F --> P[Research shortlist]
+    F --> P
     P --> S{Quoted interest match?}
-    S -- no --> N[Near misses / no_evidence]
-    S -- yes --> Q[Rank + suggest with proof]
+    S -- no --> N[Near miss or no_evidence]
+    S -- yes --> Q[Present with proof]
     Q --> A{User approves handles?}
     A -- no --> W[Write state + report]
     A -- yes --> V[Follow, settle, verify]
@@ -77,7 +86,8 @@ The schema, verdict vocabulary, and writing rules are the skill's
 that file is authoritative and the body names it.
 
 States: `suggested`, `dismissed`, `followed`, `pending`, `unverified`,
-`already_following`, `skipped`, `no_evidence`, `unreadable`.
+`already_following`, `skipped`, `no_evidence`, `unreadable`. A focus account's
+verdict carries `focus: true` and needs no graph entry.
 
 When the write is refused or unavailable, the run continues on session state of
 the same shape and prints it for the user to verify; the graph, cooldowns, and
@@ -111,7 +121,9 @@ three times the suggestion budget so that research losses do not empty the repor
 
 Two moots following an account is a meaningful coincidence of taste. It is not
 evidence that the account posts about the interest; only the account's own words
-are. The report shows both, and the interest quote is the gate.
+are. The report shows both, and the interest quote is the gate. A focus account may
+have zero overlap: the quote still decides the verdict, and the zero is stated as
+context.
 
 ## Self-contained
 

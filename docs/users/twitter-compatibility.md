@@ -1,13 +1,16 @@
 # twitter-compatibility
 
-Scores how compatible you are with your **associated accounts** on X, for the
-subjects you care about. An associated account is a moot, someone you follow who
-does not follow you back, or someone who follows you whom you do not follow. It asks
-for the scope first — moots, following-only, followers-only, or all — then reads
-your own feed and the target's, and returns a 0–100 score with the counted evidence
-behind every point. It can optionally read image, video-frame, and audio-transcript
-evidence when you opt in and the session proves it can. It is not a personality
-guess and not a prediction that someone will reply.
+Scores how compatible you are with accounts on X, for the subjects you care
+about. By default that means your **associated accounts**: a moot, someone you
+follow who does not follow you back, or someone who follows you whom you do not
+follow. You can also name one account — whether or not it follows you back or
+belongs to those groups — and score it directly, with its relationship shown as
+context. It asks for the scope first — focus, moots, following-only,
+followers-only, or all — then reads your own feed and the target's, and returns a
+0–100 score with the counted evidence behind every point. It can optionally read
+image, video-frame, and audio-transcript evidence when you opt in and the session
+proves it can. It is not a personality guess and not a prediction that someone
+will reply.
 
 Install it by copying the `twitter-compatibility` folder into your skills
 directory; see [Getting skills](getting-skills.md). Invoke it in plain language or
@@ -35,7 +38,7 @@ It is read-only: it never likes, replies, reposts, follows, or messages. It is
 | Interactive browser control | Every read happens in the real UI |
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
-| Following and Followers lists | Classifies moots, following-only, followers-only, or all |
+| Following and Followers lists | Classify moots, following-only, followers-only, and all; a focus account is classified from its live profile instead |
 | Non-text evidence modes (optional) | Need a model and browser tool that return images, video frames, or an audio transcript; otherwise that mode is flagged unavailable and the run stays text-only |
 | Local file write | Keeps the scope, evidence modes, rubric, scores, and queue in `~/.x-compatibility/`; without it the run continues on session state |
 
@@ -57,9 +60,11 @@ verify. Later runs then start fresh, so some work may be repeated.
 4. **Read your feed** — your own Posts, Replies, Media, and Likes when visible. This
    is read fresh every run; your replies and likes show what you engage with, which
    is what format fit measures.
-5. **Pick targets** — from the chosen scope. Following and Followers list membership
-   plus the live `Follows you` marker classify each account as a moot,
-   following-only, or followers-only. You confirm the batch.
+5. **Pick targets** — the accounts you named in a focus run, or a slice of the
+   chosen list scope. List membership plus the live `Follows you` marker classify
+   each account as a moot, following-only, followers-only, or not-associated. You
+   confirm the batch when the skill sampled it; a handle you named needs no
+   confirmation.
 6. **Read each target** — bio, join date, category, newest posts, replies, reposts,
    quotes, media, captions or alt text, and image-only media, video frames, or audio
    transcripts when those modes are on and proven. Each item is classified and
@@ -79,15 +84,17 @@ Ask for it first; there is no silent default.
 
 | Scope | Who it includes | Confirmed by |
 | --- | --- | --- |
+| `focus` | The accounts you name, whatever their relationship | The live profile; `not-associated` when in neither list |
 | `moots` | You follow them and they follow you | Both lists, or `Follows you` while you follow them |
 | `following-only` | You follow them; they do not follow you | In Following; no `Follows you` (or absent from Followers when that list is read) |
 | `followers-only` | They follow you; you do not follow them | In Followers; `Follows you` and control not `Following`/`Unfollow` (or absent from Following when that list is read) |
 | `all` | The union, each account once | Both lists, deduplicated |
 
-The live profile wins when a list row and the profile disagree. An account in
-neither list is not associated; it is added only after you confirm. A category is
-reported on every row and card, but it does not change the score formula — it
-selects the population and feeds the access component.
+The live profile wins when a list row and the profile disagree. A named account is
+scored even when it is in neither list; it is labelled `not-associated`, which is
+context rather than an error, and the skill never asks you to justify a handle you
+supplied. A category is reported on every row and card, but it does not change the
+score formula — it selects the population and feeds the access component.
 
 ## Visual and multimodal evidence
 
@@ -157,10 +164,10 @@ ranked above a confirmed one.
 
 State lives at `~/.x-compatibility/<handle>.json`
 (`%USERPROFILE%\.x-compatibility\<handle>.json` on Windows), in your home
-directory. It holds the scope in force, evidence modes and area flags, the rubric and
-signal lexicon, your aggregate source metrics, each target's category, score and
-component counts, the queue, hidden handles, and re-read dates. It holds no post
-quotes, permalinks, images, or private details.
+directory. It holds the scope in force, any focus handles, evidence modes, area
+flags, the rubric and signal lexicon, your aggregate source metrics, each target's
+category, score and component counts, the queue, hidden handles, and re-read dates.
+It holds no post quotes, permalinks, images, or private details.
 
 Each run opens by naming that file and summarizing what it holds — scope, evidence
 modes, rubric version, areas and weights, scored and stale counts, last write — or
@@ -171,9 +178,9 @@ and the next run starts fresh.
 A score is current for 14 days. Changing an area, a signal term, a weight, the
 mode, the window, an evidence mode, or a visual area flag is a new rubric: every old
 score becomes stale and is re-read before it is ranked again. Changing only the
-scope does not invalidate scores; it changes which associated accounts are reported,
-and a target outside the scope keeps its entry without being ranked. Your own feed
-is re-read every run; it is never scored from last run's copy.
+scope does not invalidate scores; it changes which accounts are reported, and a
+target outside the scope keeps its entry without being ranked. Your own feed is
+re-read every run; it is never scored from last run's copy.
 
 ## Connectivity and access failures
 

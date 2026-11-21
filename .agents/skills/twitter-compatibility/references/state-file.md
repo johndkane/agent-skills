@@ -13,6 +13,7 @@ wins, and a saved score is never reported as current.
 {
   "account": "@me",
   "scope": "all",
+  "focus": [],
   "rubric": {
     "version": 1,
     "updated": "2026-11-21",
@@ -109,9 +110,14 @@ wins, and a saved score is never reported as current.
 
 ## Fields
 
-- `scope` — the current population filter: `moots`, `following-only`,
-  `followers-only`, or `all`. It selects which associated accounts are reported; it
-  is not part of the rubric, and changing it does not invalidate scores.
+- `scope` — the current population filter: `focus`, `moots`, `following-only`,
+  `followers-only`, or `all`. It selects which accounts are reported; it is not part
+  of the rubric, and changing it does not invalidate scores. `focus` is driven by the
+  `focus` list.
+- `focus` — the handles the user named for a focus run, lowercase with `@`. Empty
+  or absent outside a focus run, and an older file without it means no named focus
+  handles. A focus target needs no list membership and no follow-back; its
+  category may be `not-associated`.
 - `rubric` — the measuring instrument. `areas` and their `terms` are frozen once
   confirmed; `visual` marks an area whose primary evidence may be images or frames;
   `weights` is the normalized component set the user approved; `evidenceModes` is
@@ -122,7 +128,8 @@ wins, and a saved score is never reported as current.
 - `source` — aggregates only, refreshed every run. Never keep source post text,
   quotes, or permalinks here.
 - `targets` — one entry per handle ever scored, keyed by lowercase handle with `@`.
-  `category` is `moot`, `following-only`, or `followers-only`; `areas` holds the
+  `category` is `moot`, `following-only`, `followers-only`, or `not-associated`;
+  `areas` holds the
   per-area score and matched count; `evidence` holds the counts the card shows,
   including `nonText`; `gap` is a short tag, not a quote.
 - `queue` — handles and categories the user chose but this run did not reach.
@@ -145,9 +152,8 @@ appears in a report is read in that run.
 
 - A stale score may be shown only as `previous` with its date and rubric version;
   it is never ranked with current scores.
-- Changing `scope` alone does not invalidate a score. It changes which associated
-  accounts are reported; a target outside the scope keeps its entry and is not
-  ranked this run.
+- Changing `scope` alone does not invalidate a score. It changes which accounts are
+  reported; a target outside the scope keeps its entry and is not ranked this run.
 - Re-read `insufficient` and `unreadable` on the next run; a wider window or a
   changed lexicon may change the first, and the second is often transient.
 - `hidden` and `excluded` persist until the user asks to change them.
@@ -175,6 +181,9 @@ appears in a report is read in that run.
 State: ~/.x-compatibility/<handle>.json — scope moots, evidence text, rubric v1
 (Rust ×3, Postgres ×2; reply-first), 12 scored, 2 stale, last write 2026-11-21.
 ```
+
+A focus run names the handles instead, for example `scope focus (@alice, @bob)`;
+`category not-associated` is shown there as context, not as a warning.
 
 No file: name the path and say the run starts fresh. Writing unavailable: say
 `session-only` and print the structure for verification.

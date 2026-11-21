@@ -20,7 +20,8 @@ Date: 2026-11-21 · State: ~/.x-compatibility/<handle>.json
 State one line about what the state file holds and whether this run is session-only.
 Never dump the file. The `Evidence` header reads `text` (default), or the enabled
 modes with their outcome: `text+images (available)` or
-`text+images (unavailable — text-only)`.
+`text+images (unavailable — text-only)`. A focus run writes
+`Scope: focus — @alice, @bob (named by you)` and gives each category as context.
 
 ## Summary table
 
@@ -30,7 +31,11 @@ modes with their outcome: `text+images (available)` or
 | 1 | [@alice](https://x.com/alice) | moot | `███████░░░` 74 | Good | Rust 92 | AI 25 | high |
 | 2 | [@bob](https://x.com/bob) | following-only | `███████░░░` 71 | Good | Rust 76 | AI 20 | high |
 | 3 | [@carol](https://x.com/carol) | followers-only | `██████░░░░` 58 | Workable | Postgres 80 | Rust 25 | medium |
+| 4 | [@dave](https://x.com/dave) | not-associated | `█████░░░░░` 55 | Workable | Postgres 60 | Rust 40 | medium |
 ```
+
+`not-associated` appears only for an account the user named; it is context, never a
+penalty or an exclusion.
 
 The bar is ten cells: `round(score / 10)` filled with `█`, the rest `░`. Rank only
 `high` and `medium` confidence. Put `low` in a provisional table after it, never at
@@ -103,8 +108,10 @@ accounts. It answers "shared on what?", not only "who is highest?".
   missing.
 - **Unreadable** — protected or notice-replaced pages: handle, what did not render.
   No score and no inference.
-- **Out of scope** — handles in state whose live category no longer matches the
-  chosen scope: handle, category, date. Keep the entry; no score this run.
+- **Out of scope** — handles in state whose live category no longer matches a
+  selected population: handle, category, date. Keep the entry; no score this run.
+  In a focus run every named account is reported, so this list is empty unless the
+  live category contradicts a selected population.
 - **Hidden** — handles the user asked to skip, with the reason and date.
 
 An empty result is valid. Report the counts, then offer to widen the window, add
@@ -121,7 +128,7 @@ signal terms, or read the missing tab. Never pad the table with a weak match.
   with only strengths is not the score.
 - **Scope and category are visible.** State the scope in the header and the category
   on every card and row; never mix categories silently. Category is reported, not
-  scored.
+  scored, and `not-associated` is a label for a named account, not a failure.
 - **Evidence modes are visible.** The header names the modes and whether each is
   `available` or `unavailable`; an unavailable mode is text-only. Tag non-text items
   `[image]`, `[video]`, or `[audio]`, describe only what is visible, and keep their

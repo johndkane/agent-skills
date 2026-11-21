@@ -6,6 +6,10 @@ match — each one carrying the quote that proves the match, the permalink, the
 moots who follow them, and a live check that the user does not already follow
 them.
 
+It can also assess one account you name directly. That account does not need a
+moot to follow it, and it does not need to follow you back: its relationship is
+reported as context, never treated as a requirement.
+
 Install it by copying the `twitter-moot-radar` folder into your skills directory;
 see [Getting skills](getting-skills.md). Invoke it in plain language or with your
 host's explicit syntax; see [Using skills](invoking.md).
@@ -14,6 +18,8 @@ host's explicit syntax; see [Using skills](invoking.md).
 
 - "find people I should follow"
 - "who do my moots follow that I don't?"
+- "check out `@alice` for me"
+- "is this account worth following?"
 - "find accounts like the ones I follow"
 - "build me a follow list from my network"
 - "what are people in my circles following?"
@@ -43,12 +49,14 @@ repeated.
 2. **Learn the UI** — read the current labels for `Follow`, `Following`,
    `Unfollow`, `Follows you`, and `Pending`, plus the row anatomy of a Following
    list. `Following` and `Unfollow` are the same already-followed state.
-3. **Ask for interests** — 3–8 checkable areas, optional signal words,
-   strictness, an overlap bar, exclusions, evidence modes, moot scope, and a
-   budget, all restated before any harvesting.
+3. **Confirm the brief** — the target (the whole moot graph, or an account you
+   name), then 3–8 checkable areas, optional signal words, strictness, an overlap
+   bar, exclusions, evidence modes, moot scope, and a budget, all restated before
+   any harvesting. A named target skips the roster and harvest steps.
 4. **Build the moot roster** — a moot is someone the user follows who follows
    back, confirmed by the `Follows you` marker before their list is used. Moots
-   are ordered by how relevant their own topic is to the named interests.
+   are ordered by how relevant their own topic is to the named interests. A focus
+   run skips this.
 5. **Harvest Following lists** — collect handles with bio excerpts from moots'
    Following tabs only, counting how many distinct moots follow each candidate.
    Nothing is harvested from "Who to follow", Explore, or search.
@@ -71,6 +79,16 @@ repeated.
 11. **Persist and report** — the roster and harvested graph survive interest
     changes; ranking is redone instead of re-harvesting.
 
+## Focus on one account
+
+Name an account and the skill assesses that account instead of searching the
+graph. It skips the roster, the harvest, and the overlap bar; the same evidence
+standard applies. The report gives the interest verdict, the quoted proof, and
+the relationship — `follows you` or not, already followed or not, and how many
+moots follow it, including none — as context. A missing follow-back or a zero
+overlap is a fact about the relationship, not a flaw in the request, and the
+skill does not push you toward a different account.
+
 ## Why overlap is the signal
 
 A moot is a person the user already chose to follow and who chose them back, so
@@ -86,10 +104,10 @@ Every suggestion must show:
 - a quoted post of 200 characters or fewer, with its date and a permalink that is
   linked, or a linked bio line that states the interest;
 - the moots who follow the account, by handle and count, each handle linked to
-  its profile;
-- a live `Follow @handle` control reading, confirming the user does not already
-  follow them;
-- an optional `follows you` note, which is a bonus rather than a reason.
+  its profile; a focus account may have none, and `Moots: none` is a valid line;
+- a live follow control reading: `Follow @handle` confirms you do not already
+  follow them, and `Following`/`Unfollow` is reported as already followed;
+- an optional `follows you` note, which is context rather than a reason.
 
 Text is the default and the cheapest. With an evidence mode on and proven, a
 non-text match may stand in for the quoted line: `[image] "Rust code with impl

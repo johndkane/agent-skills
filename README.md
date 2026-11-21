@@ -26,18 +26,20 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
 - **[`twitter-moot-radar`](.agents/skills/twitter-moot-radar/SKILL.md)** — finds
   accounts worth following through your mutuals, ranked by how many moots follow
   them and shown with a quoted post, its permalink, and live proof you do not
-  follow them yet. Optional image, video-frame, or transcript proof is labelled and
-  lower-weight. Nothing is followed without per-handle approval.
+  follow them yet. Or assesses one account you name — even one no moot follows and
+  one that does not follow you back — with its relationship shown as context.
+  Optional image, video-frame, or transcript proof is labelled and lower-weight.
+  Nothing is followed without per-handle approval.
   [Read more](docs/users/twitter-moot-radar.md)
 
 - **[`twitter-compatibility`](.agents/skills/twitter-compatibility/SKILL.md)** —
-  scores how compatible you are with your associated accounts on X — moots,
-  accounts you follow, accounts that follow you, or all — on subjects you name.
-  Asks for the scope first, reads both feeds, counts posts, replies, reposts, and
-  media, and can optionally read image, video-frame, or audio-transcript evidence
-  when the session proves it can. Returns a 0–100 score with its evidence, per-area
-  breakdowns, and a post worth replying to. Read-only: no likes, replies, follows,
-  or messages.
+  scores how compatible you are with accounts on X — moots, accounts you follow,
+  accounts that follow you, all of them, or one account you name whether or not it
+  is associated — on subjects you name. Asks for the scope first, reads both feeds,
+  counts posts, replies, reposts, and media, and can optionally read image,
+  video-frame, or audio-transcript evidence when the session proves it can. Returns
+  a 0–100 score with its evidence, per-area breakdowns, and a post worth replying
+  to. Read-only: no likes, replies, follows, or messages.
   [Read more](docs/users/twitter-compatibility.md)
 
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — this repository's
@@ -102,7 +104,8 @@ and what each host reads.
 | Using a skill | [User guide](docs/users/README.md) → [Getting skills](docs/users/getting-skills.md) → [Invoking skills](docs/users/invoking.md) |
 | Running a checkout | [Architecture](docs/operators/architecture.md) → [Scripts](docs/operators/scripts.md) → [Adopting this repo](docs/operators/adopting.md) |
 | Changing the repository | [Agent instructions](docs/developers/agent-instructions.md) → [Lode Coding](docs/developers/lode-coding.md) → [Host differences](docs/developers/hosts.md) |
-| Adding a skill | [Skills](docs/skills/README.md) → [Skill groups](docs/skills/skill-groups.md) |
+| Adding a skill | [Skills](docs/skills/README.md) → [Skill groups](docs/skills/skill-groups.md) → [skill-verify](docs/skills/skill-verify.md) |
+| Writing a browser-driven X skill | [X skill contract](docs/skills/twitter-core.md) → [Shared X rules](docs/skills/twitter-shared.md) → [Browser cadence](docs/skills/browser-cadence.md) |
 
 ## Using this as a skeleton
 

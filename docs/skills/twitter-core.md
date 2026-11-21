@@ -30,8 +30,8 @@ creating its central files.
 | Skill | Task | State |
 | --- | --- | --- |
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks | `~/.x-followback/` |
-| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests, with optional non-text proof | `~/.x-moot-radar/` |
-| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts, on chosen subjects and scope, text-first with opt-in image, video-frame, and transcript evidence | `~/.x-compatibility/` |
+| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests, or assess one named account, with optional non-text proof | `~/.x-moot-radar/` |
+| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts or one named account, on chosen subjects and scope, text-first with opt-in image, video-frame, and transcript evidence | `~/.x-compatibility/` |
 
 The links above point at this repository's copy for browsing. A skill is its
 folder, so installing one means copying that folder into a host's skills
@@ -125,6 +125,12 @@ damages the user's account or produces a false claim.
     text-only and says so. Lower weight never turns a photo into proof of a person,
     and no image supports a claim about race, ethnicity, gender, age, disability,
     health, religion, or sexuality.
+19. **Classification is context, not a gate.** A relationship — follower, followee,
+    moot, or none — explains how an account surfaced and which label the report
+    carries. When the user names an account to assess, it is a valid target on its
+    own: a missing follow-back or zero moot overlap is reported as fact, never used
+    to question the request, demand confirmation, or redirect to a different
+    account. Only a genuinely ambiguous handle needs a question.
 
 ## Human cadence
 
@@ -210,6 +216,9 @@ relearning the flow.
 - **A relationship is not evidence.** Who follows an account explains why it
   surfaced, not what it posts about. Only the account's own bio and posts can
   support a claim about its interests.
+- **A named target is not a suggestion.** When the user supplies a handle, the
+  task is to assess that account. Moot overlap, list membership, and follow-back
+  answer "how did it surface", never "is the request valid".
 - **A photo is not a person.** Profile images and media can flag spam, a watermark,
   or an interest, but never prove that an account belongs to a real person; never
   infer sensitive traits from them.

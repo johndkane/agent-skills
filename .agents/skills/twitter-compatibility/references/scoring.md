@@ -22,14 +22,17 @@ rule below. Either way it counts for format fit.
 ## Scope
 
 Scope is a population filter, not a scoring factor. The formulas are identical for
-`moots`, `following-only`, `followers-only`, and `all`; the category changes which
-associated accounts enter the run and what the report shows. A category is
+`focus`, `moots`, `following-only`, `followers-only`, and `all`; the category
+changes which accounts enter the run and what the report shows. A category is
 confirmed from list membership and the live profile, never inferred from the score.
-Access still uses `follows you` and `replied to you`, so a followers-only account
-can score higher on access than a following-only account with the same content.
+`not-associated` labels a named focus account that is in neither list; it is scored
+like any other target, and the label is context, never a gate. Access still uses
+`follows you` and `replied to you`, so a followers-only account can score higher on
+access than a following-only account with the same content.
 
-An account outside the chosen scope is not scored or reported this run; keep its
-state entry for later. A scope change alone never invalidates a score.
+An account outside the chosen population is not scored or reported this run, unless
+the user named it. Keep its state entry for later; a scope change alone never
+invalidates a score.
 
 ## Area score
 

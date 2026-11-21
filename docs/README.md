@@ -14,8 +14,8 @@ needed: choose a skill, get it, and use it.
 | [Getting skills](users/getting-skills.md) | Ask your agent, copy the folder, or enable it in your account |
 | [Invoking skills](users/invoking.md) | Explicit syntax for each host, TUI, CLI, and app — and why `/` is not universal |
 | [twitter-followback](users/twitter-followback.md) | Follow back real, active followers |
-| [twitter-moot-radar](users/twitter-moot-radar.md) | Find accounts worth following through your mutuals |
-| [twitter-compatibility](users/twitter-compatibility.md) | Score how compatible you are with your associated accounts — moots, following, followers, or all — on subjects you choose |
+| [twitter-moot-radar](users/twitter-moot-radar.md) | Find accounts worth following through your mutuals, or assess one account you name |
+| [twitter-compatibility](users/twitter-compatibility.md) | Score how compatible you are with your associated accounts, or one account you name — moots, following, followers, all, or focus — on subjects you choose |
 
 ## Operators
 

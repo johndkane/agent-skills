@@ -28,11 +28,12 @@
 - **Lode** — `lode/`, this agent-owned memory and the home of project-specific guidance.
 - **Protected account** — an X account that hides its posts until it approves a follow request.
 - **Moot** — a person the user follows who follows back; a `twitter-moot-radar` source and one `twitter-compatibility` scope.
-- **Associated account** — a moot, a following-only account, or a followers-only account; the population `twitter-compatibility` scores.
-- **Compatibility scope** — `moots`, `following-only`, `followers-only`, or `all`, chosen up front; it filters the population without changing the score formula.
+- **Associated account** — a moot, a following-only account, or a followers-only account; the default population `twitter-compatibility` scores when no account is named.
+- **Focus account** — one or more accounts the user names for direct assessment; scored or researched whatever its relationship, with the category and moot overlap reported as context, never as a gate.
+- **Compatibility scope** — `focus`, `moots`, `following-only`, `followers-only`, or `all`, chosen up front; it filters the population without changing the score formula.
 - **Following-only** — an associated account the user follows that does not follow back.
 - **Followers-only** — an associated account that follows the user without a follow back.
-- **Category** — the per-target relationship label — `moot`, `following-only`, or `followers-only` — shown with a score but never scored itself.
+- **Category** — the per-target relationship label — `moot`, `following-only`, `followers-only`, or `not-associated` — shown with a score but never scored itself.
 - **Multimodal evidence** — opt-in reading of images, video frames, and audio transcripts; text is the default, 0 subject points when off, lower-weight and capped when on, and never enough for high confidence alone.
 - **Evidence mode** — `text` (default, always on), `images`, `video`, or `audio`; each extra mode is opted in by the user and capability-tested once per run.
 - **Evidence gate** — the two checks before non-text evidence counts: the user opted into that mode, and it passed its capability test this run; a failed gate is reported `unavailable`, never a silent zero.

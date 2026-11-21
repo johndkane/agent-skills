@@ -16,6 +16,9 @@ Why: writes about low-level Rust, and two of your Rust moots follow them
 Caution: none
 ```
 
+A focus account uses the same card with `Moots: none` (or the actual count) and a
+`Focus: named by you` line. Overlap is context, never a gate.
+
 When an evidence mode is on and proven, a non-text match may replace the quoted
 line:
 `[image] "Rust code with impl Trait" — [2026-11-14](https://x.com/<handle>/status/<id>)`,
@@ -34,7 +37,8 @@ memory, from a previous run, or from the follow relationship.
   evidence read under an opted-in mode; it never outranks a quoted post or proves a
   real person.
 - **Name the moots.** `@a, @b (2)` is the social proof; do not summarise it as
-  "several moots".
+  "several moots". For a focus account, `none` is a valid count and carries no
+  judgement.
 - **State the relationship honestly.** `follows you` is a bonus, not a reason;
   `not followed` must come from the control read in this run.
 - **Flag the thin ones.** Protected, brand-adjacent, or single-post evidence gets
@@ -46,8 +50,10 @@ memory, from a previous run, or from the follow relationship.
 
 ## Report order
 
-1. Interest profile, overlap bar, and exclusions in force.
-2. Suggestions grouped by interest, strongest first.
+1. Target: whole moot graph or named focus account, and the interests, overlap
+   bar, and exclusions in force.
+2. Suggestions grouped by interest, strongest first; a focus account presented
+   singly, with moot overlap as context.
 3. Near misses, with reasons.
 4. Filtered counts by reason.
 5. Protected accounts excluded.

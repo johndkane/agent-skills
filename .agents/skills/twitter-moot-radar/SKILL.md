@@ -5,10 +5,12 @@ description: >-
   your areas of interest, harvests what your moots follow, and suggests only the
   accounts that match, ranked by how many moots follow them and shown with
   proof — a quoted post, its permalink, the moots behind it, and live
-  confirmation that you do not follow them yet. Optionally reads image-only posts
+  confirmation that you do not follow them yet. Or assess one named account
+  directly, with moot overlap shown as context rather than a requirement.
+  Optionally reads image-only posts
   and video frames when you opt in, as labelled lower-weight proof. Use when asked to find people to
   follow, find accounts in my mutuals' circles, who do my moots follow that I
-  don't, find similar accounts, or build a follow list from my network. Not for
+  don't, check out a specific account, find similar accounts, or build a follow list from my network. Not for
   mass-following, growth hacking, or unfollowing; nothing is followed without
   your per-handle approval.
 compatibility: >-
@@ -27,6 +29,11 @@ are the best recommendation source and the easiest to flatter with noise. Return
 a short ranked list where every line is checkable; never follow without
 per-handle approval.
 
+A **focus account** is one the user names directly. Assess it on its own merits:
+no moot has to follow it, and whether it follows the user back is context, not a
+requirement. A zero overlap and a missing follow-back are facts to report, never
+a reason to question the request or push the user toward a different account.
+
 ## Group rules
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
@@ -36,20 +43,25 @@ optional background.
 
 ## Rules
 
-- Interests come from the user, restated as checkable areas before harvesting.
-  "Tech" is not checkable; "Rust and systems programming" is.
+- Interests come from the user, restated as checkable areas before any harvesting
+  or assessment. "Tech" is not checkable; "Rust and systems programming" is.
 - Harvest moots' Following lists only — never "Who to follow", Explore, search,
   or a moot's Followers tab.
-- Overlap ranks: more distinct moots means higher. Two is the default bar; one
-  moot is a weak lead and is named as such.
+- Overlap ranks a graph run: more distinct moots means higher. Two is the default
+  bar; one moot is a weak lead and is named as such. A focus run has no bar.
 - No suggestion without a quoted post (date + permalink) or a bio line that
   states the interest. A post beats a bio.
 - A follow relationship is relevance, not interest. Only the account's words
   prove what it posts about.
 - "Not followed" is proved by a live `Follow @handle` control, not by a list.
 - Report by default. Follow only handles the user approves by name.
+- A named handle is a focus target: research it directly, skip the roster and
+  harvest, and do not ask it to justify itself through moots, a follow-back, or
+  an overlap bar.
 - Filter noise at the row level; keep quote evidence dated; reuse the graph and
-  re-rank when interests change.
+  re-rank when interests change. For a focus target, skip patterns and the
+  overlap bar become caution notes, while the interest-evidence gate still
+  applies.
 - Text is the default evidence mode. Images, video frames, and audio transcripts
   are opt-in, capability-tested in Step 6, capped, and labelled; a photo never
   proves a real person or a sensitive trait.
@@ -73,9 +85,10 @@ passkey, captcha, or payment; never enter credentials.
    the control's exact label:
    - `Follow @handle` — not followed; this is the "not followed" proof.
    - `Following @handle` / `Unfollow @handle` — already followed, under either
-     label; both prove the follow. Drop it.
+     label; both prove the follow. Context for a focus account; a graph run drops
+     it from suggestions.
    - `Pending` — an outstanding request on a protected account.
-   - `Follows you` — a bonus signal, not a moot by itself.
+   - `Follows you` — context, not a moot by itself and not a requirement.
 3. On a moot's Following list, note where the handle, bio excerpt, and any
    mutual marker sit; confirm whether rows show `Follows you`.
 4. The lists are virtualised: collect continuously while scrolling, varying
@@ -84,13 +97,16 @@ passkey, captcha, or payment; never enter credentials.
    snapshot, compare two known states, check X Help; the live UI wins. Ask if it
    stays unclear.
 
-## Step 2 — Ask for areas of interest
+## Step 2 — Confirm the brief
 
 Never infer interests from existing follows. If state holds a profile for this
 account, say the state line, show it, and ask whether to keep or change it.
 
 Ask, then restate:
 
+- **Target** — the whole moot graph (default), or one or more accounts the user
+  names. A named account is in scope whatever its relationship: followed or
+  unfollowed, follows back or not, moot or not.
 - **Areas** — 3 to 8, concrete and observable; push back once on vague ones.
 - **Signal words** (optional) — tools, projects, jargon, names that count as
   evidence.
@@ -99,21 +115,26 @@ Ask, then restate:
   avatar and banner), `video` (paused frames), and `audio` (host transcript only);
   text stays on and is the cheapest. Restate the set; each mode is capability-tested
   in Step 6.
-- **Overlap bar** — 2+ distinct moots by default, or strong single-moot
-  evidence.
+- **Overlap bar** — graph runs only: 2+ distinct moots by default, or strong
+  single-moot evidence.
 - **Exclusions** — marketing/affiliate, crypto/trading, adult, giveaways,
   impersonation/parody, hate/abuse; let the user add or remove.
-- **Moot scope** — all confirmed moots across runs, or a named subset.
+- **Moot scope** — graph runs only: all confirmed moots across runs, or a named
+  subset.
 - **Budget** — suggestions to return, moots to scan, wall-clock limit.
 - **Already-follows-you** — flag separately or leave out; that is a follow-back
-  task.
-- **Protected accounts** — posts unreadable, so no proof is possible; exclude
-  and report, never offer an evidence-free shortcut.
+  task. A focus account is assessed either way.
+- **Protected accounts** — posts unreadable, so no proof is possible; report the
+  limit. A focus account is still reported, without an evidence-free shortcut.
 
 If the user says "use your judgement", propose the list, bar, budget, and evidence
 modes, and get a yes. Restate the brief in one paragraph.
 
 ## Step 3 — Build the moot roster
+
+**Focus run:** skip this step and Step 4. The named account is the target, and
+moots are optional context gathered later by checking whether any confirmed moot
+happens to follow it. Do not harvest a graph to justify the request.
 
 1. Confirm the account; the roster belongs to it.
 2. A moot must be evidenced: the `Follows you` marker is strongest; the
@@ -129,6 +150,8 @@ modes, and get a yes. Restate the brief in one paragraph.
    their list.
 
 ## Step 4 — Harvest Following lists
+
+**Focus run:** skip; go to Step 6 for the named account.
 
 For each moot, in order:
 
@@ -150,6 +173,9 @@ narrowly.
 
 ## Step 5 — Filter before opening profiles
 
+**Focus run:** no overlap filter and no shortlist cut. Research the named account
+and turn any skip pattern into a stated caution instead of dropping it.
+
 1. **Overlap** — at or above the Step 2 bar (default 2).
 2. **Row exclusions** — drop obvious skip patterns before a profile visit.
 3. **State** — drop `suggested` inside cooldown, `dismissed`, `followed`.
@@ -170,11 +196,13 @@ Skip patterns:
 - **Bad character** — slurs, hate, harassment, abuse.
 
 A borderline bio is not a suggestion; skip it, or near-miss it when overlap is
-strong. Count filtered items by reason for the report.
+strong. Count filtered items by reason for the report. In a focus run, do not skip:
+state the same point as a caution and finish the assessment.
 
 ## Step 6 — Research and collect proof
 
-For each shortlisted candidate, open the profile:
+For each shortlisted candidate (in a focus run, the named account), open the
+profile:
 
 | Signal | Proves |
 | --- | --- |
@@ -182,8 +210,8 @@ For each shortlisted candidate, open the profile:
 | Last two or three posts | the interest is real and current; the quote |
 | Post dates | recency — default activity within ~30 days |
 | Followers / following | farm or echo-chamber check |
-| Follow control | the user does not already follow them |
-| `Follows you` | bonus: they already follow the user |
+| Follow control | whether the user follows them: `Follow` proves not followed; `Following`/`Unfollow` proves already followed |
+| `Follows you` | the follow-back state: context, never a requirement |
 | Lock icon | posts unreadable; no proof possible |
 
 Proof rules:
@@ -195,8 +223,9 @@ Proof rules:
 - Display name, avatar, emoji, and the follow relationship are not interest
   evidence.
 - Tag each match to a named interest; multiple matches rank up.
-- No readable posts, no suggestion — record `no_evidence` and move on, whatever
-  the overlap.
+- No readable posts, no interest claim — record `no_evidence` and say what was
+  missing. A graph run drops the candidate; a focus run still reports the
+  account and its follow state, without a match claim.
 - **Multimodal proof (opt-in)** — gate each enabled mode with the shared capability
   test before the first read. With it proven, an image-only post, paused video
   frame, or host transcript may satisfy the one-match gate when the pictured
@@ -209,8 +238,9 @@ Proof rules:
   from a photo or infer sensitive traits. Skip media reads on a candidate already
   failing the text gate; keep inside 1 profile image pair, 3 media items per
   candidate, and 12 non-text reads per run.
-- If the control reads `Following` or `Unfollow`, record `already_following` and
-  drop it.
+- If the control reads `Following` or `Unfollow`, record `already_following`.
+  A graph run drops it; a focus run keeps the assessment and reports the state
+  as context.
 - A "potentially sensitive content" interstitial is not a profile: no bio, no
   posts, no control. Record `unreadable`, report it as unreadable, and infer
   nothing — not the interest, not the activity, not the relationship.
@@ -219,8 +249,13 @@ Proof rules:
 
 ## Step 7 — Rank and present with proof
 
-Rank by overlap, then evidence strength, then recency, then a sane follower
-ratio. Present grouped by interest, strongest first.
+Graph run: rank by overlap, then evidence strength, then recency, then a sane
+follower ratio, grouped by interest, strongest first.
+
+Focus run: one assessment, not a ranking. Lead with the interest verdict and the
+quoted proof, then the relationship (`follows you` or not, `not followed` or
+already following) and the moot count — including `Moots: none` — as context.
+Never present a low or zero overlap as a shortfall.
 
 Use the card in [references/report-format.md](references/report-format.md):
 quote, date, permalink, moots by handle and count, live follow state, optional
@@ -276,6 +311,9 @@ that the next run starts fresh and may repeat decided work.
 ## Step 10 — Report honestly
 
 - Interest profile, overlap bar, and exclusions in force.
+- Focus run: the named account, its interest evidence, and its follow-back and
+  moot overlap as context. A missing follow-back or zero overlap is not an error
+  and needs no apology or alternative suggestion.
 - Moots confirmed, harvested, remaining, and the resume point.
 - Suggestions by interest: quote, date, permalink, moots, follow state.
 - Evidence modes and capability; non-text reads counted; `[image]`, `[video]`, or
@@ -305,11 +343,14 @@ that the next run starts fresh and may repeat decided work.
       restated.
 - [ ] Every enabled evidence mode capability-tested; `unavailable` flagged;
       non-text proof labelled and never above medium confidence.
-- [ ] Roster from confirmed moots only, labelled, ordered, capped.
+- [ ] Roster from confirmed moots only, labelled, ordered, capped — or skipped
+      for a named focus account.
 - [ ] Harvest from Following lists only; overlap counted per candidate.
 - [ ] Every suggestion has quoted evidence with date and permalink, and a live
       "not followed" reading.
 - [ ] Protected accounts excluded and reported, not guessed at.
+- [ ] A named focus account was researched directly: no roster, harvest, overlap
+      bar, or follow-back requirement applied to it.
 - [ ] Near misses listed with reasons.
 - [ ] Only approved handles followed and verified after settling; no double
       clicks; cadence jittered.

@@ -1,9 +1,10 @@
 # twitter-compatibility
 
-The catalog's scoring skill for associated accounts. It asks for the scope —
-moots, following-only, followers-only, or all — then which subjects and factors
-matter, reads the signed-in user's feed and each target's feed, and returns a 0–100
-compatibility score with counted evidence. Instructions live in the skill's own
+The catalog's scoring and comparison skill for accounts on X. It asks for the
+scope — focus, moots, following-only, followers-only, or all — then which subjects
+and factors matter, reads the signed-in user's feed and each target's feed, and
+returns a 0–100 compatibility score with counted evidence. A named focus account is
+scored whatever its relationship. Instructions live in the skill's own
 `SKILL.md` (this checkout:
 [`twitter-compatibility/SKILL.md`](../../.agents/skills/twitter-compatibility/SKILL.md));
 human page:
@@ -16,10 +17,12 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 
 1. Read-only. It never likes, replies, reposts, follows, block, reports, or
    messages; the entry point is a suggestion for the user, not an action.
-2. Scope is asked first: `moots`, `following-only`, `followers-only`, or `all`
-   associated accounts. It is a population filter, not a rubric change; a category
-   is confirmed from Following/Followers membership and the live `Follows you`
-   marker, never inferred from the score.
+2. Scope is asked first: `focus`, `moots`, `following-only`, `followers-only`, or
+   `all` associated accounts. It is a population filter, not a rubric change; a
+   category is confirmed from Following/Followers membership and the live `Follows
+   you` marker, never inferred from the score. A named account is a focus target
+   whatever its relationship; in neither list it is labelled `not-associated`, and
+   that label never blocks or delays scoring.
 3. Both sides are read fresh every run. The source feed is the signed-in user's own
    Posts, Replies, Media, and visible Likes; the target's is the scored account's
    posts, replies, reposts, and media. State is memory, never evidence.
@@ -46,9 +49,9 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
    every earlier score stale and unrankable until re-read. A scope change does not;
    it changes who is reported.
 10. State lives outside the repository at `~/.x-compatibility/<handle>.json`, one
-    file per signed-in account, and holds the scope, evidence modes, area flags,
-    rubric data, aggregates, scores, categories, counts, queue, hidden handles, and
-    dates — no quotes, permalinks, images, or private details.
+    file per signed-in account, and holds the scope, focus handles, evidence modes,
+    area flags, rubric data, aggregates, scores, categories, counts, queue, hidden
+    handles, and dates — no quotes, permalinks, images, or private details.
 11. A report is not a prediction. A high score means more shared, replyable
     material in the sample, not friendship, agreement, or a reply.
 12. Every enabled evidence mode is capability-tested once per run. A failed test is
@@ -59,7 +62,7 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 
 ```mermaid
 flowchart TD
-    P[Confirm scope: moots, following-only, followers-only, all] --> I[Confirm areas, terms, weights, targets, evidence modes]
+    P[Confirm scope: focus, moots, following-only, followers-only, all] --> I[Confirm areas, terms, weights, targets, evidence modes]
     I --> G[Capability-test each enabled mode]
     G --> S[Read source feed]
     S --> T[Read each target feed]
@@ -120,7 +123,8 @@ confidence; a card per account with category, per-area rows, component scores, t
 or three quoted items with dates and permalinks, non-text count when on, fit, gap,
 caution, and at most one entry point; a bridge matrix of areas by the top accounts;
 and separate lower-scored, provisional, insufficient, unreadable, out-of-scope, and
-hidden lists. The template is
+hidden lists. `not-associated` is a category for a named focus account, shown as
+context rather than a caution. The template is
 [`references/report-format.md`](../../.agents/skills/twitter-compatibility/references/report-format.md).
 
 An entry point is the newest matching post within 14 days that asks a question or
@@ -136,7 +140,8 @@ target tabs are capped at 40/30 posts, 30/20 replies, 15/10 media, and 15 likes.
 Profile visits are the expensive unit, so state lets later runs read only new or
 stale targets instead of re-reading the whole set. Changing the rubric invalidates
 scores but not handles, categories, or the queue; changing only the scope keeps
-every score and changes who is reported. Evidence modes and `visual` area flags live
+every score and changes who is reported. A focus run stores its named handles and
+scores them like any target. Evidence modes and `visual` area flags live
 in the rubric; capability is per run because the host may change.
 
 When file write is refused or unavailable, the run continues on session state of

@@ -1,18 +1,18 @@
 ---
 name: twitter-compatibility
 description: >-
-  Score how compatible you are with your associated accounts on X (Twitter) —
-  moots, the accounts you follow, and the accounts that follow you — for subjects
-  you choose: asks for the scope and interest areas first, reads both your own feed
-  and each target's posts, replies, reposts, and media, and optionally reads image,
-  video-frame, or audio-transcript evidence when you opt in and the session proves
-  it can; returns a 0-100
-  compatibility score with the counted evidence behind every point, a ranked table,
-  per-area breakdowns, and a recent post worth replying to. Use when asked who you
-  should interact with, which accounts fit you, how compatible you are with
-  someone, who to reply to, or to score your moots, follows, or followers on a
-  topic. Read only: it never likes, replies, follows, or messages. Not for growth,
-  engagement farming, or judging people.
+  Score how compatible you are with accounts on X (Twitter) for subjects you
+  choose: moots, accounts you follow, accounts that follow you, or one account you
+  name — whether or not it follows you back. Asks for scope and areas
+  first, reads both your own feed and each target's posts,
+  replies, reposts, and media, and optionally reads image, video-frame, or
+  audio-transcript evidence when you opt in and the session proves it; returns a
+  0-100 compatibility score with the counted evidence behind every point, a
+  ranked table, per-area breakdowns, and a post worth replying to. Use when
+  asked who you should interact with, which accounts fit you, how compatible you
+  are with someone, score @alice, who to reply to, or to score your moots,
+  follows, or followers on a topic. Read only: it never likes, replies, follows,
+  or messages. Not for growth, engagement farming, or judging people.
 compatibility: >-
   Needs interactive browser control and a browser session already signed in to X,
   plus optional local file write for cross-run state. For optional image,
@@ -23,11 +23,14 @@ compatibility: >-
 
 # X/Twitter Compatibility
 
-Score how compatible you are with your **associated accounts** on X, on the subjects
-you name. An associated account is a moot, an account you follow that does not
-follow you back, or an account that follows you that you do not follow. Ask the
-scope up front — `moots`, `following-only`, `followers-only`, or `all` — then score
-only that subset.
+Score how compatible you are with accounts on X, on the subjects you name. By
+default that means your **associated accounts**: moots, accounts you follow
+without a follow-back, and accounts that follow you. A **focus account** is one the
+user names: score it whatever its relationship, and report that relationship as
+context, never as a gate.
+
+Ask the scope up front — `focus`, `moots`, `following-only`, `followers-only`, or
+`all` — then score only that set.
 
 ## Group rules
 
@@ -37,12 +40,13 @@ cadence, access failures, and privacy — and it is part of this skill.
 
 ## Rules
 
-- Scope comes from the user up front: `moots` (you follow and they follow you),
-  `following-only` (you follow, they do not follow you), `followers-only` (they
-  follow you, you do not follow them), or `all` associated accounts. Never infer it
-  from state or from who happens to be in the queue.
-- An account in neither the user's Following nor Followers list is not associated;
-  ask before adding it, and record the exception.
+- Scope comes from the user up front: `focus`, `moots`, `following-only`,
+  `followers-only`, or `all`, each defined in Step 3. Never infer it from state or
+  the queue.
+- A named account is a focus target whatever its relationship; in neither list it
+  is `not-associated`, a label, not an error. Score it without asking: a missing
+  follow-back or association never justifies declining or redirecting. Only an
+  ambiguous handle needs a question.
 - Read both sides fresh every run: the source user's own Posts, Replies, Media, and
   visible Likes, and the target's Posts, Replies, Media, and reposts. State is
   memory, never evidence.
@@ -110,11 +114,12 @@ captcha, or payment; never enter credentials.
 Ask, then restate in one paragraph. The scope is asked first; never infer areas
 from the accounts themselves.
 
-1. **Scope** — ask first, with no silent default: `moots` (you follow and they
-   follow you), `following-only` (you follow, they do not follow you),
-   `followers-only` (they follow you, you do not follow them), or `all` associated
-   accounts (the union, each account once). Restate the scope and its counts. If
-   the user says "use your judgement", propose `all`.
+1. **Scope** — ask first, with no silent default: `focus` (the accounts the user
+   names), `moots` (you follow and they follow you), `following-only` (you follow,
+   they do not follow you), `followers-only` (they follow you, you do not follow
+   them), or `all` associated accounts. A named handle makes the scope `focus`;
+   an explicitly named list scope wins. Restate the scope and its counts. If the
+   user says "use your judgement", propose `all`.
 2. **Areas** — 3 to 8 concrete, checkable subjects. Push back once on vague ones:
    "tech" is not checkable; "Rust and systems programming" is.
 3. **Signal terms** — 5 to 12 lowercase words or short phrases per area (tools,
@@ -137,9 +142,10 @@ from the accounts themselves.
    higher, per `references/scoring.md`. Each enabled mode is capability-tested once
    per run (Step 6); a failed test keeps text and reports `unavailable`, never a
    silent zero.
-7. **Targets** — named handles, or a slice of the chosen scope. A named account
-   outside the scope is scored only after the user confirms. Collect more handles
-   than the batch and let the user pick.
+7. **Targets** — the named handles in a focus run, or a slice of the chosen
+   population otherwise. A named account outside that population is still scored,
+   labelled `not-associated`; no confirmation is needed. Collect extra handles and
+   let the user pick.
 8. **Exclusions** — default none, because the user chose these accounts. Offer to
    exclude categories or handles by name and record the reason.
 9. **Window and budget** — default the last 30 days, with a 90-day look-back for
@@ -171,8 +177,9 @@ Read the source in this run; do not score from last run's copy.
 ## Step 5 — Build the target queue for the chosen scope
 
 1. Read the lists the scope needs: Following and Followers for `moots` and `all`;
-   Following for `following-only`; Followers for `followers-only`. Collect handle,
-   display name, bio excerpt, and `Follows you`; dedupe.
+   Following for `following-only`; Followers for `followers-only`; `focus` needs
+   only the profile pair. Collect handle, display name, bio excerpt, and
+   `Follows you`; dedupe.
 2. Classify each row:
    - `moot` — in Following and Followers when both lists were read, or `Follows you`
      on a profile the user follows.
@@ -180,26 +187,27 @@ Read the source in this run; do not score from last run's copy.
      absent from Followers when that list was read.
    - `followers-only` — in Followers; `Follows you` present and the control is not
      `Following`/`Unfollow`, or absent from Following when that list was read.
+   - `not-associated` — absent from both lists. Reported for a named focus account;
+     never a reason to refuse or redirect.
    The live profile wins when a list row and the profile disagree.
-3. Named handles: classify from the profile pair. An account in neither the
-   Following nor the Followers list is not associated; ask before adding it, and
-   record the exception.
+3. Named handles: classify from the profile pair. An account in neither list is
+   `not-associated`; score it and record the label as context.
 
    | `Follows you` | Control | Category |
    | --- | --- | --- |
    | present | `Following` / `Unfollow` | `moot` |
    | present | `Follow` / `Follow back` | `followers-only` |
    | absent | `Following` / `Unfollow` | `following-only` |
-   | absent | `Follow` / `Follow back` | not associated — ask |
+   | absent | `Follow` / `Follow back` | `not-associated` |
 
 4. Present the sampled handles with their categories and counts; let the user
-   choose the batch. List order is a sample, not a ranking.
+   choose the batch. A focus run skips the sample.
 5. Prefer stale, insufficient, and unreadable handles, then new ones. A current
    handle is read only when the user asks to re-score or wants it in this report;
    every target in the report is read in this run.
 6. Queue the rest, with its category, for the next run.
-7. Never score a suggestion module, "who to follow" strip, or search result as an
-   associated account.
+7. Never score a suggestion module, "who to follow" strip, or search result as a
+   target. A focus target is one the user named, not one the page suggested.
 
 ## Step 6 — Read each target feed
 
@@ -207,8 +215,8 @@ For each target, in queue order:
 
 1. Open the profile; confirm the exact `@handle`, display name, and category. Note
    bio, join date, follower/following counts, `Follows you`, lock icon, and pinned
-   post. If the live category no longer matches the selected scope, keep the state
-   entry but leave it out of this run.
+   post. If the live category no longer matches a selected population, keep the
+   state entry but leave it out of this run. A focus target ignores the category.
 2. Sample up to 30 Posts, 20 Replies, 10 Media, and reposts visible in Posts.
    Deduplicate by URL; one item is one row.
 3. Capability-test each enabled mode once per run before counting it: screenshot a
@@ -268,14 +276,15 @@ Read [references/report-format.md](references/report-format.md) before the first
 card.
 
 1. Open with the scope and its counts, evidence modes and capability, the rubric,
-   final weights, mode, sample sizes, date, and state line.
+   final weights, mode, sample sizes, date, and state line. A focus run says the
+   accounts were named and gives each category as context.
 2. Ranked table: rank, linked handle, category, score with a ten-cell bar, band,
    strongest area, main gap, confidence.
 3. A card for each target at or above the card floor (default 55), strongest first:
    category, per-area scores, counted signals, non-text count, two or three quoted
    items with dates and permalinks, fit, gap, and one entry point when a recent
    matching post invites a reply.
-4. A bridge matrix: areas as rows, the top three accounts as columns.
+4. A bridge matrix: areas as rows, top three accounts as columns.
 5. Lower scores, provisional, `insufficient`, `unreadable`, and out-of-scope
    handles separately, one line each. An empty or thin result is valid; report
    counts and offer to widen the sample or lexicon.
@@ -286,17 +295,18 @@ card.
 
 ## Step 9 — Persist and report
 
-1. Write after each target and before the run ends: scope, evidence modes and area
-   flags, rubric version, lexicon and weights, source metrics, per-target category,
-   scores and counts, non-text counts, queue, hidden handles, and follow-ups.
+1. Write after each target and before the run ends: scope, focus handles, evidence
+   modes and area flags, rubric version, lexicon and weights, source metrics,
+   per-target category, scores and counts, non-text counts, queue, hidden handles,
+   and follow-ups.
 2. A changed rubric, evidence mode, or `visual` area flag bumps the version; a
    scope change does not. Mark old scores stale and keep them only as a labelled
    previous score. Never mix versions in one ranking.
 3. Record `scored`, `stale`, `insufficient`, `unreadable`, `hidden`, and `excluded`
-   with a date and a short reason, plus each target's category. A target outside the
-   current scope keeps its entry but is not reported.
+   with a date and a short reason, plus each target's category. A target outside
+   the run keeps its entry but is not reported.
 4. Report what was read, what was missing, where the run stopped, and what remains.
-5. Say plainly that nothing was liked, replied to, followed, or messaged.
+5. Say nothing was liked, replied to, followed, or messaged.
 
 ## Limits
 
@@ -327,8 +337,10 @@ card.
 - [ ] Control proven; source and target identities confirmed; tabs read this run.
 - [ ] State loaded or started fresh; state line given; rubric version and scope
       recorded.
-- [ ] Scope chosen up front from moots / following-only / followers-only / all;
-      counts restated.
+- [ ] Scope chosen up front from focus / moots / following-only / followers-only /
+      all; counts restated.
+- [ ] A named focus account is scored whatever its relationship; `not-associated`
+      is context, not a gate.
 - [ ] Evidence modes confirmed; each enabled mode capability-tested, or flagged
       `unavailable` and the run kept text-only.
 - [ ] Areas, signal terms, both weight sets, targets, and budget confirmed and

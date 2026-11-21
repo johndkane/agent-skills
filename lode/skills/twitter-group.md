@@ -8,8 +8,8 @@ applies the group mechanics in [groups](groups.md).
 | Skill | Task |
 | --- | --- |
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks |
-| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest matching accounts from the moot graph, with optional non-text proof |
-| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility across associated-account scopes, text-first with opt-in multimodal evidence |
+| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest matching accounts from the moot graph, or assess one named account, with optional non-text proof |
+| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility across associated-account scopes or one named account, text-first with opt-in multimodal evidence |
 
 ## Central files
 
@@ -37,6 +37,10 @@ applies the group mechanics in [groups](groups.md).
 7. Text is every member's default evidence mode. An enabled multimodal mode is
    capability-tested once per run and reported `available` or `unavailable`; the
    shared file is the one place that rule is authored and it is copied verbatim.
+8. Both assessment members accept a named focus account. A relationship label —
+   `moot`, `following-only`, `followers-only`, or `not-associated` — is context,
+   never a gate; this is authored per member because `twitter-followback` acts on
+   a follower queue rather than assessing a named account.
 
 ```mermaid
 flowchart LR
