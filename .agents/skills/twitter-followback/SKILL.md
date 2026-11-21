@@ -25,13 +25,15 @@ from the live page, observation first.
 
 - Research every candidate before following: bio, join date, follower ratio,
   newest post, last two or three posts.
-- Work only `Follow back` rows. On a protected follower's row, plain `Follow`
-  counts. `Following` and `Pending` are already handled — never touch them.
+- Work only `Follow back` rows. Plain `Follow` counts only on a row confirmed
+  this run as a protected follower; on any other Followers row it means the
+  account no longer follows the user — a stranger, never queued.
+- `Following`, `Unfollow`, and `Pending` are already handled — never touch them.
 - Never unfollow, block, report, or message. Never follow from suggestions,
   "who to follow", or search.
-- Verify before claiming: the exact handle's control must read
-  `Following`/`Unfollow` after the settle window. A protected account reaches
-  `Pending` at most — a request, not a follow.
+- Verify before claiming: the exact handle's control must read `Following` or
+  `Unfollow` — either label proves the follow — after the full settle window. A
+  protected account reaches `Pending` at most — a request, not a follow.
 - Never click one control twice inside the settle window.
 - Persist progress and follow-ups to the state file; the live UI wins over it.
 - Borderline accounts are the user's call. Bring the evidence, not just the
@@ -84,9 +86,10 @@ passkey, captcha, or payment; never enter credentials.
 1. Confirm the signed-in handle; several accounts may share one browser.
 2. Open that account's **Followers** tab — not Following, not a suggestion
    list.
-3. Observe the labels on several rows. `Follow back` is the queue; other
-   variants, `Subscribe` icon labels, and the protected-account signs are in
-   [references/ui-vocabulary.md](references/ui-vocabulary.md).
+3. Observe the labels on several rows. `Follow back` is the queue;
+   `Following` and `Unfollow` are the same already-followed state under two
+   labels. Other variants, `Subscribe` icon labels, and the protected-account
+   signs are in [references/ui-vocabulary.md](references/ui-vocabulary.md).
 4. Read the row anatomy: display name, `@handle`, "Follows you", action button,
    bio excerpt, and a lock icon on protected rows.
 5. An unfamiliar label or layout is resolved before acting, using the ladder in
@@ -118,11 +121,12 @@ the protected decision and budget in one summary.
 ## Step 3 — Load state, build the queue
 
 1. Read the state file first (Step 7). Same account and criteria: skip
-   `processed`, except re-read `unverified` and wait for `pending`'s `checkOn`;
-   drain `queue`; scan from `scannedThrough`. Criteria changed: archive the file
-   and start fresh. UI wins in every case.
-2. Collect `Follow back` rows plus protected `Follow` rows still in the Followers
-   tab, keyed by `@handle`, in order.
+   `processed`, except re-read `unverified` and `unreadable` and wait for
+   `pending`'s `checkOn`; drain `queue`; scan from `scannedThrough`. Criteria
+   changed: archive the file and start fresh. UI wins in every case.
+2. Collect `Follow back` rows plus `Follow` rows confirmed this run as protected
+   followers, keyed by `@handle`, in order. A `Follow` row with no lock icon is
+   someone who no longer follows the user: leave it unqueued and un-researched.
 3. Deduplicate; the list is virtualised, so collect while scrolling.
 4. Stalls near ~100 rows: jump in large steps with pauses, vary the step, and
    scroll back occasionally.
@@ -148,6 +152,12 @@ Protected accounts supply no post evidence. Note what you saw (bio, join date,
 ratio, handle), apply the Step 2 decision, and never claim the activity or
 character check was done. If the user chose non-post evidence, say so. Record a
 skip as `skipped`, reason `protected`.
+
+A "potentially sensitive content" notice can replace the whole profile: no
+header, bio, posts, or control. Record `unreadable` with the reason and a
+follow-up, infer nothing, and never file it as a skip on merit. Recognition
+signs and the re-read rule are in
+[references/ui-vocabulary.md](references/ui-vocabulary.md).
 
 Skip patterns:
 
@@ -175,13 +185,16 @@ Skip patterns:
 ## Step 6 — Settle and handle limits
 
 After each click, poll the same control at jittered checkpoints of roughly 2–4,
-7–9, 14–16, and 28–30 seconds. A late flip is on time, not a failure.
+7–9, 14–16, and 28–30 seconds, then re-read at about 60 and 120 seconds before
+calling a miss. X flips late: a change near two minutes is on time, not a
+failure.
 
 - No second click inside the window: it unfollows or cancels the request.
 - Rows lie late too; confirm on the profile, never by re-clicking the row.
+- Either label lands it: `Following` or `Unfollow`.
 - Treat a late landing as success and record it.
 - On a miss: pause 2–6 minutes, re-read, then retry **once** only if it still
-  reads `Follow`/`Follow back`.
+  reads `Follow`/`Follow back`. Never retry before the longer re-read.
 - A second miss ends follow activity for the run — expect a burst of about
   three follows, then a cooldown, often with no visible notice.
 - Never loop, never work around a limit with another account, session, or
@@ -193,7 +206,10 @@ One file per signed-in account, outside the repository:
 
 - `~/.x-followback/<handle>.json`; on Windows
   `%USERPROFILE%\.x-followback\<handle>.json`; drop the `@`.
-- Never inside the skill folder or a repo; no secrets.
+- Never inside the skill folder or a repo; no secrets. This file is the only
+  place a real handle, name, or private detail is written; it persists between
+  runs so progress carries over, and skill text and saved examples use fictional
+  placeholders.
 
 Schema, verdicts, writing rules, and the start-of-run follow-up pass are in
 [references/state-file.md](references/state-file.md). Read it before the first
@@ -204,6 +220,8 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
 - Four buckets: **newly followed**, **already followed**, **pending requests**,
   **unverified** — and how each was verified.
 - Skips grouped by reason, with representative handles.
+- Unreadable profiles — sensitive-content notices and other pages that rendered
+  no profile — listed separately from skips, with what could not be read.
 - Protected accounts separately, and whether research was limited to non-post
   evidence.
 - Where the run stopped, how many rows remain, the resume point, next follow-up
@@ -223,8 +241,10 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
 - [ ] Control proven; account identified; UI labels confirmed this run.
 - [ ] Criteria, protected decision, and budget confirmed and restated.
 - [ ] State loaded or started fresh; no rework of processed handles.
-- [ ] Queue from follow-back rows only; `Pending` recorded, not queued.
-- [ ] Every candidate researched; protected limits stated.
+- [ ] Queue from follow-back rows only; `Follow` strangers excluded, `Pending`
+      recorded, not queued.
+- [ ] Every candidate researched; protected and unreadable limits stated, not
+      inferred around.
 - [ ] Every follow exact-handle matched and verified after settling; protected
       ones recorded `Pending` with a follow-up.
 - [ ] No double clicks; no stale rows trusted; cadence jittered.

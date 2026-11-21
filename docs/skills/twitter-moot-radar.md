@@ -43,7 +43,8 @@ it does not follow anything without per-handle approval.
 1. **Prove control** — confirm the browser relay and drive the signed-in session
    before planning.
 2. **Learn the UI** — read the current labels for `Follow`, `Following`,
-   `Follows you`, and `Pending`, plus the row anatomy of a Following list.
+   `Unfollow`, `Follows you`, and `Pending`, plus the row anatomy of a Following
+   list. `Following` and `Unfollow` are the same already-followed state.
 3. **Ask for interests** — 3–8 checkable areas, optional signal words,
    strictness, an overlap bar, exclusions, moot scope, and a budget, all restated
    before any harvesting.
@@ -91,8 +92,10 @@ Every suggestion must show:
   follow them;
 - an optional `follows you` note, which is a bonus rather than a reason.
 
-If the posts are unreadable — a protected account — there is no suggestion. The
-account is reported as unreadable instead of guessed at.
+If the posts are unreadable — a protected account, or a "potentially sensitive
+content" interstitial standing in for the profile — there is no suggestion. The
+account is reported as unreadable instead of guessed at, and nothing is inferred
+from what did not render.
 
 An empty result is a valid result: the skill reports the filtered counts and
 offers to widen the interests, lower the overlap bar, or extend the harvest rather
@@ -119,6 +122,8 @@ permanent unless the user asks to revisit.
 - Hand off for login, 2FA, captcha, or payment, and never try to pass a challenge
   to keep a run going.
 - Never describe a protected account's interests.
+- Real handles and private details stay in the local state file, which persists
+  between runs; examples use fictional placeholders.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Related

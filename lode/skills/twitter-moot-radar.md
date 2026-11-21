@@ -18,12 +18,14 @@ Family rules: [`twitter-core`](../../docs/skills/twitter-core.md).
    appearing in the Following list alone is not enough.
 4. Overlap is counted per distinct moot, and the default bar is two.
 5. No suggestion without a quoted post or bio line, with its date and permalink.
-6. A protected account has unreadable posts, so no suggestion is possible; it is
-   reported, not guessed at.
+6. A protected account has unreadable posts, and a "potentially sensitive
+   content" interstitial can replace a profile outright; either way no suggestion
+   is possible, and the account is reported unreadable, not guessed at.
 7. "Not followed" is proven by the live `Follow @handle` control, never by absence
    from a list.
 8. Nothing is followed without per-handle approval; approved handles get
-   exact-handle matching and the settle-window check.
+   exact-handle matching and the settle-window check, which runs to about two
+   minutes. `Following` and `Unfollow` both prove a follow.
 9. Moots and sources are interest-independent and reused across interest changes;
    verdicts are re-derived from the new profile, not re-harvested.
 10. Cadence, throttling, credential handoff, and reporting honesty are written
@@ -59,7 +61,7 @@ The schema, verdict vocabulary, and writing rules are the skill's
 that file is authoritative and the body names it.
 
 States: `suggested`, `dismissed`, `followed`, `pending`, `unverified`,
-`already_following`, `skipped`, `no_evidence`.
+`already_following`, `skipped`, `no_evidence`, `unreadable`.
 
 ## Why sources and verdicts are separate
 

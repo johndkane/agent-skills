@@ -55,6 +55,9 @@ Quote the advertised values; use the validator's `read-properties` when present.
 - Every relative link and image resolves inside the skill folder.
 - Every referenced file is one level deep from `SKILL.md`; no nested chains.
 - No absolute local paths or `file://` links.
+- No real account handles, personal names, email addresses, or private details.
+  Examples use obvious placeholders (`@alice`, `example.com`); a real handle
+  belongs only in the runtime state file the skill defines.
 - Runtime state points outside the folder, for example `~/.<name>/`.
 
 ## Step 3 — Shape and size
@@ -111,6 +114,7 @@ From the repository root:
 
 - [ ] Folder and `name` match; frontmatter within limits.
 - [ ] No repo or host path in the body; links stay inside the folder.
+- [ ] No real handles, names, emails, or private details; examples are placeholders.
 - [ ] Size within target; references flat and named; closing checklist present.
 - [ ] README bullet, docs row and page, lode entry and map row.
 - [ ] Validator reports `Valid skill`; links resolve.

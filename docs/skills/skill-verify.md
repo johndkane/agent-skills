@@ -34,7 +34,9 @@ passing it.
 1. **Frontmatter** — folder and `name` match, kebab-case rules, description
    limits and trigger words, `compatibility` ≤500, standard fields only.
 2. **Self-containment** — no links or dependencies outside the skill folder, no
-   host or repository paths, every reference one level deep and resolvable.
+   host or repository paths, every reference one level deep and resolvable, and
+   no real handles, names, emails, or private details; examples are
+   placeholders.
 3. **Shape and size** — line and token targets, flat focused references,
    scripts and assets named, closing checklist, no duplicated rules.
 4. **Catalog wiring** — root README bullet, docs catalog row and page, lode entry

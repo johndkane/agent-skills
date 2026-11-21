@@ -27,17 +27,21 @@ writing rules, and the start-of-run follow-up pass.
 
 `scannedThrough` is the last handle examined while scrolling; `queue` is the
 ordered list of collected handles that have no verdict yet. `state` is one of
-`followed`, `already_following`, `skipped`, `pending`, `unverified`, `blocked`.
-`unverified` means a click was made and no state change was observed by the end
-of the settle window; re-read it next run before doing anything else with that
-handle. `blocked` means the account cannot be followed from this account (it
-blocks the user, or the control is unavailable); record the reason rather than
-retrying.
+`followed`, `already_following`, `skipped`, `pending`, `unverified`, `blocked`,
+`unreadable`. `unverified` means a click was made and no state change was
+observed by the end of the settle window; re-read it next run before doing
+anything else with that handle. `unreadable` means the page could not be read at
+all — typically a "potentially sensitive content" notice where the profile should
+be. It carries a `reason` and a `followUps` entry and is never a judgement about
+the person. Protected accounts keep their own policy instead (`skipped` reason
+`protected`, or a `pending` request): that is a decision, not an unread page.
+`blocked` means the account cannot be followed from this account (it blocks the
+user, or the control is unavailable); record the reason rather than retrying.
 
 ## Writing rules
 
-- Every `pending` and `unverified` entry also gets a `followUps` entry, so the
-  next run cannot forget it.
+- Every `pending`, `unverified`, and `unreadable` entry also gets a `followUps`
+  entry, so the next run cannot forget it.
 - Remove a handle from `queue` only when its verdict is written, and append newly
   collected handles in list order. Persisting only the cursor would silently drop
   rows that were collected but not yet processed.
@@ -45,6 +49,8 @@ retrying.
   before ending the run. A crash should cost at most one batch.
 - The file is memory, not proof. A saved `followed` never justifies reporting a
   follow; re-read the live control next run.
+- Hold only what tracking needs: handle, verdict, dates, reason, and short tags.
+  No emails, addresses, credentials, or private details.
 - A saved `skipped` stays skipped only while the criteria are unchanged. If the
   user tunes the rubric, archive the file and revisit the affected handles.
 - New followers appear above the cursor, so still scan the top of the list when
@@ -56,7 +62,7 @@ retrying.
 
 1. Build the check-in list from two sources: `followUps` whose `checkOn` is
    today or earlier, and every `unverified` entry from an earlier run.
-2. Open each profile and read the control after it settles:
+2. Open each profile and read the control after the full settle window:
    - `Following` / `Unfollow` — the pending request was accepted, or the late
      click landed. Record `followed`, remove the follow-up, and note that posts
      are now readable. For an accepted protected account, offer the research
@@ -69,6 +75,9 @@ retrying.
      - on a pending request — declined or withdrawn. Record `skipped` with
        reason `request declined`; do not re-request unless asked.
      - on an unverified click — the research is already done, so retry once with
-       the settle window. If it misses again, leave it for the next run and end
-       follow activity as in the settle-window rules.
+       the full settle window. If it misses again, leave it for the next run and
+       end follow activity as in the settle-window rules.
+   - page unreadable — still a sensitive-content notice, or replaced by
+     something that renders no profile. Keep `unreadable`, push `checkOn` out,
+     and infer no verdict from what did not render.
 3. Report these results separately from new follows from this run.

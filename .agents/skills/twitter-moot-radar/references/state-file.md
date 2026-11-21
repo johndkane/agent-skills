@@ -26,7 +26,10 @@ writing rules.
 ```
 
 Verdict states: `suggested`, `dismissed`, `followed`, `pending`, `unverified`,
-`already_following`, `skipped` (with reason), `no_evidence`.
+`already_following`, `skipped` (with reason), `no_evidence`, `unreadable`.
+`unreadable` means the profile could not be read at all — typically a
+"potentially sensitive content" notice where the page should be. It is not a
+judgement and carries no inference; re-read it next run.
 
 ## Writing rules
 
@@ -38,7 +41,8 @@ Verdict states: `suggested`, `dismissed`, `followed`, `pending`, `unverified`,
 - `skipped` and `no_evidence` are rechecked only when the interest profile or the
   source set changes.
 - Keep short tags, not quotes. The quote lives in the report with its date and
-  permalink; state holds handles, verdicts, and dates.
+  permalink; state holds handles, verdicts, dates, and short tags — no emails,
+  addresses, or private details.
 - Write after each harvested moot, at every stop, and before ending the run.
 - The file is memory, not proof: re-read the control and the profile next run.
 - If the agent cannot write files, build the same structure and print it for the

@@ -88,7 +88,8 @@ passkey, captcha, or payment; never enter credentials.
 2. On a profile, read the display name, `@handle`, `Follows you`, lock icon, and
    the control's exact label:
    - `Follow @handle` — not followed; this is the "not followed" proof.
-   - `Following @handle` / `Unfollow @handle` — already followed; drop it.
+   - `Following @handle` / `Unfollow @handle` — already followed, under either
+     label; both prove the follow. Drop it.
    - `Pending` — an outstanding request on a protected account.
    - `Follows you` — a bonus signal, not a moot by itself.
 3. On a moot's Following list, note where the handle, bio excerpt, and any
@@ -207,7 +208,11 @@ Proof rules:
 - Tag each match to a named interest; multiple matches rank up.
 - No readable posts, no suggestion — record `no_evidence` and move on, whatever
   the overlap.
-- If the control reads `Following`, record `already_following` and drop it.
+- If the control reads `Following` or `Unfollow`, record `already_following` and
+  drop it.
+- A "potentially sensitive content" interstitial is not a profile: no bio, no
+  posts, no control. Record `unreadable`, report it as unreadable, and infer
+  nothing — not the interest, not the activity, not the relationship.
 - Note quote, date, permalink, and moots as you read them; state keeps tags, not
   quotes.
 
@@ -232,7 +237,9 @@ The default is a report with zero actions.
    whose accessible name is exactly `Follow @handle`.
 3. Reject prefix matches; they can click a suggestion elsewhere.
 4. Wait out the settle window — checkpoints of roughly 2–4, 7–9, 14–16, 28–30
-   seconds. `Following @handle` is a follow; `Pending` is a request.
+   seconds, then re-read at about 60 and 120 seconds. A flip near two minutes is
+   on time; re-read before ever retrying. Either `Following` or `Unfollow` with
+   the exact handle is a follow; `Pending` is a request.
 5. Never click twice inside the window: the second click unfollows.
 6. About three follows, then a cooldown: pause 2–6 minutes, re-read once, end
    follow activity for the run, record the resume point. No other account or
@@ -253,6 +260,11 @@ One file per signed-in account, outside the repository:
 Schema, verdicts, and writing rules are in
 [references/state-file.md](references/state-file.md). Read it before the first
 write and when resuming.
+
+This file is the only place a real handle or private detail is written; it
+persists between runs so the graph and verdicts carry over. Skill text and any
+saved example use fictional placeholders, and the file holds only what tracking
+needs.
 
 ## Step 10 — Report honestly
 

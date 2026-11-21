@@ -43,12 +43,16 @@ damages the user's account or produces a false claim.
    loose matches can act on a different account. Re-read `location.pathname` and
    the profile header before acting.
 6. **Verify, then claim.** Report only what was read on screen during this run. A
-   saved state file is memory, not proof.
-7. **Respect the settle window.** X updates late. Poll the same control at
-   jittered checkpoints inside it — roughly 2–4, 7–9, 14–16, and 28–30 seconds; a
-   flip after 15–20 seconds is on time, not a failure. Never click the same
-   control twice inside the window — the second click reverses a follow or
-   cancels a request.
+   saved state file is memory, not proof. A followed account reads either
+   `Following` or `Unfollow` — one state, two labels. Accept both, matched by the
+   exact `@handle`; treating only `Following` as proof reports real follows as
+   unverified, and clicking what reads `Unfollow` unfollows.
+7. **Respect the settle window.** X updates late — well past 30 seconds. Poll the
+   same control at jittered checkpoints of roughly 2–4, 7–9, 14–16, and 28–30
+   seconds, then re-read at about 60 and 120 seconds before calling a miss; a flip
+   near two minutes is on time, not a failure. Re-read before ever retrying.
+   Never click the same control twice inside the window — the second click
+   reverses a follow or cancels a request.
 8. **A throttle is a stop signal, not a retry signal.** Expect a burst of about
    three actions, then a cooldown of minutes. Pause, re-read before retrying
    once, then end the run cleanly and record the resume point. Never work around
@@ -64,13 +68,18 @@ damages the user's account or produces a false claim.
 12. **Separate what you know from what you inferred.** Reports distinguish
     verified, pending, unverified, skipped, and unreadable. Protected accounts
     are unreadable: no post-based judgement is possible, and the report says so.
+    A "potentially sensitive content" interstitial is unreadable the same way —
+    the DOM is a notice, not the profile — so nothing about bio, posts, activity,
+    or relationship is inferred from it.
 13. **Evidence, not adjectives.** "Posts about Rust; bio says systems
     engineer" beats "looks interesting". Name the quote, the date, and where it
     was seen. Never assert an interest, a job, or a relationship that was not
     read.
 14. **Privacy stays local.** State holds handles, verdicts, dates, and short
     quotes. No credentials, no full timelines, no bulk personal data, nothing
-    inside the repository.
+    inside the repository. Skill text, saved examples, and commits use fictional
+    placeholders (`@alice`); a real handle or private detail appears only in that
+    account's state file, outside the repository, where it persists between runs.
 
 ## Human cadence
 
@@ -154,6 +163,9 @@ relearning the flow.
 - **A relationship is not evidence.** Who follows an account explains why it
   surfaced, not what it posts about. Only the account's own bio and posts can
   support a claim about its interests.
+- **A row label is a snapshot, not a relationship.** A Followers row can read
+  `Follow` because the account stopped following the user after the list was
+  built. That is a stranger: never queued, never researched as a follow-back.
 - Blocks, age-restricted accounts, and accounts that changed handles produce
   controls that do not match the expected vocabulary. Record the reason instead
   of retrying.

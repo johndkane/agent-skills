@@ -111,6 +111,10 @@ must not depend on either `AGENTS.md` or this wiki.
   path. Duplicating a rule is correct; a broken link is not. A repo-maintenance
   skill may name repository paths it checks, but never depends on them as
   resources.
+- **No real identities** — skill text, docs, lode entries, and commit messages
+  use fictional placeholders (`@alice`, `example.com`). A real handle, name,
+  email, or private detail belongs only in the runtime state file the skill
+  defines, outside the repository, where it persists between runs.
 - **Families** — a skill that belongs to a family (currently the
   [X/Twitter skills](twitter-core.md)) follows the family contract instead of
   inventing browser, timing, or state behaviour. Its body carries the rules it

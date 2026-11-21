@@ -7,10 +7,14 @@ describes. It records the known variants and how to resolve a new one.
 
 - `Follow back` — the row's account follows the user and the user does not follow
   them. This is the work queue.
-- `Following` — already followed. Nothing to do.
+- `Following` / `Unfollow` — already followed: one state, two labels. X uses
+  either name for the same account, across accounts and over time. Neither is
+  "stale": both are proof of a follow.
 - `Follow` — no follow from the user yet. On a profile page this is the normal
-  control for a stranger; on a Followers row, confirm the account is a follower
-  and is protected before treating it as a follow-back target.
+  control for a stranger. On a Followers row it means either a protected
+  follower or someone who stopped following the user after the list was built;
+  only the lock icon (or the protected signs below) makes it a follow-back
+  target. Without that sign it is a stranger — never queued.
 - `Subscribe` — the account sells subscriptions; the follow control may be
   reduced to an icon button whose accessible label is `Follow @handle` or
   `Unfollow @handle`.
@@ -34,6 +38,19 @@ one by any of these, on the row and on the profile:
 Do not misread this as an empty shell or a dormant account: the person may post
 daily, you simply cannot read it. Record that the posts are unreadable, because
 that blocks both the research and the follow verification.
+
+## Interstitials that replace a profile
+
+"Potentially sensitive content" can stand in for the whole profile: a notice
+where the header, bio, posts, and follow control should be. The DOM is the
+notice, not the account's page.
+
+- It can appear on an account that rendered normally earlier in the run; it is
+  a property of the visit, not of the account.
+- Nothing rendered means nothing read: `unreadable`, with the reason and the
+  follow-up the skill body describes.
+- It is not an empty shell, not dormant, and not a skip on merit.
+- Re-read once on a later visit; if it still renders, push the follow-up out.
 
 ## When the UI does not make sense
 

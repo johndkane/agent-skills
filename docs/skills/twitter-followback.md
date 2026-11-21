@@ -51,16 +51,21 @@ skip it before loading.
 4. **Load state** — read the previous run's progress and any due follow-ups before
    scanning, so work is not repeated.
 5. **Build the queue** — only follow-back rows (`Follow back`, or `Follow` on a
-   confirmed protected follower), deduplicated by handle and collected while
-   scrolling the virtualised list. `Pending` rows are recorded, not queued.
+   row confirmed as a protected follower), deduplicated by handle and collected
+   while scrolling the virtualised list. A `Follow` row without the protected
+   marker is someone who no longer follows the user — a stranger, never queued.
+   `Pending` rows are recorded, not queued.
 6. **Research each candidate** — bio, join date, follower ratio, newest posts,
    with protected accounts limited to non-post evidence.
 7. **Follow with exact identity matching** — the control must be tied to that
-   handle; after a settle window of up to 30 seconds a public account must read
-   `Following`, a protected account `Pending`.
-8. **Handle timing and throttling** — a late click can land 15+ seconds later;
-   never re-click inside the window. A real miss means throttled: wait, retry
-   once, then stop for the run rather than looping.
+   handle. Verification lasts until the control settles, which can take about
+   two minutes: either `Following` or `Unfollow` proves a follow, while a
+   protected account reads `Pending`.
+8. **Handle timing and throttling** — X updates late, and flips have landed near
+   two minutes after the press, so the control is re-read well past 30 seconds
+   before a miss is believed. Never re-click inside the window. A real miss means
+   throttled: wait, re-read, retry once, then stop for the run rather than
+   looping.
 9. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
    times are drawn from ranges and scaled to the work: minimum dwell for passive
    checks, longer pauses while reading, and the longest pause before a
@@ -85,6 +90,16 @@ flag anything that would have been skipped — without unfollowing. If it is sti
 pending after about a month, the skill reports it as unresolved and stops
 checking.
 
+## Unreadable profiles
+
+A "potentially sensitive content" interstitial can replace the whole profile: no
+header, bio, posts, or follow control. The skill records the handle as
+`unreadable`, with a follow-up, and reports it separately from skips. Nothing is
+inferred from the missing page — not the interest, the activity, or the
+relationship — because the notice is not the account. A later visit may render
+normally; until it does, the account stays out of both the queue and the report's
+judgements.
+
 ## Across runs
 
 The Followers tab can hold hundreds of rows, and X throttles follows after a
@@ -104,6 +119,8 @@ check due follow-ups first. The live UI always wins over the file: a saved
 - Never unfollow, block, report, or message.
 - Never follow accounts from suggestion modules or search results.
 - Hand off for login, 2FA, captcha, or payment.
+- Real handles and private details stay in the local state file, which persists
+  between runs; examples use fictional placeholders.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Related

@@ -10,14 +10,21 @@ human page:
 
 1. Research before every follow; nothing is followed because it appeared in a
    list.
-2. Verify after a settle window of up to 30 seconds, never inside it. A second
-   click can unfollow or cancel a request.
-3. A protected account ends at `Pending`, never `Following`.
-4. The live UI wins over saved state; a saved `followed` is not proof.
-5. State lives outside the repository, one file per signed-in account.
-6. Never unfollow, block, report, or message.
-7. Cadence jitter changes timing only, never verification or the challenge
-   handoff.
+2. Verify after the settle window, never inside it. Checkpoints run through
+   ~30 seconds, then re-reads near 60 and 120 seconds; a flip near two minutes is
+   on time. A second click can unfollow or cancel a request.
+3. `Following` and `Unfollow` are the same followed state; either label proves
+   it, matched by the exact handle.
+4. A protected account ends at `Pending`, never `Following`.
+5. The queue is `Follow back` rows plus `Follow` on a confirmed protected
+   follower. `Follow` without that marker is a stranger: never queued.
+6. The live UI wins over saved state; a saved `followed` is not proof.
+7. State lives outside the repository, one file per signed-in account.
+8. Never unfollow, block, report, or message.
+9. A page that rendered a notice instead of a profile — a "potentially sensitive
+   content" interstitial — is recorded `unreadable`, never inferred from.
+10. Cadence jitter changes timing only, never verification or the challenge
+    handoff.
 
 ## Cadence
 
@@ -31,6 +38,7 @@ wait(uniform(1.5, 4.0))                   # first read of a page
 move_to(control, moves=randint(2, 4)); wait(uniform(0.8, 2.5))
 click(control)
 poll(control, [2-4, 7-9, 14-16, 28-30])   # inside the settle window
+reread(control, [60, 120])                # before calling a miss
 wait(uniform(4, 12))                      # before the next candidate
 ```
 
@@ -51,16 +59,16 @@ retry-once rule, and the challenge handoff stay exact. A captcha, checkpoint, or
 
 ```mermaid
 flowchart TD
-    A[Load state] --> B{Due follow-ups or unverified?}
+    A[Load state] --> B{Due follow-ups, unverified, or unreadable?}
     B -- yes --> C[Check profiles, settle, record]
     B -- no --> D[Scan Followers from cursor]
     C --> D
     D --> E[Research candidates]
     E --> F[Follow with exact handle match]
     F --> G{Label after settle window}
-    G -- Following --> H[Record followed]
+    G -- Following / Unfollow --> H[Record followed]
     G -- Pending --> I[Record pending + follow-up date]
-    G -- unchanged --> J[Throttled: pause, retry once, else stop]
+    G -- unchanged after ~2 min --> J[Throttled: pause, retry once, else stop]
     H --> K[Write state]
     I --> K
     J --> K
@@ -78,10 +86,13 @@ The schema, writing rules, and follow-up pass are the skill's
 that file is authoritative and the body names it.
 
 States: `followed`, `already_following`, `skipped`, `pending`, `unverified`,
-`blocked`. `pending` is an outstanding follow request; `unverified` is a click
-whose state change was never observed. Every pending or unverified entry also
-gets a `followUps` entry. `queue` holds collected handles that have no verdict;
-the cursor alone would drop them.
+`blocked`, `unreadable`. `pending` is an outstanding follow request;
+`unverified` is a click whose state change was never observed; `unreadable` is a
+page that rendered a notice instead of a profile and carries a reason, not a
+judgement. Protected accounts keep their own policy (`skipped` or `pending`).
+Every pending, unverified, or unreadable entry also gets a `followUps` entry.
+`queue` holds collected handles that have no verdict; the cursor alone would drop
+them.
 
 ## Why a state file
 

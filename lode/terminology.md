@@ -27,9 +27,11 @@
 - **Proof standard** — a quoted post or bio line with date and permalink, the moots behind it, and a live `Follow` control reading; no suggestion without it.
 - **Near miss** — a high-overlap candidate without readable interest evidence, listed separately so the user can overrule the rubric.
 - **Pending** — the control state after requesting to follow a protected account; a request, not a follow.
-- **Settle window** — the up-to-30-second pause after a click before judging whether the UI changed.
+- **Settle window** — the period after a click before judging whether the UI changed: checkpoints through roughly 30 seconds, then re-reads near 60 and 120 seconds, because a flip can land near two minutes.
+- **Unreadable** — a page that rendered a notice instead of a profile, such as a sensitive-content interstitial; recorded as a verdict with a reason, never inferred from.
 - **Follow-up pass** — the start-of-run check of due pending requests and unverified clicks.
-- **Run state file** — per-account local JSON at `~/.x-<skill>/` holding the criteria or interests in force, cursor, queue, verdicts, and follow-ups.
+- **Run state file** — per-account local JSON at `~/.x-<skill>/` holding the criteria or interests in force, cursor, queue, verdicts, and follow-ups; it persists between runs and is the only place a real handle or private detail is written.
+- **Placeholder handle** — a fictional handle such as `@alice` used in skill text, docs, and examples; real handles exist only in the run state file.
 - **Human cadence** — jittered waits, scroll steps, pointer moves, and dwell times drawn from ranges so a run does not read as a fixed click rhythm.
 - **X core contract** — [`docs/skills/twitter-core.md`](../docs/skills/twitter-core.md), the authoring home for rules shared by every browser-driven X skill; skill bodies mirror it and never link to it.
 

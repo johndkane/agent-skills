@@ -21,7 +21,8 @@ does not read the content twice.
 - **A live repository** — developers may change files mid-session; re-read and
   adapt instead of treating a change as corruption.
 - **Invariants** — the rules that keep the repo portable: single copy, relative
-  links at mode `120000`, no host-specific copies, standard frontmatter.
+  links at mode `120000`, no host-specific copies, standard frontmatter, and no
+  real handles or personal data.
 - **Adding and changing skills** — the exact steps, including the README row and
   the folder/`name` pairing.
 - **Skill design rules** — portability, progressive disclosure, terse writing,
@@ -71,6 +72,17 @@ commit request.
 
 When work is done, report what should be committed and stop, unless the user
 asked for the commit.
+
+## No real handles or personal data
+
+Every skill folder is copied to other machines and Git history is permanent, so
+repository text never carries a real account. Skills, docs, lode entries, and
+commit messages use fictional placeholders such as `@alice` or `example.com`.
+
+Real identity data belongs to runtime state: a skill writes the user's real
+handle, verdicts, and dates to its state file outside the repository
+(`~/.x-<skill>/<handle>.json`), where it persists between runs so the work
+resumes. Nothing in the repository — and no commit message — stores it.
 
 ## Docs and lode are different things
 

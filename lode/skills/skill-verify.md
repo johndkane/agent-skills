@@ -17,6 +17,8 @@ and reports pass/fail with evidence. Canonical instructions:
    but never links to them as resources.
 5. A skill passes only when every required check passes; the report lists what
    remains otherwise.
+6. No real identities: skill text, docs, and lode use fictional placeholders, and
+   a real handle or private detail belongs only to the runtime state file.
 
 ## Checks
 

@@ -79,6 +79,11 @@ request.
     still work. Skill bodies reference only files inside their own folder, by
     relative path; documentation links into `.agents/skills` are browsing
     conveniences and must never be described as the skill's canonical location.
+11. No real account names, handles, or personal data in repository files or in
+    commits, including commit messages. Skills, docs, and lode text use fictional
+    placeholders (`@alice`, `example.com`). A real handle, name, email, address,
+    or private detail is written only to that account's run state file, outside
+    the repository, where it persists between runs to track state and progress.
 
 ## Git
 
@@ -139,7 +144,9 @@ Apply these to every skill, new or changed. The reasoning is in
   folder and treats links into this repository as browsing conveniences, never
   as the skill's location.
 - Runtime data never lives in the skill folder. Keep it outside the repository,
-  one file per user or account, with no secrets and no bulk personal data.
+  one file per user or account, with no secrets and no bulk personal data. Skill
+  text uses fictional placeholders; a real handle, name, or private detail exists
+  only in the runtime state file.
 - A skill must not depend on this repository's conventions. `AGENTS.md` governs
   the repo; the skill must work where no `AGENTS.md` exists. The exception is a
   repo-maintenance skill, which may check this layout but must still link only
@@ -251,6 +258,8 @@ commands here remain the fallback if the skill cannot run.
 - [ ] `git ls-files -s` still shows `120000` for every link.
 - [ ] `bash -n scripts/link-skills.sh` passes and both scripts report `ok`.
 - [ ] No secrets, `.env` files, or generated artifacts are added.
+- [ ] No real handles, names, emails, or private data in the change or its commit
+      message; examples are fictional placeholders.
 
 ## Direction
 

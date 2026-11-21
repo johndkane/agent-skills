@@ -81,6 +81,21 @@ is pacing, not evasion, and never widens a settle window, skips a verification, 
 passes a challenge. A new browser-action skill is not complete without a cadence
 section.
 
+## No real handles or personal data
+
+Skill text, docs, lode entries, and commit messages use fictional placeholders
+(`@alice`, `example.com`). A real handle, name, email, or private detail never
+enters a file in this repository.
+
+```text
+skill text / docs / lode / commits  ->  placeholders only
+~/.x-<skill>/<handle>.json          ->  the real handle, verdicts, dates
+```
+
+Reason: a skill folder is copied to other machines and Git history is permanent.
+The state file is runtime data, kept outside the repository; it persists between
+runs so a long task resumes instead of redoing the research.
+
 ## Expect mid-session changes
 
 The human may edit, commit, or restructure the repository while an agent works.
