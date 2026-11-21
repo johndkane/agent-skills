@@ -65,8 +65,9 @@ Two other sources exist and are deliberately not required:
    file, another member's copy, or an include syntax the spec does not define. A
    skill that writes runtime state also states the session-only fallback; stopping
    a run because file write was refused is a fail.
-3. **Shape and size** — line and token targets, flat focused references,
-   scripts and assets named, closing checklist, no duplicated rules.
+3. **Shape and size** — the 500-line / ~5,000-token pass line, with the
+   200–300-line / ~3,000-token aim advisory; flat focused references, scripts and
+   assets named, closing checklist, no duplicated rules.
 4. **Catalog wiring** — root README bullet, docs catalog row and page, lode entry
    and map row, group index and byte-identical shared copy, terminology where a
    concept is new.

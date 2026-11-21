@@ -14,9 +14,10 @@ description: >-
   engagement farming, or judging people.
 compatibility: >-
   Needs interactive browser control and a browser session already signed in to X,
-  plus optional local file write for cross-run state. Must run locally on the
-  user's machine; cloud, sandboxed, or headless sessions without browser access
-  cannot complete it.
+  plus optional local file write for cross-run state. For optional visual evidence,
+  the model and browser tool must return readable images; otherwise the run stays
+  text-only. Must run locally on the user's machine; cloud, sandboxed, or headless
+  sessions without browser access cannot complete it.
 ---
 
 # X/Twitter Compatibility

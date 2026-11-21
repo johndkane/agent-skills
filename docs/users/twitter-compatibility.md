@@ -137,6 +137,8 @@ ranked above a confirmed one.
 - It is not a personality, political, or mental-health assessment.
 - It is not comparable across rubric versions or old samples.
 - It is not a reason to mass-follow, mass-reply, or game someone's feed.
+- It does not see images unless visual evidence is on and the session proves it
+  can; image-only matches are lower-weight and cap at `medium` confidence.
 - A high score means "more shared, replyable material in this sample"; the sample
   sizes and counts are always on the report.
 

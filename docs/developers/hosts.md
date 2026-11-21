@@ -14,8 +14,8 @@ menu is commands only. The full syntax table is on
   trailing, or doubled hyphens) and must match the directory name.
 - `description` is required and capped at 1024 chars. Front-load the use case and
   trigger words; this is the only text most agents see before activating a skill.
-- `SKILL.md` is loaded in full on activation. Keep it under 500 lines and move
-  detail into `references/`.
+- `SKILL.md` is loaded in full on activation. Keep it under 500 lines and
+  ~5,000 tokens, and move detail into `references/`.
 - Name collisions resolve differently everywhere (Claude Code: enterprise →
   personal → project; OpenCode: later source wins; Codex: both are listed). Keep
   names unique.
