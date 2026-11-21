@@ -237,8 +237,11 @@ On Windows use `.venv\Scripts\pip` and `.venv\Scripts\skills-ref.exe`.
 exactly what a host advertises.
 
 Then run the `skill-verify` skill: it wraps the validator, the catalog wiring,
-the size and self-containment checks, and returns pass/fail evidence. The
-commands here remain the fallback if the skill cannot run.
+the size and self-containment checks, and returns pass/fail evidence. No official
+skill-verify skill exists: the Agent Skills project publishes only `skills-ref`,
+and Anthropic's `skill-creator` is Claude-only and authoring-focused, so this
+repository's gate stays. The commands here remain the fallback if the skill
+cannot run.
 
 ## Checks before handing off
 

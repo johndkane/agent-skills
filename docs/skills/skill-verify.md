@@ -23,11 +23,30 @@ repositories.
 | Need | Why |
 | --- | --- |
 | Local file read and shell | It reads the folder and runs the checks |
-| `skills-ref` | Frontmatter validation; `.venv` in the repo or on `PATH` |
+| `skills-ref` | The official frontmatter and naming validator; `.venv` in the repo or on `PATH` |
 | A git checkout | Scope detection and the `120000` link check |
 
 Without a validator, the skill reports that check as unverified instead of
 passing it.
+
+## Validation sources
+
+The frontmatter check is not hand-rolled. It calls `skills-ref`, the reference
+validator published with the Agent Skills specification, which checks `name`,
+`description`, `compatibility`, the allowed field set, and the directory match.
+
+The rest of the gate is repository policy. No external validator knows this
+catalog's canonical tree, README/docs/lode wiring, symlink modes, or size
+targets, so those checks stay in the skill.
+
+Two other sources exist and are deliberately not required:
+
+- Anthropic's `skill-creator` is the official skill for authoring and evaluating
+  skills. It targets Claude surfaces, uses Claude-only tools, and is not a
+  pre-handoff repository gate, so it is not a cross-agent substitute here.
+- `agent-ecosystem/skill-validator` is a third-party CLI with broader structural,
+  link, and token checks. It runs only when already on `PATH`; the skill never
+  installs it and never treats its absence as a failure.
 
 ## What it checks
 
@@ -56,7 +75,9 @@ re-run afterwards.
 The token figure is an estimate from character count, not a tokenizer. The skill
 knows this repository's layout by design — the one exception to the
 self-containment rule — but it still links only inside its own folder, so a
-copied folder works.
+copied folder works. `skills-ref` accepts Unicode letters in `name`, while this
+repository requires ASCII kebab-case, so the stricter rule wins when they
+disagree.
 
 ## Related
 

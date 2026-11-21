@@ -19,6 +19,22 @@ and reports pass/fail with evidence. Canonical instructions:
    remains otherwise.
 6. No real identities: skill text, docs, and lode use fictional placeholders, and
    a real handle or private detail belongs only to the runtime state file.
+7. The frontmatter and naming check is the official `skills-ref` CLI; the gate
+   adds repository checks instead of reimplementing the specification.
+8. There is no official replacement skill. The Agent Skills project publishes
+   only `skills-ref`; Anthropic's official `skill-creator` is authoring-focused
+   and uses Claude-only tools, so it cannot serve this cross-agent gate.
+9. The third-party `skill-validator` (agent-ecosystem) may supplement structure,
+   link, orphan, and token checks when it is already on `PATH`. Its absence is
+   never a failure, and it is never installed to make a check pass.
+
+## Sources
+
+| Source | Scope | Status |
+| --- | --- | --- |
+| `skills-ref` | Frontmatter, naming, directory match | Official, required |
+| Anthropic `skill-creator` | Authoring, evaluation, description tuning | Official, not used |
+| `agent-ecosystem/skill-validator` | Structure, links, tokens, orphans | Third-party, optional |
 
 ## Checks
 
@@ -46,6 +62,8 @@ when file or shell access is missing.
   says so.
 - The validator is `.venv/skills-ref` or `skills-ref` on `PATH`; without either,
   frontmatter validation is manual and marked unverified.
+- `skills-ref` accepts Unicode letters in `name`, while this repository requires
+  ASCII `[a-z0-9-]`; the gate applies the stricter rule.
 - It knows this repository's layout by design, which is the documented exception
   to the self-containment rule.
 

@@ -42,7 +42,8 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the repository's
   verification gate: checks a skill's frontmatter, self-containment, size,
   reference layout, and catalog wiring, then reports pass/fail with file
-  evidence.
+  evidence. Frontmatter and naming go through the official `skills-ref`
+  validator; the catalog checks are this repository's own.
   - **Triggers** before handing off any skill creation or change, or on "verify
     this skill", "check the skill", or "is this skill ready?".
   - **Needs** local file read and shell access, plus `skills-ref` for frontmatter

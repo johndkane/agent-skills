@@ -3,9 +3,9 @@ name: skill-verify
 description: >-
   Verify a skill in this repository before handoff: folder and name match,
   frontmatter limits, self-containment, progressive disclosure and size,
-  reference layout, catalog wiring, and the reference validator. Use before
-  creating or changing any skill, or when asked to verify, review, check, or
-  audit a skill; reports pass/fail with file evidence and exact fixes. Not for
+  reference layout, catalog wiring, and the official skills-ref validator. Use
+  before creating or changing any skill, or when asked to verify, review, check,
+  or audit a skill; reports pass/fail with file evidence and exact fixes. Not for
   authoring skill content or auditing unrelated repositories.
 compatibility: >-
   Requires local file read and shell access. The frontmatter validator is
@@ -17,6 +17,20 @@ compatibility: >-
 
 Run before handing off any skill creation or change. Report pass/fail with
 evidence; never mark a check passed from memory.
+
+This is this repository's gate, not a reimplementation of the standard. It
+delegates the frontmatter check and keeps only the catalog checks that no
+external validator covers.
+
+## Validation sources
+
+| Source | Role | Used |
+| --- | --- | --- |
+| `skills-ref` (Agent Skills project) | Official validator: frontmatter, naming, directory match | Required in Step 5 |
+| Anthropic `skill-creator` | Official skill for authoring and evaluating skills | No: authoring scope and Claude-only tools |
+| `skill-validator` (agent-ecosystem) | Third-party structure, link, token, orphan checks | Optional, only if already on `PATH` |
+
+Never install a source silently; a missing source makes its check unverified.
 
 ## Rules
 
@@ -43,6 +57,9 @@ evidence; never mark a check passed from memory.
 - `compatibility` — optional, ≤500 chars, only real environment requirements.
 - `license`, `metadata` (string map), `allowed-tools` (experimental) only; no
   host-specific field is load-bearing.
+
+`skills-ref` accepts Unicode letters in `name`; this repository requires ASCII
+`[a-z0-9-]`. Apply the stricter rule.
 
 Quote the advertised values; use the validator's `read-properties` when present.
 
@@ -91,14 +108,19 @@ From the repository root:
 
 1. Run `skills-ref validate .agents/skills/<name>` with
    `.venv/Scripts/skills-ref.exe` on Windows, `.venv/bin/skills-ref` elsewhere,
-   else `skills-ref` on PATH. Require `Valid skill`.
-2. Run `read-properties` and compare with the frontmatter.
-3. Resolve every relative link in touched `docs/` and `lode/` files; report
+   else `skills-ref` on PATH. Require `Valid skill`. This is the official check;
+   a hand read never replaces it.
+2. If `skill-validator` (agent-ecosystem) is already on `PATH`, run
+   `skill-validator check <skill-folder>` and fold its structure, link, orphan,
+   and token findings into Steps 2 and 3. Its warnings are advisory against this
+   repository's stricter targets; never install it to make a check pass.
+3. Run `read-properties` and compare with the frontmatter.
+4. Resolve every relative link in touched `docs/` and `lode/` files; report
    missing targets.
-4. If links or scripts changed: `git ls-files -s` shows `120000` for
+5. If links or scripts changed: `git ls-files -s` shows `120000` for
    `.claude/skills` and `.github/skills`, and `bash -n scripts/link-skills.sh`
    exits 0.
-5. Without a validator, mark it unverified and give the install command; do not
+6. Without a validator, mark it unverified and give the install command; do not
    install silently.
 
 ## Step 6 — Report

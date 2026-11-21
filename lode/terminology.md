@@ -16,7 +16,8 @@
 - **Opt-in host directory** — a native host directory created only when named or when `--all` is used.
 - **Frontmatter** — the YAML block at the top of `SKILL.md`.
 - **Description** — the frontmatter field hosts read before deciding to load a skill.
-- **skills-ref** — the reference validator from the Agent Skills project.
+- **skills-ref** — the official reference validator from the Agent Skills project; it checks frontmatter and naming only.
+- **Repo gate** — a skill that enforces this repository's catalog rules on top of the official validator; `skill-verify` is the only one.
 - **Docs** — `docs/`, the human wiki.
 - **Lode** — `lode/`, this agent-owned memory.
 - **Protected account** — an X account that hides its posts until it approves a follow request.
