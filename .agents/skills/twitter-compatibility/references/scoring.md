@@ -15,9 +15,9 @@ One item is one URL. Deduplicate across tabs. A repost carries the repost marker
 and the original author's words; weight it as amplification, never authorship.
 
 An item is classifiable only if its readable text, caption, or alt text supports a
-match. An image with none of those is 0 subject evidence in text-only mode; with
-visual evidence on and proven, it follows the visual rule below. Either way it
-counts for format fit.
+match. An image or video frame with none of those is 0 subject evidence with the
+mode off or `unavailable`; with that mode on and proven, it follows the multimodal
+rule below. Either way it counts for format fit.
 
 ## Scope
 
@@ -43,9 +43,10 @@ alt text. Never match a handle or display name.
 | Quote post | 2 |
 | Repost | 1.5 |
 | Media with caption or alt text | 2 |
-| Image-only, text-only mode or visual unavailable | 0 |
-| Image-only, visual on, standard area | 1 |
-| Image-only, visual on, `visual` area | 2 |
+| Image or video frame only, mode off or unavailable | 0 |
+| Image or video frame only, mode on, standard area | 1 |
+| Image or video frame only, mode on, `visual` area | 2 |
+| Audio transcript only, mode on | 1 |
 
 ```text
 areaScore = round(100 × min(1, points / 12))
@@ -55,9 +56,10 @@ Four original posts about an area reach 100; a single post reaches 25. An item
 matching two areas counts in both: a cross-cutting post is legitimate evidence,
 not a bonus. Cap each area at 12 points so one prolific thread cannot dominate.
 
-Visual-only points are capped at 6 in a standard area and 12 in a `visual` area;
-the area's overall 12-point cap still applies, so images can support a subject but
-cannot carry a non-visual area alone.
+Non-text points are capped at 6 in a standard area and 12 in a `visual` area; an
+audio transcript caps at 6 in any area. The area's overall 12-point cap still
+applies, so non-text evidence can support a subject but cannot carry a non-visual
+area alone.
 
 ```text
 subject = round( Σ(areaScore × areaWeight) / Σ(areaWeight) )
@@ -65,30 +67,44 @@ subject = round( Σ(areaScore × areaWeight) / Σ(areaWeight) )
 
 Area weights are 1–5 and belong to the user.
 
-## Visual evidence
+## Multimodal evidence
 
-Text is the default for two reasons: not every host returns image pixels to the
-model, and visual subject matching is less reproducible than text. The user opts in
-explicitly, and the skill proves image access before counting anything.
+Text is the default because no pixel or media payload is read back as evidence, which
+keeps the run cheap and reproducible across hosts; image, frame, and transcript
+matching is less reproducible. The user opts in per mode, and the skill proves each
+mode before counting anything.
 
-- `visualEvidence: off` — captions and alt text only. Image-only media is 0 subject
-  evidence.
-- `visualEvidence: on` — after the capability test, a legible image or video frame
-  may support an area. Record a short observation, such as "image: Rust code with
-  `impl Trait`", with its date and permalink.
-- **Capability test** — screenshot a page and state one visible detail from the
-  image that the page's text does not contain. If you cannot, or the tool returns
-  only a path or metadata, set `visual: unavailable`, run text-only, and report it.
-  A filename, URL, caption, or alt text is not proof you saw the image.
+| Mode | Evidence it can count |
+| --- | --- |
+| `text` (default, always on) | item text, captions, alt text, link-preview text |
+| `images` | still image subject matter, profile avatar and banner, legible text in an image |
+| `video` | a paused frame or GIF frame; needs `images` |
+| `audio` | a host-produced transcript of a clip; never tone or identity |
+
+- `evidenceModes: ["text"]` — captions and alt text only. Image-only media is 0
+  subject evidence.
+- With a mode on and proven, a legible image or paused video frame may support an
+  area. Record a short observation, such as `[image] "Rust code with impl Trait"`,
+  and its date and permalink.
+- **Capability test, once per mode per run** — screenshot a page whose text you
+  already read, read back the image rather than a path, and state one visible detail
+  the text does not contain; for `video`, read a paused frame that differs from the
+  poster; for `audio`, quote one word from the host's transcript. A path, filename,
+  URL, caption, alt text, poster, or model name is not proof. On failure, mark that
+  mode `unavailable`, run text-only, and report it — never score the absence as a
+  silent zero.
 - **`visual: true` on an area** — for photography, illustration, design, or another
-  area whose primary evidence is images. Image-only items then count 2 and cap at
-  12; otherwise 1 and cap at 6.
-- **Audio is not assessed.** A video thumbnail or visible frame is visual evidence;
-  the soundtrack is not.
+  area whose primary evidence is images. Image or frame matches then count 2 and cap
+  at 12; otherwise 1 and cap at 6.
+- **Audio** counts only a host transcript, at 1 point, capped at 6, with no quote
+  and no claim about voice or identity. A soundtrack you cannot transcribe is not
+  assessed.
 - An unreadable, blurry, cropped, or ambiguous image is 0 for that item and is noted;
   never guess at its subject.
-- Visual-only matches cap confidence at `medium`; `high` needs at least three
+- Non-text-only matches cap confidence at `medium`; `high` needs at least three
   text-based or captioned matches.
+- Read media only where the decision turns on it: at most 1 profile image pair,
+  3 media items per target, and 12 non-text reads per run. Never read a whole feed.
 
 ## Conversation score
 
@@ -221,12 +237,12 @@ Confidence is separate from the score and always displayed.
 A missing Replies or Media tab caps confidence at `medium`. A score with no
 matched items can still be reported as `low` with "no shared subject in the
 sample"; the lexicon, not the person, may be the limit. A target whose only matches
-are visual caps at `medium`.
+are non-text caps at `medium`.
 
 ## Worked example
 
-Rubric: Rust ×3 (12 points), Postgres ×2 (6 points), AI ×1 (0 points). Visual
-evidence is off in this example.
+Rubric: Rust ×3 (12 points), Postgres ×2 (6 points), AI ×1 (0 points). Evidence
+mode is `text` in this example.
 
 ```text
 subject    = round((100×3 + 50×2 + 0×1) / 6) = 67
@@ -253,8 +269,10 @@ result.
 - Same rubric, same sample, same score. If two runs disagree, compare the counts
   before the totals.
 - Never score a tab you did not read, or a lexicon you did not confirm.
-- Never count a visual item you did not see; a caption or filename is not visual
-  evidence.
+- Never count an image, frame, or transcript you did not see; a caption, filename,
+  poster, or model name is not non-text evidence.
+- A non-text match never outranks a text match, never supports a quote, and never
+  supports a claim about identity or a sensitive trait.
 - A score from another rubric version or an older sample is stale, not comparable.
 - Do not translate a score into a prediction, a personality claim, or a reason to
   follow, like, or message.

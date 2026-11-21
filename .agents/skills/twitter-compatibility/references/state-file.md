@@ -19,7 +19,7 @@ wins, and a saved score is never reported as current.
     "mode": "reply-first",
     "windowDays": 30,
     "cardFloor": 55,
-    "visualEvidence": "off",
+    "evidenceModes": ["text"],
     "areas": [
       {
         "name": "Rust and systems programming",
@@ -87,7 +87,7 @@ wins, and a saved score is never reported as current.
         "questions": 6,
         "threads": 2,
         "quotes": 1,
-        "visual": 0
+        "nonText": 0
       },
       "relationship": {"followsYou": true, "repliedToYou": false, "protected": false},
       "gap": "little PostgreSQL in the window",
@@ -113,15 +113,18 @@ wins, and a saved score is never reported as current.
   `followers-only`, or `all`. It selects which associated accounts are reported; it
   is not part of the rubric, and changing it does not invalidate scores.
 - `rubric` — the measuring instrument. `areas` and their `terms` are frozen once
-  confirmed; `visual` marks an area whose primary evidence may be images; `weights`
-  is the normalized component set the user approved; `visualEvidence` is `off` or
-  `on`. Any change bumps `version` and `updated`.
+  confirmed; `visual` marks an area whose primary evidence may be images or frames;
+  `weights` is the normalized component set the user approved; `evidenceModes` is
+  the opt-in set — `text` plus any of `images`, `video`, `audio`. Any change bumps
+  `version` and `updated`. A legacy `visualEvidence` value maps `off` to
+  `["text"]` and `on` to `["text","images"]`, a legacy `evidence.visual` count maps
+  to `nonText`, and the rename bumps `version`.
 - `source` — aggregates only, refreshed every run. Never keep source post text,
   quotes, or permalinks here.
 - `targets` — one entry per handle ever scored, keyed by lowercase handle with `@`.
   `category` is `moot`, `following-only`, or `followers-only`; `areas` holds the
   per-area score and matched count; `evidence` holds the counts the card shows,
-  including `visual`; `gap` is a short tag, not a quote.
+  including `nonText`; `gap` is a short tag, not a quote.
 - `queue` — handles and categories the user chose but this run did not reach.
 - `hidden` — permanent until the user asks to revisit.
 - `followUps` — dated re-reads for stale, unverified, or changed items.
@@ -148,9 +151,9 @@ appears in a report is read in that run.
 - Re-read `insufficient` and `unreadable` on the next run; a wider window or a
   changed lexicon may change the first, and the second is often transient.
 - `hidden` and `excluded` persist until the user asks to change them.
-- Changing an area name, term, weight, component weight, mode, window, visual mode,
-  or a `visual` area flag is a new rubric. Bump the version, mark every target stale,
-  and re-score before reporting.
+- Changing an area name, term, weight, component weight, mode, window, evidence
+  mode, or a `visual` area flag is a new rubric. Bump the version, mark every target
+  stale, and re-score before reporting.
 
 ## Writing rules
 
@@ -169,7 +172,7 @@ appears in a report is read in that run.
 ## State line
 
 ```text
-State: ~/.x-compatibility/<handle>.json — scope moots, visual off, rubric v1
+State: ~/.x-compatibility/<handle>.json — scope moots, evidence text, rubric v1
 (Rust ×3, Postgres ×2; reply-first), 12 scored, 2 stale, last write 2026-11-21.
 ```
 

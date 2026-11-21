@@ -5,9 +5,9 @@ subjects you care about. An associated account is a moot, someone you follow who
 does not follow you back, or someone who follows you whom you do not follow. It asks
 for the scope first — moots, following-only, followers-only, or all — then reads
 your own feed and the target's, and returns a 0–100 score with the counted evidence
-behind every point. It can optionally read image-only posts when you opt in and the
-session can view images. It is not a personality guess and not a prediction that
-someone will reply.
+behind every point. It can optionally read image, video-frame, and audio-transcript
+evidence when you opt in and the session proves it can. It is not a personality
+guess and not a prediction that someone will reply.
 
 Install it by copying the `twitter-compatibility` folder into your skills
 directory; see [Getting skills](getting-skills.md). Invoke it in plain language or
@@ -22,7 +22,7 @@ with your host's explicit syntax; see [Using skills](invoking.md).
 - "score the people I follow who don't follow back"
 - "score my followers I don't follow back"
 - "score everyone in my network on Postgres and systems programming"
-- "include image-only posts in the score"
+- "include image-only posts, video frames, or audio transcripts in the score"
 - "who would be easy to reply to about this?"
 
 It is read-only: it never likes, replies, reposts, follows, or messages. It is
@@ -36,8 +36,8 @@ It is read-only: it never likes, replies, reposts, follows, or messages. It is
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
 | Following and Followers lists | Classifies moots, following-only, followers-only, or all |
-| Visual mode (optional) | Needs a model and browser tool that can view images; otherwise the run stays text-only and flags it |
-| Local file write | Keeps the scope, visual mode, rubric, scores, and queue in `~/.x-compatibility/`; without it the run continues on session state |
+| Non-text evidence modes (optional) | Need a model and browser tool that return images, video frames, or an audio transcript; otherwise that mode is flagged unavailable and the run stays text-only |
+| Local file write | Keeps the scope, evidence modes, rubric, scores, and queue in `~/.x-compatibility/`; without it the run continues on session state |
 
 File write is not a hard stop: if you decline it or the path cannot be written, the
 skill keeps running, holds the same state in the session, and prints it for you to
@@ -51,9 +51,9 @@ verify. Later runs then start fresh, so some work may be repeated.
    and the markers for posts, replies, quotes, reposts, threads, polls, media, and
    the `Follows you` relationship.
 3. **Ask for the scope and brief** — scope first, then 3–8 areas, the signal terms
-   that count as a match, area weights, the six factor weights, visual mode and any
-   visual areas, an interaction mode, targets, exclusions, and a budget. Everything
-   is restated before scoring.
+   that count as a match, area weights, the six factor weights, evidence modes and
+   any visual areas, an interaction mode, targets, exclusions, and a budget.
+   Everything is restated before scoring.
 4. **Read your feed** — your own Posts, Replies, Media, and Likes when visible. This
    is read fresh every run; your replies and likes show what you engage with, which
    is what format fit measures.
@@ -61,8 +61,9 @@ verify. Later runs then start fresh, so some work may be repeated.
    plus the live `Follows you` marker classify each account as a moot,
    following-only, or followers-only. You confirm the batch.
 6. **Read each target** — bio, join date, category, newest posts, replies, reposts,
-   quotes, media, captions or alt text, and image-only media when visual evidence is
-   on. Each item is classified and matched against your frozen signal lexicon.
+   quotes, media, captions or alt text, and image-only media, video frames, or audio
+   transcripts when those modes are on and proven. Each item is classified and
+   matched against your frozen signal lexicon.
 7. **Score** — subject overlap, conversation surface, format fit, voice fit,
    recency, and access, combined with the weights you approved. Every component
    carries its counts.
@@ -88,23 +89,32 @@ neither list is not associated; it is added only after you confirm. A category i
 reported on every row and card, but it does not change the score formula — it
 selects the population and feeds the access component.
 
-## Visual evidence
+## Visual and multimodal evidence
 
-Text is the default: not every host passes image pixels to the model, and visual
-subject matching is less reproducible. Visual scoring is opt-in.
+Text is the default, because not every host passes image pixels to the model and
+visual subject matching is less reproducible. Every extra mode is opt-in, costs
+more tokens than text, and is read only where a decision turns on it.
 
-- **Off (default)** — captions and alt text only. An image-only post scores 0 for
-  subject, though it still counts for format fit.
-- **On** — the skill first proves it can see an image: it screenshots a page and
-  states a visible detail the page text does not contain. If that fails, the run is
-  text-only and the report flags `visual: unavailable`.
-- **Weight** — an image-only item counts 1 point in a normal area, or 2 in an area
-  you mark `visual` (photography, illustration, design). Visual-only points cap at 6
-  per normal area and 12 per visual area, and visual-only matches cannot raise
-  confidence above `medium`.
-- **Audio** — not assessed. A visible video frame can count; the soundtrack cannot.
-- **Unreadable images** — blurry, cropped, or ambiguous images count 0 and are
-  flagged; they are never guessed at.
+- **Text (default)** — captions, alt text, and link text only. An image-only post
+  scores 0 for subject, though it still counts for format fit.
+- **Images** — still images, image-only posts, profile avatar and banner, and
+  legible text inside an image. The skill first proves it can see an image: it
+  screenshots a page, reads back the image rather than a path, and states a visible
+  detail the page text does not contain. If that fails, it reports `unavailable`,
+  runs text-only, and never scores the absence as a silent zero.
+- **Video** — a few paused frames from a video or GIF, with `images` on. A poster
+  image alone is not video evidence.
+- **Audio** — only a transcript the host returns, at lower weight; no claim about
+  voice, tone, or identity. A soundtrack the host cannot transcribe is not assessed.
+- **Weight** — an image or frame counts 1 point in a normal area, or 2 in an area
+  you mark `visual` (photography, illustration, design); an audio transcript counts
+  1 and caps at 6 in any area. Non-text points cap at 6 per normal area and 12 per
+  visual area, and non-text-only matches cannot raise confidence above `medium`.
+- **Limits** — at most 1 profile image pair and 3 media items per target, and 12
+  non-text reads per run; each read counts against the budget. Blurry, cropped, or
+  ambiguous images count 0 and are flagged. The skill never identifies a person from
+  a photo or infers race, ethnicity, gender, age, disability, health, religion, or
+  sexuality from an image.
 
 ## The score
 
@@ -123,8 +133,8 @@ Choose `quote-first` or `observe-only` for a different default set, or set any
 weight yourself. Areas carry their own 1–5 weights, so "Rust matters twice as much
 as AI" is part of the rubric. Scope changes who is scored, not how: the category is
 shown on every row and card, and the access component uses the live relationship.
-Image-only media follows the visual rule: 0 when off, 1 when on, or 2 for a `visual`
-area, capped per area.
+Image and frame matches follow the evidence mode: 0 when off, 1 when on, or 2 for a
+`visual` area, capped per area; an audio transcript counts 1.
 
 Bands: **Strong** 85–100, **Good** 70–84, **Workable** 55–69, **Thin** 40–54,
 **Low** 0–39. Confidence is shown separately: `high`, `medium`, `low`,
@@ -137,8 +147,9 @@ ranked above a confirmed one.
 - It is not a personality, political, or mental-health assessment.
 - It is not comparable across rubric versions or old samples.
 - It is not a reason to mass-follow, mass-reply, or game someone's feed.
-- It does not see images unless visual evidence is on and the session proves it
-  can; image-only matches are lower-weight and cap at `medium` confidence.
+- It does not see images, frames, or transcripts unless you turn those modes on and
+  the session proves it can; non-text matches are lower-weight and cap at `medium`
+  confidence.
 - A high score means "more shared, replyable material in this sample"; the sample
   sizes and counts are always on the report.
 
@@ -146,19 +157,19 @@ ranked above a confirmed one.
 
 State lives at `~/.x-compatibility/<handle>.json`
 (`%USERPROFILE%\.x-compatibility\<handle>.json` on Windows), in your home
-directory. It holds the scope in force, visual mode and area flags, the rubric and
+directory. It holds the scope in force, evidence modes and area flags, the rubric and
 signal lexicon, your aggregate source metrics, each target's category, score and
 component counts, the queue, hidden handles, and re-read dates. It holds no post
-quotes, permalinks, or private details.
+quotes, permalinks, images, or private details.
 
-Each run opens by naming that file and summarizing what it holds — scope, visual
-mode, rubric version, areas and weights, scored and stale counts, last write — or
+Each run opens by naming that file and summarizing what it holds — scope, evidence
+modes, rubric version, areas and weights, scored and stale counts, last write — or
 saying that it starts fresh. When writing is unavailable, the file is not created:
 the run keeps the same state in the session, prints it for you to verify and save,
 and the next run starts fresh.
 
 A score is current for 14 days. Changing an area, a signal term, a weight, the
-mode, the window, visual mode, or a visual area flag is a new rubric: every old
+mode, the window, an evidence mode, or a visual area flag is a new rubric: every old
 score becomes stale and is re-read before it is ranked again. Changing only the
 scope does not invalidate scores; it changes which associated accounts are reported,
 and a target outside the scope keeps its entry without being ranked. Your own feed
@@ -183,8 +194,10 @@ reported `unreadable`: no score and no inference from what did not render.
 - Read only: no like, reply, repost, follow, block, report, or message.
 - No credentials; hand off challenges. A challenge ends the run.
 - No DMs, no hidden-content inference, no claims beyond the sampled items.
-- Never claim to see an image or non-text content you cannot; the run stays
-  text-only and flags `visual: unavailable`.
+- Never claim to see an image, frame, or transcript you cannot; that mode is flagged
+  `unavailable` and the run stays text-only.
+- Never identify a person from a photo or infer race, ethnicity, gender, age,
+  disability, health, religion, or sexuality from an image.
 - Real handles and private details stay in the local state file, or in the session
   state you verify when writing is unavailable; never in the repository. Examples
   use fictional placeholders.

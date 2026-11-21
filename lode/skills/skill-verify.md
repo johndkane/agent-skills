@@ -42,6 +42,10 @@ and reports pass/fail with evidence. Canonical instructions:
 12. A skill that writes runtime state states the session-only fallback. Stopping a
     run because file write was refused, or presenting session state as a saved
     file, is a fail.
+13. A skill that reads images, video frames, or audio transcripts states text as
+    the default, the explicit opt-in, a per-mode capability test, the `unavailable`
+    fallback, read caps, and the no-identity-or-sensitive-trait rule. A silent zero
+    for an opted-in mode, or a photo presented as proof of a person, is a fail.
 
 ## Sources
 

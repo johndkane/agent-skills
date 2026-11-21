@@ -43,6 +43,10 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
     failed and the resume point, and write nothing for an item whose page never
     loaded; a click already made is `unverified` with a follow-up. Never infer
     no_evidence, an empty list, or not followed.
+14. Text is the default evidence mode. Opted-in image, video, or transcript proof
+    is labelled, ranks below a quoted post, and caps that suggestion at medium
+    confidence; profile images may flag spam or impersonation but never prove a real
+    person or a sensitive trait, and a failed mode is `unavailable`, never a zero.
 
 ## Pipeline
 
@@ -98,10 +102,10 @@ flowchart LR
 
 ## Cost model
 
-Row reads are cheap; profile visits are the throttled, expensive unit. The skill
-therefore filters at the row level — overlap bar, bot/brand patterns, previous
-verdicts — and shortlists about three times the suggestion budget so that
-research losses do not empty the report.
+Row reads are cheap; profile visits are the throttled, expensive unit, and an
+opted-in visual read costs several text items. The skill therefore filters at the
+row level — overlap bar, bot/brand patterns, previous verdicts — and shortlists about
+three times the suggestion budget so that research losses do not empty the report.
 
 ## Overlap is relevance, not interest
 

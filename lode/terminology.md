@@ -33,9 +33,12 @@
 - **Following-only** — an associated account the user follows that does not follow back.
 - **Followers-only** — an associated account that follows the user without a follow back.
 - **Category** — the per-target relationship label — `moot`, `following-only`, or `followers-only` — shown with a score but never scored itself.
-- **Visual evidence** — opt-in reading of images and video frames; off by default, 0 subject points when off, 1 or 2 when on, capped per area, and never enough for high confidence alone.
-- **Visual area** — an interest area whose primary evidence may be images; image-only items count 2 and cap at 12 instead of 1 and 6.
-- **Visual unavailable** — the flag when the model or browser tool cannot return readable image content; the run continues text-only.
+- **Multimodal evidence** — opt-in reading of images, video frames, and audio transcripts; text is the default, 0 subject points when off, lower-weight and capped when on, and never enough for high confidence alone.
+- **Evidence mode** — `text` (default, always on), `images`, `video`, or `audio`; each extra mode is opted in by the user and capability-tested once per run.
+- **Evidence gate** — the two checks before non-text evidence counts: the user opted into that mode, and it passed its capability test this run; a failed gate is reported `unavailable`, never a silent zero.
+- **Capability test** — the per-mode proof that the host returns readable pixels or a transcript; failure marks that mode `unavailable`, keeps the run text-only, and is reported instead of a silent zero.
+- **Visual area** — an interest area whose primary evidence may be images; image or frame matches count 2 and cap at 12 instead of 1 and 6.
+- **Evidence unavailable** — the per-mode flag when the model or browser tool cannot return readable content for an opted-in mode; the run continues text-only.
 - **Overlap** — the count of distinct moots following a candidate; it ranks a suggestion, never proves an interest.
 - **Interest profile** — the user's named areas plus strictness, overlap bar, and exclusions; it gates and ranks suggestions.
 - **Compatibility score** — a 0–100 weighted total over a bounded sample of two feeds under one frozen rubric; arithmetic on counted items, never a prediction.

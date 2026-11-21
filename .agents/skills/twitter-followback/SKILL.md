@@ -5,15 +5,19 @@ description: >-
   post actively, with bots, marketing, adult, crypto and impersonation accounts
   filtered out, and every completed follow verified in the UI. Handles protected
   accounts and pending requests, and resumes long follower queues from a local
-  state file, or session state when file write is unavailable. Use when asked to
+  state file, or session state when file write is unavailable. Optionally inspects
+  profile images and video frames when you opt in, to catch stock-photo and
+  impersonation noise. Use when asked to
   follow back followers or mutuals, review new followers, clean up a follow-back
   queue, check whether a follower is a bot, or decide which followers are worth
   following back. Not for mass-following, growth hacking, or unfollowing.
 compatibility: >-
   Needs an agent with interactive browser control, a browser session already
-  signed in to X, and optional local file write for cross-run state. Must run
-  locally on the user's machine; cloud, sandboxed, or headless sessions without
-  browser access cannot complete it.
+  signed in to X, and optional local file write for cross-run state. Optional
+  image, video-frame, or transcript evidence needs a model and browser tool that
+  return it; otherwise the run stays text-only. Must run locally on the user's
+  machine; cloud, sandboxed, or headless sessions without browser access cannot
+  complete it.
 ---
 
 # X/Twitter Follow-Back
@@ -43,6 +47,9 @@ optional background.
   protected account reaches `Pending` at most — a request, not a follow.
 - Never click one control twice inside the settle window.
 - Persist progress and follow-ups to the state file; the live UI wins over it.
+- Text is the default evidence mode. Images, video frames, and audio transcripts
+  are opt-in, capability-tested in Step 4, capped, and never support an identity
+  or sensitive-trait claim.
 - Borderline accounts are the user's call. Bring the evidence, not just the
   handle.
 - One account per action: the click must be tied to the researched `@handle`.
@@ -80,6 +87,10 @@ Never assume them. Ask, then restate:
 - **Scope** — how many followers, and start fresh or resume.
 - **Real person** — do project, persona, and org-adjacent accounts count?
 - **Active** — recency threshold; default about 30 days.
+- **Evidence modes** — default `text`. Offer `images` (profile avatar and banner,
+  image-only posts), `video` (paused frames), and `audio` (host transcript only);
+  text stays on and is the cheapest. Restate which modes are on; each one is
+  capability-tested in Step 4 and reported `available` or `unavailable`.
 - **Exclusions** — marketing/brand/affiliate, adult, crypto/trading,
   impersonation/parody, giveaways and engagement bait.
 - **Character** — political speech alone is fine; hate, abuse, slurs, scams are
@@ -94,7 +105,7 @@ Never assume them. Ask, then restate:
   first hard throttle.
 
 If the user says "use your judgment", state the rubric before acting. Restate
-the protected decision and budget in one summary.
+the protected decision, evidence modes, and budget in one summary.
 
 ## Step 3 — Load state, build the queue
 
@@ -136,6 +147,28 @@ header, bio, posts, or control. Record `unreadable` with the reason and a
 follow-up, infer nothing, and never file it as a skip on merit. Recognition
 signs and the re-read rule are in
 [references/ui-vocabulary.md](references/ui-vocabulary.md).
+
+### Multimodal checks (only when opted in)
+
+Gate each enabled mode once per run with the shared capability test before reading
+anything. Then read only where the decision turns on it, inside the shared caps
+(1 profile image pair and 3 media items per candidate, 12 non-text reads per run):
+
+- **Avatar and banner** — one read per candidate, for stock photo, watermark,
+  legible text-in-image, generated look, or a persona that clashes with the bio.
+  Never identify a person from a photo and never infer race, ethnicity, gender,
+  age, disability, health, religion, or sexuality.
+- **Image-only recent post** — supports activity recency only, not character. A
+  photo is not proof that the account is a real person, so a visual-only borderline
+  candidate stays the user's call with the caution stated.
+- **Legible text inside an image** — may support a bio or link signal; quote it as
+  `[image] "…"` with date and permalink. Skip media reads on a row that already
+  failed a text check.
+- **Audio transcript** — only when the host returns one; it may support a bio or
+  link signal if the clip states the person's role or field, tagged `[audio]`.
+  Never a claim about voice, accent, or identity.
+- **Mode on but unproven** — report that mode `unavailable`, run text-only, and do
+  not score the absence as a zero or a skip reason.
 
 Skip patterns:
 
@@ -209,6 +242,8 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
   evidence.
 - Where the run stopped, how many rows remain, the resume point, next follow-up
   dates.
+- Evidence modes and capability; non-text reads counted; non-text-only evidence
+  labelled and never presented as proof of a person.
 - Anything unverified, blocked, or left to the user.
 - Never claim a follow from memory, another run, or an inference.
 
@@ -217,12 +252,18 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
 - Only the user's own account, only the confirmed scope.
 - No unfollow, block, report, or message; no suggestion-module follows.
 - No credentials; hand off challenges.
+- Never claim to see an image, frame, or transcript you cannot; flag that mode
+  `unavailable` and run text-only.
+- Never identify a person from a photo or infer sensitive traits from an image.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Done checklist
 
 - [ ] Control proven; account identified; UI labels confirmed this run.
-- [ ] Criteria, protected decision, and budget confirmed and restated.
+- [ ] Criteria, protected decision, budget, and evidence modes confirmed and
+      restated.
+- [ ] Every enabled evidence mode capability-tested; `unavailable` flagged and the
+      run kept text-only.
 - [ ] State loaded or started fresh; no rework of processed handles.
 - [ ] Run opened with the state line.
 - [ ] Every handle the run lists and every cited post links to what was read.

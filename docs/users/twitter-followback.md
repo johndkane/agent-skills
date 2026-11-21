@@ -25,6 +25,7 @@ It is explicitly **not** for mass-following, growth hacking, or unfollowing.
 | Interactive browser control | Every action happens through the real UI |
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
+| Non-text evidence modes (optional) | Need a model and browser tool that return images, video frames, or an audio transcript; otherwise that mode is flagged unavailable and the run stays text-only |
 | Local file write | Keeps progress and pending follow-ups in `~/.x-followback/` between runs; without it the run continues on session state |
 
 These limits are declared in the skill's `compatibility` field, so a host can
@@ -50,8 +51,9 @@ so some work may be repeated.
    while scrolling the virtualised list. A `Follow` row without the protected
    marker is someone who no longer follows the user — a stranger, never queued.
    `Pending` rows are recorded, not queued.
-6. **Research each candidate** — bio, join date, follower ratio, newest posts,
-   with protected accounts limited to non-post evidence.
+6. **Research each candidate** — bio, join date, follower ratio, newest posts, with
+   protected accounts limited to non-post evidence. When you opt in, it may also read
+   the avatar and banner and a few image-only posts, labelled and capped.
 7. **Follow with exact identity matching** — the control must be tied to that
    handle. Verification lasts until the control settles, which can take about
    two minutes: either `Following` or `Unfollow` proves a follow, while a
@@ -86,6 +88,28 @@ flag anything that would have been skipped — without unfollowing. If it is sti
 pending after about a month, the skill reports it as unresolved and stops
 checking.
 
+## Visual and multimodal checks
+
+Text is the default. Image, video-frame, and audio-transcript evidence is opt-in,
+because not every host returns pixels and visual matching is less reproducible; a
+text-only run also costs less. When you turn a mode on, the skill proves the mode
+once per run before reading anything, then caps itself at one profile image pair and
+three media items per candidate, and 12 non-text reads per run.
+
+- **Avatar and banner** — a stock photo, watermark, legible text-in-image, generated
+  look, or a persona that clashes with the bio is a caution, not a verdict.
+- **Image-only recent post** — supports activity recency only, never character. A
+  photo is not proof that the account is a real person, so a non-text-only borderline
+  candidate stays your call.
+- **Legible text in an image** — may support a bio or link signal and is quoted as
+  `[image] "…"` with its date and permalink.
+- **Audio transcript** — only when the host returns one; it may support a bio or
+  link signal and is tagged `[audio]`, never a claim about voice or identity.
+- **Mode on but unproven** — the report says `unavailable`, the run stays text-only,
+  and the missing evidence is not scored as a zero or a skip reason.
+- **Limits** — no identity from a photo, and no inference about race, ethnicity,
+  gender, age, disability, health, religion, or sexuality from an image.
+
 ## Unreadable profiles
 
 A "potentially sensitive content" interstitial can replace the whole profile: no
@@ -119,8 +143,8 @@ file per signed-in account at `~/.x-followback/<handle>.json`
 (`%USERPROFILE%\.x-followback\<handle>.json` on Windows), in your home directory.
 
 Each run opens by naming that file and summarizing what it holds — criteria,
-queue and verdict counts, due follow-ups, and resume point — or saying that it
-starts fresh. When writing is unavailable, the file is not created: the run keeps
+evidence modes, queue and verdict counts, due follow-ups, and resume point — or
+saying that it starts fresh. When writing is unavailable, the file is not created: the run keeps
 the same state in the session, prints it for you to verify and save, and the next
 run starts fresh.
 
@@ -136,6 +160,9 @@ check due follow-ups first. The live UI always wins over the file: a saved
 - Never unfollow, block, report, or message.
 - Never follow accounts from suggestion modules or search results.
 - Hand off for login, 2FA, captcha, or payment.
+- Never claim to see an image, frame, or transcript the session cannot return; that
+  mode is flagged `unavailable` and the run stays text-only.
+- Never identify a person from a photo or infer sensitive traits from an image.
 - Real handles and private details stay in the local state file, or in the session
   state you verify when writing is unavailable; never in the repository. Examples
   use fictional placeholders.

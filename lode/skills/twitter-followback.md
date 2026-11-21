@@ -40,6 +40,10 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
     failed and the resume point, and write nothing for an item whose page never
     loaded; a click already made is `unverified` with a follow-up. Never infer
     skipped, no posts, or not followed.
+14. Text is the default evidence mode. Opted-in avatar, banner, image, video, or
+    transcript evidence can flag stock, watermark, impersonation, or activity, but
+    never proves a real person or a sensitive trait; a mode that fails its capability
+    test is reported `unavailable`, never scored as a zero.
 
 ## Cadence
 
@@ -101,7 +105,9 @@ The schema, writing rules, and follow-up pass are the skill's
 that file is authoritative and the body names it.
 
 States: `followed`, `already_following`, `skipped`, `pending`, `unverified`,
-`blocked`, `unreadable`. `pending` is an outstanding follow request;
+`blocked`, `unreadable`. The file also records the confirmed `evidenceModes`; a
+change there rechecks affected verdicts the way a criteria change does. `pending`
+is an outstanding follow request;
 `unverified` is a click whose state change was never observed; `unreadable` is a
 page that rendered a notice instead of a profile and carries a reason, not a
 judgement. Protected accounts keep their own policy (`skipped` or `pending`).

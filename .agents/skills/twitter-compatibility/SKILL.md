@@ -4,8 +4,9 @@ description: >-
   Score how compatible you are with your associated accounts on X (Twitter) —
   moots, the accounts you follow, and the accounts that follow you — for subjects
   you choose: asks for the scope and interest areas first, reads both your own feed
-  and each target's posts, replies, reposts, and media, optionally reads image-only
-  media when you opt in and the session can view images, and returns a 0-100
+  and each target's posts, replies, reposts, and media, and optionally reads image,
+  video-frame, or audio-transcript evidence when you opt in and the session proves
+  it can; returns a 0-100
   compatibility score with the counted evidence behind every point, a ranked table,
   per-area breakdowns, and a recent post worth replying to. Use when asked who you
   should interact with, which accounts fit you, how compatible you are with
@@ -14,10 +15,10 @@ description: >-
   engagement farming, or judging people.
 compatibility: >-
   Needs interactive browser control and a browser session already signed in to X,
-  plus optional local file write for cross-run state. For optional visual evidence,
-  the model and browser tool must return readable images; otherwise the run stays
-  text-only. Must run locally on the user's machine; cloud, sandboxed, or headless
-  sessions without browser access cannot complete it.
+  plus optional local file write for cross-run state. For optional image,
+  video-frame, or transcript evidence, the model and browser tool must return it;
+  otherwise the run stays text-only. Must run locally on the user's machine; cloud,
+  sandboxed, or headless sessions without browser access cannot complete it.
 ---
 
 # X/Twitter Compatibility
@@ -53,9 +54,9 @@ cadence, access failures, and privacy — and it is part of this skill.
   the strongest, weakest, and entry-point signals.
 - Replies, quotes, reposts, threads, polls, and captioned or alt-texted media
   count. A repost is amplification, not authorship, and weighs less.
-- Text is the default. Image-only media is 0 subject evidence unless the user opts
-  into visual evidence and the session proves it can see images; then it is
-  lower-weight, capped, and never enough for high confidence alone.
+- Text is the default evidence mode. Images, video frames, and audio transcripts
+  are 0 subject evidence unless the user opts in and the session proves that mode;
+  then they are lower-weight, capped, and never enough for high confidence alone.
 - Confidence sits beside every score. A low-confidence score is provisional and
   never outranks a high-confidence score in the summary.
 - A high score means more shared, replyable material in this sample — not
@@ -96,9 +97,9 @@ captcha, or payment; never enter credentials.
 1. Read [references/state-file.md](references/state-file.md), then the file at
    `~/.x-compatibility/<handle>.json` (`%USERPROFILE%\.x-compatibility\<handle>.json`
    on Windows, with the `@` dropped).
-2. Say one state line: the path, scope, visual mode, rubric version with its areas
-   and weights, current versus stale targets, and the last write. No file means the
-   run starts fresh.
+2. Say one state line: the path, scope, evidence modes, rubric version with its
+   areas and weights, current versus stale targets, and the last write. No file
+   means the run starts fresh.
 3. Ask once for file-write access. If it is refused or unavailable, say so in the
    state line and run on session state per the shared fallback.
 4. Never present a saved score as current. Older than 14 days, or from another
@@ -129,12 +130,13 @@ from the accounts themselves.
    | `quote-first` | 40 | 15 | 15 | 15 | 10 | 5 |
    | `observe-only` | 50 | 10 | 15 | 10 | 10 | 5 |
 
-6. **Visual evidence** — default `off`. Text is the portable default; visual is
-   lower-weight and less reproducible. If the user turns it on, ask which areas, if
-   any, are primarily visual (photography, illustration, design); those count
-   image-only items at 2 and cap at 12, while other areas count 1 and cap at 6. The
-   session must prove it can see images before any visual item is counted (Step 6).
-   If it cannot, run text-only and flag `visual: unavailable`.
+6. **Evidence modes** — default `text`, the cheapest and only portable mode. Offer
+   `images` (image-only posts), `video` (paused frames), and `audio` (host
+   transcript only); text stays on. Mark any area whose primary evidence is visual
+   (photography, illustration, design); those areas score image and frame matches
+   higher, per `references/scoring.md`. Each enabled mode is capability-tested once
+   per run (Step 6); a failed test keeps text and reports `unavailable`, never a
+   silent zero.
 7. **Targets** — named handles, or a slice of the chosen scope. A named account
    outside the scope is scored only after the user confirms. Collect more handles
    than the batch and let the user pick.
@@ -145,9 +147,9 @@ from the accounts themselves.
    minutes wall-clock.
 
 If the user says "use your judgement", propose the whole brief and get a yes. A
-materially changed brief, including visual mode or a `visual` area flag, bumps the
-rubric version (Step 9); a scope change does not, because scores are content-based
-and category is reported separately.
+materially changed brief, including evidence modes or a `visual` area flag, bumps
+the rubric version (Step 9); a scope change does not, because scores are
+content-based and category is reported separately.
 
 ## Step 4 — Read the source feed
 
@@ -209,29 +211,34 @@ For each target, in queue order:
    entry but leave it out of this run.
 2. Sample up to 30 Posts, 20 Replies, 10 Media, and reposts visible in Posts.
    Deduplicate by URL; one item is one row.
-3. If visual evidence is on, prove image access once per run before the first
-   image-only item: screenshot a page and state one visible detail from the image
-   that the page's text does not contain — a color, layout, or pictured object. If
-   you cannot, or the tool returns only a path or metadata, set `visual:
-   unavailable`, run text-only, and flag it in the report.
+3. Capability-test each enabled mode once per run before counting it: screenshot a
+   page whose text you read, read back the image rather than a path, and state a
+   visible detail the text lacks; for `video`, read a paused frame that differs from
+   the poster; for `audio`, quote a word from the host transcript. A path,
+   filename, caption, alt text, poster, or model name is not proof. A failed test
+   marks that mode `unavailable`, keeps text running, and is flagged in the report.
 4. Classify each item and mark area matches against the frozen lexicon. Match text,
-   captions, and alt text; when visual evidence is on and proven, also match a
-   legible image or video frame and record a short visual observation with date and
-   permalink. Never a handle, display name, filename, or URL alone. An unreadable,
-   blurry, or ambiguous image is 0 for that item and noted, never guessed.
+   captions, and alt text; with a mode on and proven, also match a legible image, a
+   paused video frame, or a transcript, and record a short observation tagged
+   `[image]`, `[video]`, or `[audio]` with date and permalink. Never a handle,
+   display name, filename, or URL alone. An unreadable, blurry, or ambiguous image
+   is 0 for that item and noted, never guessed.
 5. Count conversation surfaces, and take voice metrics from original and quote
    posts only (not reposts).
 6. Record the strongest matching item, the weakest area, and any caution — brand,
-   automated, engagement bait, or thin sample.
+   automated, engagement bait, or thin sample. Read media only where a decision
+   turns on it: at most 1 profile image pair and 3 media items per target, 12
+   non-text reads per run, counted against the budget.
 7. Stop at the batch, wall-clock limit, end of tabs, or two empty scroll stops.
    Write state after each target.
 
 If the 30-day window yields fewer than five readable items, extend the same tabs to
 90 days once, say so, and then score or record `insufficient`.
 
-An image with no caption or alt text is 0 subject evidence in text-only mode or when
-`visual: unavailable`. With visual evidence on and proven, it counts per the scoring
-rules; it always counts for format fit. Never describe an image you did not see.
+An image or frame with no caption or alt text is 0 subject evidence with the mode
+off or `unavailable`. With a mode on and proven, it counts per the scoring rules and
+always counts for format fit. Never describe an image, frame, or transcript you did
+not see.
 
 ## Step 7 — Score
 
@@ -245,11 +252,10 @@ point values, formulas, confidence, and a worked example.
    band and confidence.
 4. Fewer than five readable items: no score; record `insufficient` and what was
    missing.
-5. Image-only items follow the visual rule: 0 in text-only mode; 1 point in a
-   standard area and 2 in a `visual` area when visual evidence is on and the session
-   can see images. Visual-only points cap at 6 and 12 per area, and visual-only
+5. Non-text items follow the multimodal point values and caps in
+   `references/scoring.md`: 0 with the mode off or `unavailable`, and non-text-only
    matches cap confidence at `medium`.
-6. Show the arithmetic: counts per component, strongest and weakest area, visual
+6. Show the arithmetic: counts per component, strongest and weakest area, non-text
    count, and tab counts. A score without its counts is not reportable.
 7. Access carries at most 5 points of weight by default and never carries the
    score; `follows you` is a bonus, not a reason.
@@ -261,12 +267,12 @@ point values, formulas, confidence, and a worked example.
 Read [references/report-format.md](references/report-format.md) before the first
 card.
 
-1. Open with the scope and its counts, visual mode and capability, the rubric, final
-   weights, mode, sample sizes, date, and state line.
+1. Open with the scope and its counts, evidence modes and capability, the rubric,
+   final weights, mode, sample sizes, date, and state line.
 2. Ranked table: rank, linked handle, category, score with a ten-cell bar, band,
    strongest area, main gap, confidence.
 3. A card for each target at or above the card floor (default 55), strongest first:
-   category, per-area scores, counted signals, visual count, two or three quoted
+   category, per-area scores, counted signals, non-text count, two or three quoted
    items with dates and permalinks, fit, gap, and one entry point when a recent
    matching post invites a reply.
 4. A bridge matrix: areas as rows, the top three accounts as columns.
@@ -280,12 +286,12 @@ card.
 
 ## Step 9 — Persist and report
 
-1. Write after each target and before the run ends: scope, visual mode and area
+1. Write after each target and before the run ends: scope, evidence modes and area
    flags, rubric version, lexicon and weights, source metrics, per-target category,
-   scores and counts, visual counts, queue, hidden handles, and follow-ups.
-2. A changed rubric, visual mode, or `visual` area flag bumps the version; a scope
-   change does not. Mark old scores stale and keep them only as a labelled previous
-   score. Never mix versions in one ranking.
+   scores and counts, non-text counts, queue, hidden handles, and follow-ups.
+2. A changed rubric, evidence mode, or `visual` area flag bumps the version; a
+   scope change does not. Mark old scores stale and keep them only as a labelled
+   previous score. Never mix versions in one ranking.
 3. Record `scored`, `stale`, `insufficient`, `unreadable`, `hidden`, and `excluded`
    with a date and a short reason, plus each target's category. A target outside the
    current scope keeps its entry but is not reported.
@@ -298,8 +304,8 @@ card.
   lift one area; the counts make that visible.
 - Reposts reflect amplification, not authorship.
 - Voice fit compares observable style ratios, not personality.
-- Visual evidence is lower-weight and less reproducible; image-only matches cannot
-  lift a score to `high` confidence.
+- Image, frame, and transcript evidence is lower-weight and less reproducible;
+  non-text-only matches cannot lift a score to `high` confidence.
 - Scores compare only within one rubric and one run.
 - Protected accounts and notice-replaced pages cannot be scored, whatever the
   relationship.
@@ -310,8 +316,10 @@ card.
 - Read only: no like, reply, repost, follow, block, report, or message.
 - No credentials; hand off challenges. A challenge ends the run.
 - No DMs, no private data, no inference from hidden content.
-- Never claim to see an image or non-text content you cannot; flag
-  `visual: unavailable` and run text-only.
+- Never claim to see an image, frame, or transcript you cannot; flag that mode
+  `unavailable` and run text-only.
+- Never identify a person from a photo or infer race, ethnicity, gender, age,
+  disability, health, religion, or sexuality from any image.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Done checklist
@@ -321,15 +329,15 @@ card.
       recorded.
 - [ ] Scope chosen up front from moots / following-only / followers-only / all;
       counts restated.
-- [ ] Visual mode confirmed; image access proven, or `visual: unavailable` flagged
-      and the run kept text-only.
+- [ ] Evidence modes confirmed; each enabled mode capability-tested, or flagged
+      `unavailable` and the run kept text-only.
 - [ ] Areas, signal terms, both weight sets, targets, and budget confirmed and
       restated.
 - [ ] Source feed read in this run; source metrics computed from it.
 - [ ] Every target has a confirmed category and a counted sample, or a named
       `insufficient`/`unreadable` reason.
-- [ ] Image-only items counted only under the confirmed visual rule; visual-only
-      matches labelled and capped at `medium` confidence.
+- [ ] Non-text items counted only under a proven mode; non-text-only matches
+      labelled and capped at `medium` confidence.
 - [ ] Every score shows its counts, confidence, band, strongest and weakest area.
 - [ ] Every cited item has a date and permalink from this run; every handle is
       linked.

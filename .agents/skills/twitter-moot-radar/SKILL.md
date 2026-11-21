@@ -5,16 +5,19 @@ description: >-
   your areas of interest, harvests what your moots follow, and suggests only the
   accounts that match, ranked by how many moots follow them and shown with
   proof — a quoted post, its permalink, the moots behind it, and live
-  confirmation that you do not follow them yet. Use when asked to find people to
+  confirmation that you do not follow them yet. Optionally reads image-only posts
+  and video frames when you opt in, as labelled lower-weight proof. Use when asked to find people to
   follow, find accounts in my mutuals' circles, who do my moots follow that I
   don't, find similar accounts, or build a follow list from my network. Not for
   mass-following, growth hacking, or unfollowing; nothing is followed without
   your per-handle approval.
 compatibility: >-
   Needs an agent with interactive browser control, a browser session already
-  signed in to X, and optional local file write for cross-run state. Must run
-  locally on the user's machine; cloud, sandboxed, or headless sessions without
-  browser access cannot complete it.
+  signed in to X, and optional local file write for cross-run state. Optional
+  image, video-frame, or transcript evidence needs a model and browser tool that
+  return it; otherwise the run stays text-only. Must run locally on the user's
+  machine; cloud, sandboxed, or headless sessions without browser access cannot
+  complete it.
 ---
 
 # X/Twitter Moot Radar
@@ -47,6 +50,9 @@ optional background.
 - Report by default. Follow only handles the user approves by name.
 - Filter noise at the row level; keep quote evidence dated; reuse the graph and
   re-rank when interests change.
+- Text is the default evidence mode. Images, video frames, and audio transcripts
+  are opt-in, capability-tested in Step 6, capped, and labelled; a photo never
+  proves a real person or a sensitive trait.
 
 ## Step 0 — Confirm browser control
 
@@ -89,6 +95,10 @@ Ask, then restate:
 - **Signal words** (optional) — tools, projects, jargon, names that count as
   evidence.
 - **Strictness** — must post about the area (default), or adjacent is fine.
+- **Evidence modes** — default `text`. Offer `images` (image-only posts, profile
+  avatar and banner), `video` (paused frames), and `audio` (host transcript only);
+  text stays on and is the cheapest. Restate the set; each mode is capability-tested
+  in Step 6.
 - **Overlap bar** — 2+ distinct moots by default, or strong single-moot
   evidence.
 - **Exclusions** — marketing/affiliate, crypto/trading, adult, giveaways,
@@ -100,8 +110,8 @@ Ask, then restate:
 - **Protected accounts** — posts unreadable, so no proof is possible; exclude
   and report, never offer an evidence-free shortcut.
 
-If the user says "use your judgement", propose the list, bar, and budget, and
-get a yes. Restate the brief in one paragraph.
+If the user says "use your judgement", propose the list, bar, budget, and evidence
+modes, and get a yes. Restate the brief in one paragraph.
 
 ## Step 3 — Build the moot roster
 
@@ -182,10 +192,23 @@ Proof rules:
   and permalink, or a bio line that states the interest.
 - A single keyword among unrelated posts is not a match; look for a body of
   posts or one substantial post.
-- Display name, avatar, emoji, and the follow relationship are not evidence.
+- Display name, avatar, emoji, and the follow relationship are not interest
+  evidence.
 - Tag each match to a named interest; multiple matches rank up.
 - No readable posts, no suggestion — record `no_evidence` and move on, whatever
   the overlap.
+- **Multimodal proof (opt-in)** — gate each enabled mode with the shared capability
+  test before the first read. With it proven, an image-only post, paused video
+  frame, or host transcript may satisfy the one-match gate when the pictured
+  subject or legible words are unambiguous and tied to the interest: quote it as
+  `[image] "Rust code with impl Trait"`, `[video] "…"`, or `[audio] "…"` with date
+  and permalink.
+  Visual proof ranks below text proof, caps that suggestion at medium confidence,
+  and never replaces a text check that failed. Avatar and banner may flag stock,
+  watermark, or impersonation noise once per candidate; never identify a person
+  from a photo or infer sensitive traits. Skip media reads on a candidate already
+  failing the text gate; keep inside 1 profile image pair, 3 media items per
+  candidate, and 12 non-text reads per run.
 - If the control reads `Following` or `Unfollow`, record `already_following` and
   drop it.
 - A "potentially sensitive content" interstitial is not a profile: no bio, no
@@ -201,7 +224,8 @@ ratio. Present grouped by interest, strongest first.
 
 Use the card in [references/report-format.md](references/report-format.md):
 quote, date, permalink, moots by handle and count, live follow state, optional
-`follows you`. Read it before the first card.
+`follows you`. Read it before the first card. Open with the evidence modes and
+capability, and label every non-text proof.
 
 Never describe an account as an expert, founder, or practitioner unless the
 profile says so.
@@ -254,6 +278,8 @@ that the next run starts fresh and may repeat decided work.
 - Interest profile, overlap bar, and exclusions in force.
 - Moots confirmed, harvested, remaining, and the resume point.
 - Suggestions by interest: quote, date, permalink, moots, follow state.
+- Evidence modes and capability; non-text reads counted; `[image]`, `[video]`, or
+  `[audio]` proof labelled as lower-weight.
 - Near misses and why they fell short; filtered counts by reason.
 - Protected accounts excluded, and why that is not a judgement.
 - Follows: verified / pending / unverified, separately; nothing else changed.
@@ -266,13 +292,19 @@ that the next run starts fresh and may repeat decided work.
 - No follow without per-handle approval; no unfollow, block, report, or message.
 - No harvesting from suggestion modules, Explore, or search.
 - No credentials; hand off challenges.
+- Never claim to see an image, frame, or transcript you cannot; flag that mode
+  `unavailable` and stay text-only.
+- Never identify a person from a photo or infer sensitive traits from an image.
 - Never describe a protected account's interests; keep quotes short and local.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Done checklist
 
 - [ ] Control proven; account identified; UI labels confirmed this run.
-- [ ] Interests, exclusions, overlap bar, and budget confirmed and restated.
+- [ ] Interests, exclusions, overlap bar, budget, and evidence modes confirmed and
+      restated.
+- [ ] Every enabled evidence mode capability-tested; `unavailable` flagged;
+      non-text proof labelled and never above medium confidence.
 - [ ] Roster from confirmed moots only, labelled, ordered, capped.
 - [ ] Harvest from Following lists only; overlap counted per candidate.
 - [ ] Every suggestion has quoted evidence with date and permalink, and a live

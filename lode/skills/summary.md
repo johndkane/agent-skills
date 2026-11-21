@@ -183,13 +183,16 @@ cannot run.
 
 The X skills follow the progressive-disclosure shape: state schemas live in
 `references/state-file.md`, and the follow-back UI ladder, the suggestion card, and
-the compatibility scoring, visual-evidence, and report files live in their own
+the compatibility scoring, multimodal-evidence, and report files live in their own
 references. Their shared rules live in `references/twitter-shared.md`, copied
 verbatim from
 [`docs/skills/twitter-shared.md`](../../docs/skills/twitter-shared.md); the group
 index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). All
 open a run with a brief state line, link every handle and cited source in their
-output, and stop on an access failure instead of inferring state.
+output, and stop on an access failure instead of inferring state. Text is the
+default evidence mode; every member offers the same opt-in image, video-frame, and
+audio-transcript gate from the shared file, tests each enabled mode per run, and
+reports `unavailable` instead of zeroing it.
 
 The catalog's browser-driven X skills share
 [`docs/skills/twitter-core.md`](../../docs/skills/twitter-core.md) as their

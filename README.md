@@ -19,22 +19,25 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
   researches your followers on X and follows back only real, active people,
   filtering bots, marketing, adult, crypto, and impersonation accounts. Handles
   protected accounts, keeps run state outside the repository so long queues
-  resume, links its evidence, and paces itself at a human cadence.
+  resume, links its evidence, and paces itself at a human cadence. Text is the
+  default; optional image and frame checks are capped and labelled.
   [Read more](docs/users/twitter-followback.md)
 
 - **[`twitter-moot-radar`](.agents/skills/twitter-moot-radar/SKILL.md)** — finds
   accounts worth following through your mutuals, ranked by how many moots follow
   them and shown with a quoted post, its permalink, and live proof you do not
-  follow them yet. Nothing is followed without per-handle approval.
+  follow them yet. Optional image, video-frame, or transcript proof is labelled and
+  lower-weight. Nothing is followed without per-handle approval.
   [Read more](docs/users/twitter-moot-radar.md)
 
 - **[`twitter-compatibility`](.agents/skills/twitter-compatibility/SKILL.md)** —
   scores how compatible you are with your associated accounts on X — moots,
   accounts you follow, accounts that follow you, or all — on subjects you name.
   Asks for the scope first, reads both feeds, counts posts, replies, reposts, and
-  media, and can optionally read image-only media when the session supports it.
-  Returns a 0–100 score with its evidence, per-area breakdowns, and a post worth
-  replying to. Read-only: no likes, replies, follows, or messages.
+  media, and can optionally read image, video-frame, or audio-transcript evidence
+  when the session proves it can. Returns a 0–100 score with its evidence, per-area
+  breakdowns, and a post worth replying to. Read-only: no likes, replies, follows,
+  or messages.
   [Read more](docs/users/twitter-compatibility.md)
 
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — this repository's

@@ -10,6 +10,7 @@ writing rules, and the start-of-run follow-up pass.
 {
   "account": "@me",
   "criteria": "recency<=30d; skip marketing/adult/crypto; protected=skip",
+  "evidenceModes": ["text"],
   "updated": "2026-11-21T14:05:00Z",
   "scannedThrough": "@last_handle_seen",
   "queue": ["@erin", "@frank"],
@@ -26,7 +27,10 @@ writing rules, and the start-of-run follow-up pass.
 ```
 
 `scannedThrough` is the last handle examined while scrolling; `queue` is the
-ordered list of collected handles that have no verdict yet. `state` is one of
+ordered list of collected handles that have no verdict yet. `evidenceModes` is the
+confirmed opt-in set — `text` always, plus any of `images`, `video`, `audio` — and
+a change to it rechecks affected verdicts the way a criteria change does. An older
+file without the field means `["text"]`. `state` is one of
 `followed`, `already_following`, `skipped`, `pending`, `unverified`, `blocked`,
 `unreadable`. `unverified` means a click was made and no state change was
 observed by the end of the settle window; re-read it next run before doing

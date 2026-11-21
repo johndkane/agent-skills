@@ -16,7 +16,7 @@ because changes are applied to all copies together.
 | File | Role | Copied into members |
 | --- | --- | --- |
 | `twitter-core.md` | This contract: principles, rationale, and how to change the group | No; it is the authoring page |
-| `twitter-shared.md` | Copy-ready operative rules: state line, linked evidence, cadence, access failures, privacy | Yes, verbatim to `references/twitter-shared.md` in every member |
+| `twitter-shared.md` | Copy-ready operative rules: state line, linked evidence, cadence, access failures, multimodal evidence, privacy | Yes, verbatim to `references/twitter-shared.md` in every member |
 
 The names carry the group, so a file from another group is never mistaken for
 this one. `browser-cadence.md` is a cross-group capability page, named for the
@@ -29,9 +29,9 @@ creating its central files.
 
 | Skill | Task | State |
 | --- | --- | --- |
-| [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers | `~/.x-followback/` |
-| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests | `~/.x-moot-radar/` |
-| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts, on chosen subjects and scope, with text-first or opt-in visual evidence | `~/.x-compatibility/` |
+| [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks | `~/.x-followback/` |
+| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests, with optional non-text proof | `~/.x-moot-radar/` |
+| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts, on chosen subjects and scope, text-first with opt-in image, video-frame, and transcript evidence | `~/.x-compatibility/` |
 
 The links above point at this repository's copy for browsing. A skill is its
 folder, so installing one means copying that folder into a host's skills
@@ -118,6 +118,13 @@ damages the user's account or produces a false claim.
     not load. A click already made when access fails is `unverified` with a
     follow-up, because it may have landed. A login wall, captcha, or checkpoint
     is a handoff; a rate-limit notice keeps the throttle rule.
+18. **Text first; pixels by consent.** Text is the default evidence mode and the
+    only path every host can run. Images, video frames, and audio transcripts are
+    opt-in per run, capability-tested per mode, capped, and reported as `available`
+    or `unavailable`. A mode that is on but unproven is not a zero: the run stays
+    text-only and says so. Lower weight never turns a photo into proof of a person,
+    and no image supports a claim about race, ethnicity, gender, age, disability,
+    health, religion, or sexuality.
 
 ## Human cadence
 
@@ -203,6 +210,9 @@ relearning the flow.
 - **A relationship is not evidence.** Who follows an account explains why it
   surfaced, not what it posts about. Only the account's own bio and posts can
   support a claim about its interests.
+- **A photo is not a person.** Profile images and media can flag spam, a watermark,
+  or an interest, but never prove that an account belongs to a real person; never
+  infer sensitive traits from them.
 - **A row label is a snapshot, not a relationship.** A Followers row can read
   `Follow` because the account stopped following the user after the list was
   built. That is a stranger: never queued, never researched as a follow-back.

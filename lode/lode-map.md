@@ -13,9 +13,9 @@ Index of this lode. Read it before exploring the repository.
 | [skills/summary.md](skills/summary.md) | Skill contract, design rules, authoring, validation |
 | [skills/groups.md](skills/groups.md) | Group rules: central files, copies, alignment |
 | [skills/twitter-group.md](skills/twitter-group.md) | The live X group and its central files |
-| [skills/twitter-followback.md](skills/twitter-followback.md) | Follow-back run state, protected accounts, cadence |
-| [skills/twitter-moot-radar.md](skills/twitter-moot-radar.md) | Moot graph, overlap ranking, proof standard, cadence |
-| [skills/twitter-compatibility.md](skills/twitter-compatibility.md) | Compatibility score, associated-account scope, visual evidence, rubric, confidence, bridge matrix |
+| [skills/twitter-followback.md](skills/twitter-followback.md) | Follow-back run state, protected accounts, multimodal checks, cadence |
+| [skills/twitter-moot-radar.md](skills/twitter-moot-radar.md) | Moot graph, overlap ranking, proof standard, multimodal proof, cadence |
+| [skills/twitter-compatibility.md](skills/twitter-compatibility.md) | Compatibility score, associated-account scope, multimodal evidence gate, rubric, confidence, bridge matrix |
 | [skills/skill-verify.md](skills/skill-verify.md) | Pre-handoff skill gate, checks, evidence rules |
 | [scripts/summary.md](scripts/summary.md) | Link script behaviour |
 

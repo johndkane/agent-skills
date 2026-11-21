@@ -23,17 +23,18 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 3. Both sides are read fresh every run. The source feed is the signed-in user's own
    Posts, Replies, Media, and visible Likes; the target's is the scored account's
    posts, replies, reposts, and media. State is memory, never evidence.
-4. Areas, signal terms, area weights, factor weights, mode, targets, and budget
-   come from the user and are restated before scoring. The lexicon is the measuring
-   instrument.
+4. Areas, signal terms, area weights, factor weights, evidence modes, targets, and
+   budget come from the user and are restated before scoring. The lexicon is the
+   measuring instrument.
 5. A score is arithmetic over counted items. Every component has point values and a
    formula in
    [`references/scoring.md`](../../.agents/skills/twitter-compatibility/references/scoring.md);
    every reported score shows its counts.
 6. A repost is amplification, not authorship, and is weighted lower. Text is the
-   default: an image-only item is 0 subject evidence unless visual evidence is on
-   and proven. Then it counts 1 point (2 in a `visual` area), caps at 6 or 12 per
-   area, and visual-only matches cap confidence at `medium`.
+   default: an image, frame, or transcript is 0 subject evidence unless that mode is
+   opted in and proven. Then an image or video frame counts 1 point (2 in a `visual`
+   area), an audio transcript 1, caps at 6 or 12 per area, and non-text-only matches
+   cap confidence at `medium`.
 7. Confidence is separate from score: `high`, `medium`, `low`, `insufficient`,
    `unreadable`. Fewer than five readable target items is `insufficient`, not a
    zero; a protected or notice-replaced page is `unreadable`, with no score and no
@@ -41,22 +42,26 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 8. Relationship is a bonus, capped at the default 5% access component. `Follows
    you` never carries a ranking.
 9. A score is current for 14 days. Any change to an area, term, weight, mode,
-   window, visual mode, or a `visual` area flag bumps the rubric version and makes
+   window, evidence mode, or a `visual` area flag bumps the rubric version and makes
    every earlier score stale and unrankable until re-read. A scope change does not;
    it changes who is reported.
 10. State lives outside the repository at `~/.x-compatibility/<handle>.json`, one
-    file per signed-in account, and holds the scope, visual mode, area flags, rubric
-    data, aggregates, scores, categories, counts, queue, hidden handles, and dates —
-    no quotes, permalinks, or private details.
+    file per signed-in account, and holds the scope, evidence modes, area flags,
+    rubric data, aggregates, scores, categories, counts, queue, hidden handles, and
+    dates — no quotes, permalinks, images, or private details.
 11. A report is not a prediction. A high score means more shared, replyable
     material in the sample, not friendship, agreement, or a reply.
+12. Every enabled evidence mode is capability-tested once per run. A failed test is
+    reported `unavailable`, text continues, and the absent evidence is never scored
+    as a silent zero or guessed from a caption, filename, or poster.
 
 ## Pipeline
 
 ```mermaid
 flowchart TD
-    P[Confirm scope: moots, following-only, followers-only, all] --> I[Confirm areas, terms, weights, targets]
-    I --> S[Read source feed]
+    P[Confirm scope: moots, following-only, followers-only, all] --> I[Confirm areas, terms, weights, targets, evidence modes]
+    I --> G[Capability-test each enabled mode]
+    G --> S[Read source feed]
     S --> T[Read each target feed]
     T --> M[Match frozen lexicon]
     M --> C[Score six components]
@@ -70,7 +75,7 @@ flowchart TD
 ## Why the score is objective
 
 "Objective" here means reproducible arithmetic on a stated sample, not a claim of
-scientific measurement. Three things make it checkable:
+scientific measurement. Four things make it checkable:
 
 - The signal lexicon is confirmed before reading and frozen in the rubric, so the
   same post matches the same area on every run.
@@ -78,8 +83,9 @@ scientific measurement. Three things make it checkable:
   counts.
 - The sample is bounded and named: tab caps, a 30-day default window, and a
   confidence level derived from what was actually read.
-- Visual evidence is opt-in, capability-tested, lower-weight, and capped; text
-  remains the default and the only reliable path across hosts.
+- Visual and multimodal evidence is opt-in, capability-tested per mode, lower-weight,
+  and capped; text remains the default and the only reliable path across hosts, and
+  an unproven mode is reported, never silently zeroed.
 
 The limits are stated in the same breath: public posts are not intent, a thread can
 lift one area, reposts are not voice, and the voice component compares style ratios
@@ -100,9 +106,9 @@ rather than personality.
 user may set any weights, and the final normalized set is reported. Area scores are
 separate and combined by 1–5 area weights, so the ranking follows the subjects the
 user actually cares about. Scope selects the population and is shown as a category;
-it does not change the weights. Visual evidence is a separate rubric setting:
-image-only items are 0 by default, and 1 or 2 only when the user opts in and the
-session proves it can see images.
+it does not change the weights. Evidence modes are a separate rubric setting:
+image, frame, and transcript evidence is 0 by default, and lower-weight only when
+the user opts in and the session proves that mode; text is the cheap default.
 
 Bands: Strong 85–100, Good 70–84, Workable 55–69, Thin 40–54, Low 0–39. Only
 `high` and `medium` confidence scores are ranked; `low` sits in a provisional block.
@@ -111,7 +117,7 @@ Bands: Strong 85–100, Good 70–84, Workable 55–69, Thin 40–54, Low 0–39
 
 One ranked table with a ten-cell bar, category, band, strongest area, main gap, and
 confidence; a card per account with category, per-area rows, component scores, two
-or three quoted items with dates and permalinks, visual count when on, fit, gap,
+or three quoted items with dates and permalinks, non-text count when on, fit, gap,
 caution, and at most one entry point; a bridge matrix of areas by the top accounts;
 and separate lower-scored, provisional, insufficient, unreadable, out-of-scope, and
 hidden lists. The template is
@@ -130,8 +136,8 @@ target tabs are capped at 40/30 posts, 30/20 replies, 15/10 media, and 15 likes.
 Profile visits are the expensive unit, so state lets later runs read only new or
 stale targets instead of re-reading the whole set. Changing the rubric invalidates
 scores but not handles, categories, or the queue; changing only the scope keeps
-every score and changes who is reported. Visual mode and `visual` area flags live in
-the rubric; a capability check is repeated each run because the host may change.
+every score and changes who is reported. Evidence modes and `visual` area flags live
+in the rubric; capability is per run because the host may change.
 
 When file write is refused or unavailable, the run continues on session state of
 the same shape and prints it for the user to verify; the next run starts fresh and

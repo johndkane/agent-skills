@@ -28,6 +28,7 @@ it does not follow anything without per-handle approval.
 | Interactive browser control | Every read and action happens through the real UI |
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
+| Non-text evidence modes (optional) | Need a model and browser tool that return images, video frames, or an audio transcript; otherwise that mode is flagged unavailable and the run stays text-only |
 | Local file write | Keeps the moot roster, harvested sources, and verdicts in `~/.x-moot-radar/`; without it the run continues on session state |
 
 File write is not a hard stop: if you decline it or the path cannot be written,
@@ -43,8 +44,8 @@ repeated.
    `Unfollow`, `Follows you`, and `Pending`, plus the row anatomy of a Following
    list. `Following` and `Unfollow` are the same already-followed state.
 3. **Ask for interests** — 3–8 checkable areas, optional signal words,
-   strictness, an overlap bar, exclusions, moot scope, and a budget, all restated
-   before any harvesting.
+   strictness, an overlap bar, exclusions, evidence modes, moot scope, and a
+   budget, all restated before any harvesting.
 4. **Build the moot roster** — a moot is someone the user follows who follows
    back, confirmed by the `Follows you` marker before their list is used. Moots
    are ordered by how relevant their own topic is to the named interests.
@@ -55,7 +56,8 @@ repeated.
    handles at the row level, so profile visits go to plausible people.
 7. **Research the shortlist** — bio, recent posts, recency, follower ratio, and
    the live follow control. A candidate needs a quoted post or a stated bio line
-   that matches an interest.
+   that matches an interest. With an evidence mode on and proven, an unambiguous
+   image-only post or video frame may serve as labelled, lower-weight proof.
 8. **Present with proof** — grouped by interest, ranked by overlap and evidence
    strength, each line showing quote, date, permalink, moots, and follow state.
    High-overlap candidates with no evidence go to a near-miss list.
@@ -88,6 +90,15 @@ Every suggestion must show:
 - a live `Follow @handle` control reading, confirming the user does not already
   follow them;
 - an optional `follows you` note, which is a bonus rather than a reason.
+
+Text is the default and the cheapest. With an evidence mode on and proven, a
+non-text match may stand in for the quoted line: `[image] "Rust code with impl
+Trait"`, `[video] "…"`, or `[audio] "…"`, with date and permalink. It is labelled,
+ranks below text proof, and caps that suggestion at medium confidence. The skill reads at most three media items per candidate and 12
+non-text reads per run; a mode that is on but unproven is reported `unavailable` and
+the run stays text-only. It never identifies a person from a photo, never infers
+race, ethnicity, gender, age, disability, health, religion, or sexuality from an
+image, and never treats a photo as proof of a real person.
 
 The candidate handle links to its profile. Every handle the run lists — in the
 state line, a question, or the report — plus every cited moot or quote, is one
@@ -122,8 +133,9 @@ visible rate-limit notice stays a throttle.
 
 State lives at `~/.x-moot-radar/<handle>.json`
 (`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), in your home directory.
-It holds the interest profile in force, confirmed moots with their topic, the
-harvested source sets, the per-moot cursor, the queue, and a verdict per handle.
+It holds the interest profile in force, its evidence modes, confirmed moots with
+their topic, the harvested source sets, the per-moot cursor, the queue, and a
+verdict per handle.
 
 Each run opens by naming that file and summarizing what it holds — interests,
 moot and source counts, queue and verdict counts, last write — or saying that it
@@ -144,6 +156,9 @@ permanent unless the user asks to revisit.
 - Never harvest from suggestion modules, Explore, or search results.
 - Hand off for login, 2FA, captcha, or payment, and never try to pass a challenge
   to keep a run going.
+- Never claim to see an image, frame, or transcript the session cannot return; that
+  mode is flagged `unavailable` and the run stays text-only.
+- Never identify a person from a photo or infer sensitive traits from an image.
 - Never describe a protected account's interests.
 - Real handles and private details stay in the local state file, or in the session
   state you verify when writing is unavailable; never in the repository. Examples

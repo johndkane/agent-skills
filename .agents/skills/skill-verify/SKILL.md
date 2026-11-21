@@ -95,6 +95,10 @@ Quote the advertised values; use the validator's `read-properties` when present.
   refused or unavailable: continue on session state, print it for the user to
   verify, and accept repeated work next run. Stopping a run for missing
   persistence, or presenting session state as a saved file, is a fail.
+- A skill that reads images, video frames, or audio transcripts must state text as
+  the default, the explicit opt-in, a per-mode capability test, the `unavailable`
+  fallback, read caps, and the no-identity-or-sensitive-trait rule. A silent zero
+  for an opted-in mode, or a photo presented as proof of a person, is a fail.
 
 ## Step 3 — Shape and size
 
@@ -162,6 +166,8 @@ From the repository root:
 - [ ] No repo or host path in the body; links stay inside the folder.
 - [ ] No real handles, names, emails, or private details; examples are placeholders.
 - [ ] Online skills carry no run data: no saved quotes, permalinks, screenshots, or state.
+- [ ] Any image, frame, or transcript mode is opt-in, capability-tested, capped,
+      and reported `unavailable` instead of silently zeroed.
 - [ ] Within 500 lines and ~5,000 tokens; references flat and named; closing
       checklist present.
 - [ ] README bullet, docs row and page, lode entry and map row.

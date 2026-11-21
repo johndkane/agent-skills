@@ -9,7 +9,7 @@ bridge matrix, and presentation rules.
 ## Compatibility report — @me
 
 Scope: moots · 12 associated accounts · 5 scored · 3 stale · 2 queued
-Visual: off (text-only)
+Evidence: text (images off)
 Rubric v1 · reply-first · 3 areas (Rust ×3, Postgres ×2, AI ×1)
 Weights: subject 40 · conversation 25 · format 15 · voice 10 · recency 5 · access 5
 Source sample: 74 items (Posts 38, Replies 24, Media 12)
@@ -18,8 +18,9 @@ Date: 2026-11-21 · State: ~/.x-compatibility/<handle>.json
 ```
 
 State one line about what the state file holds and whether this run is session-only.
-Never dump the file. The `Visual` header reads `off (text-only)`, `on (images
-readable)`, or `unavailable (text-only fallback)`.
+Never dump the file. The `Evidence` header reads `text` (default), or the enabled
+modes with their outcome: `text+images (available)` or
+`text+images (unavailable — text-only)`.
 
 ## Summary table
 
@@ -53,8 +54,9 @@ across the areas.
 
 **Signals:** 4 replies to others; 6 questions; 2 threads; 1 quote post.
 
-**Visual:** none in this card. When visual evidence is on, write
-`3 image-only items read visually` and mark each quoted visual item `[visual]`.
+**Evidence:** none in this card; text only. With a mode on and proven, write
+`3 image items and 1 video frame read` and tag each item `[image]`, `[video]`, or
+`[audio]`.
 
 **Components:** subject 71 · conversation 66 · format 85 · voice 86 · recency 100 ·
 access 60.
@@ -120,10 +122,10 @@ signal terms, or read the missing tab. Never pad the table with a weak match.
 - **Scope and category are visible.** State the scope in the header and the category
   on every card and row; never mix categories silently. Category is reported, not
   scored.
-- **Visual mode is visible.** The header says `off`, `on`, or `unavailable`; an
-  unavailable session is text-only. Label visual items `[visual]`, describe only
-  what is visible, and keep their lower weight. An unreadable image is noted and
-  not counted.
+- **Evidence modes are visible.** The header names the modes and whether each is
+  `available` or `unavailable`; an unavailable mode is text-only. Tag non-text items
+  `[image]`, `[video]`, or `[audio]`, describe only what is visible, and keep their
+  lower weight. An unreadable image is noted and not counted.
 - **Confidence is visible.** In each card heading, and as a column in the table.
 - **No predictions.** Do not say someone will reply, will agree, is friendly, or is
   a good person. Do not describe a persona beyond the sampled items.

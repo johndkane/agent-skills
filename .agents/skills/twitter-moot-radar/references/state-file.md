@@ -13,7 +13,8 @@ writing rules.
     "version": 1,
     "areas": ["Rust and systems programming", "PostgreSQL internals"],
     "strictness": "must post about the area",
-    "overlapBar": 2
+    "overlapBar": 2,
+    "evidenceModes": ["text"]
   },
   "moots": {"@a": {"state": "confirmed", "topic": "compilers", "on": "2026-11-21"}},
   "sources": {"@cand": {"moots": ["@a", "@b"], "firstSeen": "2026-11-21"}},
@@ -35,6 +36,10 @@ judgement and carries no inference; re-read it next run.
 
 - `moots` and `sources` are interest-independent. When the interests change, keep
   them and re-rank; do not re-harvest the graph unless the user asks.
+- `evidenceModes` is the confirmed opt-in set — `text` always, plus any of
+  `images`, `video`, `audio`. A change rechecks verdicts that relied on non-text
+  evidence; the graph is untouched. An older file without the field means
+  `["text"]`.
 - `suggested` has a cooldown of about 30 days, unless new moots follow the
   candidate — a new source is new evidence and may justify re-suggesting.
 - `dismissed` is permanent unless the user asks to revisit the handle.

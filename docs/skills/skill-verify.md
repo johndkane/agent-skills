@@ -64,7 +64,11 @@ Two other sources exist and are deliberately not required:
    copy at `references/<group>-shared.md`; the body never points at a central
    file, another member's copy, or an include syntax the spec does not define. A
    skill that writes runtime state also states the session-only fallback; stopping
-   a run because file write was refused is a fail.
+   a run because file write was refused is a fail. A skill that reads images, video
+   frames, or audio transcripts states the text default, the explicit opt-in, a
+   per-mode capability test, the `unavailable` fallback, read caps, and the
+   no-identity-or-sensitive-trait rule; a silent zero or a photo presented as proof
+   of a person is a fail.
 3. **Shape and size** — the 500-line / ~5,000-token pass line, with the
    200–300-line / ~3,000-token aim advisory; flat focused references, scripts and
    assets named, closing checklist, no duplicated rules.

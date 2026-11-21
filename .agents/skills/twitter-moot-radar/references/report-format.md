@@ -16,6 +16,13 @@ Why: writes about low-level Rust, and two of your Rust moots follow them
 Caution: none
 ```
 
+When an evidence mode is on and proven, a non-text match may replace the quoted
+line:
+`[image] "Rust code with impl Trait" — [2026-11-14](https://x.com/<handle>/status/<id>)`,
+`[video] "…"`, or `[audio] "…"`. Label it, rank it below text proof, and never
+describe more than the pictured subject or legible words. Open the report with
+`Evidence: text+images (available)` or the `unavailable — text-only` form.
+
 Placeholders come from the profile reading in this run. Never fill a line from
 memory, from a previous run, or from the follow relationship.
 
@@ -23,6 +30,9 @@ memory, from a previous run, or from the follow relationship.
 
 - **Evidence before adjectives.** The quote, date, and permalink come first; the
   one-sentence "why" only connects them to the interest the user named.
+- **Label non-text proof.** `[image]`, `[video]`, or `[audio]` marks lower-weight
+  evidence read under an opted-in mode; it never outranks a quoted post or proves a
+  real person.
 - **Name the moots.** `@a, @b (2)` is the social proof; do not summarise it as
   "several moots".
 - **State the relationship honestly.** `follows you` is a bonus, not a reason;

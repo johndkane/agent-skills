@@ -75,11 +75,59 @@ stop and before the report so the user can verify and save it. Never stop the ru
 for lack of a state file. Say once that the next run starts fresh and may repeat
 work this run already decided; that rework is an accepted cost, not a failure.
 
+## Multimodal evidence
+
+Text is the default and always-on evidence mode: captions, alt text, and
+link-preview text. A screenshot used only to prove browser control is not evidence
+and is not read back as one. Text is the portable, reproducible, cheapest path, and
+no pixel, frame, or audio payload is read back into the model unless the user opts
+in. Image, frame, and transcript matching is less reproducible than text and costs
+more tokens, so it is lower-weight and capped.
+
+The user may add one or more modes in the brief:
+
+| Mode | Reads | What it adds |
+| --- | --- | --- |
+| `images` | still images, screenshots, profile avatar and banner, legible text inside an image | image-only posts and profile-identity signals |
+| `video` | a few paused frames from a video or GIF; needs `images` | pictured subject matter in video posts |
+| `audio` | a host-produced transcript of a clip, only when the host returns one | spoken words, never tone, accent, or identity |
+
+- Ask once, in the brief, and restate it. A mode is off unless the user turned it on
+  for this run. Text stays on in every mode.
+- A mode outside this table is allowed only when the host actually returns it, the
+  user opts in by name, and it passes the same capability test and caps.
+- Gate each enabled mode once per run: screenshot a page whose text you already
+  read, request the image content rather than a path, and state one visible detail
+  the text does not contain — a colour, layout, or pictured object. For `video`,
+  read a paused frame that differs from the poster; for `audio`, quote one word from
+  the host's transcript. A path, filename, URL, caption, alt text, poster, or model
+  name is not proof of a mode.
+- Record each mode as `available` or `unavailable` and report it. A failed or missed
+  test turns that mode off for the run, keeps text running, and is stated as
+  `unavailable` — never a silent zero and never a guess. The host can change between
+  runs, so test every run.
+- Read media only where a decision turns on it, never across a whole feed. Cap
+  reads at 1 profile image pair per account, 3 media items per candidate, and 12
+  non-text reads per run unless the brief sets another cap; a non-text read costs
+  several text items and counts against the run budget.
+- Describe one short checkable phrase per image or frame: avatar or banner type,
+  legible text, watermark, stock or generated look, or the pictured subject, with
+  its date and permalink. Never infer race, ethnicity, gender, age, disability,
+  health, religion, sexuality, or identity from an image, and never identify a
+  person from a photo. A photo is not proof that an account belongs to a real
+  person.
+- With a mode off or unavailable, non-text content is 0 evidence and the report says
+  why. With a mode on and proven, it is lower-weight evidence: it never outranks a
+  text match, never carries a high-confidence claim, and an unreadable, blurry, or
+  ambiguous image is 0 and noted, never guessed.
+- Name the modes and outcome in the state line and the report: `evidence: text`
+  (default), `text+images (available)`, or `text+images (unavailable — text-only)`.
+
 ## Privacy
 
 State lives outside the skill folder and the repository, one file per signed-in
 account. It holds handles, verdicts, dates, and short tags — no credentials, no
-full timelines, no bulk personal data. Skill text and examples use fictional
-placeholders (`@alice`); a real handle or private detail exists only in that
-account's state file, or in the session output the user verifies when writing is
-unavailable.
+full timelines, no saved images, frames, or transcripts, no bulk personal data.
+Skill text and examples use fictional placeholders (`@alice`); a real handle or
+private detail exists only in that account's state file, or in the session output
+the user verifies when writing is unavailable.

@@ -7,16 +7,16 @@ applies the group mechanics in [groups](groups.md).
 
 | Skill | Task |
 | --- | --- |
-| [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers |
-| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest matching accounts from the moot graph |
-| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility across associated-account scopes, text-first with opt-in visual evidence |
+| [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks |
+| [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest matching accounts from the moot graph, with optional non-text proof |
+| [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility across associated-account scopes, text-first with opt-in multimodal evidence |
 
 ## Central files
 
 | File | Role | Copy |
 | --- | --- | --- |
 | [`twitter-core.md`](../../docs/skills/twitter-core.md) | Contract: principles, practices, considerations | None; authoring page |
-| [`twitter-shared.md`](../../docs/skills/twitter-shared.md) | Operative rules: state line, linked evidence, cadence, access failures, persistence fallback, privacy | `references/twitter-shared.md` in every member |
+| [`twitter-shared.md`](../../docs/skills/twitter-shared.md) | Operative rules: state line, linked evidence, cadence, access failures, persistence fallback, multimodal evidence, privacy | `references/twitter-shared.md` in every member |
 | [`skill-groups.md`](../../docs/skills/skill-groups.md) | Group index and naming convention | None |
 
 ## Invariants
@@ -34,6 +34,9 @@ applies the group mechanics in [groups](groups.md).
    file and that the index lists the member.
 6. A cross-group capability page is named for the capability, not a group, such
    as [`browser-cadence.md`](../../docs/skills/browser-cadence.md).
+7. Text is every member's default evidence mode. An enabled multimodal mode is
+   capability-tested once per run and reported `available` or `unavailable`; the
+   shared file is the one place that rule is authored and it is copied verbatim.
 
 ```mermaid
 flowchart LR
