@@ -21,17 +21,17 @@ State one line about what the state file holds and whether this run is session-o
 Never dump the file. The `Evidence` header reads `text` (default), or the enabled
 modes with their outcome: `text+images (available)` or
 `text+images (unavailable — text-only)`. A focus run writes
-`Scope: focus — @alice, @bob (named by you)` and gives each category as context.
+`Scope: focus — @example_alice, @example_bob (named by you)` and gives each category as context.
 
 ## Summary table
 
 ```markdown
 | # | Account | Category | Score | Band | Best area | Main gap | Conf. |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | [@alice](https://x.com/alice) | moot | `███████░░░` 74 | Good | Rust 92 | AI 25 | high |
-| 2 | [@bob](https://x.com/bob) | following-only | `███████░░░` 71 | Good | Rust 76 | AI 20 | high |
-| 3 | [@carol](https://x.com/carol) | followers-only | `██████░░░░` 58 | Workable | Postgres 80 | Rust 25 | medium |
-| 4 | [@dave](https://x.com/dave) | not-associated | `█████░░░░░` 55 | Workable | Postgres 60 | Rust 40 | medium |
+| 1 | [@example_alice](https://x.com/example_alice) | moot | `███████░░░` 74 | Good | Rust 92 | AI 25 | high |
+| 2 | [@example_bob](https://x.com/example_bob) | following-only | `███████░░░` 71 | Good | Rust 76 | AI 20 | high |
+| 3 | [@example_carol](https://x.com/example_carol) | followers-only | `██████░░░░` 58 | Workable | Postgres 80 | Rust 25 | medium |
+| 4 | [@example_dave](https://x.com/example_dave) | not-associated | `█████░░░░░` 55 | Workable | Postgres 60 | Rust 40 | medium |
 ```
 
 `not-associated` appears only for an account the user named; it is context, never a
@@ -44,7 +44,7 @@ a higher rank.
 ## Card
 
 ```markdown
-### [@alice](https://x.com/alice) — 74/100 · Good · confidence high
+### [@example_alice](https://x.com/example_alice) — 74/100 · Good · confidence high
 
 `███████░░░` 74 · moot · reply-first
 
@@ -66,15 +66,15 @@ across the areas.
 **Components:** subject 71 · conversation 66 · format 85 · voice 86 · recency 100 ·
 access 60.
 
-**Why:** "still rewriting the scheduler in unsafe Rust" — [2026-11-14](https://x.com/alice/status/...);
-reposted "the borrow checker finally clicked" — [2026-11-09](https://x.com/bob/status/...);
-reply "try the arena allocator first" — [2026-11-02](https://x.com/alice/status/...).
+**Why:** "still rewriting the scheduler in unsafe Rust" — [2026-11-14](https://x.com/example_alice/status/...);
+reposted "the borrow checker finally clicked" — [2026-11-09](https://x.com/example_bob/status/...);
+reply "try the arena allocator first" — [2026-11-02](https://x.com/example_alice/status/...).
 
 **Fit:** replies to 4 accounts · short, question-led · text and image mix · active 4 days ago.
 
 **Gap:** little AI tooling in the last 30 days (1 item).
 
-**Entry point:** ["which profiling tool do you reach for first?"](https://x.com/alice/status/...) —
+**Entry point:** ["which profiling tool do you reach for first?"](https://x.com/example_alice/status/...) —
 an open question in the strongest area; a reply could compare your own setup.
 
 **Caution:** none.
@@ -88,7 +88,7 @@ message, and nothing is posted.
 ## Bridge matrix
 
 ```markdown
-| Area | [@alice](https://x.com/alice) | [@bob](https://x.com/bob) | [@carol](https://x.com/carol) |
+| Area | [@example_alice](https://x.com/example_alice) | [@example_bob](https://x.com/example_bob) | [@example_carol](https://x.com/example_carol) |
 | --- | --- | --- | --- |
 | Rust and systems programming | 92 | 76 | 25 |
 | PostgreSQL internals | 63 | 55 | 80 |

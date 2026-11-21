@@ -8,7 +8,7 @@ template and the presentation rules; Step 7 decides the order.
 ```markdown
 [@handle](https://x.com/handle) — Display name
 Interest: Rust and systems programming
-Moots: [@a](https://x.com/a), [@b](https://x.com/b) (2)
+Moots: [@moot_a](https://x.com/moot_a), [@moot_b](https://x.com/moot_b) (2)
 Evidence: "spent the week rewriting the scheduler in unsafe Rust" — [2026-11-14](https://x.com/handle/status/...)
 Bio: [systems engineer, ex-embedded](https://x.com/handle)
 Status: not followed · follows you
@@ -36,7 +36,7 @@ memory, from a previous run, or from the follow relationship.
 - **Label non-text proof.** `[image]`, `[video]`, or `[audio]` marks lower-weight
   evidence read under an opted-in mode; it never outranks a quoted post or proves a
   real person.
-- **Name the moots.** `@a, @b (2)` is the social proof; do not summarise it as
+- **Name the moots.** `@moot_a, @moot_b (2)` is the social proof; do not summarise it as
   "several moots". For a focus account, `none` is a valid count and carries no
   judgement.
 - **State the relationship honestly.** `follows you` is a bonus, not a reason;

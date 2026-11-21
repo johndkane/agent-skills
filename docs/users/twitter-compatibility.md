@@ -10,7 +10,8 @@ followers-only, or all — then reads your own feed and the target's, and return
 0–100 score with the counted evidence behind every point. It can optionally read
 image, video-frame, and audio-transcript evidence when you opt in and the session
 proves it can. It is not a personality guess and not a prediction that someone
-will reply.
+will reply. It serves a real person on their own personal account — never
+engagement farming, marketing, or brand growth.
 
 Install it by copying the `twitter-compatibility` folder into your skills
 directory; see [Getting skills](getting-skills.md). Invoke it in plain language or
@@ -20,7 +21,7 @@ with your host's explicit syntax; see [Using skills](invoking.md).
 
 - "who should I interact with on X?"
 - "which accounts fit me?"
-- "how compatible am I with `@alice`?"
+- "how compatible am I with `@example_alice`?"
 - "score my moots on Rust"
 - "score the people I follow who don't follow back"
 - "score my followers I don't follow back"
@@ -29,7 +30,7 @@ with your host's explicit syntax; see [Using skills](invoking.md).
 - "who would be easy to reply to about this?"
 
 It is read-only: it never likes, replies, reposts, follows, or messages. It is
-**not** for growth, engagement farming, or judging people.
+**not** for growth, engagement farming, marketing, or judging people.
 
 ## Requirements
 

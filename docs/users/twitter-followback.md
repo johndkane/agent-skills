@@ -2,7 +2,8 @@
 
 Follows back the people behind an X account: real humans who follow the user,
 post actively, and pass a character check. Bots, brands, funnels, and guesses are
-skipped.
+skipped. It is personal account-keeping for a real person on their own account —
+never engagement farming, marketing, or brand growth.
 
 Install it by copying the `twitter-followback` folder into your skills directory;
 see [Getting skills](getting-skills.md). Invoke it in plain language or with your
@@ -16,7 +17,8 @@ host's explicit syntax; see [Using skills](invoking.md).
 - "is this follower a bot?"
 - "which followers are worth following back?"
 
-It is explicitly **not** for mass-following, growth hacking, or unfollowing.
+It is explicitly **not** for mass-following, growth hacking, engagement farming,
+marketing, or unfollowing.
 
 ## Requirements
 

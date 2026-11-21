@@ -58,7 +58,7 @@ wins, and a saved score is never reported as current.
     }
   },
   "targets": {
-    "@alice": {
+    "@example_alice": {
       "status": "scored",
       "category": "moot",
       "scoredOn": "2026-11-21",
@@ -96,14 +96,14 @@ wins, and a saved score is never reported as current.
     }
   },
   "queue": [
-    {"handle": "@bob", "category": "following-only"},
-    {"handle": "@carol", "category": "followers-only"}
+    {"handle": "@example_bob", "category": "following-only"},
+    {"handle": "@example_carol", "category": "followers-only"}
   ],
   "hidden": {
-    "@dave": {"reason": "user asked to skip", "on": "2026-11-21"}
+    "@example_dave": {"reason": "user asked to skip", "on": "2026-11-21"}
   },
   "followUps": [
-    {"handle": "@alice", "why": "re-read after the rubric change", "on": "2026-11-22"}
+    {"handle": "@example_alice", "why": "re-read after the rubric change", "on": "2026-11-22"}
   ]
 }
 ```
@@ -167,7 +167,7 @@ appears in a report is read in that run.
 - Keep handles, scores, counts, dates, short tags, and the lexicon. No post text,
   quotes, permalinks, full timelines, emails, or private details.
 - The file is the only place a real handle is written; skill text and examples use
-  placeholders such as `@alice` and `@me`.
+  placeholders such as `@example_alice` and `@me`.
 - Ask once for permission to write the path. If the user declines or the path cannot
   be written, say so in the state line, keep the same structure in session state,
   print it at every stop and before the report for the user to verify, and
@@ -182,7 +182,7 @@ State: ~/.x-compatibility/<handle>.json — scope moots, evidence text, rubric v
 (Rust ×3, Postgres ×2; reply-first), 12 scored, 2 stale, last write 2026-11-21.
 ```
 
-A focus run names the handles instead, for example `scope focus (@alice, @bob)`;
+A focus run names the handles instead, for example `scope focus (@example_alice, @example_bob)`;
 `category not-associated` is shown there as context, not as a warning.
 
 No file: name the path and say the run starts fresh. Writing unavailable: say

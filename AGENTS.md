@@ -45,7 +45,7 @@ and stop.
 ## Secrets and personal data
 
 Never write secrets, credentials, tokens, `.env` contents, or private keys into a
-file, command, or commit. Use fictional placeholders (`@alice`, `example.com`)
+file, command, or commit. Use fictional placeholders (`@example_alice`, `example.com`)
 instead of real names, handles, emails, addresses, or private details. Runtime and
 account data stay outside the repository, one file per user or account, with no
 secrets or bulk personal data. If a secret is already committed, stop and report

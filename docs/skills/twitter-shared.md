@@ -128,6 +128,6 @@ The user may add one or more modes in the brief:
 State lives outside the skill folder and the repository, one file per signed-in
 account. It holds handles, verdicts, dates, and short tags — no credentials, no
 full timelines, no saved images, frames, or transcripts, no bulk personal data.
-Skill text and examples use fictional placeholders (`@alice`); a real handle or
+Skill text and examples use fictional placeholders (`@example_alice`); a real handle or
 private detail exists only in that account's state file, or in the session output
 the user verifies when writing is unavailable.

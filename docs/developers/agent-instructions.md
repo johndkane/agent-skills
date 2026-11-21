@@ -73,7 +73,7 @@ commit request. The query and write lists are in
 
 ## No secrets or personal data
 
-Repository files and commit messages use fictional placeholders such as `@alice`
+Repository files and commit messages use fictional placeholders such as `@example_alice`
 or `example.com`. Real identity and account data belong in runtime state outside
 the repository. The full rule is in
 [`AGENTS.md`](../../AGENTS.md#secrets-and-personal-data).

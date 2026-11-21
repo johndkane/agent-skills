@@ -33,7 +33,7 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
    formula in
    [`references/scoring.md`](../../.agents/skills/twitter-compatibility/references/scoring.md);
    every reported score shows its counts.
-6. A repost is amplification, not authorship, and is weighted lower. Text is the
+6. A repost is secondhand, not authorship, and is weighted lower. Text is the
    default: an image, frame, or transcript is 0 subject evidence unless that mode is
    opted in and proven. Then an image or video frame counts 1 point (2 in a `visual`
    area), an audio transcript 1, caps at 6 or 12 per area, and non-text-only matches
@@ -100,7 +100,7 @@ rather than personality.
 | --- | --- | --- |
 | Subject | 40 | Matched posts, replies, quotes, reposts, captioned media per weighted area |
 | Conversation | 25 | Replies to others and to the source, questions, invitations, commentary quotes, threads, polls |
-| Format | 15 | Distance between source engagement formats and target formats |
+| Format | 15 | Distance between the formats the source engages with and the target's formats |
 | Voice | 10 | Median length, question rate, first-person rate, emoji rate |
 | Recency | 5 | Newest original post and posts per week |
 | Access | 5 | Follows you, replied to you, public profile |

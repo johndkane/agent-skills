@@ -10,9 +10,11 @@ description: >-
   0-100 compatibility score with the counted evidence behind every point, a
   ranked table, per-area breakdowns, and a post worth replying to. Use when
   asked who you should interact with, which accounts fit you, how compatible you
-  are with someone, score @alice, who to reply to, or to score your moots,
+  are with someone, score @example_alice, who to reply to, or to score your moots,
   follows, or followers on a topic. Read only: it never likes, replies, follows,
-  or messages. Not for growth, engagement farming, or judging people.
+  or messages. Built for a real person deciding who to talk to on their own
+  personal account; not for brands or marketers. Not for growth, engagement
+  farming, marketing, or judging people.
 compatibility: >-
   Needs interactive browser control and a browser session already signed in to X,
   plus optional local file write for cross-run state. For optional image,
@@ -28,6 +30,9 @@ default that means your **associated accounts**: moots, accounts you follow
 without a follow-back, and accounts that follow you. A **focus account** is one the
 user names: score it whatever its relationship, and report that relationship as
 context, never as a gate.
+
+This serves a real person deciding who to talk to on their own account — never
+engagement farming, marketing, or brand growth.
 
 Ask the scope up front — `focus`, `moots`, `following-only`, `followers-only`, or
 `all` — then score only that set.
@@ -57,7 +62,8 @@ cadence, access failures, and privacy — and it is part of this skill.
 - Every point is traceable: show the counts behind it and quote the items behind
   the strongest, weakest, and entry-point signals.
 - Replies, quotes, reposts, threads, polls, and captioned or alt-texted media
-  count. A repost is amplification, not authorship, and weighs less.
+  count. A repost is secondhand — someone else's words, not the account's own —
+  and weighs less.
 - Text is the default evidence mode. Images, video frames, and audio transcripts
   are 0 subject evidence unless the user opts in and the session proves that mode;
   then they are lower-weight, capped, and never enough for high confidence alone.
@@ -312,7 +318,7 @@ card.
 
 - The sample is public or self-visible posts, not private intent. A busy thread can
   lift one area; the counts make that visible.
-- Reposts reflect amplification, not authorship.
+- Reposts are secondhand, not authorship.
 - Voice fit compares observable style ratios, not personality.
 - Image, frame, and transcript evidence is lower-weight and less reproducible;
   non-text-only matches cannot lift a score to `high` confidence.
@@ -323,6 +329,8 @@ card.
 ## Safety
 
 - Only the user's own account, only the confirmed scope.
+- Real people, personal accounts: never engagement farming, marketing, or brand
+  work; no mass automation.
 - Read only: no like, reply, repost, follow, block, report, or message.
 - No credentials; hand off challenges. A challenge ends the run.
 - No DMs, no private data, no inference from hidden content.

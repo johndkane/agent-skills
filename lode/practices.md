@@ -121,7 +121,7 @@ section.
 ## No real handles or personal data
 
 Skill text, docs, lode entries, and commit messages use fictional placeholders
-(`@alice`, `example.com`). A real handle, name, email, or private detail never
+(`@example_alice`, `example.com`). A real handle, name, email, or private detail never
 enters a file in this repository.
 
 An online skill's folder is instructions, not run memory. Saved quotes,

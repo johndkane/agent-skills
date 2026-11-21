@@ -41,6 +41,16 @@ applies the group mechanics in [groups](groups.md).
    `moot`, `following-only`, `followers-only`, or `not-associated` — is context,
    never a gate; this is authored per member because `twitter-followback` acts on
    a follower queue rather than assessing a named account.
+9. Every member is written for a real person on their own personal X account —
+   never engagement farming, marketing, or brand work. Each description, body
+   intro, and Safety section states it, and the contract records the decision.
+   Words that carry the negative marketing or engagement flavor never describe
+   the skills' own behavior: lists are read, collected, and scanned (never
+   "harvested"), a repost is "secondhand" (never "amplification"), the bio
+   signal is "selling" (never "promotion"). Exclusion labels and disclaimers
+   keep their standard names (marketing/funnel, engagement bait, follow farm,
+   growth hacking), because their context pins them to what is skipped or
+   rejected, not to what the skill does.
 
 ```mermaid
 flowchart LR

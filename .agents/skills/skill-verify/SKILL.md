@@ -78,7 +78,7 @@ Quote the advertised values; use the validator's `read-properties` when present.
 - Every referenced file is one level deep from `SKILL.md`; no nested chains.
 - No absolute local paths or `file://` links.
 - No personal data anywhere in the folder. Examples use obvious placeholders
-  (`@alice`, `@bob`, `@me`, `<handle>`, `example.com`); a real handle, name,
+  (`@example_alice`, `@example_bob`, `@me`, `<handle>`, `example.com`); a real handle, name,
   email, phone, address, account ID, or private detail belongs only in the
   runtime state file.
 - For an X/Twitter, browser-driven, or other online skill, the whole folder —

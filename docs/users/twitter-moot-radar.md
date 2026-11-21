@@ -8,7 +8,9 @@ them.
 
 It can also assess one account you name directly. That account does not need a
 moot to follow it, and it does not need to follow you back: its relationship is
-reported as context, never treated as a requirement.
+reported as context, never treated as a requirement. It is for a real person
+curating their own feed — finding people, not audiences — and is never for
+engagement farming, marketing, or brand growth.
 
 Install it by copying the `twitter-moot-radar` folder into your skills directory;
 see [Getting skills](getting-skills.md). Invoke it in plain language or with your
@@ -18,14 +20,15 @@ host's explicit syntax; see [Using skills](invoking.md).
 
 - "find people I should follow"
 - "who do my moots follow that I don't?"
-- "check out `@alice` for me"
+- "check out `@example_alice` for me"
 - "is this account worth following?"
 - "find accounts like the ones I follow"
 - "build me a follow list from my network"
 - "what are people in my circles following?"
 
-It is explicitly **not** for mass-following, growth hacking, or unfollowing, and
-it does not follow anything without per-handle approval.
+It is explicitly **not** for mass-following, growth hacking, engagement farming,
+marketing, or unfollowing, and it does not follow anything without per-handle
+approval.
 
 ## Requirements
 
@@ -35,7 +38,7 @@ it does not follow anything without per-handle approval.
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
 | Non-text evidence modes (optional) | Need a model and browser tool that return images, video frames, or an audio transcript; otherwise that mode is flagged unavailable and the run stays text-only |
-| Local file write | Keeps the moot roster, harvested sources, and verdicts in `~/.x-moot-radar/`; without it the run continues on session state |
+| Local file write | Keeps the moot roster, collected source sets, and verdicts in `~/.x-moot-radar/`; without it the run continues on session state |
 
 File write is not a hard stop: if you decline it or the path cannot be written,
 the skill keeps running, holds the same state in the session, and prints it for
@@ -52,14 +55,14 @@ repeated.
 3. **Confirm the brief** — the target (the whole moot graph, or an account you
    name), then 3–8 checkable areas, optional signal words, strictness, an overlap
    bar, exclusions, evidence modes, moot scope, and a budget, all restated before
-   any harvesting. A named target skips the roster and harvest steps.
+   any reading. A named target skips the roster and list-reading steps.
 4. **Build the moot roster** — a moot is someone the user follows who follows
    back, confirmed by the `Follows you` marker before their list is used. Moots
    are ordered by how relevant their own topic is to the named interests. A focus
    run skips this.
-5. **Harvest Following lists** — collect handles with bio excerpts from moots'
+5. **Read Following lists** — collect handles with bio excerpts from moots'
    Following tabs only, counting how many distinct moots follow each candidate.
-   Nothing is harvested from "Who to follow", Explore, or search.
+   No candidate comes from "Who to follow", Explore, or search.
 6. **Filter early** — drop obvious bots, brands, funnels, and already-decided
    handles at the row level, so profile visits go to plausible people.
 7. **Research the shortlist** — bio, recent posts, recency, follower ratio, and
@@ -76,13 +79,13 @@ repeated.
     passive checks, longer pauses while reading, and the longest pause before a
     state-changing click. Jitter applies to timing only; verification and
     throttle rules stay exact, and a challenge still ends the run.
-11. **Persist and report** — the roster and harvested graph survive interest
-    changes; ranking is redone instead of re-harvesting.
+11. **Persist and report** — the roster and the moot graph survive interest
+    changes; ranking is redone instead of re-reading the lists.
 
 ## Focus on one account
 
 Name an account and the skill assesses that account instead of searching the
-graph. It skips the roster, the harvest, and the overlap bar; the same evidence
+graph. It skips the roster, the list reads, and the overlap bar; the same evidence
 standard applies. The report gives the interest verdict, the quoted proof, and
 the relationship — `follows you` or not, already followed or not, and how many
 moots follow it, including none — as context. A missing follow-back or a zero
@@ -129,8 +132,8 @@ account is reported as unreadable instead of guessed at, and nothing is inferred
 from what did not render.
 
 An empty result is a valid result: the skill reports the filtered counts and
-offers to widen the interests, lower the overlap bar, or extend the harvest rather
-than padding the list with weak matches.
+offers to widen the interests, lower the overlap bar, or read further down the
+lists rather than padding the list with weak matches.
 
 ## Connectivity and access failures
 
@@ -152,7 +155,7 @@ visible rate-limit notice stays a throttle.
 State lives at `~/.x-moot-radar/<handle>.json`
 (`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), in your home directory.
 It holds the interest profile in force, its evidence modes, confirmed moots with
-their topic, the harvested source sets, the per-moot cursor, the queue, and a
+their topic, the collected source sets, the per-moot cursor, the queue, and a
 verdict per handle.
 
 Each run opens by naming that file and summarizing what it holds — interests,
@@ -171,7 +174,7 @@ permanent unless the user asks to revisit.
 - Only the user's own account, only with the confirmed scope.
 - Nothing is followed without per-handle approval; no unfollow, block, report, or
   message.
-- Never harvest from suggestion modules, Explore, or search results.
+- Never take candidates from suggestion modules, Explore, or search results.
 - Hand off for login, 2FA, captcha, or payment, and never try to pass a challenge
   to keep a run going.
 - Never claim to see an image, frame, or transcript the session cannot return; that

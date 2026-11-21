@@ -13,15 +13,15 @@ writing rules, and the start-of-run follow-up pass.
   "evidenceModes": ["text"],
   "updated": "2026-11-21T14:05:00Z",
   "scannedThrough": "@last_handle_seen",
-  "queue": ["@erin", "@frank"],
+  "queue": ["@example_erin", "@example_frank"],
   "processed": {
-    "@alice": {"state": "followed", "on": "2026-11-21"},
-    "@bob": {"state": "skipped", "reason": "empty shell", "on": "2026-11-21"},
-    "@carol": {"state": "pending", "on": "2026-11-21", "checkOn": "2026-11-28"},
-    "@dave": {"state": "unverified", "on": "2026-11-21"}
+    "@example_alice": {"state": "followed", "on": "2026-11-21"},
+    "@example_bob": {"state": "skipped", "reason": "empty shell", "on": "2026-11-21"},
+    "@example_carol": {"state": "pending", "on": "2026-11-21", "checkOn": "2026-11-28"},
+    "@example_dave": {"state": "unverified", "on": "2026-11-21"}
   },
   "followUps": [
-    {"handle": "@carol", "checkOn": "2026-11-28", "reason": "request pending"}
+    {"handle": "@example_carol", "checkOn": "2026-11-28", "reason": "request pending"}
   ]
 }
 ```

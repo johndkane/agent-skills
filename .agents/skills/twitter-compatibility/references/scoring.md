@@ -12,7 +12,7 @@ is the arithmetic.
 | Target | Posts, Replies, Media, reposts visible in Posts | 30 / 20 / 10 |
 
 One item is one URL. Deduplicate across tabs. A repost carries the repost marker
-and the original author's words; weight it as amplification, never authorship.
+and the original author's words; weight it as secondhand, never authorship.
 
 An item is classifiable only if its readable text, caption, or alt text supports a
 match. An image or video frame with none of those is 0 subject evidence with the

@@ -10,7 +10,9 @@ description: >-
   impersonation noise. Use when asked to
   follow back followers or mutuals, review new followers, clean up a follow-back
   queue, check whether a follower is a bot, or decide which followers are worth
-  following back. Not for mass-following, growth hacking, or unfollowing.
+  following back. Built for a real person keeping up their own personal account;
+  not for brands or marketers. Not for mass-following, growth hacking, engagement
+  farming, or unfollowing.
 compatibility: >-
   Needs an agent with interactive browser control, a browser session already
   signed in to X, and optional local file write for cross-run state. Optional
@@ -23,7 +25,9 @@ compatibility: >-
 # X/Twitter Follow-Back
 
 Follow back real, active followers — never a bot, brand, funnel, or guess. Work
-from the live page, observation first.
+from the live page, observation first. This is personal account-keeping for a
+real person: it helps you follow the people you actually want in your feed. It
+is never for engagement farming, marketing, or brand growth.
 
 ## Group rules
 
@@ -129,7 +133,7 @@ the protected decision, evidence modes, and budget in one summary.
 
 | Signal | Tells you |
 | --- | --- |
-| Bio | identity, role, links, promotion, bait |
+| Bio | identity, role, links, selling, bait |
 | Join date | new accounts are a risk signal; age is not proof |
 | Followers / following | thousands followed with few followers is a farm |
 | Newest post | whether the account is active |
@@ -250,6 +254,8 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
 ## Safety
 
 - Only the user's own account, only the confirmed scope.
+- Real people, personal accounts: never engagement farming, marketing, or brand
+  work; no mass automation.
 - No unfollow, block, report, or message; no suggestion-module follows.
 - No credentials; hand off challenges.
 - Never claim to see an image, frame, or transcript you cannot; flag that mode

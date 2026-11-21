@@ -2,17 +2,19 @@
 name: twitter-moot-radar
 description: >-
   Find accounts worth following on X (Twitter) through your mutuals: asks for
-  your areas of interest, harvests what your moots follow, and suggests only the
+  your areas of interest, reads what your moots follow, and suggests only the
   accounts that match, ranked by how many moots follow them and shown with
   proof — a quoted post, its permalink, the moots behind it, and live
   confirmation that you do not follow them yet. Or assess one named account
   directly, with moot overlap shown as context rather than a requirement.
-  Optionally reads image-only posts
-  and video frames when you opt in, as labelled lower-weight proof. Use when asked to find people to
-  follow, find accounts in my mutuals' circles, who do my moots follow that I
-  don't, check out a specific account, find similar accounts, or build a follow list from my network. Not for
-  mass-following, growth hacking, or unfollowing; nothing is followed without
-  your per-handle approval.
+  Optionally reads image-only posts and video frames when you opt in, as
+  labelled lower-weight proof. Use when asked to find people to follow, find
+  accounts in my mutuals' circles, who do my moots follow that I don't, check
+  out a specific account, find similar accounts, or build a follow list from my
+  network. Built for a real person choosing who to follow on their own personal
+  account; not for brands or marketers. Not for mass-following, growth hacking,
+  engagement farming, or unfollowing; nothing is followed without your
+  per-handle approval.
 compatibility: >-
   Needs an agent with interactive browser control, a browser session already
   signed in to X, and optional local file write for cross-run state. Optional
@@ -29,6 +31,10 @@ are the best recommendation source and the easiest to flatter with noise. Return
 a short ranked list where every line is checkable; never follow without
 per-handle approval.
 
+This skill serves a real person curating their own feed: finding people worth
+following, never audiences. It is never for engagement farming, marketing, or
+brand growth.
+
 A **focus account** is one the user names directly. Assess it on its own merits:
 no moot has to follow it, and whether it follows the user back is context, not a
 requirement. A zero overlap and a missing follow-back are facts to report, never
@@ -43,9 +49,9 @@ optional background.
 
 ## Rules
 
-- Interests come from the user, restated as checkable areas before any harvesting
+- Interests come from the user, restated as checkable areas before any reading
   or assessment. "Tech" is not checkable; "Rust and systems programming" is.
-- Harvest moots' Following lists only — never "Who to follow", Explore, search,
+- Read moots' Following lists only — never "Who to follow", Explore, search,
   or a moot's Followers tab.
 - Overlap ranks a graph run: more distinct moots means higher. Two is the default
   bar; one moot is a weak lead and is named as such. A focus run has no bar.
@@ -56,8 +62,8 @@ optional background.
 - "Not followed" is proved by a live `Follow @handle` control, not by a list.
 - Report by default. Follow only handles the user approves by name.
 - A named handle is a focus target: research it directly, skip the roster and
-  harvest, and do not ask it to justify itself through moots, a follow-back, or
-  an overlap bar.
+  the list reads, and do not ask it to justify itself through moots, a
+  follow-back, or an overlap bar.
 - Filter noise at the row level; keep quote evidence dated; reuse the graph and
   re-rank when interests change. For a focus target, skip patterns and the
   overlap bar become caution notes, while the interest-evidence gate still
@@ -134,7 +140,7 @@ modes, and get a yes. Restate the brief in one paragraph.
 
 **Focus run:** skip this step and Step 4. The named account is the target, and
 moots are optional context gathered later by checking whether any confirmed moot
-happens to follow it. Do not harvest a graph to justify the request.
+happens to follow it. Do not read a graph to justify the request.
 
 1. Confirm the account; the roster belongs to it.
 2. A moot must be evidenced: the `Follows you` marker is strongest; the
@@ -146,10 +152,10 @@ happens to follow it. Do not harvest a graph to justify the request.
 5. Cap at the budget; record the rest for the next run.
 6. A protected moot may hide its Following list until the user is approved.
    Record it as unavailable, not empty; never guess.
-7. Reuse a confirmed moot from state, but re-read `Follows you` when harvesting
+7. Reuse a confirmed moot from state, but re-read `Follows you` when reading
    their list.
 
-## Step 4 — Harvest Following lists
+## Step 4 — Read the Following lists
 
 **Focus run:** skip; go to Step 6 for the named account.
 
@@ -157,18 +163,18 @@ For each moot, in order:
 
 1. Open `x.com/<moot>/following` directly; confirm whose list it is.
 2. Collect continuously: handle, display name, short bio excerpt. Append the
-   moot to each candidate's `moots` set as you go, so overlap grows during the
-   harvest.
+   moot to each candidate's `moots` set as you go, so overlap grows while the
+   lists are read.
 3. Skip the user, the moots, handles already decided in state, and handles the
    user already follows (a row hint; confirmed in Step 6).
 4. Read the top first — recency reflects current taste. Default to roughly the
    first 60–120 rows per moot; go deeper only if the budget is unfilled.
 5. Stop when the budget is full, the list ends, or two scroll stops add nothing;
    vary jumps and back-scroll occasionally.
-6. Never harvest a Followers tab, Explore, search, or a "similar accounts"
-   module.
+6. Never take candidates from a Followers tab, Explore, search, or a "similar
+   accounts" module.
 
-Rows are cheap; profile visits are the throttled unit. Harvest broadly, research
+Rows are cheap; profile visits are the throttled unit. Read broadly, research
 narrowly.
 
 ## Step 5 — Filter before opening profiles
@@ -314,7 +320,7 @@ that the next run starts fresh and may repeat decided work.
 - Focus run: the named account, its interest evidence, and its follow-back and
   moot overlap as context. A missing follow-back or zero overlap is not an error
   and needs no apology or alternative suggestion.
-- Moots confirmed, harvested, remaining, and the resume point.
+- Moots confirmed, read, remaining, and the resume point.
 - Suggestions by interest: quote, date, permalink, moots, follow state.
 - Evidence modes and capability; non-text reads counted; `[image]`, `[video]`, or
   `[audio]` proof labelled as lower-weight.
@@ -327,8 +333,10 @@ that the next run starts fresh and may repeat decided work.
 ## Safety
 
 - Only the user's own account, only the confirmed scope.
+- Real people, personal accounts: never engagement farming, marketing, or brand
+  work; no mass automation.
 - No follow without per-handle approval; no unfollow, block, report, or message.
-- No harvesting from suggestion modules, Explore, or search.
+- No candidates from suggestion modules, Explore, or search.
 - No credentials; hand off challenges.
 - Never claim to see an image, frame, or transcript you cannot; flag that mode
   `unavailable` and stay text-only.
@@ -345,12 +353,12 @@ that the next run starts fresh and may repeat decided work.
       non-text proof labelled and never above medium confidence.
 - [ ] Roster from confirmed moots only, labelled, ordered, capped — or skipped
       for a named focus account.
-- [ ] Harvest from Following lists only; overlap counted per candidate.
+- [ ] List reads came from Following lists only; overlap counted per candidate.
 - [ ] Every suggestion has quoted evidence with date and permalink, and a live
       "not followed" reading.
 - [ ] Protected accounts excluded and reported, not guessed at.
-- [ ] A named focus account was researched directly: no roster, harvest, overlap
-      bar, or follow-back requirement applied to it.
+- [ ] A named focus account was researched directly: no roster, list reads,
+      overlap bar, or follow-back requirement applied to it.
 - [ ] Near misses listed with reasons.
 - [ ] Only approved handles followed and verified after settling; no double
       clicks; cadence jittered.

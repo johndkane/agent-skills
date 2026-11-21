@@ -11,6 +11,12 @@ dependency: a skill folder is installed on its own, so no `SKILL.md` links here.
 Each skill carries a copy of every rule it needs, and the group stays consistent
 because changes are applied to all copies together.
 
+The group is built for real people running their own personal X accounts:
+following back people they know, choosing who to follow, and understanding their
+own network. It is never for engagement farming, marketing, or brand work — no
+rule in the group serves those purposes, and every member states this in its
+description, its body intro, and its Safety rules.
+
 ## Shared files
 
 | File | Role | Copied into members |
@@ -96,7 +102,7 @@ damages the user's account or produces a false claim.
 14. **Privacy stays local.** State holds handles, verdicts, dates, and short
     quotes. No credentials, no full timelines, no bulk personal data, nothing
     inside the repository. Skill text, saved examples, and commits use fictional
-    placeholders (`@alice`); a real handle or private detail appears only in that
+    placeholders (`@example_alice`); a real handle or private detail appears only in that
     account's state file, outside the repository, or in the session output the
     user verifies when writing is unavailable.
 15. **Say where progress lives at the start.** As soon as the signed-in account is
@@ -232,8 +238,10 @@ relearning the flow.
   repeated misses as a stop, not as evidence about the account.
 - Users change their mind mid-run. Re-confirm rather than continuing under the
   old rubric.
-- Human-scale use only. These skills research and act one account at a time;
-  they are not for mass automation, growth hacking, or scraping at volume.
+- Human-scale use only. These skills research and act one account at a time,
+  for a real person on their own personal account; they are not for mass
+  automation, growth hacking, engagement farming, marketing, or scraping at
+  volume.
 
 ## Changing the core
 

@@ -47,6 +47,9 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
   safety, size, reference layout, and catalog wiring, then reports pass/fail with
   file evidence. [Read more](docs/skills/skill-verify.md)
 
+The X/Twitter skills are for real people tending their own personal accounts —
+never for engagement farming, marketing, or brand growth.
+
 Skills that share behavior form a group with central files named for the group;
 the [group index](docs/skills/skill-groups.md) lists the members and the shared
 rules copied into each.

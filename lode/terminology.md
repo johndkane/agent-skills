@@ -52,7 +52,7 @@
 - **Bridge matrix** — the report table of interest areas by the top-scoring accounts.
 - **Entry point** — the newest matching post within 14 days that asks a question or invites a reply, with a suggested angle; never a sent message.
 - **Stale score** — a score older than 14 days or from a different rubric version; shown only as previous, never ranked.
-- **Source set** — the moots whose Following lists surfaced a candidate; it grows during a harvest and is reused across interest changes.
+- **Source set** — the moots whose Following lists surfaced a candidate; it grows while Following lists are read and is reused across interest changes.
 - **Proof standard** — a quoted post or bio line with date and permalink, the moots behind it, and a live `Follow` control reading; no suggestion without it.
 - **Near miss** — a high-overlap candidate without readable interest evidence, listed separately so the user can overrule the rubric.
 - **Pending** — the control state after requesting to follow a protected account; a request, not a follow.
@@ -64,8 +64,9 @@
 - **Persistence fallback** — continuing a state-writing run on in-memory session state when file write is refused or unavailable, printing it for the user to verify, and accepting that the next run starts fresh and may repeat work.
 - **Linked evidence** — a handle, quote, or date in a run's output that opens the X profile or post it came from; only pages read in that run are linked, never a guessed URL.
 - **Access failure** — a browser, network, or site condition that stops a page or control from rendering; a run-level stop and flag, never a verdict about the account.
-- **Placeholder handle** — a fictional handle such as `@alice` used in skill text, docs, and examples; real handles exist only in the run state file or in session state printed for the user to verify.
+- **Placeholder handle** — a fictional handle in skill text, docs, and examples, using the `@example_<name>` scheme (`@example_alice`, `@example_bob`, …) or `@moot_a`/`@moot_b` for moot slots, so every example is format-valid and unlikely to collide with a real account; structural tokens (`@me`, `@cand`, `@handle`, `@last_row_seen`) are not person placeholders. Real handles exist only in the run state file or in session state printed for the user to verify.
 - **Human cadence** — jittered waits, scroll steps, pointer moves, and dwell times drawn from ranges so a run does not read as a fixed click rhythm.
 - **X core contract** — [`docs/skills/twitter-core.md`](../docs/skills/twitter-core.md), the authoring home for rules shared by every browser-driven X skill; skill bodies mirror it and never link to it.
+- **Personal scope** — the X group's positioning: every member serves a real person on their own personal X account; never engagement farming, marketing, or brand work. Stated in each description, body intro, and Safety section; words with the negative marketing or engagement flavor never describe the skills' own behavior (read/collect/scan, "secondhand", "selling"), while exclusion labels and disclaimers keep their standard names.
 
 Related: [summary](summary.md), [practices](practices.md).

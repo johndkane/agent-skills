@@ -1,7 +1,7 @@
 # twitter-moot-radar
 
 The catalog's recommendation and account-assessment skill. It asks the user for
-interests, harvests what their mutuals follow, and returns matching accounts with
+interests, reads what their mutuals follow, and returns matching accounts with
 quoted proof; or it assesses one account the user names, whatever its relationship.
 Instructions live in the skill's own `SKILL.md` (this checkout:
 [`twitter-moot-radar/SKILL.md`](../../.agents/skills/twitter-moot-radar/SKILL.md));
@@ -14,8 +14,8 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 ## Invariants
 
 1. Interests come from the user and are restated as checkable areas before any
-   harvesting or assessment.
-2. Only mutuals' Following lists are harvested — never suggestion modules,
+   reading or assessment.
+2. Only mutuals' Following lists are read — never suggestion modules,
    Explore, search, or a moot's Followers tab.
 3. A moot is confirmed by the `Follows you` marker before their list is used;
    appearing in the Following list alone is not enough.
@@ -32,7 +32,7 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
    exact-handle matching and the settle-window check, which runs to about two
    minutes. `Following` and `Unfollow` both prove a follow.
 9. Moots and sources are interest-independent and reused across interest changes;
-   verdicts are re-derived from the new profile, not re-harvested.
+   verdicts are re-derived from the new profile, without re-reading the graph.
 10. Cadence, throttling, credential handoff, and reporting honesty are copied
     into `references/twitter-shared.md` from the group's central file; a copied
     skill has no access to `docs/`.
@@ -50,8 +50,8 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
     is labelled, ranks below a quoted post, and caps that suggestion at medium
     confidence; profile images may flag spam or impersonation but never prove a real
     person or a sensitive trait, and a failed mode is `unavailable`, never a zero.
-15. A named account is a focus target: no roster or harvest, skip patterns become
-    cautions, and its follow-back state and moot overlap are context. The
+15. A named account is a focus target: no roster or list reads, skip patterns
+    become cautions, and its follow-back state and moot overlap are context. The
     interest-evidence gate still applies, and the report does not push the user
     toward a different account because it is not a moot.
 
@@ -62,7 +62,7 @@ flowchart TD
     I[Confirm target + interests] --> T{Named focus account?}
     T -- yes --> P[Research that account]
     T -- no --> R[Build moot roster]
-    R --> H[Harvest moots' Following lists]
+    R --> H[Read moots' Following lists]
     H --> F[Filter: overlap, skips, state]
     F --> P
     P --> S{Quoted interest match?}

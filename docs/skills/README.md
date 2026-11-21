@@ -17,7 +17,9 @@ The full instructions for each skill live in its `SKILL.md`; these pages explain
 the skill rather than replacing it.
 
 Skills that drive the same product form a group with central files named for the
-group. The browser-driven X skills are the first group: their contract is
+group. The browser-driven X skills are the first group: they are built for real
+people on personal X accounts, never for engagement farming, marketing, or brand
+work. Their contract is
 [`twitter-core.md`](twitter-core.md), and their copy-ready operative rules are
 [`twitter-shared.md`](twitter-shared.md), copied verbatim into each member's
 `references/twitter-shared.md`. The [group index](skill-groups.md) lists the
@@ -121,7 +123,7 @@ the lode, or this wiki.
   skill may name repository paths it checks, but never depends on them as
   resources.
 - **No real identities** — skill text, docs, lode entries, and commit messages
-  use fictional placeholders (`@alice`, `example.com`). A real handle, name,
+  use fictional placeholders (`@example_alice`, `example.com`). A real handle, name,
   email, or private detail belongs only in the runtime state file the skill
   defines, outside the repository (or in the session output the user verifies
   when writing is unavailable). For an X/Twitter, browser-driven, or other online
