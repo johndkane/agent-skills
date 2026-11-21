@@ -19,8 +19,12 @@
 - **Description** — the frontmatter field hosts read before deciding to load a skill.
 - **skills-ref** — the official reference validator from the Agent Skills project; it checks frontmatter and naming only.
 - **Repo gate** — a skill that enforces this repository's catalog rules on top of the official validator; `skill-verify` is the only one.
-- **Docs** — `docs/`, the human wiki.
-- **Lode** — `lode/`, this agent-owned memory.
+- **AGENTS.md** — repository-agnostic agent instructions: how to work, git and privacy rules, verification, and documentation surfaces; it carries no project details.
+- **Project guidance** — the repository-specific rules kept in `lode/`: layout, invariants, skills, scripts, commands, and validation.
+- **README** — `README.md`, the high-level entry point for a repository visitor: what it is, what it contains, where to start.
+- **Docs** — `docs/`, the human documentation tree, grouped by audience.
+- **Docs audience** — one of `users/`, `operators/`, `developers/`, or `skills/` under `docs/`; each owns its detail, and other pages link to it.
+- **Lode** — `lode/`, this agent-owned memory and the home of project-specific guidance.
 - **Protected account** — an X account that hides its posts until it approves a follow request.
 - **Moot** — a person the user follows who follows back; the only source for `twitter-moot-radar`.
 - **Overlap** — the count of distinct moots following a candidate; it ranks a suggestion, never proves an interest.

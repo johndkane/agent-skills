@@ -8,8 +8,8 @@ without costing context on every prompt.
 
 | Skill | What it does | Runs where |
 | --- | --- | --- |
-| [`twitter-followback`](twitter-followback.md) | Researches followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts; links handles and cited posts; stops on access failures; opens each run with its state summary | Local agent with browser control |
-| [`twitter-moot-radar`](twitter-moot-radar.md) | Asks for your interests, reads what your mutuals follow, and suggests matching accounts with quoted proof and live follow status; every handle, moot, and quote is linked; stops on access failures; opens each run with its state summary | Local agent with browser control |
+| [`twitter-followback`](../users/twitter-followback.md) | Researches followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts; links handles and cited posts; stops on access failures; opens each run with its state summary | Local agent with browser control |
+| [`twitter-moot-radar`](../users/twitter-moot-radar.md) | Asks for your interests, reads what your mutuals follow, and suggests matching accounts with quoted proof and live follow status; every handle, moot, and quote is linked; stops on access failures; opens each run with its state summary | Local agent with browser control |
 | [`skill-verify`](skill-verify.md) | Checks a skill folder against the catalog rules — including personal-data safety for online skills — and reports pass/fail with evidence | Local agent with file and shell access |
 
 The full instructions for each skill live in its `SKILL.md`; these pages explain
@@ -80,12 +80,12 @@ search only two levels and recognise a limited set of file types.
 Some runtimes split the third layer into "read a resource" and "run a script",
 which is why Microsoft documents four stages. The content model is the same.
 
-## Skills and AGENTS.md
+## Skills and project instructions
 
-`AGENTS.md` is repository context: how this project is built and maintained. A
-skill is a portable task workflow that must work where no `AGENTS.md` exists.
-Keep project conventions in `AGENTS.md` and task procedure in the skill; a skill
-must not depend on either `AGENTS.md` or this wiki.
+`AGENTS.md` is generic agent guidance, and project-specific context lives in the
+lode. A skill is a portable task workflow that must work where neither exists.
+Keep project conventions out of the skill; a skill must not depend on `AGENTS.md`,
+the lode, or this wiki.
 
 ## Rules a skill must follow
 
@@ -133,7 +133,9 @@ must not depend on either `AGENTS.md` or this wiki.
    point the body at it.
 3. Keep the body lean; move dense detail into `references/` files one level deep.
 4. Add a row to the catalog table above, a bullet to
-   [the root README](../../README.md), a page beside this one, and a lode entry.
+   [the root README](../../README.md), a page in the audience section that fits
+   (`docs/users/` for an end-user skill, this section for a maintenance skill),
+   and a lode entry.
 5. Validate with the reference implementation.
 6. Run [`skill-verify`](skill-verify.md) and fix every failure.
 7. Stop and report the change; the human commits. No link work is needed.
@@ -154,7 +156,7 @@ and `to-prompt` show what a host actually advertises.
 
 ## Related
 
-- [Invoking skills](invoking.md) — explicit syntax for every host and surface
-- [Architecture](../architecture.md) — how the tree reaches each host
-- [Scripts](../scripts.md) — wiring and recovery
-- [Agent instructions](../agent-instructions.md) — the repo rules
+- [Invoking skills](../users/invoking.md) — explicit syntax for every host and surface
+- [Architecture](../operators/architecture.md) — how the tree reaches each host
+- [Scripts](../operators/scripts.md) — wiring and recovery
+- [Agent instructions](../developers/agent-instructions.md) — the repo rules

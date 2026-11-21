@@ -43,8 +43,7 @@ claude -p "/twitter-followback review my new followers"
 ```
 
 You can also let the description trigger it ("review my new followers"). Claude
-Code reads `.claude/skills` (and `~/.claude/skills`), which is why this repository
-links `.claude/skills` to the canonical tree.
+Code reads `.claude/skills` (and `~/.claude/skills`).
 
 ## Claude Cowork
 
@@ -210,9 +209,9 @@ skill by name in plain language; every host understands that.
   OpenCode additionally supports `metadata.opencode/autoinvoke: false`, which
   hides the skill from the model but still allows explicit loading by ID.
   Codex sets `policy.allow_implicit_invocation: false` in `agents/openai.yaml`.
-- **Wrong directory.** Use the host's project location, or the linked
-  `.claude/skills` / `.github/skills` in this repository. Cowork and Copilot
-  cloud are account- or repository-based, not local-checkout-based.
+- **Wrong directory.** Use the host's project skills directory or its personal
+  skills directory. Cowork and Copilot cloud load from your account or the
+  project repository, not from a local folder.
 - **Stale session.** Some builds load skills once at startup. Restart after
   adding or editing a skill when the host does not offer a reload command.
 - **Permissions.** A host can deny the `skill` tool or hide a skill through an
@@ -220,7 +219,7 @@ skill by name in plain language; every host understands that.
 - **Wrong surface.** A skill available in the IDE is not automatically available
   in the cloud agent, the desktop app, or Cowork.
 
-For this repository's inventory, run `opencode debug skill` for OpenCode,
+To see what a host discovered, run `opencode debug skill` for OpenCode,
 `gemini skills list --all`, `/skills list` in Copilot CLI, or `$` / `/skills` in
 Codex.
 
@@ -239,5 +238,4 @@ Codex.
 - [Gemini CLI skills](https://geminicli.com/docs/cli/skills/) and
   [commands](https://geminicli.com/docs/reference/commands/)
 
-Related: [Skills](README.md) · [Architecture](../architecture.md) ·
-[Scripts](../scripts.md) · [Agent instructions](../agent-instructions.md)
+Related: [User guide](README.md) · [Getting skills](getting-skills.md)

@@ -12,13 +12,46 @@ graph TD
     A --> G["Gemini CLI"]
 ```
 
+## Repository tree
+
+```text
+agent-skills/
+├── .agents/
+│   └── skills/                       # canonical source of truth
+│       ├── twitter-followback/
+│       ├── twitter-moot-radar/
+│       └── skill-verify/
+├── .claude/
+│   └── skills -> ../.agents/skills   # Claude Code
+├── .github/
+│   └── skills -> ../.agents/skills   # GitHub Copilot
+├── scripts/
+│   ├── link-skills.sh
+│   └── link-skills.ps1
+├── docs/                             # human documentation, by audience
+├── lode/                             # agent memory (Lode Coding)
+├── AGENTS.md                         # generic agent guidance
+├── CLAUDE.md                         # imports AGENTS.md
+└── README.md                         # high-level overview
+```
+
 ## Invariants
 
-- `.agents/skills/<name>/SKILL.md` is the only copy.
-- Every link is relative and points at `../.agents/skills`.
-- Git stores links as mode `120000`; a plain text file means the checkout lacked
-  symlink support.
-- Host directories that read the canonical tree are opt-in.
+Breaking these breaks every host at once. Do not change them without an explicit
+request.
+
+1. `.agents/skills/<name>/SKILL.md` is the only copy. Never duplicate a skill into
+   a host-specific directory.
+2. Every agent link is a relative symlink to `../.agents/skills`. Never replace
+   one with a real directory and never commit a copy of the tree.
+3. Symlink targets stay relative. Git must record every link as mode `120000`.
+4. Never add `.agents/` or any agent link to `.gitignore`.
+5. Default wiring is `claude` + `copilot`. `.opencode/skills`, `.cursor/skills`,
+   and `.gemini/skills` are opt-in, because those hosts already read
+   `.agents/skills` and a second path surfaces every skill twice. Never commit an
+   opt-in link without a reason.
+6. The repository stays droppable into another project: no build step, no
+   generated artifacts, no dependencies to install.
 
 ## Why this shape
 
@@ -39,4 +72,17 @@ Both scripts detect that placeholder and replace it.
 ./scripts/link-skills.ps1
 ```
 
-Related: [practices](../practices.md), [scripts](../scripts/summary.md).
+## Checks
+
+- `git ls-files -s` shows `120000` for `.claude/skills` and `.github/skills`.
+- `bash -n scripts/link-skills.sh` passes.
+- Both scripts report `ok` on a default run.
+
+## Documentation
+
+`README.md` is the high-level overview, `docs/` is human documentation by audience,
+and `lode/` is project-specific guidance and memory. See
+[documentation](../documentation/summary.md).
+
+Related: [practices](../practices.md), [scripts](../scripts/summary.md),
+[documentation](../documentation/summary.md).

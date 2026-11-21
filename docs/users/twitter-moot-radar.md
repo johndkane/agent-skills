@@ -6,20 +6,9 @@ match — each one carrying the quote that proves the match, the permalink, the
 moots who follow them, and a live check that the user does not already follow
 them.
 
-Install by copying the `twitter-moot-radar` folder into the skills directory your
-host reads; the `SKILL.md` inside it is the whole skill, and everything it
-references is inside the same folder. This page explains the skill and is not part
-of the install.
-
-Dense detail lives beside it in `references/` — the state schema and the
-suggestion card format — and is read only when `SKILL.md` points at it. The
-group's shared rules — state line, linked evidence, cadence, access failures, and
-privacy — are in `references/twitter-shared.md`, copied verbatim from the central
-[`twitter-shared.md`](twitter-shared.md).
-
-It follows the [shared contract for X skills](twitter-core.md). Browse the
-instructions in this repository:
-[`twitter-moot-radar/SKILL.md`](../../.agents/skills/twitter-moot-radar/SKILL.md).
+Install it by copying the `twitter-moot-radar` folder into your skills directory;
+see [Getting skills](getting-skills.md). Invoke it in plain language or with your
+host's explicit syntax; see [Using skills](invoking.md).
 
 ## When it triggers
 
@@ -66,13 +55,12 @@ it does not follow anything without per-handle approval.
    strength, each line showing quote, date, permalink, moots, and follow state.
    High-overlap candidates with no evidence go to a near-miss list.
 9. **Follow only on approval** — named handles only, with exact identity matching
-   and the group's settle-window verification.
+   and settle-window verification.
 10. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
     times are drawn from ranges and scaled to the work: minimum dwell for
     passive checks, longer pauses while reading, and the longest pause before a
-    state-changing click. See [browser cadence](browser-cadence.md). Jitter
-    applies to timing only; verification and throttle rules stay exact, and a
-    challenge still ends the run.
+    state-changing click. Jitter applies to timing only; verification and
+    throttle rules stay exact, and a challenge still ends the run.
 11. **Persist and report** — the roster and harvested graph survive interest
     changes; ranking is redone instead of re-harvesting.
 
@@ -128,7 +116,7 @@ visible rate-limit notice stays a throttle.
 ## Across runs
 
 State lives at `~/.x-moot-radar/<handle>.json`
-(`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), outside the repository.
+(`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), in your home directory.
 It holds the interest profile in force, confirmed moots with their topic, the
 harvested source sets, the per-moot cursor, the queue, and a verdict per handle.
 
@@ -156,7 +144,7 @@ permanent unless the user asks to revisit.
 
 ## Related
 
-- [Twitter group contract](twitter-core.md) — the group contract
+- [User guide](README.md)
+- [Getting skills](getting-skills.md)
+- [Using skills](invoking.md)
 - [twitter-followback](twitter-followback.md) — the other X skill
-- [Skills catalog](README.md)
-- [Agent instructions](../agent-instructions.md)

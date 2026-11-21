@@ -4,7 +4,7 @@ The catalog's browser-driven skill. It follows back real people on X and keeps
 its own run state between sessions. Instructions live in the skill's own
 `SKILL.md` (this checkout: [`twitter-followback/SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md));
 human page:
-[`docs/skills/twitter-followback.md`](../../docs/skills/twitter-followback.md).
+[`docs/users/twitter-followback.md`](../../docs/users/twitter-followback.md).
 Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 [`twitter-shared`](../../docs/skills/twitter-shared.md) (operative rules copied to
 `references/twitter-shared.md`).
@@ -121,7 +121,9 @@ whose button simply had not updated.
 
 The state file is runtime data of the user's machine, not part of the skill.
 Keeping it outside preserves the droppable-repository rule in
-[AGENTS.md](../../AGENTS.md): no build step, no generated artifacts, no secrets.
+[the layout invariants](../layout/summary.md#invariants): no build step, no
+generated artifacts. Secrets and personal data follow
+[`AGENTS.md`](../../AGENTS.md).
 
 Related: [skills summary](summary.md), [practices](../practices.md),
 [terminology](../terminology.md).

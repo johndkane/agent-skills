@@ -54,4 +54,4 @@ minutes after roughly 40–60 interactions.
 
 - [Skills catalog](README.md)
 - [X/Twitter shared core](twitter-core.md)
-- [Agent instructions](../agent-instructions.md)
+- [Agent instructions](../developers/agent-instructions.md)

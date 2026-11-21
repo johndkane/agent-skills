@@ -36,6 +36,39 @@ The description is the only text a host sees before loading a skill. It states
 what the skill does, when to use it, and what it is not for. Trigger words go
 first because some hosts shorten long descriptions.
 
+## Four surfaces, no overlap
+
+`AGENTS.md` is generic agent guidance, `README.md` is the visitor's overview,
+`docs/` is the human wiki by audience, and `lode/` is project-specific guidance
+and memory. A fact lives on one surface; the others link.
+
+```text
+AGENTS.md -> how to work
+README.md -> docs/<audience>/page.md
+docs/     -> the reader's task
+lode/     -> how this project works, for the next session
+```
+
+Reason: a README that grows into a manual hides the entry point, and mixing docs
+with lode either loses the rationale or exposes agent notes to readers. Human
+pages link only to human pages; only developer pages may reference the lode or
+`AGENTS.md`, and only to explain an agentic mechanism or practice. Full contract:
+[documentation](documentation/summary.md).
+
+## Generic AGENTS, specific lode
+
+`AGENTS.md` carries only rules that apply to any repository. Project layout,
+invariants, commands, validation, and the skill rules live in the lode.
+
+```text
+AGENTS.md -> how to work (generic)
+lode/     -> how this project works (specific)
+```
+
+Reason: the instruction file can be copied into another repository unchanged,
+while the lode describes this one. A new project rule goes into the lode entry
+that owns the topic, registered in `lode/lode-map.md`.
+
 ## Git writes are opt-in
 
 Agents query Git freely and write to it only on explicit request. A request to
@@ -134,8 +167,9 @@ flowchart LR
 ## Verify through the skill
 
 Skill creation is not done until `skill-verify` runs and passes. The checklist in
-`AGENTS.md` is the fallback when file or shell access is missing, not the primary
-gate. A `pass` needs evidence; an unavailable check is `unverified`.
+[the skill contract](skills/summary.md#checks-before-handing-off) is the fallback
+when file or shell access is missing, not the primary gate. A `pass` needs
+evidence; an unavailable check is `unverified`.
 
-Related: [layout](layout/summary.md), [skills](skills/summary.md),
-[scripts](scripts/summary.md).
+Related: [layout](layout/summary.md), [documentation](documentation/summary.md),
+[skills](skills/summary.md), [scripts](scripts/summary.md).

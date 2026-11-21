@@ -47,4 +47,17 @@ graph TD
 ./scripts/link-skills.ps1 -All -Force
 ```
 
+## Commands
+
+```bash
+./scripts/link-skills.sh                  # claude + copilot (default)
+./scripts/link-skills.sh cursor           # one host
+./scripts/link-skills.sh --all --force    # every host, replace anything odd
+```
+
+```powershell
+./scripts/link-skills.ps1 -All
+./scripts/link-skills.ps1 claude cursor -Force
+```
+
 Related: [layout](../layout/summary.md), [practices](../practices.md).

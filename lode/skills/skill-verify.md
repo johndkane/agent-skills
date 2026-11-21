@@ -63,10 +63,10 @@ flowchart TD
 
 ## Why a skill, not only a checklist
 
-A checklist in `AGENTS.md` states the rule; the skill executes it: resolves the
-repo root, derives scope from git, runs the validator, resolves links, measures
-the body, and returns evidence. The checklist stays as the documented fallback
-when file or shell access is missing.
+The [skill contract](summary.md#checks-before-handing-off) states the rules; the
+skill executes them: resolves the repo root, derives scope from git, runs the
+validator, resolves links, measures the body, and returns evidence. The checklist
+stays as the documented fallback when file or shell access is missing.
 
 ## Limits
 
@@ -82,6 +82,5 @@ when file or shell access is missing.
 - It knows this repository's layout by design, which is the documented exception
   to the self-containment rule.
 
-Related: [skills summary](summary.md),
-[agent instructions](../../AGENTS.md),
-[skill design rules](../../AGENTS.md#skill-design-rules).
+Related: [skills summary](summary.md), [group rules](groups.md),
+[agent instructions](../../AGENTS.md).

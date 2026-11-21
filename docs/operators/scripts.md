@@ -5,8 +5,8 @@ behaviourally identical; pick the one your shell can run.
 
 | Script | Runs on |
 | --- | --- |
-| [`link-skills.sh`](../scripts/link-skills.sh) | macOS, Linux, Git Bash, WSL |
-| [`link-skills.ps1`](../scripts/link-skills.ps1) | Windows PowerShell or pwsh |
+| [`link-skills.sh`](../../scripts/link-skills.sh) | macOS, Linux, Git Bash, WSL |
+| [`link-skills.ps1`](../../scripts/link-skills.ps1) | Windows PowerShell or pwsh |
 
 Every link they create is relative and points at `../.agents/skills`, so the
 repository still works if it is cloned somewhere else.
@@ -75,13 +75,13 @@ When a new host needs a link:
 
 1. Add a row to the `hosts` table in both scripts, using the same key and path.
 2. Add an alias if the host has a common short name.
-3. Add the row to the environment table in this page and in the
-   [root README](../README.md).
-4. If it is a default, update [AGENTS.md](../AGENTS.md) and the architecture page.
+3. Add the row to the environment table on this page.
+4. If it is a default, update the default-wiring rule and the
+   [architecture](architecture.md) page.
 5. Test `--help`, the default run, the new name, and `--all`.
 
 ## Related
 
 - [Architecture](architecture.md) — why the links exist
-- [Skills](skills/README.md) — the catalog they expose
-- [Agent instructions](agent-instructions.md) — repo rules and checks
+- [Skills](../skills/README.md) — the catalog they expose
+- [Agent instructions](../developers/agent-instructions.md) — repo rules and checks

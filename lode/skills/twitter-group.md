@@ -1,7 +1,7 @@
 # twitter group
 
-The first skill group. It holds the rules shared by every X/Twitter skill and the
-mechanics for keeping the copies aligned.
+The first skill group. It holds the rules shared by every X/Twitter skill and
+applies the group mechanics in [groups](groups.md).
 
 ## Members
 
@@ -50,6 +50,7 @@ break the moment the folder is copied, so the operative rules are copied into
 each member. The central file is the edit point; the copies are what the agent
 reads at runtime.
 
-Related: [skills summary](summary.md), [twitter-followback](twitter-followback.md),
+Related: [skills summary](summary.md), [group rules](groups.md),
+[twitter-followback](twitter-followback.md),
 [twitter-moot-radar](twitter-moot-radar.md),
 [shared rules](../../docs/skills/twitter-shared.md).

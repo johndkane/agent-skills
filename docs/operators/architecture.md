@@ -23,6 +23,34 @@ The links are **relative**, so a clone works at any path, and they point at the
 whole `skills` directory rather than an individual skill. Adding a skill needs no
 link work.
 
+## Repository tree
+
+```
+agent-skills/
+├── .agents/
+│   └── skills/                       # canonical source of truth
+│       ├── twitter-followback/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       ├── twitter-moot-radar/
+│       │   ├── SKILL.md
+│       │   └── references/
+│       └── skill-verify/
+│           └── SKILL.md
+├── .claude/
+│   └── skills -> ../.agents/skills   # Claude Code
+├── .github/
+│   └── skills -> ../.agents/skills   # GitHub Copilot
+├── scripts/
+│   ├── link-skills.sh                # macOS, Linux, Git Bash
+│   └── link-skills.ps1               # Windows
+├── docs/                             # human documentation, by audience
+├── lode/                             # agent memory (Lode Coding)
+├── AGENTS.md                         # generic agent guidance
+├── CLAUDE.md                         # imports AGENTS.md for older Claude Code
+└── README.md                         # high-level project overview
+```
+
 ## What each host reads
 
 | Host | Native project location | Reads `.agents/skills` | Link needed |
@@ -55,8 +83,8 @@ One tree plus links keeps a single source of truth that every host reads.
 ## Symlink mechanics
 
 Git stores a symlink as a blob with mode `120000` and the target path as its
-content. That is why the target must be relative and why the mode is checked in
-the [pre-handoff checks](../AGENTS.md#checks-before-handing-off).
+content. That is why the target must be relative; the [link scripts](scripts.md) check the
+mode.
 
 | Platform | Behaviour |
 | --- | --- |
@@ -83,6 +111,6 @@ See [Scripts](scripts.md) for the full option set.
 
 ## Related
 
-- [Skills](skills/README.md) — the catalog and the rules a skill must follow
+- [Skills](../skills/README.md) — the catalog and the rules a skill must follow
 - [Scripts](scripts.md) — wiring, flags, and recovery
 - [Adopting this repo](adopting.md) — taking this layout into another project

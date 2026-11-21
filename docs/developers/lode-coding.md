@@ -11,13 +11,15 @@ the code and the decisions; the agent owns the memory and the execution.
   <https://raw.githubusercontent.com/fjzeit/lode/refs/heads/main/prompts/SystemPrompt.txt>
 
 The prompt is embedded verbatim in
-[`AGENTS.md`](../AGENTS.md#lode-coding) and below. It is embedded rather than
+[`AGENTS.md`](../../AGENTS.md#lode-coding) and below. It is embedded rather than
 linked so every session has the method without network access. When updating it,
 copy the canonical file unchanged; do not reword it.
 
 ## How this repository applies it
 
-- `lode/` is the agent's memory. `docs/` is the human wiki. Keep them separate.
+- `AGENTS.md` is generic and reusable. `lode/` is the agent's memory and holds the
+  project-specific guidance. `docs/` is the human wiki; `README.md` is the
+  high-level entry point. Keep them separate.
 - The lode lives at the repository root and starts at `lode/lode-map.md`.
 - `lode/tmp/` is git-ignored; session scraps belong there.
 - This page documents the method for humans. It is not the lode.
@@ -109,5 +111,5 @@ if the lode/ does not exist, ask the user if you should create one.
 ## Related
 
 - [Agent instructions](agent-instructions.md) — how `AGENTS.md` is structured
-- [Architecture](architecture.md) — the system the lode describes
-- [Skills](skills/README.md) — the catalog
+- [Architecture](../operators/architecture.md) — the system the lode describes
+- [Skills](../skills/README.md) — the catalog

@@ -5,7 +5,7 @@ their mutuals follow, and returns matching accounts with quoted proof.
 Instructions live in the skill's own `SKILL.md` (this checkout:
 [`twitter-moot-radar/SKILL.md`](../../.agents/skills/twitter-moot-radar/SKILL.md));
 human page:
-[`docs/skills/twitter-moot-radar.md`](../../docs/skills/twitter-moot-radar.md).
+[`docs/users/twitter-moot-radar.md`](../../docs/users/twitter-moot-radar.md).
 Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 [`twitter-shared`](../../docs/skills/twitter-shared.md) (operative rules copied to
 `references/twitter-shared.md`).

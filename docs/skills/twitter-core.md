@@ -220,8 +220,8 @@ relearning the flow.
    member's `references/twitter-shared.md`, update this page and each docs page,
    the catalog rows, the group index, and the lode entry for the group.
 4. **Validate**: `skills-ref validate` for every touched skill, every copy
-   byte-identical to the central file, and the checks in
-   [`AGENTS.md`](../../AGENTS.md).
+   byte-identical to the central file, and the agent-side checks in
+   [the skill contract](../../lode/skills/summary.md#checks-before-handing-off).
 5. **Never leave a split**: the central file ahead of a copy, or a copy ahead of
    the central file, is a defect, not a work in progress.
 
@@ -239,6 +239,6 @@ flowchart LR
 ## Related
 
 - [Skills catalog](README.md)
-- [twitter-followback](twitter-followback.md)
-- [twitter-moot-radar](twitter-moot-radar.md)
-- [Agent instructions](../agent-instructions.md)
+- [twitter-followback](../users/twitter-followback.md)
+- [twitter-moot-radar](../users/twitter-moot-radar.md)
+- [Agent instructions](../developers/agent-instructions.md)

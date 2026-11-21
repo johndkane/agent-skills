@@ -25,7 +25,7 @@ copy them.
 
 | Group | Members | Central files | Copies |
 | --- | --- | --- | --- |
-| twitter | [`twitter-followback`](twitter-followback.md), [`twitter-moot-radar`](twitter-moot-radar.md) | [`twitter-core.md`](twitter-core.md) (contract), [`twitter-shared.md`](twitter-shared.md) (operative rules) | `references/twitter-shared.md` in each member |
+| twitter | [`twitter-followback`](../users/twitter-followback.md), [`twitter-moot-radar`](../users/twitter-moot-radar.md) | [`twitter-core.md`](twitter-core.md) (contract), [`twitter-shared.md`](twitter-shared.md) (operative rules) | `references/twitter-shared.md` in each member |
 
 ## Cross-group pages
 

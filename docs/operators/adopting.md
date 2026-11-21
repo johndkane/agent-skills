@@ -11,7 +11,7 @@ Point your agent at the repository:
 > project, then wire the hosts I use.
 
 The agent copies the tree and runs the link script for the hosts you name. This
-is the same path described in the [root README](../README.md).
+is the same path described in the [root README](../../README.md).
 
 ## What to copy
 
@@ -22,9 +22,11 @@ is the same path described in the [root README](../README.md).
 | `scripts/link-skills.ps1` | Wires the catalog on Windows |
 | `.gitignore` rules | Protects the destination from agent-local state and secrets |
 | `.gitattributes` | Normalises line endings so skill files stay stable |
+| `AGENTS.md` | Generic agent guidance; it works unchanged in another repository |
 
 Do not copy `docs/` or `lode/`. The docs describe this repository, and the lode is
-this repository's agent memory. A host project should grow its own.
+this repository's project-specific agent memory. A host project should grow its
+own.
 
 ## Merge, do not overwrite
 
@@ -32,11 +34,9 @@ If the destination already has a `.gitignore`, merge the agent rules into it.
 Never overwrite the file wholesale, and keep the warning at the top: do not ignore
 `.agents/` or any agent link, or the skills disappear from version control.
 
-If the destination already has an `AGENTS.md`, merge the **Invariants** and
-**Adding a skill** sections. Leave its project-specific rules in place.
-
-Use the same rule for `AGENTS.md` that you use for `.gitignore`: add the portable
-parts, keep the destination's own content.
+`AGENTS.md` is generic and can be taken as-is. Do not copy the lode: it describes
+this repository. If the destination needs its own project rules, start a lode
+there rather than merging this one.
 
 ## Wire the hosts
 
@@ -63,5 +63,5 @@ Every skill must report `Valid skill` before the change is committed.
 ## Related
 
 - [Architecture](architecture.md) — why the copy-and-link model works
-- [Skills](skills/README.md) — the catalog and its rules
+- [Skills](../skills/README.md) — the catalog and its rules
 - [Scripts](scripts.md) — the wiring reference

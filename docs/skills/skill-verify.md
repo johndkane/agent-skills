@@ -93,4 +93,4 @@ fictional, so an unfamiliar one is a finding rather than a pass.
 
 - [Twitter group contract](twitter-core.md) — the group contract example
 - [Skills catalog](README.md)
-- [Agent instructions](../agent-instructions.md) — the rule set it enforces
+- [Agent instructions](../developers/agent-instructions.md) — the rule set it enforces

@@ -4,20 +4,9 @@ Follows back the people behind an X account: real humans who follow the user,
 post actively, and pass a character check. Bots, brands, funnels, and guesses are
 skipped.
 
-Install by copying the `twitter-followback` folder into the skills directory your
-host reads; the `SKILL.md` inside it is the whole skill, and everything it
-references is inside the same folder. This page explains the skill and is not part
-of the install.
-
-Dense detail lives beside it in `references/` — the state schema, the follow-up
-pass, and the UI ladder — and is read only when `SKILL.md` points at it. The
-group's shared rules — state line, linked evidence, cadence, access failures, and
-privacy — are in `references/twitter-shared.md`, copied verbatim from the central
-[`twitter-shared.md`](twitter-shared.md).
-
-It follows the [shared contract for X skills](twitter-core.md). Browse the
-instructions in this repository:
-[`twitter-followback/SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md).
+Install it by copying the `twitter-followback` folder into your skills directory;
+see [Getting skills](getting-skills.md). Invoke it in plain language or with your
+host's explicit syntax; see [Using skills](invoking.md).
 
 ## When it triggers
 
@@ -72,9 +61,8 @@ skip it before loading.
 9. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
    times are drawn from ranges and scaled to the work: minimum dwell for passive
    checks, longer pauses while reading, and the longest pause before a
-   state-changing click. See [browser cadence](browser-cadence.md). Jitter
-   applies to timing only; verification and throttle rules stay exact, and a
-   challenge still ends the run.
+   state-changing click. Jitter applies to timing only; verification and throttle
+   rules stay exact, and a challenge still ends the run.
 10. **Persist and report** — save the cursor, verdicts, and follow-up dates;
     report new follows, pre-existing follows, pending requests, unverified
     clicks, and skips separately. Every handle the run lists — state line,
@@ -125,7 +113,7 @@ visible rate-limit notice stays a throttle.
 The Followers tab can hold hundreds of rows, and X throttles follows after a
 short burst, so one pass is not expected to finish. The skill keeps one state
 file per signed-in account at `~/.x-followback/<handle>.json`
-(`%USERPROFILE%\.x-followback\<handle>.json` on Windows), outside the repository.
+(`%USERPROFILE%\.x-followback\<handle>.json` on Windows), in your home directory.
 
 Each run opens by naming that file and summarizing what it holds — criteria,
 queue and verdict counts, due follow-ups, and resume point — or saying that it
@@ -149,6 +137,7 @@ check due follow-ups first. The live UI always wins over the file: a saved
 
 ## Related
 
-- [Skills catalog](README.md)
-- [Architecture](../architecture.md)
-- [Agent instructions](../agent-instructions.md)
+- [User guide](README.md)
+- [Getting skills](getting-skills.md)
+- [Using skills](invoking.md)
+- [twitter-moot-radar](twitter-moot-radar.md) — the other X skill
