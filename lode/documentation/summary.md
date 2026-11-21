@@ -65,6 +65,12 @@ other two directories own operating and changing the repository.
 - Human pages link only to human pages. A user or operator page never links into
   `lode/` or `AGENTS.md`; a developer page may, to explain an agentic mechanism or
   practice.
+- User-facing voice: `README.md` and `docs/users/` are written in plain, friendly
+  language for a reader who doesn't know this repo — everyday words over mechanism
+  names ("a progress file on your machine", not "state file"; terms explained where
+  they first appear), with tables and command blocks kept verbatim as reference and
+  every rule, number, and safety boundary unchanged. The terse, precise register
+  stays in skill bodies and `docs/skills/`; friendliness lives only on human pages.
 - A change updates the human page and this lode in the same session.
 
 ```text

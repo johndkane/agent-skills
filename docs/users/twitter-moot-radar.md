@@ -1,20 +1,22 @@
 # twitter-moot-radar
 
-Suggests accounts to follow on X by listening to the user's mutuals. It asks for
-areas of interest, reads what each moot follows, and returns only accounts that
-match — each one carrying the quote that proves the match, the permalink, the
-moots who follow them, and a live check that the user does not already follow
-them.
+Suggests accounts to follow on X by listening to the people you already trust.
+A **moot** — internet slang for a *mutual* — is someone you follow who follows
+you back. You tell the skill
+what you're interested in, it reads what your moots follow, and it suggests
+only the accounts that genuinely match: each one comes with the post that
+proves it, a link to that post, which of your moots follow it, and a live check
+that you don't already follow it.
 
-It can also assess one account you name directly. That account does not need a
-moot to follow it, and it does not need to follow you back: its relationship is
-reported as context, never treated as a requirement. It is for a real person
-curating their own feed — finding people, not audiences — and is never for
-engagement farming, marketing, or brand growth.
+It can also look at one account you name directly. That account doesn't need a
+moot to follow it, and it doesn't need to follow you back — its relationship to
+you is reported as a fact, never treated as a test it has to pass. The skill is
+for a real person curating their own feed — finding people, not audiences — and
+is never for engagement farming, marketing, or brand growth.
 
-Install it by copying the `twitter-moot-radar` folder into your skills directory;
-see [Getting skills](getting-skills.md). Invoke it in plain language or with your
-host's explicit syntax; see [Using skills](invoking.md).
+Install it by copying the `twitter-moot-radar` folder into your skills
+directory; see [Getting skills](getting-skills.md). Then ask for it in plain
+language or use your app's skill syntax; see [Using skills](invoking.md).
 
 ## When it triggers
 
@@ -27,164 +29,165 @@ host's explicit syntax; see [Using skills](invoking.md).
 - "what are people in my circles following?"
 
 It is explicitly **not** for mass-following, growth hacking, engagement farming,
-marketing, or unfollowing, and it does not follow anything without per-handle
-approval.
+marketing, or unfollowing, and it does not follow anything without your
+approval, name by name.
 
-## Requirements
+## What it needs
 
 | Need | Why |
 | --- | --- |
-| Interactive browser control | Every read and action happens through the real UI |
-| A browser already signed in to X | The skill never handles credentials |
-| A local session | Cloud, sandboxed, and headless sessions cannot complete it |
-| Non-text evidence modes (optional) | Need a model and browser tool that return images, video frames, or an audio transcript; otherwise that mode is flagged unavailable and the run stays text-only |
-| Local file write | Keeps the moot roster, collected source sets, and verdicts in `~/.x-moot-radar/`; without it the run continues on session state |
+| Browser control | Every read and action happens in the real X app, in your browser |
+| A browser already signed in to X | The skill never touches passwords or codes |
+| A local session | Cloud, sandboxed, and headless sessions can't run it |
+| Image and video checks (optional) | Need a setup that can actually show images and video frames to the model; if yours can't, the skill says so and works with text only |
+| A progress file on your machine | Keeps your moot list, its findings, and your decisions in `~/.x-moot-radar/`; without one it still works, it just can't resume |
 
-File write is not a hard stop: if you decline it or the path cannot be written,
-the skill keeps running, holds the same state in the session, and prints it for
-you to verify and save. Later runs then start fresh, so some work may be
-repeated.
+The progress file isn't a hard requirement: if you say no, or the folder can't
+be written, the skill keeps going and shows you its progress so you can save it
+yourself. The next run then starts fresh, so some work may be repeated.
 
 ## How it works
 
-1. **Prove control** — confirm the browser relay and drive the signed-in session
-   before planning.
-2. **Learn the UI** — read the current labels for `Follow`, `Following`,
-   `Unfollow`, `Follows you`, and `Pending`, plus the row anatomy of a Following
-   list. `Following` and `Unfollow` are the same already-followed state.
-3. **Confirm the brief** — the target (the whole moot graph, or an account you
-   name), then 3–8 checkable areas, optional signal words, strictness, an overlap
-   bar, exclusions, evidence modes, moot scope, and a budget, all restated before
-   any reading. A named target skips the roster and list-reading steps.
-4. **Build the moot roster** — a moot is someone the user follows who follows
-   back, confirmed by the `Follows you` marker before their list is used. Moots
-   are ordered by how relevant their own topic is to the named interests. A focus
-   run skips this.
-5. **Read Following lists** — collect handles with bio excerpts from moots'
-   Following tabs only, counting how many distinct moots follow each candidate.
-   No candidate comes from "Who to follow", Explore, or search.
-6. **Filter early** — drop obvious bots, brands, funnels, and already-decided
-   handles at the row level, so profile visits go to plausible people.
-7. **Research the shortlist** — bio, recent posts, recency, follower ratio, and
-   the live follow control. A candidate needs a quoted post or a stated bio line
-   that matches an interest. With an evidence mode on and proven, an unambiguous
-   image-only post or video frame may serve as labelled, lower-weight proof.
-8. **Present with proof** — grouped by interest, ranked by overlap and evidence
-   strength, each line showing quote, date, permalink, moots, and follow state.
-   High-overlap candidates with no evidence go to a near-miss list.
-9. **Follow only on approval** — named handles only, with exact identity matching
-   and settle-window verification.
-10. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
-    times are drawn from ranges and scaled to the work: minimum dwell for
-    passive checks, longer pauses while reading, and the longest pause before a
-    state-changing click. Jitter applies to timing only; verification and
-    throttle rules stay exact, and a challenge still ends the run.
-11. **Persist and report** — the roster and the moot graph survive interest
-    changes; ranking is redone instead of re-reading the lists.
+1. **Checks it can drive the browser** — confirms it's really controlling your
+   signed-in X session before doing anything.
+2. **Learns the current screen** — reads what the follow buttons, the "follows
+   you" marker, and the lock icon actually say right now, since X changes them
+   often. `Following` and `Unfollow` mean the same thing: already followed.
+3. **Confirms the brief with you** — the whole moot graph or one named account,
+   then 3–8 concrete interests, optional signal words, how strict to be, the
+   optional image modes, how many suggestions you want, and a time budget. It
+   reads the brief back before starting.
+4. **Builds the moot list** — a moot is confirmed by the "follows you" marker
+   on their profile before their list is used, never guessed from a single
+   list. Moots are put in order by how close their own interests are to yours.
+   A named-account run skips this.
+5. **Reads the Following lists** — collects names and short bios
+   from your moots' Following tabs only, counting how many distinct moots
+   follow each account. Nothing comes from "Who to follow", Explore, or search.
+6. **Filters early** — obvious bots, salesy accounts, and already-decided names
+   are dropped before any profile is opened, so attention goes to plausible
+   people.
+7. **Researches the shortlist** — bio, recent posts, how recently they posted,
+   follower ratio, and the live follow button. A candidate needs one quoted
+   post or a bio line that really matches one of your interests. With an image
+   mode on and proven, a clear image-only post or video frame can count too —
+   labelled, and worth less than text.
+8. **Presents with proof** — grouped by interest, strongest first: the quote,
+   its date and link, the moots behind it, and the follow state. Candidates
+   with many moots but no matching post go on a separate "near miss" list, so
+   you can decide for yourself.
+9. **Follows only on your approval** — named handles only, one at a time,
+   verified in the app the same way followback does.
+10. **Moves like a person** — varied pauses, scroll steps, and reading time, so
+    the pace doesn't look robotic. The pacing is timing only: the checks and
+    stop rules stay strict, and a verification challenge ends the run.
+11. **Remembers between runs** — the moot list and its findings survive even
+    when you change your interests; only the ranking is redone, never the
+    whole read.
 
-## Focus on one account
+## Naming one account
 
-Name an account and the skill assesses that account instead of searching the
-graph. It skips the roster, the list reads, and the overlap bar; the same evidence
-standard applies. The report gives the interest verdict, the quoted proof, and
-the relationship — `follows you` or not, already followed or not, and how many
-moots follow it, including none — as context. A missing follow-back or a zero
-overlap is a fact about the relationship, not a flaw in the request, and the
-skill does not push you toward a different account.
+Give it a handle and the skill assesses that account instead of searching the
+graph. It skips the moot list, the graph reading, and the overlap bar entirely;
+the same proof standard applies. The report gives the interest verdict, the
+quoted proof, and the relationship — whether they follow you, whether you
+already follow them, and how many moots follow them, including none — all as
+context. A missing follow-back or a zero overlap is a fact about the
+relationship, not a flaw in your request, and the skill won't push you toward
+a different account.
 
 ## Why overlap is the signal
 
-A moot is a person the user already chose to follow and who chose them back, so
-their follows are a proxy for taste rather than for reach. Two or more moots
-following the same account is a meaningful coincidence; one moot is a lead. The
-skill ranks on that count, but never treats it as proof of an interest — only the
-candidate's own posts and bio can do that.
+A moot is a person you chose and who chose you back, so who they follow says
+something about taste rather than about reach. Two or more moots following the
+same account is a meaningful coincidence; one is a lead. The skill ranks on
+that count but never treats it as proof of an interest — only the account's own
+posts and bio can show that.
 
-## Proof standard
+## What counts as proof
 
 Every suggestion must show:
 
-- a quoted post of 200 characters or fewer, with its date and a permalink that is
-  linked, or a linked bio line that states the interest;
-- the moots who follow the account, by handle and count, each handle linked to
-  its profile; a focus account may have none, and `Moots: none` is a valid line;
-- a live follow control reading: `Follow @handle` confirms you do not already
-  follow them, and `Following`/`Unfollow` is reported as already followed;
-- an optional `follows you` note, which is context rather than a reason.
+- a quoted post of 200 characters or fewer, with its date and a working link —
+  or a linked bio line that states the interest outright;
+- the moots who follow the account, by name and count, each name linked to
+  their profile. A named account may have none, and "Moots: none" is a normal,
+  valid line;
+- a live follow button reading: `Follow @example_alice` confirms you don't
+  follow them yet, and `Following`/`Unfollow` is reported as already followed;
+- an optional "follows you" note, which is context rather than a reason.
 
-Text is the default and the cheapest. With an evidence mode on and proven, a
-non-text match may stand in for the quoted line: `[image] "Rust code with impl
-Trait"`, `[video] "…"`, or `[audio] "…"`, with date and permalink. It is labelled,
-ranks below text proof, and caps that suggestion at medium confidence. The skill reads at most three media items per candidate and 12
-non-text reads per run; a mode that is on but unproven is reported `unavailable` and
-the run stays text-only. It never identifies a person from a photo, never infers
-race, ethnicity, gender, age, disability, health, religion, or sexuality from an
-image, and never treats a photo as proof of a real person.
+Text is the default and the cheapest. With an image mode on and proven, a
+non-text match can stand in for the quoted line — `[image] "Rust code with
+impl Trait"`, `[video] "…"`, or `[audio] "…"`, each with date and permalink.
+It's labelled, ranks below text, and caps that suggestion at "medium"
+confidence. The skill reads at most three media items per candidate and twelve
+non-text reads per run; a mode that's on but can't actually work is reported
+unavailable and the run stays text-only. It never identifies a person from a
+photo, never guesses sensitive traits from an image, and never treats a photo
+as proof of a real person.
 
-The candidate handle links to its profile. Every handle the run lists — in the
-state line, a question, or the report — plus every cited moot or quote, is one
-click from the page it came from. Only pages read in the run are linked; a status
-URL is never built from a handle.
+The candidate's name links to their profile. Every handle, moot, and quote in
+the report is one click from the page it came from, and only pages actually
+read in that run are linked.
 
-If the posts are unreadable — a protected account, or a "potentially sensitive
-content" interstitial standing in for the profile — there is no suggestion. The
-account is reported as unreadable instead of guessed at, and nothing is inferred
-from what did not render.
+If the posts can't be read — a protected account, or a "potentially sensitive
+content" warning standing in for the profile — there is no suggestion. The
+account is reported as unreadable instead of guessed at.
 
-An empty result is a valid result: the skill reports the filtered counts and
-offers to widen the interests, lower the overlap bar, or read further down the
-lists rather than padding the list with weak matches.
+An empty result is a real result: the skill reports what was filtered and
+why, and offers to widen the interests, lower the bar, or read further down
+the lists — rather than padding the list with weak matches.
 
-## Connectivity and access failures
+## When a page won't load
 
-A page that did not render is treated as an access failure, not as an account
-state. That covers a disconnected browser relay, a closed tab, DNS or timeout
-errors, an X error page or blank shell, an expired session, and a login wall. A
-tab that worked earlier and then stops rendering mid-run is the same failure.
+A page that didn't render is treated as a hiccup, not as an answer about the
+account: dropped browser connection, closed tab, network errors, an X error
+page or blank screen, an expired session, a login wall, or a tab that freezes
+mid-run.
 
-The skill stops and flags what failed, where, how many items remain, and the
-resume point. An item whose page never loaded gets no verdict, so the next run
-retries it instead of recording a false `no_evidence` or "not followed". A click
-already made when the page fails is recorded `unverified` with a follow-up,
-because it may have landed. Login, 2FA, captcha, and checkpoints are handed to
-the user. A profile-level sensitive-content notice stays `unreadable`, and a
-visible rate-limit notice stays a throttle.
+The skill stops and tells you what failed, where, how many accounts were left,
+and where to pick up. An account whose page never loaded gets no verdict, so
+the next run tries it again. A click already made when the page dies is marked
+unverified with a check-in. Login, 2FA, and verification challenges are handed
+to you, and a visible rate-limit notice is treated as the slow-down it is.
 
-## Across runs
+## Between runs
 
-State lives at `~/.x-moot-radar/<handle>.json`
-(`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), in your home directory.
-It holds the interest profile in force, its evidence modes, confirmed moots with
-their topic, the collected source sets, the per-moot cursor, the queue, and a
-verdict per handle.
+Progress lives at `~/.x-moot-radar/<handle>.json`
+(`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), in your home
+directory. It holds the interests in force and their image modes, the confirmed
+moots and what they post about, which accounts were surfaced by which moots,
+where each list-reading stopped, and every decision made so far.
 
-Each run opens by naming that file and summarizing what it holds — interests,
-moot and source counts, queue and verdict counts, last write — or saying that it
-starts fresh. When writing is unavailable, the file is not created: the run keeps
-the same state in the session, prints it for you to verify and save, and the next
-run starts fresh.
+Each run opens by naming that file and summarizing what it holds — or saying
+it starts fresh. If you declined file writing, no file is created: the run
+keeps the same information in the session, prints it for you to verify and
+save, and the next run starts fresh.
 
-Moots and sources are interest-independent, so changing interests re-ranks the
-existing graph instead of re-reading it. A `suggested` verdict cools down for
-about 30 days unless new moots start following that account; `dismissed` is
-permanent unless the user asks to revisit.
+Moots and findings don't depend on your interests, so changing interests just
+re-ranks what's already there instead of re-reading everything. A suggestion
+you've seen cools down for about 30 days unless new moots start following that
+account; something you dismissed stays dismissed until you ask to revisit it.
 
 ## Safety boundaries
 
-- Only the user's own account, only with the confirmed scope.
-- Nothing is followed without per-handle approval; no unfollow, block, report, or
-  message.
-- Never take candidates from suggestion modules, Explore, or search results.
-- Hand off for login, 2FA, captcha, or payment, and never try to pass a challenge
-  to keep a run going.
-- Never claim to see an image, frame, or transcript the session cannot return; that
-  mode is flagged `unavailable` and the run stays text-only.
-- Never identify a person from a photo or infer sensitive traits from an image.
-- Never describe a protected account's interests.
-- Real handles and private details stay in the local state file, or in the session
-  state you verify when writing is unavailable; never in the repository. Examples
-  use fictional placeholders.
-- Stop and ask when identity, scope, or UI behaviour is unclear.
+- Only your own account, only within the rules you confirmed.
+- Nothing is followed without your approval, name by name; no unfollow, block,
+  report, or message.
+- Suggestions never come from "who to follow", Explore, or search results.
+- Hands off for login, 2FA, captcha, or payment, and never tries to pass a
+  challenge to keep going.
+- Never claims to see an image, frame, or transcript the session can't produce;
+  that mode is flagged unavailable and the run stays text-only.
+- Never identifies a person from a photo or guesses sensitive traits from an
+  image.
+- Never describes a protected account's interests.
+- Real handles and private details stay in the progress file on your machine,
+  or in the session output you verify; never in this repository. Examples use
+  invented handles like `@example_alice`.
+- Stops and asks whenever identity, scope, or the screen doesn't look as
+  expected.
 
 ## Related
 

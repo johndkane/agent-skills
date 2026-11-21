@@ -1,34 +1,39 @@
 # User guide
 
-Skills are task-scoped workflows an agent loads when your request matches them.
-This section tells you which skill to choose, how to get it, and how to use it.
-You do not need to know how the project behind the skills is built.
+A skill is a set of instructions your agent loads when your request matches it.
+This guide helps you pick one, get it into your app, and use it. You don't need
+to know anything about how this repository is built.
 
-## Available skills
+## The skills
 
 | Skill | What it does for you | Full guide |
 | --- | --- | --- |
-| `twitter-followback` | Reviews your new followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts. Text is the default; optional image and frame checks are capped and labelled. Keeps progress on your machine so long queues resume, or in-session when file write is declined. | [twitter-followback](twitter-followback.md) |
-| `twitter-moot-radar` | Finds accounts worth following through your mutuals, ranked by how many of them follow each account and shown with a quoted post and proof you do not follow it yet. Or assesses one account you name, even one no moot follows and one that does not follow you back, with the relationship shown as context. Optional image, frame, or transcript proof is labelled and lower-weight. Nothing is followed without your approval. | [twitter-moot-radar](twitter-moot-radar.md) |
-| `twitter-compatibility` | Scores how compatible you are with accounts on X — moots, accounts you follow, accounts that follow you, all, or one account you name whether or not it is associated — on subjects you choose, with a 0–100 score, counted evidence, per-area breakdowns, and a post worth replying to. Asks for the scope first; text is the default and image, video-frame, or audio-transcript evidence is opt-in. Read-only. | [twitter-compatibility](twitter-compatibility.md) |
+| `twitter-followback` | Looks at your new followers on X and follows back the real, active people. Bots and marketing, adult, crypto, and impersonation accounts are skipped. It checks each follow before calling it done and keeps its progress on your machine, so a long session can resume later. Optional image and video-frame checks are off unless you turn them on. | [twitter-followback](twitter-followback.md) |
+| `twitter-moot-radar` | Finds accounts worth following through your mutuals. You name your interests, it reads what your moots follow, and every suggestion comes with proof — the post that shows the match, a link to it, and a live check that you don't follow it yet. It can also look at one account you name, whatever its relationship to you. Nothing is followed without your approval, name by name. | [twitter-moot-radar](twitter-moot-radar.md) |
+| `twitter-compatibility` | Scores how well you'd get along with accounts on X about the things you care about — your moots, people you follow, people who follow you, or one account you name. It reads both feeds, counts real posts and replies, and returns a 0–100 score with the evidence behind every point. Read-only: it never likes, replies, follows, or messages anyone. | [twitter-compatibility](twitter-compatibility.md) |
 
-The X skills need interactive browser control with a browser already signed in
-to X, plus local file write for cross-run state when it is available. They run
-locally; cloud, sandboxed, or headless sessions cannot run them. If you decline
-file write, they continue on session state and print it for you to verify, so a
-later run may repeat work. Their run state stays on your machine and never enters
-the repository, and their output links the handles and posts they cite.
+## What they need to run
+
+The X skills drive a real browser, so they need:
+
+- an agent with browser control, and a browser already signed in to X;
+- to run on your machine — cloud or sandboxed sessions can't run them;
+- optionally, permission to save a small progress file in your home folder, so
+  long sessions can pick up later. If you'd rather not, they keep going and
+  show you their progress instead — you may just see some work repeated next
+  time.
+
+Everything they learn stays on your machine and never enters this repository,
+and everything they report links back to the page it came from.
 
 ## Choose a skill
 
-- **Clean up who you follow back** → `twitter-followback`.
-- **Find people to follow through your network** → `twitter-moot-radar`.
-- **See who you would interact with easily, and on what** →
-  `twitter-compatibility`.
+- **Follow back the right people** → `twitter-followback`.
+- **Find new people through your own network** → `twitter-moot-radar`.
+- **See who you'd click with, and about what** → `twitter-compatibility`.
 
 ## Get and use it
 
-1. [Get the skill](getting-skills.md) — ask your agent, copy the folder, or
-   enable it in your account.
-2. [Use the skill](invoking.md) — explicit invocation in Claude Code, Copilot,
+1. [Get the skill](getting-skills.md) — ask your agent, or copy one folder.
+2. [Use the skill](invoking.md) — how to call it up in Claude Code, Copilot,
    OpenCode, Codex, Cursor, and Gemini CLI.
