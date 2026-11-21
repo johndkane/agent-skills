@@ -5,13 +5,27 @@ principles, practices, and considerations below. A skill adds only what its own
 task needs. When a run teaches something new, the lesson lands here first and
 reaches every X skill in the same change.
 
-This page is the single home for those rules, and the place to edit them first.
-It is a maintainer's contract, not a runtime dependency: a skill folder is
-installed on its own, so no `SKILL.md` links here. Each skill carries a copy of
-every rule it needs, and the family stays consistent because changes are applied
-to all copies together.
+This page is the single home for the contract: the principles, rationale, and
+decisions behind the group's rules. It is a maintainer's page, not a runtime
+dependency: a skill folder is installed on its own, so no `SKILL.md` links here.
+Each skill carries a copy of every rule it needs, and the group stays consistent
+because changes are applied to all copies together.
 
-## The family
+## Shared files
+
+| File | Role | Copied into members |
+| --- | --- | --- |
+| `twitter-core.md` | This contract: principles, rationale, and how to change the group | No; it is the authoring page |
+| `twitter-shared.md` | Copy-ready operative rules: state line, linked evidence, cadence, access failures, privacy | Yes, verbatim to `references/twitter-shared.md` in every member |
+
+The names carry the group, so a file from another group is never mistaken for
+this one. `browser-cadence.md` is a cross-group capability page, named for the
+capability rather than a group.
+
+The group index is [`skill-groups.md`](skill-groups.md). Add a group there before
+creating its central files.
+
+## The group
 
 | Skill | Task | State |
 | --- | --- | --- |
@@ -198,24 +212,25 @@ relearning the flow.
 ## Changing the core
 
 1. **Classify the lesson.** Would another X skill have to solve it the same way?
-   If yes, it belongs here. If it is specific to one task, it belongs in that
-   skill — and in its `references/` if it needs detail.
-2. **Write it here first**, as a rule in the current tense: what is true now, not
-   what changed.
-3. **Propagate in the same change**: every X skill body (edited directly — no
-   skill links here), its docs page, the catalog rows, and the lode entry for the
-   family.
-4. **Validate**: `skills-ref validate` for every touched skill, and the checks in
+   If yes, it belongs in the group. If it is specific to one task, it belongs in
+   that skill — and in its `references/` if it needs detail.
+2. **Choose the central file.** Principles and rationale go in this page.
+   Operative rules go in `twitter-shared.md` as a self-contained instruction.
+3. **Propagate in the same change**: copy `twitter-shared.md` verbatim into every
+   member's `references/twitter-shared.md`, update this page and each docs page,
+   the catalog rows, the group index, and the lode entry for the group.
+4. **Validate**: `skills-ref validate` for every touched skill, every copy
+   byte-identical to the central file, and the checks in
    [`AGENTS.md`](../../AGENTS.md).
-5. **Never leave a split**: the core ahead of the skills, or one skill ahead of
-   the core, is a defect, not a work in progress.
+5. **Never leave a split**: the central file ahead of a copy, or a copy ahead of
+   the central file, is a defect, not a work in progress.
 
 ```mermaid
 flowchart LR
-    R[A run teaches something] --> Q{Family-wide?}
-    Q -- yes --> C[Update the core]
-    C --> S[Apply to every X skill]
-    S --> D[Docs pages + lode]
+    R[A run teaches something] --> Q{Group-wide?}
+    Q -- yes --> C[Update the central files]
+    C --> S[Copy into every X member]
+    S --> D[Docs pages + catalog + lode]
     D --> V[Validate + report]
     Q -- no --> K[Update one skill]
     K --> D

@@ -71,6 +71,10 @@ Quote the advertised values; use the validator's `read-properties` when present.
   `.gemini/`). A link or dependency is a fail. A repo-maintenance skill may name
   these paths as things it checks, never as a resource it reads.
 - Every relative link and image resolves inside the skill folder.
+- A group member points only at `references/<group>-shared.md` inside its own
+  folder, never at `docs/skills/<group>-shared.md`, a central path, another
+  member's copy, or an include syntax the spec does not define. The copy is the
+  whole rule set; the body names it with when to read it.
 - Every referenced file is one level deep from `SKILL.md`; no nested chains.
 - No absolute local paths or `file://` links.
 - No personal data anywhere in the folder. Examples use obvious placeholders
@@ -110,6 +114,10 @@ Quote the advertised values; use the validator's `read-properties` when present.
   requirements, safety, related links. It must not call the repository path
   canonical.
 - `lode/skills/<name>.md` and a row in `lode/lode-map.md`.
+- If the skill is a group member per `docs/skills/skill-groups.md`, its
+  `references/<group>-shared.md` is byte-identical to
+  `docs/skills/<group>-shared.md`, and the body names it with when to read it. A
+  mismatch is a fail; report the first differing line.
 - Docs and lode describe current behavior, not a changelog.
 - New domain terms have a `lode/terminology.md` entry.
 
@@ -151,5 +159,6 @@ From the repository root:
 - [ ] Online skills carry no run data: no saved quotes, permalinks, screenshots, or state.
 - [ ] Size within target; references flat and named; closing checklist present.
 - [ ] README bullet, docs row and page, lode entry and map row.
+- [ ] Group members carry a byte-identical shared copy; the index lists the group.
 - [ ] Validator reports `Valid skill`; links resolve.
 - [ ] Report gives pass/fail with evidence.

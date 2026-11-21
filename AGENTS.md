@@ -110,8 +110,8 @@ after an explicit instruction such as "commit this" or "push it".
 3. Follow the [skill design rules](#skill-design-rules): self-contained,
    progressive disclosure, terse agent-first writing, size targets, and a
    closing checklist.
-4. If the skill joins a family, follow [skill families](#skill-families) and
-   copy the shared behavior into the body.
+4. If the skill joins a group, follow [skill groups](#skill-groups), copy its
+   `references/<group>-shared.md` from the central file, and point the body at it.
 5. Ship the full set: a bullet under "The skills" in `README.md`, a row in
    `docs/skills/README.md`, a page in `docs/skills/`, and a lode entry.
 6. Run the validation in the next section.
@@ -190,27 +190,40 @@ Apply these to every skill, new or changed. The reasoning is in
 - Persist progress and follow-ups outside the repository so long tasks resume.
 - Prefer a clean stop and hand-off over pushing through a limit.
 - Browser-action skills pace like people: copy the ranges from
-  [browser cadence](docs/skills/browser-cadence.md) into the body and apply them
-  proportionally — readiness before the wait, long dwells for reading, an
-  upper-range pause and hover before state-changing clicks, no padding for
-  passive checks. Jitter timing, never verification; a challenge stops the run.
+  [browser cadence](docs/skills/browser-cadence.md) into the body or the group's
+  shared reference and apply them proportionally — readiness before the wait,
+  long dwells for reading, an upper-range pause and hover before state-changing
+  clicks, no padding for passive checks. Jitter timing, never verification; a
+  challenge stops the run.
 - Human-scale use only: no mass automation, volume scraping, or evading controls.
 
-## Skill families
+## Skill groups
 
-Some skills share behavior and form a family with one contract page. The X/Twitter
-skills are the current family; their contract is
-[`docs/skills/twitter-core.md`](docs/skills/twitter-core.md).
+Some skills share behavior and form a group with central files whose names carry
+the group. The X/Twitter group is the current example: contract
+[`docs/skills/twitter-core.md`](docs/skills/twitter-core.md), operative rules
+[`docs/skills/twitter-shared.md`](docs/skills/twitter-shared.md), and index
+[`docs/skills/skill-groups.md`](docs/skills/skill-groups.md).
 
-- Agree shared behavior in the contract page, then copy it into every member's
-  body. Members never link to the contract.
-- One change updates the whole family: contract, every skill body, each docs page,
-  and the lode entry. Never leave the contract ahead of the members.
-- Members may not disagree on shared behavior. Settle it in the contract, then
-  apply it to every body.
-- Keep family rules specific. Browser control, exact-handle matching, cadence,
-  the settle window, throttling, protected accounts, and the `~/.x-<skill>/`
-  state shape belong to the X family, not to every skill.
+- Name central files for the group: `<group>-core.md` for the contract and
+  `<group>-shared.md` for copy-ready operative rules. A cross-group capability
+  page is named for the capability, such as `browser-cadence.md`.
+- Add the group to the index before creating its central files.
+- Copy `<group>-shared.md` verbatim into every member at
+  `references/<group>-shared.md`; the body names it and says when to read it.
+  Members never link to a central file outside their own folder. A rule may also
+  live in the body when that is the better place; copy it, do not link it.
+- Point at the copy with a plain relative path. Never use an include, a symlink to
+  a central file, or a pointer to another member: the spec does not define one,
+  and a copied folder must work alone.
+- One change updates the index, the central files, every copy, each docs page, and
+  the lode entry. Never leave a central file ahead of a copy.
+- Members may not disagree on group behavior. Settle it centrally, then copy it.
+- A central file applies only to its group. If two groups need the same rule, make
+  it a capability page or give each group its own named copy.
+- Keep group rules specific. Browser control, exact-handle matching, cadence, the
+  settle window, throttling, protected accounts, and the `~/.x-<skill>/` state
+  shape belong to the X group, not to every skill.
 
 ## Verifying skill changes
 
@@ -252,11 +265,11 @@ cannot run.
 - [ ] `SKILL.md` is terse and behavior-complete: no motivation prose, no repeated
       rules, roughly 3,000 tokens or less, and every detail file it names is one
       level deep inside the skill folder.
-- [ ] An X/Twitter or other family change reached the contract page and every
-      member in the same change (see [Skill families](#skill-families)).
+- [ ] A group change reached the central files, the index, and every member copy
+      in the same change (see [Skill groups](#skill-groups)).
 - [ ] A browser-action skill carries the proportional cadence from
-      [browser cadence](docs/skills/browser-cadence.md) in its body, with
-      verification and challenge handling left exact.
+      [browser cadence](docs/skills/browser-cadence.md) in its body or group-shared
+      reference, with verification and challenge handling left exact.
 - [ ] The `skill-verify` skill ran and reported every required check passing.
 - [ ] The README bullet exists and matches the skill's real requirements.
 - [ ] `git ls-files -s` still shows `120000` for every link.

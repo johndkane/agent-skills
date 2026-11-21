@@ -10,7 +10,10 @@ references is inside the same folder. This page explains the skill and is not pa
 of the install.
 
 Dense detail lives beside it in `references/` — the state schema, the follow-up
-pass, and the UI ladder — and is read only when `SKILL.md` points at it.
+pass, and the UI ladder — and is read only when `SKILL.md` points at it. The
+group's shared rules — state line, linked evidence, cadence, access failures, and
+privacy — are in `references/twitter-shared.md`, copied verbatim from the central
+[`twitter-shared.md`](twitter-shared.md).
 
 It follows the [shared contract for X skills](twitter-core.md). Browse the
 instructions in this repository:

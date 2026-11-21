@@ -3,7 +3,8 @@
 - **Agent Skill** — a folder containing `SKILL.md` plus optional resources, loaded by a host when relevant.
 - **SKILL.md** — the required entry file: YAML frontmatter plus instructions.
 - **Canonical tree** — `.agents/skills`, the only real copy of every skill in this repository; it is not a required install location.
-- **Skill family** — skills that share behavior under one contract page, mirrored into each body and never linked to at runtime.
+- **Skill group** — skills that share behavior under group-named central files, mirrored into each member and never linked to at runtime.
+- **Group shared file** — the copy-ready `<group>-shared.md` central file; every member carries a byte-identical `references/<group>-shared.md`.
 - **Repo-maintenance skill** — a skill that checks or changes this repository; it may name repo paths it checks, but still links only inside its own folder.
 - **Progressive disclosure** — loading `name` and `description` at startup, the `SKILL.md` body on activation, and `references/`, `scripts/`, or `assets/` files only when the body names them.
 - **Reference file** — a focused document under `references/` holding detail too dense for the body; named by `SKILL.md`, one level deep.

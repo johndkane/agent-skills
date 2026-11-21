@@ -12,7 +12,10 @@ references is inside the same folder. This page explains the skill and is not pa
 of the install.
 
 Dense detail lives beside it in `references/` — the state schema and the
-suggestion card format — and is read only when `SKILL.md` points at it.
+suggestion card format — and is read only when `SKILL.md` points at it. The
+group's shared rules — state line, linked evidence, cadence, access failures, and
+privacy — are in `references/twitter-shared.md`, copied verbatim from the central
+[`twitter-shared.md`](twitter-shared.md).
 
 It follows the [shared contract for X skills](twitter-core.md). Browse the
 instructions in this repository:
@@ -63,7 +66,7 @@ it does not follow anything without per-handle approval.
    strength, each line showing quote, date, permalink, moots, and follow state.
    High-overlap candidates with no evidence go to a near-miss list.
 9. **Follow only on approval** — named handles only, with exact identity matching
-   and the family's settle-window verification.
+   and the group's settle-window verification.
 10. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
     times are drawn from ranges and scaled to the work: minimum dwell for
     passive checks, longer pauses while reading, and the longest pause before a
@@ -153,7 +156,7 @@ permanent unless the user asks to revisit.
 
 ## Related
 
-- [Shared core for X skills](twitter-core.md) — the family contract
+- [Twitter group contract](twitter-core.md) — the group contract
 - [twitter-followback](twitter-followback.md) — the other X skill
 - [Skills catalog](README.md)
 - [Agent instructions](../agent-instructions.md)

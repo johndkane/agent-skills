@@ -6,7 +6,9 @@ Instructions live in the skill's own `SKILL.md` (this checkout:
 [`twitter-moot-radar/SKILL.md`](../../.agents/skills/twitter-moot-radar/SKILL.md));
 human page:
 [`docs/skills/twitter-moot-radar.md`](../../docs/skills/twitter-moot-radar.md).
-Family rules: [`twitter-core`](../../docs/skills/twitter-core.md).
+Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
+[`twitter-shared`](../../docs/skills/twitter-shared.md) (operative rules copied to
+`references/twitter-shared.md`).
 
 ## Invariants
 
@@ -28,9 +30,9 @@ Family rules: [`twitter-core`](../../docs/skills/twitter-core.md).
    minutes. `Following` and `Unfollow` both prove a follow.
 9. Moots and sources are interest-independent and reused across interest changes;
    verdicts are re-derived from the new profile, not re-harvested.
-10. Cadence, throttling, credential handoff, and reporting honesty are written
-    into the skill body from the family contract; a copied skill has no access to
-    `docs/`.
+10. Cadence, throttling, credential handoff, and reporting honesty are copied
+    into `references/twitter-shared.md` from the group's central file; a copied
+    skill has no access to `docs/`.
 11. A run opens with one short state line: the file path, interests in force, moot
     and source counts, queue and verdict counts, and last write. No file means the
     run starts fresh.
@@ -106,11 +108,10 @@ are. The report shows both, and the interest quote is the gate.
 ## Self-contained
 
 The skill never links to `docs/` or this lode. A folder can be copied out on its
-own, so its `SKILL.md` repeats the cadence table, skip patterns, settle window,
-and state shape rather than pointing at the family contract. Duplication is
-deliberate; the contract here is the authoring source that every copy is checked
-against.
+own, so its `SKILL.md` and `references/twitter-shared.md` carry the cadence table,
+skip patterns, settle window, and state shape rather than pointing at the group's
+central files. Duplication is deliberate; the central files are the authoring
+sources that every copy is checked against.
 
 Related: [skills summary](summary.md), [twitter-followback](twitter-followback.md),
-[family rules](../../docs/skills/twitter-core.md),
-[terminology](../terminology.md).
+[twitter group](twitter-group.md), [terminology](../terminology.md).

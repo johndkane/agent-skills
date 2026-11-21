@@ -39,12 +39,14 @@ minutes after roughly 40–60 interactions.
 
 ## Keeping the practice
 
-- This page is canonical. Copy the table into every browser-action skill body;
-  skill bodies link only inside their own folder.
-- Changing a range updates this page, every browser-action skill, its docs page,
-  and its lode entry in the same change.
-- For the X family, [`twitter-core.md`](twitter-core.md) mirrors the table and
-  adds the settle-window and throttle specifics.
+- This page is canonical. Copy the table into every browser-action skill body or
+  its group-shared reference; skill bodies link only inside their own folder.
+- Changing a range updates this page, every browser-action skill copy, its docs
+  page, and its lode entry in the same change.
+- For the X group, [`twitter-core.md`](twitter-core.md) and
+  [`twitter-shared.md`](twitter-shared.md) mirror the table; the shared file
+  carries the operative cadence, and the contract adds the settle-window and
+  throttle specifics.
 - A new browser-action skill includes a cadence section, these proportional
   rules, and the challenge stop; check that its body uses ranges, not constants.
 

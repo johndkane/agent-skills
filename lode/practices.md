@@ -47,23 +47,27 @@ implement something is not a request to commit.
 names, defaults, force flag, and placeholder recovery. A change to one is a
 change to both.
 
-## One lesson, whole family
+## One lesson, whole group
 
-Browser-driven X skills share one contract,
-[`docs/skills/twitter-core.md`](../docs/skills/twitter-core.md). A new lesson goes
-into the core first, then into every X skill, its docs page, and its lode entry
-in the same change.
+Browser-driven X skills form a group with two central files:
+[`twitter-core.md`](../docs/skills/twitter-core.md) for the contract and
+[`twitter-shared.md`](../docs/skills/twitter-shared.md) for operative rules. A
+new lesson is classified, then lands in the contract or the shared file.
+Operative changes are copied verbatim into every member's
+`references/twitter-shared.md`; docs pages, catalog rows, the group index, and
+lode entries follow in the same change.
 
 ```text
-run -> lesson -> core -> every X skill body + docs page + lode
+run -> lesson -> central file -> every member copy + docs page + lode
 ```
 
-Reason: the family may not disagree on browser control, identity matching,
-timing, throttling, credentials, state shape, evidence, or reporting honesty.
+Reason: the group may not disagree on browser control, identity matching, timing,
+throttling, credentials, state shape, evidence, or reporting honesty.
 
-A skill folder is installed on its own, so no `SKILL.md` links to the core, the
-lode, `docs/`, or another skill. The lesson is copied into each skill body. The
-core is where it is decided, not where a runtime reads it.
+A skill folder is installed on its own, so no `SKILL.md` links to a central file,
+the lode, `docs/`, or another skill. Operative rules are copied into each member,
+not linked. The central file is where they are decided, not where a runtime reads
+them.
 
 ## Browser skills pace like people
 

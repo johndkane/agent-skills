@@ -34,6 +34,11 @@ and reports pass/fail with evidence. Canonical instructions:
     allowed; runtime state stays outside the folder. A placeholder URL such as
     `https://x.com/<handle>` is fine; a specific profile or status URL from a run
     is not.
+11. A group member's `references/<group>-shared.md` is byte-identical to the
+    central `docs/skills/<group>-shared.md`, the group index lists the member, and
+    the body names the copy with when to read it. The body points only at the copy
+    inside its own folder, never at the central file or another member's copy. A
+    mismatch or an outside pointer is a fail.
 
 ## Sources
 

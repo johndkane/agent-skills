@@ -47,9 +47,12 @@ extensions.
 
 The two X skills follow this shape: state schemas live in
 `references/state-file.md`, and the follow-back UI ladder and the suggestion card
-live in their own reference files. Both open a run with a brief state line, link
-every handle and cited source in their output, and stop on an access failure
-instead of inferring state.
+live in their own reference files. Their shared rules live in
+`references/twitter-shared.md`, copied verbatim from
+[`docs/skills/twitter-shared.md`](../../docs/skills/twitter-shared.md); the group
+index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). Both
+open a run with a brief state line, link every handle and cited source in their
+output, and stop on an access failure instead of inferring state.
 
 ## Authoring flow
 

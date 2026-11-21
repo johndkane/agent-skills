@@ -14,6 +14,9 @@ Full documentation lives in [`docs/`](docs/README.md).
 
 Everything lives in **[`.agents/skills/`](.agents/skills)**. One folder per skill,
 each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
+Skills that share behavior form a group with central files named for the group;
+the [group index](docs/skills/skill-groups.md) lists the members and the shared
+rules copied into each.
 
 - **[`twitter-followback`](.agents/skills/twitter-followback/SKILL.md)** —
   researches followers on X and follows back only real, active people; filters
@@ -127,8 +130,10 @@ agent-skills/
 ```
 
 Adding a skill means creating `.agents/skills/<name>/SKILL.md` and a bullet in
-the list above. Nothing else — the links point at the whole directory, so every
-agent sees it immediately.
+the list above. Nothing else for host wiring — the links point at the whole
+directory, so every agent sees it immediately. A group member also copies its
+group's shared reference into `references/`, as the
+[group index](docs/skills/skill-groups.md) describes.
 
 Not created by default: `.opencode/skills`, `.cursor/skills`, `.gemini/skills`.
 Each of those tools already reads `.agents/skills`, so a second path would

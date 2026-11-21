@@ -13,7 +13,7 @@ not part of the install.
 - before handing off any skill creation or change
 - "verify this skill", "check the skill", "review my skill"
 - "is this skill ready?", "audit the skill folder"
-- after a family-wide rule change, to confirm every member still conforms
+- after a group-wide rule change, to confirm every member still conforms
 
 It is not for authoring skill content, and it does not audit unrelated
 repositories.
@@ -60,11 +60,14 @@ Two other sources exist and are deliberately not required:
    quotes, permalinks, profile excerpts, follower lists, screenshots, state
    dumps, credentials, cookies, or session tokens: instructions are not run
    memory. A placeholder URL such as `https://x.com/<handle>` is fine; a specific
-   profile or status URL from a run is not.
+   profile or status URL from a run is not. A group member's shared rules are a
+   copy at `references/<group>-shared.md`; the body never points at a central
+   file, another member's copy, or an include syntax the spec does not define.
 3. **Shape and size** — line and token targets, flat focused references,
    scripts and assets named, closing checklist, no duplicated rules.
 4. **Catalog wiring** — root README bullet, docs catalog row and page, lode entry
-   and map row, terminology where a concept is new.
+   and map row, group index and byte-identical shared copy, terminology where a
+   concept is new.
 5. **Validation** — `skills-ref validate`, advertised properties, link
    resolution, link modes, and the shell syntax check when those files changed.
 
@@ -88,6 +91,6 @@ fictional, so an unfamiliar one is a finding rather than a pass.
 
 ## Related
 
-- [Shared core for X skills](twitter-core.md) — the family contract example
+- [Twitter group contract](twitter-core.md) — the group contract example
 - [Skills catalog](README.md)
 - [Agent instructions](../agent-instructions.md) — the rule set it enforces

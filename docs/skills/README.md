@@ -15,12 +15,12 @@ without costing context on every prompt.
 The full instructions for each skill live in its `SKILL.md`; these pages explain
 the skill rather than replacing it.
 
-Skills that drive the same product share a contract so they cannot drift apart.
-The browser-driven X skills are the first family: every one is built from and
-extends [the shared core](twitter-core.md) — browser control, exact-handle
-matching, settle-and-verify timing, human-cadence jitter, state shape, and
-reporting honesty — and a new principle is written there before it reaches the
-individual skills.
+Skills that drive the same product form a group with central files named for the
+group. The browser-driven X skills are the first group: their contract is
+[`twitter-core.md`](twitter-core.md), and their copy-ready operative rules are
+[`twitter-shared.md`](twitter-shared.md), copied verbatim into each member's
+`references/twitter-shared.md`. The [group index](skill-groups.md) lists the
+members and central files.
 
 Every skill that drives a browser follows the same
 [human cadence](browser-cadence.md): jittered, proportional waits copied into
@@ -118,17 +118,19 @@ must not depend on either `AGENTS.md` or this wiki.
   X/Twitter, browser-driven, or other online skill, the folder is instructions,
   not run memory: no saved quotes, permalinks, follower lists, screenshots, or
   state dumps.
-- **Families** — a skill that belongs to a family (currently the
-  [X/Twitter skills](twitter-core.md)) follows the family contract instead of
-  inventing browser, timing, or state behaviour. Its body carries the rules it
-  needs; the core is where they are agreed and changed. Update the whole family
-  together.
+- **Groups** — a skill that belongs to a group (currently the
+  [X/Twitter group](twitter-core.md)) follows the group contract instead of
+  inventing browser, timing, or state behaviour. Copy the group's
+  `references/<group>-shared.md` into the member and point the body at it; the
+  central file is where rules are agreed and changed. Update the whole group,
+  index, and every copy together.
 
 ## Adding a skill
 
 1. Create `.agents/skills/<name>/SKILL.md`.
-2. Write the frontmatter and instructions. If the skill joins a family, read the
-   family contract first and build from it.
+2. Write the frontmatter and instructions. If the skill joins a group, read the
+   group contract, copy `references/<group>-shared.md` from the central file, and
+   point the body at it.
 3. Keep the body lean; move dense detail into `references/` files one level deep.
 4. Add a row to the catalog table above, a bullet to
    [the root README](../../README.md), a page beside this one, and a lode entry.

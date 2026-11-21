@@ -5,6 +5,9 @@ its own run state between sessions. Instructions live in the skill's own
 `SKILL.md` (this checkout: [`twitter-followback/SKILL.md`](../../.agents/skills/twitter-followback/SKILL.md));
 human page:
 [`docs/skills/twitter-followback.md`](../../docs/skills/twitter-followback.md).
+Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
+[`twitter-shared`](../../docs/skills/twitter-shared.md) (operative rules copied to
+`references/twitter-shared.md`).
 
 ## Invariants
 

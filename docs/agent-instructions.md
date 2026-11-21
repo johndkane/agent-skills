@@ -27,7 +27,7 @@ does not read the content twice.
   the folder/`name` pairing.
 - **Skill design rules** — portability, progressive disclosure, terse writing,
   runtime data, and behavior standards for every skill.
-- **Skill families** — one contract page, copied into every member body, updated
+- **Skill groups** — group-named central files, copied into every member, updated
   in one change.
 - **Verifying skill changes** — run the `skill-verify` skill before handoff.
 - **Validation** — the `skills-ref` commands.

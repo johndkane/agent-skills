@@ -9,7 +9,9 @@ you can read in any order.
 | --- | --- |
 | [Architecture](architecture.md) | Why there is one canonical tree and how each agent finds it |
 | [Skills](skills/README.md) | The skill catalog, the spec rules, and how to add a skill |
+| [Skill groups](skills/skill-groups.md) | Group-named central files, their members, and the copy rule |
 | [Shared core for X skills](skills/twitter-core.md) | The contract every browser-driven X skill is built from |
+| [Shared rules for X skills](skills/twitter-shared.md) | Operative rules copied verbatim into each X skill |
 | [Browser cadence](skills/browser-cadence.md) | How browser-action skills pace themselves with jittered, proportional waits |
 | [Invoking skills](skills/invoking.md) | Explicit syntax for each host, TUI, CLI, and app — and why `/` is not universal |
 | [Scripts](scripts.md) | `link-skills.sh` and `link-skills.ps1`: environments, flags, behaviour |
@@ -32,7 +34,9 @@ lode/                            agent-owned project memory (see Lode Coding)
 Two short rules explain the shape:
 
 1. A skill is written once, in `.agents/skills`.
-2. Everything else is a link or a description. Nothing is copied.
+2. Host paths are links, not copies. Group rules are the one deliberate copy: a
+   central file is mirrored verbatim into each member so a copied skill works
+   alone.
 
 ## Quick start
 
