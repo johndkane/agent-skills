@@ -38,6 +38,7 @@ create folder -> write SKILL.md -> add README bullet -> validate -> hand off
 a host actually advertises.
 
 The catalog includes `twitter-followback`, a local-only browser skill; its
-behaviour is documented in `docs/skills/twitter-followback.md`.
+behaviour is documented in `docs/skills/twitter-followback.md` and its run-state
+contract in [twitter-followback.md](twitter-followback.md).
 
 Related: [layout](../layout/summary.md), [practices](../practices.md).

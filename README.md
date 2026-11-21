@@ -17,11 +17,15 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
 
 - **[`twitter-followback`](.agents/skills/twitter-followback/SKILL.md)** —
   researches followers on X and follows back only real, active people; filters
-  bots, marketing, adult, crypto, and impersonation accounts.
+  bots, marketing, adult, crypto, and impersonation accounts. Offers a policy for
+  protected accounts, whose posts are unreadable and whose follow only reaches
+  `Pending`, and keeps progress in a local state file so long queues and pending
+  requests resume across runs.
   - **Triggers** on "follow back my followers", "clean up my follow-back queue",
     or "which followers are worth following back".
-  - **Needs** interactive browser control with a browser already signed in to X.
-    Local only — cloud, sandboxed, or headless sessions cannot run it.
+  - **Needs** interactive browser control with a browser already signed in to X,
+    plus local file write for its state file. Local only — cloud, sandboxed, or
+    headless sessions cannot run it.
 
 No build step, no package installs, and no need to copy anything by hand.
 

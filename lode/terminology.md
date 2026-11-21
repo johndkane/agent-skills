@@ -13,5 +13,10 @@
 - **skills-ref** — the reference validator from the Agent Skills project.
 - **Docs** — `docs/`, the human wiki.
 - **Lode** — `lode/`, this agent-owned memory.
+- **Protected account** — an X account that hides its posts until it approves a follow request.
+- **Pending** — the control state after requesting to follow a protected account; a request, not a follow.
+- **Settle window** — the up-to-30-second pause after a click before judging whether the UI changed.
+- **Follow-up pass** — the start-of-run check of due pending requests and unverified clicks.
+- **Run state file** — per-account local JSON at `~/.x-followback/` holding the cursor, pending queue, verdicts, and follow-ups.
 
 Related: [summary](summary.md), [practices](practices.md).

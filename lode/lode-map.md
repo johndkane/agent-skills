@@ -10,6 +10,7 @@ Index of this lode. Read it before exploring the repository.
 | [plans/roadmap.md](plans/roadmap.md) | Open directions |
 | [layout/summary.md](layout/summary.md) | Canonical tree and links |
 | [skills/summary.md](skills/summary.md) | Skill authoring contract |
+| [skills/twitter-followback.md](skills/twitter-followback.md) | Follow-back run state and protected accounts |
 | [scripts/summary.md](scripts/summary.md) | Link script behaviour |
 
 ## Structure
@@ -25,7 +26,8 @@ lode/
 ├── layout/
 │   └── summary.md
 ├── skills/
-│   └── summary.md
+│   ├── summary.md
+│   └── twitter-followback.md
 └── scripts/
     └── summary.md
 ```
