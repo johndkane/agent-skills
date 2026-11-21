@@ -18,6 +18,8 @@ does not read the content twice.
 ## What AGENTS.md covers
 
 - **Purpose** — one canonical skill tree, linked for each host.
+- **A live repository** — developers may change files mid-session; re-read and
+  adapt instead of treating a change as corruption.
 - **Invariants** — the rules that keep the repo portable: single copy, relative
   links at mode `120000`, no host-specific copies, standard frontmatter.
 - **Adding and changing skills** — the exact steps, including the README row and
@@ -46,6 +48,14 @@ does not read the content twice.
   rule has one home.
 - The Lode Coding prompt is the one exception: it is embedded verbatim, because
   agents must have it in every session. Do not paraphrase it.
+
+## A live repository
+
+The project can change while an agent is working. A developer may edit a skill,
+rewrite this page, add a rule, or commit in parallel. Agents should re-read before
+acting on a stale view, treat unfamiliar edits as work in progress, and adapt to
+the current state rather than reverting it. Conflicts are reported, not silently
+"fixed" by restoring an earlier reading.
 
 ## Git is read-only by default
 

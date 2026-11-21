@@ -30,6 +30,22 @@ lode/                            agent memory (see Lode Coding below)
 Other host directories (`.opencode/skills`, `.cursor/skills`, `.gemini/skills`)
 exist only when the link script was explicitly told to wire them.
 
+## A live repository
+
+Developers edit this project while agent sessions run: files, skills, docs, lode
+entries, and even this file can change mid-session. That is expected, not
+corruption.
+
+- Re-read a file before acting on it when your last read may be stale. The disk is
+  the source of truth, not your earlier context.
+- Treat unfamiliar edits as the developer's work in progress. Do not revert,
+  overwrite, or "restore" changes you did not make.
+- If a change conflicts with your task, adapt to the current state and say what
+  changed; ask only when the intent is unclear.
+- When a tool result no longer matches what you read, snapshot again before
+  acting. Do not retry blindly against a stale view.
+- Git writes stay opt-in even while others are committing.
+
 ## Invariants
 
 Breaking these breaks every host at once. Do not change them without an explicit
@@ -165,6 +181,11 @@ Apply these to every skill, new or changed. The reasoning is in
   outcomes separately; never claim success from memory or inference.
 - Persist progress and follow-ups outside the repository so long tasks resume.
 - Prefer a clean stop and hand-off over pushing through a limit.
+- Browser-action skills pace like people: copy the ranges from
+  [browser cadence](docs/skills/browser-cadence.md) into the body and apply them
+  proportionally — readiness before the wait, long dwells for reading, an
+  upper-range pause and hover before state-changing clicks, no padding for
+  passive checks. Jitter timing, never verification; a challenge stops the run.
 - Human-scale use only: no mass automation, volume scraping, or evading controls.
 
 ## Skill families
@@ -222,6 +243,9 @@ commands here remain the fallback if the skill cannot run.
       level deep inside the skill folder.
 - [ ] An X/Twitter or other family change reached the contract page and every
       member in the same change (see [Skill families](#skill-families)).
+- [ ] A browser-action skill carries the proportional cadence from
+      [browser cadence](docs/skills/browser-cadence.md) in its body, with
+      verification and challenge handling left exact.
 - [ ] The `skill-verify` skill ran and reported every required check passing.
 - [ ] The README bullet exists and matches the skill's real requirements.
 - [ ] `git ls-files -s` still shows `120000` for every link.

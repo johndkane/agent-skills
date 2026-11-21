@@ -1,18 +1,8 @@
 # Follow-back state file
 
-Read this before the first write of a run, and again when resuming. It holds the
-schema, the verdict vocabulary, the writing rules, and the start-of-run follow-up
-pass.
-
-## Location
-
-One file per signed-in account, outside the repository:
-
-- `~/.x-followback/<handle>.json` on macOS/Linux, or
-  `%USERPROFILE%\.x-followback\<handle>.json` on Windows. Drop the leading `@`
-  from the filename.
-- Never write it inside the skill folder or a repo, never commit it, and keep it
-  to handles, verdicts, and dates — no secrets.
+Read this before the first write of a run, and again when resuming. The state
+path is in the skill body. This file holds the schema, the verdict vocabulary, the
+writing rules, and the start-of-run follow-up pass.
 
 ## Schema
 

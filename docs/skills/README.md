@@ -22,6 +22,10 @@ matching, settle-and-verify timing, human-cadence jitter, state shape, and
 reporting honesty — and a new principle is written there before it reaches the
 individual skills.
 
+Every skill that drives a browser follows the same
+[human cadence](browser-cadence.md): jittered, proportional waits copied into
+its own body, with verification and challenge handling left exact.
+
 ## Anatomy
 
 ```

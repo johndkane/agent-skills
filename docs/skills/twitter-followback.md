@@ -62,9 +62,11 @@ skip it before loading.
    never re-click inside the window. A real miss means throttled: wait, retry
    once, then stop for the run rather than looping.
 9. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
-   times are drawn from ranges so the run does not read as a metronome. The
-   jitter applies to timing only; verification and throttle rules stay exact,
-   and a challenge still ends the run.
+   times are drawn from ranges and scaled to the work: minimum dwell for passive
+   checks, longer pauses while reading, and the longest pause before a
+   state-changing click. See [browser cadence](browser-cadence.md). Jitter
+   applies to timing only; verification and throttle rules stay exact, and a
+   challenge still ends the run.
 10. **Persist and report** — save the cursor, verdicts, and follow-up dates;
     report new follows, pre-existing follows, pending requests, unverified
     clicks, and skips separately.

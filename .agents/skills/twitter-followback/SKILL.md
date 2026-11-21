@@ -53,9 +53,17 @@ Pacing never excuses skipping verification or passing a challenge.
 | Typing a handle | 80–250 ms per character |
 
 - Move in two to four hops, hover, click; let the pointer rest.
-- Open with 30–60 s of reading; break 2–5 min after ~40–60 interactions.
-- Jitter timing only: one click, the full settle window, and the retry rules
-  stay exact.
+- Readiness first: wait for the page or control to exist, then apply the minimum
+  wait. Never sleep instead of checking.
+- Scale with consequence: take the upper half of the click range and a hover
+  before a state-changing click; passive navigation and re-checks need only the
+  minimum.
+- Dwell where a person would read — profile evidence and rows — not on every
+  scroll tick.
+- Open with 30–60 s of reading; break 2–5 min after ~40–60 interactions; cadence
+  counts against the wall-clock budget.
+- Jitter timing only: exact-handle matching, the full settle window, and the
+  retry rules stay exact.
 - A captcha, checkpoint, or "verify it's you" prompt ends the run. Hand off;
   never try to pass it.
 
@@ -190,9 +198,6 @@ One file per signed-in account, outside the repository:
 Schema, verdicts, writing rules, and the start-of-run follow-up pass are in
 [references/state-file.md](references/state-file.md). Read it before the first
 write and when resuming; a schema from memory drops the queue or follow-ups.
-
-Write every batch (~5 decisions), at each stop, and before ending. The file is
-memory, not proof.
 
 ## Step 8 — Report honestly
 

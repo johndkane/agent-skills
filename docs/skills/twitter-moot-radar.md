@@ -64,9 +64,11 @@ it does not follow anything without per-handle approval.
 9. **Follow only on approval** — named handles only, with exact identity matching
    and the family's settle-window verification.
 10. **Move at a human cadence** — waits, scroll steps, pointer moves, and dwell
-    times are drawn from ranges so the run does not read as a metronome. The
-    jitter applies to timing only; verification and throttle rules stay exact,
-    and a challenge still ends the run.
+    times are drawn from ranges and scaled to the work: minimum dwell for
+    passive checks, longer pauses while reading, and the longest pause before a
+    state-changing click. See [browser cadence](browser-cadence.md). Jitter
+    applies to timing only; verification and throttle rules stay exact, and a
+    challenge still ends the run.
 11. **Persist and report** — the roster and harvested graph survive interest
     changes; ranking is redone instead of re-harvesting.
 

@@ -1,16 +1,8 @@
 # Moot radar state file
 
-Read this before the first write of a run and whenever resuming. It holds the
-schema, the verdict vocabulary, and the writing rules.
-
-## Location
-
-One file per signed-in account, outside the repository:
-
-```text
-~/.x-moot-radar/<handle>.json
-%USERPROFILE%\.x-moot-radar\<handle>.json   (Windows)
-```
+Read this before the first write of a run and whenever resuming. The state path
+is in the skill body. This file holds the schema, the verdict vocabulary, and the
+writing rules.
 
 ## Schema
 

@@ -65,6 +65,35 @@ A skill folder is installed on its own, so no `SKILL.md` links to the core, the
 lode, `docs/`, or another skill. The lesson is copied into each skill body. The
 core is where it is decided, not where a runtime reads it.
 
+## Browser skills pace like people
+
+Any skill that drives a browser to navigate, scroll, click, or type copies the
+ranges from [`docs/skills/browser-cadence.md`](../docs/skills/browser-cadence.md)
+into its body and applies them proportionally.
+
+```text
+readiness -> minimum dwell -> read longer -> hover before acting
+cadence counts against the budget; verification and challenge handling stay exact
+```
+
+Reason: machine-regular clicks are what rate limiters and readers notice. Jitter
+is pacing, not evasion, and never widens a settle window, skips a verification, or
+passes a challenge. A new browser-action skill is not complete without a cadence
+section.
+
+## Expect mid-session changes
+
+The human may edit, commit, or restructure the repository while an agent works.
+The disk is the source of truth; an earlier read is not.
+
+```text
+read -> developer edits -> re-read before acting -> adapt or report -> never revert
+```
+
+Treat unfamiliar edits as the developer's work in progress. If a change conflicts
+with the task, say what changed and ask only when intent is unclear. Git writes
+remain opt-in.
+
 ## Write for agents
 
 Skill bodies are runtime instructions, not documentation. Use terse imperatives,

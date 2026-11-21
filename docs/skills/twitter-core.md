@@ -90,8 +90,16 @@ window, and the challenge handoff stay exact.
 
 Move to a control in two to four separate moves, pause, then press, and let the
 pointer rest afterwards. Open a run with 30–60 s of reading, and break for 2–5
-minutes after roughly 40–60 interactions. A captcha, checkpoint, or "verify it's
-you" prompt still ends the run: pacing is not evasion.
+minutes after roughly 40–60 interactions.
+
+Apply it proportionally: wait for the page or control to exist before the minimum
+dwell; take the upper half of the click range and a hover before a state-changing
+click; dwell where a person would read, not on every tick; and count cadence
+against the run budget. A captcha, checkpoint, or "verify it's you" prompt still
+ends the run: pacing is not evasion.
+
+The ranges are canonical in [browser cadence](browser-cadence.md); this page adds
+the X-specific settle-window and throttle rules.
 
 ## Practices
 
