@@ -22,7 +22,9 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 5. The queue is `Follow back` rows plus `Follow` on a confirmed protected
    follower. `Follow` without that marker is a stranger: never queued.
 6. The live UI wins over saved state; a saved `followed` is not proof.
-7. State lives outside the repository, one file per signed-in account.
+7. State lives outside the repository, one file per signed-in account; when the
+   write is refused or unavailable, the same structure lives in session state and
+   is printed for the user to verify, and the run continues.
 8. Never unfollow, block, report, or message.
 9. A page that rendered a notice instead of a profile — a "potentially sensitive
    content" interstitial — is recorded `unreadable`, never inferred from.
@@ -115,7 +117,9 @@ them.
 - Follow requests resolve over days, if at all.
 
 Without it, every run re-researches the same handles and may re-follow accounts
-whose button simply had not updated.
+whose button simply had not updated. A refused or unavailable write never stops
+the run: the skill keeps the same structure in session state, prints it at each
+stop for the user to verify, and accepts the repeated research on the next run.
 
 ## Why it is not in the repo
 

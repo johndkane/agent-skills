@@ -8,8 +8,8 @@ operative rule set; every member carries the same text.
 As soon as the signed-in account is known and before any scanning, give one short
 state line: the state file path and what it currently holds — criteria or
 interests in force, queue and verdict counts, due follow-ups, and the resume
-point. If no file exists, name the path and say the run starts fresh. Summarize;
-never dump the file.
+point. If no file exists, name the path and say the run starts fresh; if writing
+is unavailable, say that the run is session-only. Summarize; never dump the file.
 
 ## Linked evidence
 
@@ -66,10 +66,20 @@ failed, where, how many items remain, and the resume point. A profile-level
 sensitive-content notice stays `unreadable`; a visible rate-limit notice follows
 the throttle rule.
 
+## Persistence fallback
+
+Ask once for permission to write the state path. If the user declines, or the path
+cannot be written, say so in the state line and run on session state: hold the
+same structure in memory, record each verdict as you go, and print it at every
+stop and before the report so the user can verify and save it. Never stop the run
+for lack of a state file. Say once that the next run starts fresh and may repeat
+work this run already decided; that rework is an accepted cost, not a failure.
+
 ## Privacy
 
 State lives outside the skill folder and the repository, one file per signed-in
 account. It holds handles, verdicts, dates, and short tags — no credentials, no
 full timelines, no bulk personal data. Skill text and examples use fictional
 placeholders (`@alice`); a real handle or private detail exists only in that
-account's state file.
+account's state file, or in the session output the user verifies when writing is
+unavailable.

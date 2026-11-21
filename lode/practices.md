@@ -135,7 +135,10 @@ skill text / docs / lode / commits  ->  placeholders only
 
 Reason: a skill folder is copied to other machines and Git history is permanent.
 The state file is runtime data, kept outside the repository; it persists between
-runs so a long task resumes instead of redoing the research.
+runs so a long task resumes instead of redoing the research. When file write is
+refused or unavailable, the run continues on session state of the same shape,
+prints it for the user to verify, and accepts that the next run may repeat work;
+persistence is never a reason to stop.
 
 ## Expect mid-session changes
 

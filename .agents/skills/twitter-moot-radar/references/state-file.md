@@ -45,5 +45,7 @@ judgement and carries no inference; re-read it next run.
   addresses, or private details.
 - Write after each harvested moot, at every stop, and before ending the run.
 - The file is memory, not proof: re-read the control and the profile next run.
-- If the agent cannot write files, build the same structure and print it for the
-  user to save. Say that resuming is unavailable.
+- If file write is refused or unavailable, keep the same structure in session
+  state, print it at each stop and before the report for the user to verify and
+  save, and continue the run. Resuming is then unavailable: say once that the next
+  run may repeat work. Never present session state as a saved file.

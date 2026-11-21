@@ -55,8 +55,10 @@ user, or the control is unavailable); record the reason rather than retrying.
   user tunes the rubric, archive the file and revisit the affected handles.
 - New followers appear above the cursor, so still scan the top of the list when
   resuming.
-- If the agent cannot write files, build the same structure during the run and
-  print it for the user to save. Say plainly that resuming is unavailable.
+- If file write is refused or unavailable, keep the same structure in session
+  state, print it at each stop and before the report for the user to verify and
+  save, and continue the run. Resuming is then unavailable: say once that the next
+  run may repeat work. Never present session state as a saved file.
 
 ## Follow-up pass (start of every run)
 

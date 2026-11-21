@@ -4,16 +4,16 @@ description: >-
   Research and follow back legitimate followers on X (Twitter): real people who
   post actively, with bots, marketing, adult, crypto and impersonation accounts
   filtered out, and every completed follow verified in the UI. Handles protected
-  accounts and pending follow requests, and resumes long follower queues from a
-  local state file across runs. Use when asked to follow back followers or
-  mutuals, review new followers, clean up a follow-back queue, check whether a
-  follower is a bot, or decide which followers are worth following back. Not for
-  mass-following, growth hacking, or unfollowing.
+  accounts and pending requests, and resumes long follower queues from a local
+  state file, or session state when file write is unavailable. Use when asked to
+  follow back followers or mutuals, review new followers, clean up a follow-back
+  queue, check whether a follower is a bot, or decide which followers are worth
+  following back. Not for mass-following, growth hacking, or unfollowing.
 compatibility: >-
   Needs an agent with interactive browser control, a browser session already
-  signed in to X, and local file write for the run state file. Must run locally
-  on the user's machine; cloud, sandboxed, or headless sessions without browser
-  access cannot complete it.
+  signed in to X, and optional local file write for cross-run state. Must run
+  locally on the user's machine; cloud, sandboxed, or headless sessions without
+  browser access cannot complete it.
 ---
 
 # X/Twitter Follow-Back
@@ -189,6 +189,11 @@ One file per signed-in account, outside the repository:
   runs so progress carries over, and skill text and saved examples use fictional
   placeholders.
 
+Ask once for file-write access. If it is refused or the path cannot be written,
+say so in the state line, keep the same structure in session state, print it at
+every stop and before the report for the user to verify, and continue. Say once
+that the next run starts fresh and may repeat decided work.
+
 Schema, verdicts, writing rules, and the start-of-run follow-up pass are in
 [references/state-file.md](references/state-file.md). Read it before the first
 write and when resuming; a schema from memory drops the queue or follow-ups.
@@ -230,5 +235,6 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
       ones recorded `Pending` with a follow-up.
 - [ ] No double clicks; no stale rows trusted; cadence jittered.
 - [ ] No unfollows, strangers, or suggestion clicks.
-- [ ] State written before hand-off.
+- [ ] State written before hand-off, or printed for verification when writing is
+      unavailable.
 - [ ] Report separates new, pre-existing, pending, unverified, and skips.

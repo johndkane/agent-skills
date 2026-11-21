@@ -15,7 +15,7 @@ applies the group mechanics in [groups](groups.md).
 | File | Role | Copy |
 | --- | --- | --- |
 | [`twitter-core.md`](../../docs/skills/twitter-core.md) | Contract: principles, practices, considerations | None; authoring page |
-| [`twitter-shared.md`](../../docs/skills/twitter-shared.md) | Operative rules: state line, linked evidence, cadence, access failures, privacy | `references/twitter-shared.md` in every member |
+| [`twitter-shared.md`](../../docs/skills/twitter-shared.md) | Operative rules: state line, linked evidence, cadence, access failures, persistence fallback, privacy | `references/twitter-shared.md` in every member |
 | [`skill-groups.md`](../../docs/skills/skill-groups.md) | Group index and naming convention | None |
 
 ## Invariants

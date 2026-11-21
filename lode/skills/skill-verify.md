@@ -39,6 +39,9 @@ and reports pass/fail with evidence. Canonical instructions:
     the body names the copy with when to read it. The body points only at the copy
     inside its own folder, never at the central file or another member's copy. A
     mismatch or an outside pointer is a fail.
+12. A skill that writes runtime state states the session-only fallback. Stopping a
+    run because file write was refused, or presenting session state as a saved
+    file, is a fail.
 
 ## Sources
 

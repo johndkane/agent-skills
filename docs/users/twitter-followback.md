@@ -25,10 +25,13 @@ It is explicitly **not** for mass-following, growth hacking, or unfollowing.
 | Interactive browser control | Every action happens through the real UI |
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
-| Local file write | Keeps progress and pending follow-ups in `~/.x-followback/` between runs |
+| Local file write | Keeps progress and pending follow-ups in `~/.x-followback/` between runs; without it the run continues on session state |
 
 These limits are declared in the skill's `compatibility` field, so a host can
-skip it before loading.
+skip it before loading. File write is not a hard stop: if you decline it or the
+path cannot be written, the skill keeps running, holds the same state in the
+session, and prints it for you to verify and save. Later runs then start fresh,
+so some work may be repeated.
 
 ## How it works
 
@@ -117,7 +120,9 @@ file per signed-in account at `~/.x-followback/<handle>.json`
 
 Each run opens by naming that file and summarizing what it holds — criteria,
 queue and verdict counts, due follow-ups, and resume point — or saying that it
-starts fresh.
+starts fresh. When writing is unavailable, the file is not created: the run keeps
+the same state in the session, prints it for you to verify and save, and the next
+run starts fresh.
 
 It records the scan cursor, the pending queue, a verdict per handle, and a
 `followUps` list for pending requests and unverified clicks. Later runs drain the
@@ -131,8 +136,9 @@ check due follow-ups first. The live UI always wins over the file: a saved
 - Never unfollow, block, report, or message.
 - Never follow accounts from suggestion modules or search results.
 - Hand off for login, 2FA, captcha, or payment.
-- Real handles and private details stay in the local state file, which persists
-  between runs; examples use fictional placeholders.
+- Real handles and private details stay in the local state file, or in the session
+  state you verify when writing is unavailable; never in the repository. Examples
+  use fictional placeholders.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Related

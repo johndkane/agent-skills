@@ -104,7 +104,9 @@ the lode, or this wiki.
   dense detail into `references/`, executable helpers into `scripts/`, and static
   templates or data into `assets/`; name each file and when to read it.
 - **Runtime needs** — declare them in `compatibility` instead of assuming a
-  capable environment.
+  capable environment. A need the skill can proceed without, such as an optional
+  state-file write, is a stated fallback, not a blocker: continue on session
+  state, print it for the user to verify, and accept repeated work next run.
 - **Self-contained** — a skill folder is installed on its own, so `SKILL.md` may
   reference only files inside that folder (`references/`, `scripts/`, `assets/`).
   Never link to `docs/`, `lode/`, `AGENTS.md`, another skill, or any repository
@@ -114,8 +116,9 @@ the lode, or this wiki.
 - **No real identities** — skill text, docs, lode entries, and commit messages
   use fictional placeholders (`@alice`, `example.com`). A real handle, name,
   email, or private detail belongs only in the runtime state file the skill
-  defines, outside the repository, where it persists between runs. For an
-  X/Twitter, browser-driven, or other online skill, the folder is instructions,
+  defines, outside the repository (or in the session output the user verifies
+  when writing is unavailable). For an X/Twitter, browser-driven, or other online
+  skill, the folder is instructions,
   not run memory: no saved quotes, permalinks, follower lists, screenshots, or
   state dumps.
 - **Groups** — a skill that belongs to a group (currently the

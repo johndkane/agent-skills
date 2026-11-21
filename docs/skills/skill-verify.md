@@ -62,7 +62,9 @@ Two other sources exist and are deliberately not required:
    memory. A placeholder URL such as `https://x.com/<handle>` is fine; a specific
    profile or status URL from a run is not. A group member's shared rules are a
    copy at `references/<group>-shared.md`; the body never points at a central
-   file, another member's copy, or an include syntax the spec does not define.
+   file, another member's copy, or an include syntax the spec does not define. A
+   skill that writes runtime state also states the session-only fallback; stopping
+   a run because file write was refused is a fail.
 3. **Shape and size** — line and token targets, flat focused references,
    scripts and assets named, closing checklist, no duplicated rules.
 4. **Catalog wiring** — root README bullet, docs catalog row and page, lode entry

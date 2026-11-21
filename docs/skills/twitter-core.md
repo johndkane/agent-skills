@@ -79,6 +79,9 @@ damages the user's account or produces a false claim.
 11. **Progress outlives the run.** Lists are virtualised and can hold thousands
     of rows; work ends mid-list. Persist a cursor, a queue, verdicts, and
     follow-ups outside the repository. When state and UI disagree, the UI wins.
+    If the file cannot be written, the run continues on session state and prints
+    it for the user to verify at every stop; the next run starts fresh and may
+    repeat work, which is an accepted cost, never a reason to stop.
 12. **Separate what you know from what you inferred.** Reports distinguish
     verified, pending, unverified, skipped, and unreadable. Protected accounts
     are unreadable: no post-based judgement is possible, and the report says so.
@@ -93,7 +96,8 @@ damages the user's account or produces a false claim.
     quotes. No credentials, no full timelines, no bulk personal data, nothing
     inside the repository. Skill text, saved examples, and commits use fictional
     placeholders (`@alice`); a real handle or private detail appears only in that
-    account's state file, outside the repository, where it persists between runs.
+    account's state file, outside the repository, or in the session output the
+    user verifies when writing is unavailable.
 15. **Say where progress lives at the start.** As soon as the signed-in account is
     known and before any scanning, give one short state line: the state file path
     and what it currently holds — the criteria or interests in force, queue and
@@ -171,7 +175,9 @@ relearning the flow.
 
   with `account`, the criteria or interests in force, a resume cursor, a queue of
   collected-but-undecided handles, a verdict per handle, and dated follow-ups.
-  Write after each batch, at every stop, and before the run ends.
+  Write after each batch, at every stop, and before the run ends. When writing is
+  unavailable, keep the same shape in session, print it for the user to verify,
+  and continue; resuming is then unavailable and the cost is repeated work.
 - **Criteria changes invalidate verdicts.** When the brief changes materially,
   re-derive or archive the affected verdicts rather than applying them to a new
   rubric. Data the brief does not touch — a social graph, a roster — may be kept

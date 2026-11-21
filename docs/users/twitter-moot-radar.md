@@ -28,7 +28,12 @@ it does not follow anything without per-handle approval.
 | Interactive browser control | Every read and action happens through the real UI |
 | A browser already signed in to X | The skill never handles credentials |
 | A local session | Cloud, sandboxed, and headless sessions cannot complete it |
-| Local file write | Keeps the moot roster, harvested sources, and verdicts in `~/.x-moot-radar/` |
+| Local file write | Keeps the moot roster, harvested sources, and verdicts in `~/.x-moot-radar/`; without it the run continues on session state |
+
+File write is not a hard stop: if you decline it or the path cannot be written,
+the skill keeps running, holds the same state in the session, and prints it for
+you to verify and save. Later runs then start fresh, so some work may be
+repeated.
 
 ## How it works
 
@@ -122,7 +127,9 @@ harvested source sets, the per-moot cursor, the queue, and a verdict per handle.
 
 Each run opens by naming that file and summarizing what it holds — interests,
 moot and source counts, queue and verdict counts, last write — or saying that it
-starts fresh.
+starts fresh. When writing is unavailable, the file is not created: the run keeps
+the same state in the session, prints it for you to verify and save, and the next
+run starts fresh.
 
 Moots and sources are interest-independent, so changing interests re-ranks the
 existing graph instead of re-reading it. A `suggested` verdict cools down for
@@ -138,8 +145,9 @@ permanent unless the user asks to revisit.
 - Hand off for login, 2FA, captcha, or payment, and never try to pass a challenge
   to keep a run going.
 - Never describe a protected account's interests.
-- Real handles and private details stay in the local state file, which persists
-  between runs; examples use fictional placeholders.
+- Real handles and private details stay in the local state file, or in the session
+  state you verify when writing is unavailable; never in the repository. Examples
+  use fictional placeholders.
 - Stop and ask when identity, scope, or UI behaviour is unclear.
 
 ## Related

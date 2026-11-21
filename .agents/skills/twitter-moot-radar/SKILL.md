@@ -12,9 +12,9 @@ description: >-
   your per-handle approval.
 compatibility: >-
   Needs an agent with interactive browser control, a browser session already
-  signed in to X, and local file write for the run state file. Must run locally
-  on the user's machine; cloud, sandboxed, or headless sessions without browser
-  access cannot complete it.
+  signed in to X, and optional local file write for cross-run state. Must run
+  locally on the user's machine; cloud, sandboxed, or headless sessions without
+  browser access cannot complete it.
 ---
 
 # X/Twitter Moot Radar
@@ -244,6 +244,11 @@ persists between runs so the graph and verdicts carry over. Skill text and any
 saved example use fictional placeholders, and the file holds only what tracking
 needs.
 
+Ask once for file-write access. If it is refused or the path cannot be written,
+say so in the state line, keep the same structure in session state, print it at
+every stop and before the report for the user to verify, and continue. Say once
+that the next run starts fresh and may repeat decided work.
+
 ## Step 10 — Report honestly
 
 - Interest profile, overlap bar, and exclusions in force.
@@ -276,7 +281,8 @@ needs.
 - [ ] Near misses listed with reasons.
 - [ ] Only approved handles followed and verified after settling; no double
       clicks; cadence jittered.
-- [ ] State written before hand-off.
+- [ ] State written before hand-off, or printed for verification when writing is
+      unavailable.
 - [ ] Run opened with the state line.
 - [ ] Every handle the run lists, every moot, and every cited post is linked to what was read.
 - [ ] Access failures flagged, not turned into verdicts.

@@ -98,6 +98,10 @@ verify before claiming, persist progress, stop cleanly — is in
   verification; a challenge stops the run.
 - An online skill stops on an access failure instead of inferring account state.
   Record an unreadable page as a verdict with a reason.
+- Persistence is never a hard stop. When the state-file write is refused or
+  unavailable, the run continues on session state of the same shape, prints it for
+  the user to verify, and says plainly that the next run starts fresh and may
+  repeat work.
 
 ## Adding a skill
 
@@ -170,6 +174,8 @@ cannot run.
 - [ ] The README bullet exists and matches the skill's real requirements.
 - [ ] Online skills keep run data — handles, quotes, screenshots, state — outside
       the skill folder.
+- [ ] A state-writing skill states the session-only fallback and does not stop
+      when file write is unavailable.
 
 ## Catalog state
 

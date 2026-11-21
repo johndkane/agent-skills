@@ -75,6 +75,10 @@ that file is authoritative and the body names it.
 States: `suggested`, `dismissed`, `followed`, `pending`, `unverified`,
 `already_following`, `skipped`, `no_evidence`, `unreadable`.
 
+When the write is refused or unavailable, the run continues on session state of
+the same shape and prints it for the user to verify; the graph, cooldowns, and
+verdicts are then lost between runs, and that repeated work is accepted.
+
 ## Why sources and verdicts are separate
 
 The social graph (`moots`, `sources`) is expensive to read and independent of the

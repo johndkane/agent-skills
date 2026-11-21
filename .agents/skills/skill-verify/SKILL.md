@@ -91,6 +91,10 @@ Quote the advertised values; use the validator's `read-properties` when present.
   not.
 - Runtime state points outside the folder, for example `~/.<name>/`; a state
   file, database, or export inside the folder is a fail.
+- A skill that writes runtime state must say what happens when the write is
+  refused or unavailable: continue on session state, print it for the user to
+  verify, and accept repeated work next run. Stopping a run for missing
+  persistence, or presenting session state as a saved file, is a fail.
 
 ## Step 3 — Shape and size
 
