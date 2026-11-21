@@ -84,6 +84,10 @@ handle, verdicts, and dates to its state file outside the repository
 (`~/.x-<skill>/<handle>.json`), where it persists between runs so the work
 resumes. Nothing in the repository — and no commit message — stores it.
 
+An online skill's folder is instructions, not run memory. Saved post quotes,
+permalinks, profile excerpts, follower lists, screenshots, and state dumps stay
+outside it, exactly like real handles.
+
 ## Docs and lode are different things
 
 | Directory | Owner | Purpose |

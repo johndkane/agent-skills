@@ -32,6 +32,9 @@
 - **Unreadable** — a page that rendered a notice instead of a profile, such as a sensitive-content interstitial; recorded as a verdict with a reason, never inferred from.
 - **Follow-up pass** — the start-of-run check of due pending requests and unverified clicks.
 - **Run state file** — per-account local JSON at `~/.x-<skill>/` holding the criteria or interests in force, cursor, queue, verdicts, and follow-ups; it persists between runs and is the only place a real handle or private detail is written.
+- **State line** — the one- or two-line start-of-run summary of the state file path and what it currently holds; with no file, it names the path and says the run starts fresh.
+- **Linked evidence** — a handle, quote, or date in a run's output that opens the X profile or post it came from; only pages read in that run are linked, never a guessed URL.
+- **Access failure** — a browser, network, or site condition that stops a page or control from rendering; a run-level stop and flag, never a verdict about the account.
 - **Placeholder handle** — a fictional handle such as `@alice` used in skill text, docs, and examples; real handles exist only in the run state file.
 - **Human cadence** — jittered waits, scroll steps, pointer moves, and dwell times drawn from ranges so a run does not read as a fixed click rhythm.
 - **X core contract** — [`docs/skills/twitter-core.md`](../docs/skills/twitter-core.md), the authoring home for rules shared by every browser-driven X skill; skill bodies mirror it and never link to it.

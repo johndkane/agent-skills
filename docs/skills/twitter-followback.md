@@ -74,7 +74,9 @@ skip it before loading.
    challenge still ends the run.
 10. **Persist and report** — save the cursor, verdicts, and follow-up dates;
     report new follows, pre-existing follows, pending requests, unverified
-    clicks, and skips separately.
+    clicks, and skips separately. Every handle the run lists — state line,
+    question, or report — opens its X profile, and cited posts open their
+    permalinks, so every claim is one click from its source.
 
 ## Protected accounts
 
@@ -100,12 +102,31 @@ relationship — because the notice is not the account. A later visit may render
 normally; until it does, the account stays out of both the queue and the report's
 judgements.
 
+## Connectivity and access failures
+
+A page that did not render is treated as an access failure, not as an account
+state. That covers a disconnected browser relay, a closed tab, DNS or timeout
+errors, an X error page or blank shell, an expired session, and a login wall. A
+tab that worked earlier and then stops rendering mid-run is the same failure.
+
+The skill stops and flags what failed, where, how many items remain, and the
+resume point. An item whose page never loaded gets no verdict, so the next run
+retries it instead of recording a false "skipped" or "not followed". A click
+already made when the page fails is recorded `unverified` with a follow-up,
+because it may have landed. Login, 2FA, captcha, and checkpoints are handed to
+the user. A profile-level sensitive-content notice stays `unreadable`, and a
+visible rate-limit notice stays a throttle.
+
 ## Across runs
 
 The Followers tab can hold hundreds of rows, and X throttles follows after a
 short burst, so one pass is not expected to finish. The skill keeps one state
 file per signed-in account at `~/.x-followback/<handle>.json`
 (`%USERPROFILE%\.x-followback\<handle>.json` on Windows), outside the repository.
+
+Each run opens by naming that file and summarizing what it holds — criteria,
+queue and verdict counts, due follow-ups, and resume point — or saying that it
+starts fresh.
 
 It records the scan cursor, the pending queue, a verdict per handle, and a
 `followUps` list for pending requests and unverified clicks. Later runs drain the

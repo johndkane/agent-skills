@@ -36,6 +36,12 @@ from the live page, observation first.
   protected account reaches `Pending` at most — a request, not a follow.
 - Never click one control twice inside the settle window.
 - Persist progress and follow-ups to the state file; the live UI wins over it.
+- Open with one short state line before scanning: the file path and what it holds
+  — criteria, queue and verdict counts, due follow-ups, resume point. No file:
+  name the path and say the run starts fresh. Summarize, do not dump it.
+- Link what you name: every handle the run lists — state line, question, or
+  report — opens `https://x.com/<handle>`, and each cited post opens its
+  permalink. Link only pages read this run; never invent a URL.
 - Borderline accounts are the user's call. Bring the evidence, not just the
   handle.
 - One account per action: the click must be tied to the researched `@handle`.
@@ -68,6 +74,24 @@ Pacing never excuses skipping verification or passing a challenge.
   retry rules stay exact.
 - A captcha, checkpoint, or "verify it's you" prompt ends the run. Hand off;
   never try to pass it.
+
+## Access failures
+
+A page that did not load is not evidence. Treat these as access failures: relay
+disconnected, tab gone, navigation timeout, DNS or network error; an X error
+page, blank shell, or spinner with no content; a title or URL that is not the
+requested page; an expired session, login wall, captcha, checkpoint, or
+site-wide block.
+
+Stop the task and report the failure; never turn it into a verdict. Mid-run, a
+tab that worked and then stops rendering is the same thing: re-read once after a
+2–5 second pause to rule out a blip, then stop. Keep the cursor and confirmed
+state; do not advance past an unread item. An item whose page never loaded gets
+no verdict; if a click was already made and the page then fails, record
+`unverified` with a follow-up, because the click may have landed. Say what
+failed, where, how many items remain, and the resume point. A profile-level
+sensitive-content notice stays `unreadable`; a visible rate-limit notice follows
+the throttle rule.
 
 ## Step 0 — Confirm browser control
 
@@ -120,10 +144,10 @@ the protected decision and budget in one summary.
 
 ## Step 3 — Load state, build the queue
 
-1. Read the state file first (Step 7). Same account and criteria: skip
-   `processed`, except re-read `unverified` and `unreadable` and wait for
-   `pending`'s `checkOn`; drain `queue`; scan from `scannedThrough`. Criteria
-   changed: archive the file and start fresh. UI wins in every case.
+1. Read the state file first (Step 7) and say the state line. Same account and
+   criteria: skip `processed`, except re-read `unverified` and `unreadable` and
+   wait for `pending`'s `checkOn`; drain `queue`; scan from `scannedThrough`.
+   Criteria changed: archive the file and start fresh. UI wins in every case.
 2. Collect `Follow back` rows plus `Follow` rows confirmed this run as protected
    followers, keyed by `@handle`, in order. A `Follow` row with no lock icon is
    someone who no longer follows the user: leave it unqueued and un-researched.
@@ -241,6 +265,9 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
 - [ ] Control proven; account identified; UI labels confirmed this run.
 - [ ] Criteria, protected decision, and budget confirmed and restated.
 - [ ] State loaded or started fresh; no rework of processed handles.
+- [ ] Run opened with the state line.
+- [ ] Every handle the run lists and every cited post links to what was read.
+- [ ] Access failures flagged, not turned into verdicts.
 - [ ] Queue from follow-back rows only; `Follow` strangers excluded, `Pending`
       recorded, not queued.
 - [ ] Every candidate researched; protected and unreadable limits stated, not

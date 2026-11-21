@@ -8,9 +8,9 @@ without costing context on every prompt.
 
 | Skill | What it does | Runs where |
 | --- | --- | --- |
-| [`twitter-followback`](twitter-followback.md) | Researches followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts | Local agent with browser control |
-| [`twitter-moot-radar`](twitter-moot-radar.md) | Asks for your interests, reads what your mutuals follow, and suggests matching accounts with quoted proof and live follow status | Local agent with browser control |
-| [`skill-verify`](skill-verify.md) | Checks a skill folder against the catalog rules and reports pass/fail with evidence | Local agent with file and shell access |
+| [`twitter-followback`](twitter-followback.md) | Researches followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts; links handles and cited posts; stops on access failures; opens each run with its state summary | Local agent with browser control |
+| [`twitter-moot-radar`](twitter-moot-radar.md) | Asks for your interests, reads what your mutuals follow, and suggests matching accounts with quoted proof and live follow status; every handle, moot, and quote is linked; stops on access failures; opens each run with its state summary | Local agent with browser control |
+| [`skill-verify`](skill-verify.md) | Checks a skill folder against the catalog rules — including personal-data safety for online skills — and reports pass/fail with evidence | Local agent with file and shell access |
 
 The full instructions for each skill live in its `SKILL.md`; these pages explain
 the skill rather than replacing it.
@@ -114,7 +114,10 @@ must not depend on either `AGENTS.md` or this wiki.
 - **No real identities** — skill text, docs, lode entries, and commit messages
   use fictional placeholders (`@alice`, `example.com`). A real handle, name,
   email, or private detail belongs only in the runtime state file the skill
-  defines, outside the repository, where it persists between runs.
+  defines, outside the repository, where it persists between runs. For an
+  X/Twitter, browser-driven, or other online skill, the folder is instructions,
+  not run memory: no saved quotes, permalinks, follower lists, screenshots, or
+  state dumps.
 - **Families** — a skill that belongs to a family (currently the
   [X/Twitter skills](twitter-core.md)) follows the family contract instead of
   inventing browser, timing, or state behaviour. Its body carries the rules it

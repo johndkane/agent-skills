@@ -25,6 +25,16 @@ human page:
    content" interstitial — is recorded `unreadable`, never inferred from.
 10. Cadence jitter changes timing only, never verification or the challenge
     handoff.
+11. A run opens with one short state line: the file path, criteria in force, queue
+    and verdict counts, due follow-ups, and resume point. No file means the run
+    starts fresh.
+12. Reports link what they name: every handle a run lists — state line, question,
+    or report — to `https://x.com/<handle>`, and cited posts to their permalinks,
+    from pages read this run. No invented URLs.
+13. A page that did not load is an access failure, not a verdict. Stop, flag what
+    failed and the resume point, and write nothing for an item whose page never
+    loaded; a click already made is `unverified` with a follow-up. Never infer
+    skipped, no posts, or not followed.
 
 ## Cadence
 

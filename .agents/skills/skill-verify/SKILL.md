@@ -2,11 +2,12 @@
 name: skill-verify
 description: >-
   Verify a skill in this repository before handoff: folder and name match,
-  frontmatter limits, self-containment, progressive disclosure and size,
-  reference layout, catalog wiring, and the official skills-ref validator. Use
-  before creating or changing any skill, or when asked to verify, review, check,
-  or audit a skill; reports pass/fail with file evidence and exact fixes. Not for
-  authoring skill content or auditing unrelated repositories.
+  frontmatter limits, self-containment, personal-data safety, progressive
+  disclosure and size, reference layout, catalog wiring, and the official
+  skills-ref validator. Use before creating or changing any skill, or when asked
+  to verify, review, check, or audit a skill; reports pass/fail with file evidence
+  and exact fixes. Not for authoring skill content or auditing unrelated
+  repositories.
 compatibility: >-
   Requires local file read and shell access. The frontmatter validator is
   .venv/skills-ref or skills-ref on PATH; without either, that check is manual
@@ -63,7 +64,7 @@ Never install a source silently; a missing source makes its check unverified.
 
 Quote the advertised values; use the validator's `read-properties` when present.
 
-## Step 2 — Self-containment
+## Step 2 — Self-containment and personal data
 
 - Search the body for `../`, `docs/`, `lode/`, `AGENTS.md`, `.agents/`, and host
   directories (`.claude/`, `.github/`, `.zcode/`, `.cursor/`, `.opencode/`,
@@ -72,10 +73,20 @@ Quote the advertised values; use the validator's `read-properties` when present.
 - Every relative link and image resolves inside the skill folder.
 - Every referenced file is one level deep from `SKILL.md`; no nested chains.
 - No absolute local paths or `file://` links.
-- No real account handles, personal names, email addresses, or private details.
-  Examples use obvious placeholders (`@alice`, `example.com`); a real handle
-  belongs only in the runtime state file the skill defines.
-- Runtime state points outside the folder, for example `~/.<name>/`.
+- No personal data anywhere in the folder. Examples use obvious placeholders
+  (`@alice`, `@bob`, `@me`, `<handle>`, `example.com`); a real handle, name,
+  email, phone, address, account ID, or private detail belongs only in the
+  runtime state file.
+- For an X/Twitter, browser-driven, or other online skill, the whole folder —
+  `SKILL.md`, `references/`, `scripts/`, and `assets/` — is instructions, never
+  run memory. Fail a saved post quote, permalink, profile excerpt, follower list,
+  screenshot, state dump, credential, cookie, or session token. List every `@`
+  token and every image, and say which are placeholders; an image showing an
+  identifiable profile is a fail. A placeholder URL such as
+  `https://x.com/<handle>` is fine; a specific profile or status URL from a run is
+  not.
+- Runtime state points outside the folder, for example `~/.<name>/`; a state
+  file, database, or export inside the folder is a fail.
 
 ## Step 3 — Shape and size
 
@@ -137,6 +148,7 @@ From the repository root:
 - [ ] Folder and `name` match; frontmatter within limits.
 - [ ] No repo or host path in the body; links stay inside the folder.
 - [ ] No real handles, names, emails, or private details; examples are placeholders.
+- [ ] Online skills carry no run data: no saved quotes, permalinks, screenshots, or state.
 - [ ] Size within target; references flat and named; closing checklist present.
 - [ ] README bullet, docs row and page, lode entry and map row.
 - [ ] Validator reports `Valid skill`; links resolve.

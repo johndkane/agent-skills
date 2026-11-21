@@ -27,6 +27,13 @@ and reports pass/fail with evidence. Canonical instructions:
 9. The third-party `skill-validator` (agent-ecosystem) may supplement structure,
    link, orphan, and token checks when it is already on `PATH`. Its absence is
    never a failure, and it is never installed to make a check pass.
+10. Personal data never ships in a skill folder. Online skills in particular keep
+    no run artifacts — real handles, saved quotes, permalinks, screenshots,
+    follower lists, state dumps, credentials, cookies, or session tokens — in
+    `SKILL.md`, `references/`, `scripts/`, or `assets/`. Only placeholders are
+    allowed; runtime state stays outside the folder. A placeholder URL such as
+    `https://x.com/<handle>` is fine; a specific profile or status URL from a run
+    is not.
 
 ## Sources
 
@@ -64,6 +71,9 @@ when file or shell access is missing.
   frontmatter validation is manual and marked unverified.
 - `skills-ref` accepts Unicode letters in `name`, while this repository requires
   ASCII `[a-z0-9-]`; the gate applies the stricter rule.
+- Personal-data detection is judgement-based. The gate lists handles and images
+  and confirms placeholders; it cannot prove a handle is fictional, so an
+  unfamiliar one is a finding, not a pass.
 - It knows this repository's layout by design, which is the documented exception
   to the self-containment rule.
 

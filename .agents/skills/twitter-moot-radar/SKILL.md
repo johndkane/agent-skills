@@ -40,6 +40,13 @@ per-handle approval.
 - Report by default. Follow only handles the user approves by name.
 - Filter noise at the row level; keep quote evidence dated; reuse the graph and
   re-rank when interests change.
+- Open with one short state line before harvesting: the file path and what it
+  holds — interests, moot and source counts, queue and verdict counts, last
+  write. No file: name the path and say the run starts fresh. Summarize, do not
+  dump it.
+- Link what you name: every handle the run lists — state line, question, or
+  report — opens `https://x.com/<handle>`, and each cited post or bio line links
+  to its page. Link only pages read this run; never invent a URL.
 
 ## Human cadence
 
@@ -69,6 +76,24 @@ Pacing never excuses skipping verification or passing a challenge.
   retry rules stay exact.
 - A captcha, checkpoint, or "verify it's you" prompt ends the run. Hand off;
   never try to pass it.
+
+## Access failures
+
+A page that did not load is not evidence. Treat these as access failures: relay
+disconnected, tab gone, navigation timeout, DNS or network error; an X error
+page, blank shell, or spinner with no content; a title or URL that is not the
+requested page; an expired session, login wall, captcha, checkpoint, or
+site-wide block.
+
+Stop the task and report the failure; never turn it into a verdict. Mid-run, a
+tab that worked and then stops rendering is the same thing: re-read once after a
+2–5 second pause to rule out a blip, then stop. Keep the cursor and confirmed
+state; do not advance past an unread item. An item whose page never loaded gets
+no verdict; if a click was already made and the page then fails, record
+`unverified` with a follow-up, because the click may have landed. Say what
+failed, where, how many items remain, and the resume point. A profile-level
+sensitive-content notice stays `unreadable`; a visible rate-limit notice follows
+the throttle rule.
 
 ## Step 0 — Confirm browser control
 
@@ -103,7 +128,7 @@ passkey, captcha, or payment; never enter credentials.
 ## Step 2 — Ask for areas of interest
 
 Never infer interests from existing follows. If state holds a profile for this
-account, show it and ask whether to keep or change it.
+account, say the state line, show it, and ask whether to keep or change it.
 
 Ask, then restate:
 
@@ -299,5 +324,8 @@ needs.
 - [ ] Only approved handles followed and verified after settling; no double
       clicks; cadence jittered.
 - [ ] State written before hand-off.
+- [ ] Run opened with the state line.
+- [ ] Every handle the run lists, every moot, and every cited post is linked to what was read.
+- [ ] Access failures flagged, not turned into verdicts.
 - [ ] Report separates suggestions, near misses, filtered counts, and follow
       outcomes.

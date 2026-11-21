@@ -87,6 +87,10 @@ Skill text, docs, lode entries, and commit messages use fictional placeholders
 (`@alice`, `example.com`). A real handle, name, email, or private detail never
 enters a file in this repository.
 
+An online skill's folder is instructions, not run memory. Saved quotes,
+permalinks, profile excerpts, follower lists, screenshots, and state dumps stay
+out, exactly like real handles.
+
 ```text
 skill text / docs / lode / commits  ->  placeholders only
 ~/.x-<skill>/<handle>.json          ->  the real handle, verdicts, dates

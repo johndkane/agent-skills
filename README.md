@@ -20,8 +20,11 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
   bots, marketing, adult, crypto, and impersonation accounts. Offers a policy for
   protected accounts, whose posts are unreadable and whose follow only reaches
   `Pending`, and keeps progress in a local state file so long queues and pending
-  requests resume across runs. Paces itself at a jittered human cadence instead
-  of a fixed click rhythm.
+  requests resume across runs. Each run opens by naming that file and summarizing
+  it briefly. Handles and cited posts in its output link to X, so each claim is
+  one click from its source. It stops and flags browser, network, or site-access
+  failures instead of inferring account state. Paces itself at a jittered human
+  cadence instead of a fixed click rhythm.
   - **Triggers** on "follow back my followers", "clean up my follow-back queue",
     or "which followers are worth following back".
   - **Needs** interactive browser control with a browser already signed in to X,
@@ -30,9 +33,12 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
 
 - **[`twitter-moot-radar`](.agents/skills/twitter-moot-radar/SKILL.md)** — asks
   for your areas of interest, harvests what your mutuals follow, and suggests only
-  matching accounts, each with a quoted post, its permalink, the moots behind it,
-  and live proof you do not follow them yet. Nothing is followed without your
-  per-handle approval. Paces itself at the same jittered human cadence.
+  matching accounts, each with a linked quoted post, its permalink, the moots
+  behind it, and live proof you do not follow them yet. Handles and evidence are
+  links to X. Nothing is followed without your per-handle approval. Each run opens
+  by naming its state file and summarizing it. It stops and flags access failures
+  instead of inferring account state, and paces itself at the same jittered human
+  cadence.
   - **Triggers** on "find people I should follow", "who do my moots follow that I
     don't?", or "build me a follow list from my network".
   - **Needs** interactive browser control with a browser already signed in to X,
@@ -40,9 +46,9 @@ each with a `SKILL.md` and optional `scripts/`, `references/`, and `assets/`.
     headless sessions cannot run it.
 
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the repository's
-  verification gate: checks a skill's frontmatter, self-containment, size,
-  reference layout, and catalog wiring, then reports pass/fail with file
-  evidence. Frontmatter and naming go through the official `skills-ref`
+  verification gate: checks a skill's frontmatter, self-containment, personal-data
+  safety, size, reference layout, and catalog wiring, then reports pass/fail with
+  file evidence. Frontmatter and naming go through the official `skills-ref`
   validator; the catalog checks are this repository's own.
   - **Triggers** before handing off any skill creation or change, or on "verify
     this skill", "check the skill", or "is this skill ready?".

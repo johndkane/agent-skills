@@ -52,10 +52,15 @@ Two other sources exist and are deliberately not required:
 
 1. **Frontmatter** — folder and `name` match, kebab-case rules, description
    limits and trigger words, `compatibility` ≤500, standard fields only.
-2. **Self-containment** — no links or dependencies outside the skill folder, no
-   host or repository paths, every reference one level deep and resolvable, and
-   no real handles, names, emails, or private details; examples are
-   placeholders.
+2. **Self-containment and personal data** — no links or dependencies outside the
+   skill folder, no host or repository paths, every reference one level deep and
+   resolvable. Examples use placeholders; the folder holds no real handles,
+   names, emails, phones, addresses, account IDs, or private details. For
+   X/Twitter, browser-driven, and other online skills it also fails saved post
+   quotes, permalinks, profile excerpts, follower lists, screenshots, state
+   dumps, credentials, cookies, or session tokens: instructions are not run
+   memory. A placeholder URL such as `https://x.com/<handle>` is fine; a specific
+   profile or status URL from a run is not.
 3. **Shape and size** — line and token targets, flat focused references,
    scripts and assets named, closing checklist, no duplicated rules.
 4. **Catalog wiring** — root README bullet, docs catalog row and page, lode entry
@@ -77,7 +82,9 @@ knows this repository's layout by design — the one exception to the
 self-containment rule — but it still links only inside its own folder, so a
 copied folder works. `skills-ref` accepts Unicode letters in `name`, while this
 repository requires ASCII kebab-case, so the stricter rule wins when they
-disagree.
+disagree. Personal-data detection is judgement-based: the check lists every
+handle and image and confirms placeholders, but it cannot prove a handle is
+fictional, so an unfamiliar one is a finding rather than a pass.
 
 ## Related
 

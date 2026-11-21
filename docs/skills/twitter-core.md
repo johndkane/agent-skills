@@ -80,6 +80,25 @@ damages the user's account or produces a false claim.
     inside the repository. Skill text, saved examples, and commits use fictional
     placeholders (`@alice`); a real handle or private detail appears only in that
     account's state file, outside the repository, where it persists between runs.
+15. **Say where progress lives at the start.** As soon as the signed-in account is
+    known and before any scanning, give one short state line: the state file path
+    and what it currently holds — the criteria or interests in force, queue and
+    verdict counts, due follow-ups, and the resume point. If no file exists, name
+    the path and say the run starts fresh. Summarize; never dump the file.
+16. **Link what you name.** Whenever the run lists a handle — in the state line, a
+    question, or the report — link it to its profile, and link every cited post
+    or profile fact to the page it came from. Use full `https://x.com/<handle>`
+    and status permalinks, with the handle or quote as the link text. Link only
+    pages read this run; never invent a URL. State files keep handles, not report
+    links.
+17. **An unreachable target is not a result.** Distinguish a browser, network, or
+    site-access failure from an account or list state. If the page, tab, or
+    required control did not render — or a working tab stops responding mid-run —
+    stop, say what failed and when, and preserve the resume point. Never infer
+    "not followed", "no posts", "empty list", or "skipped" from a page that did
+    not load. A click already made when access fails is `unverified` with a
+    follow-up, because it may have landed. A login wall, captcha, or checkpoint
+    is a handoff; a rate-limit notice keeps the throttle rule.
 
 ## Human cadence
 

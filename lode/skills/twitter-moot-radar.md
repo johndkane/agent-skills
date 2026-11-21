@@ -31,6 +31,16 @@ Family rules: [`twitter-core`](../../docs/skills/twitter-core.md).
 10. Cadence, throttling, credential handoff, and reporting honesty are written
     into the skill body from the family contract; a copied skill has no access to
     `docs/`.
+11. A run opens with one short state line: the file path, interests in force, moot
+    and source counts, queue and verdict counts, and last write. No file means the
+    run starts fresh.
+12. Reports link what they name: every handle a run lists — state line, question,
+    or report — to `https://x.com/<handle>`, and each quote to its post
+    permalink, from pages read this run. No invented URLs.
+13. A page that did not load is an access failure, not a verdict. Stop, flag what
+    failed and the resume point, and write nothing for an item whose page never
+    loaded; a click already made is `unverified` with a follow-up. Never infer
+    no_evidence, an empty list, or not followed.
 
 ## Pipeline
 

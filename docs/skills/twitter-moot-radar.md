@@ -85,12 +85,18 @@ candidate's own posts and bio can do that.
 
 Every suggestion must show:
 
-- a quoted post of 200 characters or fewer, with its date and permalink, or a bio
-  line that states the interest;
-- the moots who follow the account, by handle and count;
+- a quoted post of 200 characters or fewer, with its date and a permalink that is
+  linked, or a linked bio line that states the interest;
+- the moots who follow the account, by handle and count, each handle linked to
+  its profile;
 - a live `Follow @handle` control reading, confirming the user does not already
   follow them;
 - an optional `follows you` note, which is a bonus rather than a reason.
+
+The candidate handle links to its profile. Every handle the run lists — in the
+state line, a question, or the report — plus every cited moot or quote, is one
+click from the page it came from. Only pages read in the run are linked; a status
+URL is never built from a handle.
 
 If the posts are unreadable — a protected account, or a "potentially sensitive
 content" interstitial standing in for the profile — there is no suggestion. The
@@ -101,12 +107,31 @@ An empty result is a valid result: the skill reports the filtered counts and
 offers to widen the interests, lower the overlap bar, or extend the harvest rather
 than padding the list with weak matches.
 
+## Connectivity and access failures
+
+A page that did not render is treated as an access failure, not as an account
+state. That covers a disconnected browser relay, a closed tab, DNS or timeout
+errors, an X error page or blank shell, an expired session, and a login wall. A
+tab that worked earlier and then stops rendering mid-run is the same failure.
+
+The skill stops and flags what failed, where, how many items remain, and the
+resume point. An item whose page never loaded gets no verdict, so the next run
+retries it instead of recording a false `no_evidence` or "not followed". A click
+already made when the page fails is recorded `unverified` with a follow-up,
+because it may have landed. Login, 2FA, captcha, and checkpoints are handed to
+the user. A profile-level sensitive-content notice stays `unreadable`, and a
+visible rate-limit notice stays a throttle.
+
 ## Across runs
 
 State lives at `~/.x-moot-radar/<handle>.json`
 (`%USERPROFILE%\.x-moot-radar\<handle>.json` on Windows), outside the repository.
 It holds the interest profile in force, confirmed moots with their topic, the
 harvested source sets, the per-moot cursor, the queue, and a verdict per handle.
+
+Each run opens by naming that file and summarizing what it holds — interests,
+moot and source counts, queue and verdict counts, last write — or saying that it
+starts fresh.
 
 Moots and sources are interest-independent, so changing interests re-ranks the
 existing graph instead of re-reading it. A `suggested` verdict cools down for

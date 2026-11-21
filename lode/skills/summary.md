@@ -47,7 +47,9 @@ extensions.
 
 The two X skills follow this shape: state schemas live in
 `references/state-file.md`, and the follow-back UI ladder and the suggestion card
-live in their own reference files.
+live in their own reference files. Both open a run with a brief state line, link
+every handle and cited source in their output, and stop on an access failure
+instead of inferring state.
 
 ## Authoring flow
 

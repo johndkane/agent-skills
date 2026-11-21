@@ -5,12 +5,12 @@ template and the presentation rules; Step 7 decides the order.
 
 ## Card
 
-```text
-@handle — Display name
-Interest: Rust and systems programming        Moots: @a, @b (2)
-Evidence: "spent the week rewriting the scheduler in unsafe Rust" — 2026-11-14
-          https://x.com/handle/status/...
-Bio: systems engineer, ex-embedded
+```markdown
+[@handle](https://x.com/handle) — Display name
+Interest: Rust and systems programming
+Moots: [@a](https://x.com/a), [@b](https://x.com/b) (2)
+Evidence: "spent the week rewriting the scheduler in unsafe Rust" — [2026-11-14](https://x.com/handle/status/...)
+Bio: [systems engineer, ex-embedded](https://x.com/handle)
 Status: not followed · follows you
 Why: writes about low-level Rust, and two of your Rust moots follow them
 Caution: none
