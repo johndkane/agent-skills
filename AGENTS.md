@@ -1,116 +1,83 @@
 # AGENTS.md
 
 Guidance for agents working in this repository. This file is repository-agnostic:
-it describes how to work, not what this project contains. Project-specific rules,
-layout, commands, and validation live in the lode at `lode/`.
+it covers how to work, not what the project contains. Project-specific rules
+(layout, invariants, commands, validation) live in the lode at `lode/`; this file
+stays generic so it can be reused unchanged.
 
 ## Start here
 
-1. Read `lode/lode-map.md`, `lode/summary.md`, and `lode/terminology.md` before
-   exploring or changing the codebase. The map is the index; load only the lode
-   files relevant to the task.
-2. Treat the lode as the project-specific instruction set. If it contradicts the
-   code, the code is the source of truth: summarize the disparity and ask before
-   changing the lode.
-3. Do not add project details to this file. Add them to the lode entry that owns
-   the topic and register that file in `lode/lode-map.md`.
+Read `lode/lode-map.md`, `lode/summary.md`, and `lode/terminology.md` first; the
+map indexes the rest, so load only what the task needs. The lode is the
+project-specific instruction set: if it contradicts the code, the code wins —
+summarize the disparity and ask before changing the lode. Keep project details out
+of this file; put a new rule in the owning lode entry and register it in the map.
+Session scraps belong in `lode/tmp/`, which is git-ignored.
 
-## Working with the human
+## Working rules
 
-- The human owns the code and makes final decisions. You are the memory and the
-  fast executor.
-- Confirm the brief before acting: scope, exclusions, edge cases, budget. Restate
-  it; "use your judgment" still needs a stated rubric.
-- Observe the live environment before acting. A remembered file, schema, UI, or
-  limit is not evidence; re-read and record what was confirmed this run.
-- Verify before claiming. Report verified, unverified, skipped, and unreadable
-  outcomes separately; never claim success from memory or inference.
-- Persist progress and follow-ups outside the repository so long tasks resume.
-- Prefer a clean stop and hand-off over pushing through a limit.
+- The human owns the code and decisions; you are the memory and fast executor.
+  Confirm the brief first: scope, exclusions, edge cases, budget. Restate it;
+  "use your judgment" still needs a stated rubric.
+- The disk is the source of truth, not your context. Re-read before acting on a
+  possibly stale view; when a tool result disagrees, inspect again rather than
+  retrying blindly. Treat unfamiliar edits as work in progress: adapt, say what
+  changed, and never revert or overwrite them. Ask only when intent is unclear.
+- Observe the live environment and record what you confirmed; a remembered file,
+  schema, UI, or limit is not evidence. Verify before claiming, never from memory
+  or inference, and report verified, unverified, skipped, and unreadable outcomes
+  separately.
+- Persist progress and follow-ups outside the repository so long tasks resume;
+  prefer a clean stop and hand-off over pushing through a limit.
 - On a destructive, irreversible, or external action, stop and ask.
-
-## A live repository
-
-Developers edit the project while agent sessions run: files, docs, lode entries,
-and even this file can change mid-session. That is expected, not corruption.
-
-- The disk is the source of truth, not your earlier context. Re-read a file before
-  acting when your last read may be stale.
-- Treat unfamiliar edits as the developer's work in progress. Do not revert,
-  overwrite, or "restore" changes you did not make.
-- If a change conflicts with your task, adapt to the current state and say what
-  changed; ask only when the intent is unclear.
-- When a tool result no longer matches what you read, inspect again before acting.
-  Do not retry blindly against a stale view.
-- Git writes stay opt-in even while others are committing.
+- Git writes stay opt-in even while others commit.
 
 ## Git
 
-Git writes happen only when the user explicitly asks for them. The human owns
-version control, and a request to implement something is not a request to commit.
-
-Query any time: `status`, `diff`, `log`, `show`, `ls-files`, `check-ignore`,
-`blame`, `rev-parse`, `describe`.
-
-Do not run unless the user asks: `add`, `commit`, `push`, `pull`, `fetch`,
-`merge`, `rebase`, `reset`, `checkout`, `switch`, `restore`, `stash`, `tag`,
-`clean`, `branch` changes, `remote` changes, `config` writes, `init`, or
-`worktree`.
-
-When work is complete, report what should be committed and stop. Commit only
-after an explicit instruction such as "commit this" or "push it".
+The human owns version control. Write only when the user explicitly asks; a
+request to implement is not a request to commit. Query any time: `status`, `diff`,
+`log`, `show`, `ls-files`, `check-ignore`, `blame`, `rev-parse`, `describe`. Ask
+first for `add`, `commit`, `push`, `pull`, `fetch`, `merge`, `rebase`, `reset`,
+`checkout`, `switch`, `restore`, `stash`, `tag`, `clean`, branch/remote changes,
+config writes, `init`, and `worktree`. When done, report what should be committed
+and stop.
 
 ## Secrets and personal data
 
-- Never write secrets, credentials, tokens, `.env` contents, or private keys into
-  a repository file, a persisted command, or a commit message.
-- No real names, handles, emails, addresses, or private details in repository
-  files or commits. Use fictional placeholders such as `@alice` or
-  `example.com`.
-- Runtime and account data belongs outside the repository, one file per user or
-  account, with no secrets and no bulk personal data.
-- If you find a secret already committed, stop and report it. Do not copy it,
-  print it, or rotate it yourself.
-- Human-scale use only: no mass automation, volume scraping, or evading controls.
+Never write secrets, credentials, tokens, `.env` contents, or private keys into a
+file, command, or commit. Use fictional placeholders (`@alice`, `example.com`)
+instead of real names, handles, emails, addresses, or private details. Runtime and
+account data stay outside the repository, one file per user or account, with no
+secrets or bulk personal data. If a secret is already committed, stop and report
+it; do not copy, print, or rotate it. Human-scale use only: no mass automation,
+volume scraping, or evading controls.
 
 ## Documentation surfaces
 
-Three surfaces, one job each. Do not let them overlap.
+- `README.md` (visitors): what the repo is, what it contains, where to start;
+  high level only.
+- `docs/` (humans): all generated human documentation, grouped by audience —
+  `users/` (choose, get, use), `operators/` (layout, wiring, adoption),
+  `developers/` (rules, lode, technical detail), plus a project reference.
+- `lode/` (agents): project-specific guidance and persistent memory (Lode Coding).
 
-| Surface | Owner | Purpose |
-| --- | --- | --- |
-| `README.md` | Visitors | What the repo is, what it contains, and where to start. High level only. |
-| `docs/` | Humans | All generated documentation for users, operators, and developers. |
-| `lode/` | Agents | Project-specific guidance and persistent memory (Lode Coding). |
+README stays high level; behavior, limits, and procedures belong on the owning
+`docs/` page, and other pages link rather than restate. `docs/` and `lode/` never
+swap roles; lode content does not move into `docs/`, and `docs/` is not an agent
+scratchpad. Human pages link only to human pages: user and operator pages never
+link into `lode/` or `AGENTS.md`; only a developer page may, to explain an agentic
+mechanism or practice. A change updates the human page and the relevant lode entry
+together.
 
-- `README.md` stays a high-level overview. A behavior, limit, or procedure belongs
-  on the audience page that owns it; README links there instead of repeating it.
-- `docs/` is organized by audience: `users/` (choose, get, and use the project's
-  output), `operators/` (layout, wiring, and adoption), `developers/` (repo rules,
-  lode, and technical detail), and a reference section for the project's own
-  contract.
-- A behavior has one home in `docs/`; other pages link to it instead of restating
-  it.
-- `docs/` and `lode/` never swap roles. Do not move lode content into `docs/`, and
-  do not use `docs/` as an agent scratchpad.
-- Human pages under `docs/` link only to other human pages. A user or operator
-  page never links into `lode/` or `AGENTS.md`; only a developer page may, when it
-  explains an agentic mechanism or practice used in the project.
-- A change updates the human page and the relevant lode entry in the same change.
-
-```text
-README.md   what is this?                    -> links into docs/
-docs/       how do I use, run, or change it? -> the audience page owns the detail
-lode/       how does this project work?     -> project rules and agent recall
-```
+`README.md` = what is this; `docs/` = how do I use, run, or change it; `lode/` =
+how does this project work.
 
 ## Lode Coding
 
 The prompt below is embedded verbatim from
 <https://raw.githubusercontent.com/fjzeit/lode/refs/heads/main/prompts/SystemPrompt.txt>
-so every agent session has the method without network access. To update it,
-copy that file again unchanged, then keep the repository notes at the end of this
-section.
+so every agent session has the method without network access. To update it, copy
+that file again unchanged.
 
 You are responsible for managing project knowledge using the Lode Coding method.
 
@@ -192,26 +159,12 @@ When the session starts, briefly show that you have domain knowledge before atte
 
 if the lode/ does not exist, ask the user if you should create one.
 
-## Project guidance
-
-The lode is where this repository's specifics live: layout, invariants, commands,
-validation, and the rules that only make sense here. This file stays generic so it
-can be reused in another repository unchanged.
-
-- Start at `lode/lode-map.md`; it indexes every lode file.
-- Put a new project rule in the lode entry that owns the topic, then register the
-  file in the map.
-- Session scraps belong in `lode/tmp/`, which is git-ignored.
-
 ## Checks before handing off
 
-- [ ] The change matches the brief; out-of-scope work was left alone.
-- [ ] Verified outcomes are reported separately from unverified and skipped ones.
-- [ ] Human documentation was updated in `docs/`; `README.md` is still high level.
-- [ ] The relevant lode entry was updated, and no project detail was added to this
-      file.
-- [ ] No secrets, credentials, `.env` contents, or generated artifacts were added.
-- [ ] No real names, handles, emails, addresses, or private data appear in the
-      change or its commit message.
-- [ ] Runtime and account data stay outside the repository.
-- [ ] Git writes were made only on explicit request.
+- [ ] Matches the brief; out-of-scope work untouched.
+- [ ] Verified outcomes separated from unverified and skipped.
+- [ ] `docs/` updated; `README.md` high level; owning lode entry updated with no
+      project detail here.
+- [ ] No secrets, credentials, `.env` contents, or generated artifacts.
+- [ ] No real names, handles, emails, addresses, or private data; placeholders only.
+- [ ] Runtime/account data outside the repository; git writes only on request.

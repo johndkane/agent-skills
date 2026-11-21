@@ -33,6 +33,8 @@ lode/      -> how this project works
 ```
 
 - A new generic rule goes in `AGENTS.md`.
+- `AGENTS.md` loads every session, so keep its prose terse. The embedded Lode
+  prompt is verbatim and sets the floor; compress wording, never a rule.
 - A new project rule goes in the lode entry that owns the topic, registered in
   `lode/lode-map.md`.
 - The human-facing method page is

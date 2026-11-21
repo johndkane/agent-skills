@@ -50,6 +50,9 @@ the catalog rules, the validation commands — belongs in the lode. An agent rea
 - If a user or operator page needs a project rule, state it in human terms and
   link to the developer page that owns the explanation. Do not link it into the
   lode.
+- Keep `AGENTS.md` terse: it loads every session, and the embedded Lode prompt is
+  fixed. Compress wording, never a rule, and move any detail that grows into the
+  lode.
 - The Lode Coding prompt is embedded verbatim in `AGENTS.md`; do not paraphrase
   it. It is generic, so it belongs there.
 
@@ -59,7 +62,7 @@ The project can change while an agent is working. A developer may edit a file,
 rewrite this page, add a rule, or commit in parallel. Agents re-read before
 acting on a stale view, treat unfamiliar edits as work in progress, and adapt to
 the current state rather than reverting it. See
-[`AGENTS.md`](../../AGENTS.md#a-live-repository) for the full rule.
+[`AGENTS.md`](../../AGENTS.md#working-rules) for the full rule.
 
 ## Git is read-only by default
 
