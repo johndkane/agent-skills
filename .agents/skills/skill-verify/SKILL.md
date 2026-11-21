@@ -102,10 +102,11 @@ Quote the advertised values; use the validator's `read-properties` when present.
 
 ## Step 3 — Shape and size
 
-- Measure lines and estimate tokens as characters / 4. Pass at ≤500 lines and
-  ≤5,000 tokens, the official recommendation; fail above. Treat the catalog's
-  200–300 line / ~3,000-token aim as advisory lean-up advice, never a failure.
-  State that the token figure is an estimate.
+- Measure the body — frontmatter excluded — counting lines and estimating
+  tokens as characters / 4. Pass at ≤500 lines and ≤5,000 tokens, the official
+  recommendation; fail above. Treat the catalog's 200–300 line / ~3,000-token
+  aim as advisory lean-up advice, never a failure. State that the token figure
+  is an estimate.
 - `references/` files are flat `.md`, one topic each, named in the body with
   when to read them.
 - `scripts/` files are self-contained or declare dependencies; `assets/` files
@@ -119,9 +120,10 @@ Quote the advertised values; use the validator's `read-properties` when present.
 - A bullet under "The skills" in the root `README.md` with what it does, its
   triggers, and what it needs.
 - A row in the catalog table in `docs/skills/README.md`.
-- A `docs/skills/<name>.md` page: install sentence, behavior, triggers,
-  requirements, safety, related links. It must not call the repository path
-  canonical.
+- A docs page in the audience section that fits — `docs/skills/<name>.md` for a
+  maintenance skill, `docs/users/<name>.md` for an end-user skill: install
+  sentence, behavior, triggers, requirements, safety, related links. It must not
+  call the repository path canonical.
 - `lode/skills/<name>.md` and a row in `lode/lode-map.md`.
 - If the skill is a group member per `docs/skills/skill-groups.md`, its
   `references/<group>-shared.md` is byte-identical to

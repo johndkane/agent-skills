@@ -23,8 +23,11 @@ CLAUDE.local.md
 # SpecStory session history
 .specstory/
 
-# Lode session scraps (see docs/lode/system-prompt.md)
+# Lode session scraps (see docs/developers/lode-coding.md)
 lode/tmp/
+
+# Local Python virtualenv for the skills-ref validator
+.venv/
 
 # Agent-created worktrees outside the main checkout
 .agent-worktrees/

@@ -27,7 +27,7 @@ marketing, or unfollowing.
 | Browser control | Every action happens in the real X app, in your browser |
 | A browser already signed in to X | The skill never touches passwords or codes |
 | A local session | Cloud, sandboxed, and headless sessions can't run it |
-| Image and video checks (optional) | Need a setup that can actually show images and video frames to the model; if yours can't, the skill says so and works with text only |
+| Image, video, and audio checks (optional) | Need a setup that can actually show images, video frames, or produce transcripts; if yours can't, the skill says so and works with text only |
 | A progress file on your machine | Keeps track of where it left off in `~/.x-followback/`; without one it still works, it just can't resume |
 
 The needs are declared in the skill's own settings, so your app can skip it
@@ -88,7 +88,7 @@ check-in can flag anything that would have been skipped — without unfollowing.
 If it's still pending after about a month, the skill reports it as unresolved
 and stops checking.
 
-## Image and video checks (optional)
+## Image, video, and audio checks (optional)
 
 Text comes first and is all you get by default. Image, video-frame, and audio
 checks are opt-in — not every setup can show pictures to the model, and text is

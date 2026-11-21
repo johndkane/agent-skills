@@ -7,8 +7,8 @@ description: >-
   proof — a quoted post, its permalink, the moots behind it, and live
   confirmation that you do not follow them yet. Or assess one named account
   directly, with moot overlap shown as context rather than a requirement.
-  Optionally reads image-only posts and video frames when you opt in, as
-  labelled lower-weight proof. Use when asked to find people to follow, find
+  Optionally reads image-only posts, video frames, or audio transcripts when
+  you opt in, as labelled lower-weight proof. Use when asked to find people to follow, find
   accounts in my mutuals' circles, who do my moots follow that I don't, check
   out a specific account, find similar accounts, or build a follow list from my
   network. Built for a real person choosing who to follow on their own personal

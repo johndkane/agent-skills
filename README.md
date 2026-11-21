@@ -24,8 +24,8 @@ and the whole folder is what gets copied into whichever app you use.
   It checks each follow in the app before calling it done, keeps its progress
   in a file on your machine so a long session can pick up where it left off,
   and shows its work — every account and post it mentions links back to X. It
-  paces itself like a person would, and optional image and video-frame checks
-  stay off unless you turn them on.
+  paces itself like a person would, and optional image, video-frame, and audio
+  checks stay off unless you turn them on.
   [Read more](docs/users/twitter-followback.md)
 
 - **[`twitter-moot-radar`](.agents/skills/twitter-moot-radar/SKILL.md)** —

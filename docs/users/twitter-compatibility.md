@@ -42,7 +42,7 @@ It is read-only: it never likes, replies, reposts, follows, or messages. It is
 | A browser already signed in to X | The skill never touches passwords or codes |
 | A local session | Cloud, sandboxed, and headless sessions can't run it |
 | Following and Followers lists | Needed to sort accounts into moots, following-only, followers-only, or all; a named account is checked on its own profile instead |
-| Image and video checks (optional) | Need a setup that can actually show images and video frames to the model; if yours can't, the skill says so and works with text only |
+| Image, video, and audio checks (optional) | Need a setup that can actually show images, video frames, or produce transcripts; if yours can't, the skill says so and works with text only |
 | A progress file on your machine | Keeps the agreed settings, scores, and waiting list in `~/.x-compatibility/`; without one it still works, it just can't resume |
 
 The progress file isn't a hard requirement: if you say no, or the folder can't

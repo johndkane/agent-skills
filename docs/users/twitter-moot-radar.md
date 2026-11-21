@@ -39,7 +39,7 @@ approval, name by name.
 | Browser control | Every read and action happens in the real X app, in your browser |
 | A browser already signed in to X | The skill never touches passwords or codes |
 | A local session | Cloud, sandboxed, and headless sessions can't run it |
-| Image and video checks (optional) | Need a setup that can actually show images and video frames to the model; if yours can't, the skill says so and works with text only |
+| Image, video, and audio checks (optional) | Need a setup that can actually show images, video frames, or produce transcripts; if yours can't, the skill says so and works with text only |
 | A progress file on your machine | Keeps your moot list, its findings, and your decisions in `~/.x-moot-radar/`; without one it still works, it just can't resume |
 
 The progress file isn't a hard requirement: if you say no, or the folder can't
@@ -55,7 +55,7 @@ yourself. The next run then starts fresh, so some work may be repeated.
    often. `Following` and `Unfollow` mean the same thing: already followed.
 3. **Confirms the brief with you** — the whole moot graph or one named account,
    then 3–8 concrete interests, optional signal words, how strict to be, the
-   optional image modes, how many suggestions you want, and a time budget. It
+   optional evidence modes, how many suggestions you want, and a time budget. It
    reads the brief back before starting.
 4. **Builds the moot list** — a moot is confirmed by the "follows you" marker
    on their profile before their list is used, never guessed from a single

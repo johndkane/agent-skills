@@ -79,8 +79,9 @@ stays as the documented fallback when file or shell access is missing.
 
 - Token count is estimated as characters / 4, not tokenizer output; the report
   says so.
-- The size check passes at 500 lines and ~5,000 tokens; the 200–300-line /
-  ~3,000-token aim is advisory and never a failure.
+- The size check measures the body, frontmatter excluded, and passes at 500
+  lines and ~5,000 tokens; the 200–300-line / ~3,000-token aim is advisory and
+  never a failure.
 - The validator is `.venv/skills-ref` or `skills-ref` on `PATH`; without either,
   frontmatter validation is manual and marked unverified.
 - `skills-ref` accepts Unicode letters in `name`, while this repository requires

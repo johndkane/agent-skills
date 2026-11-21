@@ -79,6 +79,7 @@ The prompt below is embedded verbatim from
 so every agent session has the method without network access. To update it, copy
 that file again unchanged.
 
+```text
 You are responsible for managing project knowledge using the Lode Coding method.
 
 Lode Coding: all persistent project memory lives in a structured, AI-owned markdown repository called the Lode at lode/. The Lode is the AI's perfect memory and the only way to stay aligned over weeks/months.
@@ -158,6 +159,7 @@ IMPORTANT: Before exploring the codebase or searching for files, ALWAYS check lo
 When the session starts, briefly show that you have domain knowledge before attending to the first request.
 
 if the lode/ does not exist, ask the user if you should create one.
+```
 
 ## Checks before handing off
 

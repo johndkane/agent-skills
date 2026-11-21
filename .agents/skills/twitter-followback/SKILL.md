@@ -6,8 +6,8 @@ description: >-
   filtered out, and every completed follow verified in the UI. Handles protected
   accounts and pending requests, and resumes long follower queues from a local
   state file, or session state when file write is unavailable. Optionally inspects
-  profile images and video frames when you opt in, to catch stock-photo and
-  impersonation noise. Use when asked to
+  profile images, video frames, and audio transcripts when you opt in, to catch
+  stock-photo and impersonation noise. Use when asked to
   follow back followers or mutuals, review new followers, clean up a follow-back
   queue, check whether a follower is a bot, or decide which followers are worth
   following back. Built for a real person keeping up their own personal account;

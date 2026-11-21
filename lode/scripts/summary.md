@@ -41,6 +41,13 @@ graph TD
 - Placeholder files from a `core.symlinks=false` checkout are replaced without
   force.
 - Unknown environments exit with a usage error.
+- On Windows, when symlink creation is refused, the PowerShell script falls
+  back to a directory junction and the shell script reports the failure. A
+  junction is a local convenience, never the committed shape: git still records
+  the link as a relative `120000` symlink.
+- Exit status is `0` on success, `1` for an environment problem (missing
+  canonical tree, nothing wired), and `2` for a usage error (unknown
+  environment or option).
 
 ```bash
 ./scripts/link-skills.sh cursor

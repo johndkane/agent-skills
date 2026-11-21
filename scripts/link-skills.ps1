@@ -115,7 +115,7 @@ foreach ($host_ in $hosts) {
 
 if ($selected.Count -eq 0) {
     [Console]::Error.WriteLine('error: nothing to wire; see -All or pass an environment')
-    exit 2
+    exit 1
 }
 
 $relativeTarget = '..\.agents\skills'
