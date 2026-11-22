@@ -38,7 +38,7 @@ creating its central files.
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks | `~/.x-followback/` |
 | [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests, or assess one named account, with optional non-text proof | `~/.x-moot-radar/` |
 | [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts or one named account, on chosen subjects and scope, text-first with opt-in image, video-frame, and transcript evidence | `~/.x-compatibility/` |
-| [`twitter-following-audit`](../../.agents/skills/twitter-following-audit/SKILL.md) | Audit the accounts the user follows and suggest keep, unfollow, mute, block, or recheck per account, on the user's interests, optimistic and read-only, text-first with opt-in non-text evidence | `~/.x-following-audit/` |
+| [`twitter-following-audit`](../../.agents/skills/twitter-following-audit/SKILL.md) | Audit the accounts the user follows and suggest keep, unfollow, mute, or recheck per account, on the user's interests, flagging safety findings separately for the user to act on, optimistic and read-only, text-first with opt-in non-text evidence | `~/.x-following-audit/` |
 
 The links above point at this repository's copy for browsing. A skill is its
 folder, so installing one means copying that folder into a host's skills

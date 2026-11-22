@@ -16,7 +16,7 @@ Index of this lode. Read it before exploring the repository.
 | [skills/twitter-followback.md](skills/twitter-followback.md) | Follow-back run state, protected accounts, multimodal checks, cadence |
 | [skills/twitter-moot-radar.md](skills/twitter-moot-radar.md) | Moot graph, overlap ranking, proof standard, multimodal proof, cadence |
 | [skills/twitter-compatibility.md](skills/twitter-compatibility.md) | Compatibility score, associated-account scope, multimodal evidence gate, rubric, confidence, bridge matrix |
-| [skills/twitter-following-audit.md](skills/twitter-following-audit.md) | Following audit, verdict set and decision table, optimism rule, windows, reason tags, state |
+| [skills/twitter-following-audit.md](skills/twitter-following-audit.md) | Following audit, verdict set and decision table, safety-flag track, optimism rule, windows, reason tags, state |
 | [skills/skill-verify.md](skills/skill-verify.md) | Pre-handoff skill gate, checks, evidence rules |
 | [scripts/summary.md](scripts/summary.md) | Link script behaviour |
 

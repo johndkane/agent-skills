@@ -1,20 +1,21 @@
 ---
 name: twitter-following-audit
 description: >-
-  Review the accounts you follow on X (Twitter) and suggest one standard
-  action each: keep, unfollow, mute, block, or recheck later. Asks for your
-  interests first, then reads each account's bio, newest post, and recent
-  posts to check whether the connection still earns its place. Unfollow can
-  come from a quiet account, a changed focus, or drifted interests, never a
-  judgement of the person; mute keeps the connection and quiets the feed;
-  block is for bots, scams, and harassment, never disagreement. Optimistic:
-  keep is the default, thin evidence never lands a negative verdict, and every
-  card leads with what the account gives you. Use when asked to audit my
-  follows, review my following list, clean up who I follow, who has gone
-  quiet, or should I still follow @example_alice. Read only: it suggests and
-  never unfollows, blocks, mutes, follows, likes, or messages. Built for a
-  real person tending their own personal account; not for brands or marketers.
-  Not for mass unfollowing, growth hacking, or engagement farming.
+  Review the accounts you follow on X (Twitter) and suggest one of four things
+  for each: keep, unfollow, mute, or recheck later. Reads each account's bio,
+  newest post, and recent posts against your interests to check whether the
+  connection still earns its place. Unfollow can come from a quiet account, a
+  changed focus, or drifted interests, never a judgement of the person; mute
+  keeps the connection and quiets the feed. Bots, scams, harassment, and
+  impersonation are flagged separately with the evidence for you to act on —
+  it never suggests blocking. Optimistic:
+  keep is the default and thin evidence never lands a negative verdict. Use
+  when asked to audit my follows, review my following list, clean up who I
+  follow, who has gone quiet, or should I still follow @example_alice. Read
+  only: it suggests and never unfollows, blocks, mutes, follows, likes, or
+  messages. Built for a real person tending their own personal account; not
+  for brands or marketers. Not for mass unfollowing, growth hacking, or
+  engagement farming.
 compatibility: >-
   Needs interactive browser control and a browser session already signed in to
   X, plus optional local file write for cross-run state. For optional image,
@@ -27,11 +28,16 @@ compatibility: >-
 # X/Twitter Following Audit
 
 Review the accounts the user follows and suggest what to do with each:
-**keep**, **unfollow**, **mute**, **block**, or **recheck** later. The test is
-fit, not worth: does the connection still earn its place against the interests
-the user names today? Unfollow can come from a quiet account, a moved focus, or
-drifted interests. Block is reserved for safety evidence. Keep is the default,
-and every card leads with what the account gives you.
+**keep**, **unfollow**, **mute**, or **recheck** later. The test is fit, not
+worth: does the connection still earn its place against the interests the user
+names today? Unfollow can come from a quiet account, a moved focus, or drifted
+interests. Keep is the default, and every card leads with what the account
+gives you.
+
+Safety findings are a separate track, not a verdict: an account that looks
+like a bot, scam, harassment source, or impersonation is flagged with quoted
+evidence for the user to act on. The audit never suggests block — block
+severs contact, which is a safety decision, not a feed-tuning choice.
 
 This serves a real person tending their own feed on their own account — never
 engagement farming, marketing, or brand growth.
@@ -48,9 +54,13 @@ it is part of this skill, not optional background.
 
 ## Rules
 
-- Verdict set: `keep`, `unfollow`, `mute`, `block`, `recheck`, defined with
-  their evidence bars in [references/verdicts.md](references/verdicts.md).
-  Read it before the first verdict.
+- Verdict set: `keep`, `unfollow`, `mute`, `recheck`, defined with their
+  evidence bars in [references/verdicts.md](references/verdicts.md). Read it
+  before the first verdict.
+- Safety evidence never produces a verdict: it routes the account to the flag
+  track, and the flag card names block and report as the user's options to
+  decide. The audit never suggests block — block is a safety decision, not a
+  curation choice.
 - Optimism is a rule, not a tone: keep needs no evidence; every other verdict
   needs proof; thin or unreadable evidence never lands a negative verdict.
 - The skill never infers disagreement from content. `disagreement` is a reason
@@ -222,9 +232,9 @@ For each queued account, in order:
    paused frame, or host transcript may support a match, tagged `[image]`,
    `[video]`, or `[audio]` with date and permalink, lower-weight and capped.
    Never identify a person from a photo or infer a sensitive trait.
-6. Safety evidence for a block is profile-level and quoted: bot or follow-farm
-   patterns, scams or fraud, harassment toward the user, impersonation.
-   Record it; Step 6 decides.
+6. Safety evidence is profile-level and quoted: bot or follow-farm patterns,
+   scams or fraud, harassment toward the user, impersonation. Record it and
+   mark the account flagged; Step 6 routes it to the flag track.
 7. A protected profile or sensitive-content notice is `unreadable`: no
    verdict, nothing inferred, move on.
 8. Media reads: at most 1 profile image pair and 3 media items per account,
@@ -242,11 +252,14 @@ verdict; it holds the decision table, the evidence bars, the reason tags, and
 the optimism wording.
 
 1. Assign one verdict per account from the decision table, with one reason
-   tag: `keep`, `unfollow`, `mute`, `block`, or `recheck`.
+   tag: `keep`, `unfollow`, `mute`, or `recheck`.
 2. Any matched item in the window proves alignment: the verdict is `keep`.
 3. A tie moves an unfollow to mute or recheck; state the tie in the card.
-4. Quoted safety evidence moves the account to `block` regardless of
-   alignment; the card shows the evidence for the user to confirm.
+4. Quoted safety evidence routes the account to the flag track instead of a
+   verdict, whatever its alignment. The flag card quotes the evidence and
+   names block and report as the user's options to decide — with the
+   calibration that block severs contact and also unfollows, while unfollow
+   alone only clears the feed — never as actions this run takes.
 5. Thin or unreadable evidence never lands a negative verdict: keep-noted or
    recheck.
 6. The user may overrule any verdict; record the final verdict and the user's
@@ -261,16 +274,21 @@ first card.
    evidence modes and capability, the audit version, and the state line.
 2. Verdict summary table: linked handle, category (`moot` or
    `following-only`), verdict, reason tag, newest post date, confidence.
-3. A card for every unfollow, mute, block, and recheck: what the account gives
-   or gave, what changed with a quoted, dated, linked item or a counted
-   dormancy fact, the alternative, and what would return it to keep.
-4. Keeps as one line each: the handle and what earns the slot — the matched
+3. A card for every unfollow, mute, and recheck: what the account gives or
+   gave, what changed with a quoted, dated, linked item or a counted dormancy
+   fact, the alternative, and what would return it to keep.
+4. Flagged accounts in their own section, after the cards: quoted, dated
+   safety evidence and the user's options — block (severs contact and also
+   unfollows), report where platform rules are implicated, or unfollow alone
+   (feed removal only) — decided by the user, never performed. A flag never
+   mixes with a verdict.
+5. Keeps as one line each: the handle and what earns the slot — the matched
    area or the tie.
-5. Held, unreadable, and overridden handles separately, one line each. An
+6. Held, unreadable, and overridden handles separately, one line each. An
    empty or all-keep result is valid and normal.
-6. Link every handle and cited item per the shared rules; never invent a
+7. Link every handle and cited item per the shared rules; never invent a
    status URL.
-7. Never describe an account as worthless, bad, or cringe; describe fit. No
+8. Never describe an account as worthless, bad, or cringe; describe fit. No
    claims about personality, politics, health, or private life. Never describe
    an image or transcript you did not see.
 
@@ -282,8 +300,8 @@ first card.
    queue, cursor, and follow-ups.
 2. A changed area, term, strictness, window, or evidence mode bumps the audit
    version and marks every verdict stale. A scope or batch change does not.
-3. Record `audited`, `stale`, `unreadable`, `held`, and overrides with dates.
-   Rechecks get a dated follow-up.
+3. Record `audited`, `flagged`, `stale`, `unreadable`, `held`, and overrides
+   with dates. Rechecks get a dated follow-up.
 4. Report what was read, what was missing, where the run stopped, and what
    remains queued.
 5. Say nothing was changed on X: no unfollow, block, mute, follow, like,
@@ -306,9 +324,10 @@ first card.
 - Only the user's own account, only the confirmed scope.
 - Real people, personal accounts: never engagement farming, marketing, or
   brand work; no mass automation, no bulk unfollowing.
-- Read only: verdicts are suggestions; the run performs no action on X.
-- Block is suggested only on quoted safety evidence and never for
-  disagreement, drift, or volume.
+- Read only: suggestions and flags only; the run performs no action on X.
+- Safety findings are flagged with quoted evidence for the user to decide;
+  the audit never suggests block, and never flags for disagreement, drift,
+  or volume.
 - No credentials; hand off challenges. A challenge ends the run.
 - No DMs, no private data, no inference from hidden content.
 - Never claim to see an image, frame, or transcript you cannot; flag that mode
@@ -332,7 +351,8 @@ first card.
 - [ ] Every non-keep verdict carries a reason tag, a quoted dated item or a
       counted dormancy fact, and its tie or lack of one.
 - [ ] Keeps are stated with what earns the slot; optimism wording throughout.
-- [ ] Block verdicts quote safety evidence and were confirmed with the user.
+- [ ] Safety findings are flagged with quoted evidence in their own section;
+      no verdict mixes with a flag; nothing was performed.
 - [ ] Every cited item has a date and permalink from this run; every handle is
       linked.
 - [ ] State written, or session state printed for verification; stale verdicts

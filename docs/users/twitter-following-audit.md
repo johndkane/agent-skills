@@ -1,13 +1,18 @@
 # twitter-following-audit
 
 Looks at the accounts you already follow on X and suggests, for each one, what
-to do next: **keep**, **unfollow**, **mute**, **block**, or **recheck** (look
-again later). The test is fit, not worth — does the connection still earn its
-place against the interests you care about today? An unfollow can come from a
-quiet account, a focus that moved, or interests that drifted, and none of that
-says anything bad about the person. Block is saved for real safety problems —
-bots, scams, harassment, impersonation — and is never suggested just because
-you disagree with someone.
+to do next: **keep**, **unfollow**, **mute**, or **recheck** (look again
+later). The test is fit, not worth — does the connection still earn its place
+against the interests you care about today? An unfollow can come from a quiet
+account, a focus that moved, or interests that drifted, and none of that says
+anything bad about the person.
+
+Safety problems are a separate track. If an account looks like a bot, scam,
+harassment source, or impersonator, it doesn't get a feed verdict at all — it
+shows up flagged, with the evidence quoted, and **you** decide whether to
+block, report, or just unfollow. The audit never suggests blocking, because
+block isn't a curation choice: it severs contact entirely, which is a decision
+about safety, not about your feed.
 
 It's optimistic on purpose. Keep is the default and needs no justification;
 every other suggestion has to show its evidence; thin evidence never lands a
@@ -70,13 +75,14 @@ yourself. The next run then starts fresh, so some work may be repeated.
    newest post date, and a sample of recent posts. It counts matches against
    your subjects, volume, and repost share. Images, video frames, or
    transcripts are read only if you opted in and the session proves it can.
-5. **Assigns one verdict per account** — keep, unfollow, mute, block, or
-   recheck — from a fixed decision table. A tie (they follow you, they replied
-   to you, you named them) moves an unfollow toward mute or recheck. Block
-   needs quoted safety evidence and your confirmation.
+5. **Assigns one verdict per account** — keep, unfollow, mute, or recheck —
+   from a fixed decision table. A tie (they follow you, they replied to you,
+   you named them) moves an unfollow toward mute or recheck. Quoted safety
+   evidence pulls the account out of the verdict track and flags it instead.
 6. **Reports** — a summary table, a card for every non-keep verdict with the
    dated evidence, what would return the account to keep, and the alternative,
-   plus one line per keep saying what earns its slot.
+   a separate flagged section with the evidence and your options, and one line
+   per keep saying what earns its slot.
 7. **Remembers between runs** — verdicts, the queue, and scheduled rechecks
    survive, so next time it picks up where it stopped.
 
@@ -87,16 +93,23 @@ yourself. The next run then starts fresh, so some work may be repeated.
 | `keep` | The connection still earns its place | Nothing |
 | `unfollow` | The connection doesn't earn its place right now | Unfollow (private, reversible) |
 | `mute` | Stay connected, stop seeing the posts | Mute |
-| `block` | Safety: stop all contact | Block (also unfollows) |
 | `recheck` | Not now — look again on a date | Nothing; it's scheduled |
+
+Block is deliberately not in this table. Block severs contact — the account
+can no longer follow, reply, mention, or DM you, and it also unfollows — so
+it's a safety decision, not a feed choice. When the audit finds quoted,
+dated evidence of bots or follow farms, scams, harassment toward you, or
+impersonation, it flags the account in its own section instead, names your
+options (block, report, or unfollow alone for something harmful that never
+interacts with you), and leaves the decision entirely to you.
 
 The reasons behind a non-keep verdict are facts, not judgements: `inactive`
 (no post inside your freshness window), `focus-moved` (they used to post in
 your areas and now don't), `outside-interests` (their current content sits
 outside your subjects), `volume` and `repost-heavy` (feed-fit problems), and
 `disagreement` — which is recorded only when **you** name it, never guessed
-from content. `safety` is the only road to block, and it requires quoted,
-dated evidence.
+from content. Flags (safety findings) carry their own reason — bot or farm,
+scam, harassment, impersonation — and require quoted, dated evidence.
 
 ## What optimism means here
 
@@ -107,6 +120,8 @@ dated evidence.
   gardening; your areas are Rust and Postgres" — never "bad content".
 - Every non-keep card names what would return the account to keep.
 - A recheck is a plan, not a demotion — people take breaks.
+- Safety problems are flagged for you with the evidence; the audit never
+  converts them into a suggestion to block.
 
 ## The scope
 
@@ -172,8 +187,8 @@ you.
 - Only your own account, only the accounts you follow or name.
 - Read only: it never unfollows, blocks, mutes, follows, likes, reposts,
   reports, or messages anyone.
-- Block is suggested only on quoted safety evidence, with your confirmation,
-  and never for disagreement, drift, or volume.
+- Safety findings are flagged with quoted evidence; the audit never suggests
+  block, and never flags for disagreement, drift, or volume.
 - Hands off for login, 2FA, captcha, or payment — a challenge ends the run.
 - No DMs, no guessing from hidden content, no claims beyond what was sampled.
 - Real handles and private details stay in the progress file on your machine,

@@ -10,7 +10,7 @@ applies the group mechanics in [groups](groups.md).
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks |
 | [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest matching accounts from the moot graph, or assess one named account, with optional non-text proof |
 | [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility across associated-account scopes or one named account, text-first with opt-in multimodal evidence |
-| [`twitter-following-audit`](../../.agents/skills/twitter-following-audit/SKILL.md) | Audit the Following list and suggest keep, unfollow, mute, block, or recheck per account, optimistic and read-only, with opt-in multimodal evidence |
+| [`twitter-following-audit`](../../.agents/skills/twitter-following-audit/SKILL.md) | Audit the Following list and suggest keep, unfollow, mute, or recheck per account, flagging safety findings separately for the user to act on, optimistic and read-only, with opt-in multimodal evidence |
 
 ## Central files
 

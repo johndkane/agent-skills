@@ -2,7 +2,8 @@
 
 Read before the first verdict and when resuming. One verdict per account, with
 one reason tag. A verdict is a suggestion the user applies; this skill never
-performs it.
+performs it. Safety findings are not verdicts — they are flags in a separate
+track (see Safety flags).
 
 ## The verdicts
 
@@ -10,9 +11,38 @@ performs it.
 | --- | --- | --- |
 | `keep` | The connection still earns its place | none |
 | `unfollow` | The connection does not earn its place right now | Unfollow |
-| `mute` | Stay connected; stop seeing the posts | Mute |
-| `block` | Safety: stop all contact from this account | Block (also unfollows) |
+| `mute` | Keep the connection; stop seeing the posts | Mute |
 | `recheck` | Not now; look again on a date | none; a dated follow-up |
+
+The verdicts answer one question: does this connection earn its feed slot?
+Block is deliberately outside the set. Block severs contact — the account can
+no longer follow, reply, mention, or DM the user, and it also unfollows —
+which is a safety decision, not a curation choice. The audit flags safety
+findings and leaves block and report to the user.
+
+## Safety flags
+
+Quoted, dated, profile-level evidence that an account is harmful routes it out
+of the verdict track entirely, whatever its alignment:
+
+- bot or follow-farm patterns;
+- scams or fraud;
+- harassment toward the user;
+- impersonation.
+
+The flag card quotes every piece of evidence with dates and permalinks, and
+names the user's options — decided by the user, never performed:
+
+- **Block** — zero contact: they cannot follow, reply, mention, or DM, and it
+  also unfollows. Warranted for harassment or impersonation, and reasonable
+  for scams or bots that interact with the user.
+- **Unfollow alone** — feed removal only; the minimum for a harmful account
+  that never interacts with the user.
+- **Report** — worth naming alongside block when the evidence implicates
+  platform rules: scams, impersonation, harassment.
+
+A flag never carries a verdict, and a verdict never carries a flag. Confirm
+with the user before a flag enters the report.
 
 ## Inputs
 
@@ -27,8 +57,6 @@ performs it.
   `long-dormant` (older than the dormant window).
 - **Feed fit** — counts from the sample: `volume` when more than about 50
   items in 7 days; `repost-heavy` when more than half the sample is reposts.
-- **Safety evidence** — quoted, dated, profile-level: bot or follow-farm
-  patterns, scams or fraud, harassment toward the user, impersonation.
 
 ## Reason tags
 
@@ -40,10 +68,10 @@ performs it.
 | `volume` | High-volume poster crowding the feed |
 | `repost-heavy` | Mostly reposts; little original content |
 | `disagreement` | Recorded only when the user names it; never inferred from content |
-| `safety` | Quoted safety evidence; block only |
 
 A keep carries no reason tag; it carries a fit line instead — the matched area
-or the tie.
+or the tie. Flags carry their own reason (bot/farm, scam, harassment,
+impersonation), not a verdict reason tag.
 
 ## Decision table
 
@@ -57,9 +85,9 @@ or the tie.
 | no | no | long-dormant | `recheck` default; `unfollow` at the user's call | `inactive` |
 | feed-fit problem | yes | active | `mute` | `volume` / `repost-heavy` |
 | feed-fit problem | no | active | `mute` or `unfollow` at the user's call | `volume` / `repost-heavy` |
-| safety evidence | any | any | `block`, confirmed with the user | `safety` |
 | prior matched history, now none | any | active | `recheck` | `focus-moved` |
 | user names a disagreement | any | any | `unfollow` or `mute` at the user's call | `disagreement` |
+| safety evidence | any | any | no verdict — flag track | — |
 
 Where the table offers the user's call, present the optimistic verdict first
 (the one that keeps the connection), name the other in one line, and let the
@@ -74,10 +102,10 @@ user pick. Until the user picks, record the optimistic one.
   window, or a window with zero matched items and a bio outside the areas.
 - `mute` — a tie plus a feed-fit or alignment reason, quoted where
   content-based.
-- `block` — quoted, dated safety evidence for every claim, confirmed with the
-  user before it enters the report; the card notes that block also unfollows.
 - `recheck` — one dated fact: the newest post inside the dormant window, or
   thin evidence with a positive bio. Sets the follow-up at the recheck gap.
+- Flag — quoted, dated evidence for every safety claim, confirmed with the
+  user before it enters the report.
 
 Confidence comes from the sample: `high` at 8 or more readable items, `medium`
 at 3–7, `low` below 3. Non-text-only matches cap at `medium`, per the shared
@@ -93,5 +121,7 @@ gate. Confidence sits beside a verdict and never flips one.
 - Unfollow is "not now": it is private and reversible, X does not notify, and
   the card names what would return the account to keep — posting in an area,
   becoming active again.
+- The audit never suggests block: safety findings are flags, and block and
+  report are the user's decisions.
 - A recheck is a plan, not a demotion.
 - No adjectives about people. Quote, date, tag.

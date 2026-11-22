@@ -48,11 +48,12 @@ and the whole folder is what gets copied into whichever app you use.
 
 - **[`twitter-following-audit`](.agents/skills/twitter-following-audit/SKILL.md)** —
   reviews the accounts you already follow and suggests what to do with each:
-  keep, unfollow, mute, block, or look again later. It's optimistic by design —
+  keep, unfollow, mute, or look again later. It's optimistic by design —
   keep is the default, every other suggestion carries dated evidence, and
   unfollow is about fit (a quiet account, a changed focus, drifted interests),
-  never a judgement of the person. Block is saved for bots, scams, and
-  harassment, never disagreement. It only suggests — you take every action.
+  never a judgement of the person. Anything that looks like a bot, scam, or
+  impersonator is flagged separately with the evidence — blocking stays your
+  call. It only suggests — you take every action.
   [Read more](docs/users/twitter-following-audit.md)
 
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the housekeeping

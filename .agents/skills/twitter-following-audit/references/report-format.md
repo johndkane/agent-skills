@@ -1,7 +1,7 @@
 # Report format
 
 Read before the first card. The report opens, summarizes, cards the negative
-verdicts, lists the keeps, and closes.
+verdicts, flags safety findings separately, lists the keeps, and closes.
 
 ## Opening
 
@@ -18,7 +18,7 @@ state line.
   `following-only`; reason tag, or `—` for keep; newest post date read this
   run; confidence from the sample.
 
-## Cards for unfollow, mute, block, and recheck
+## Cards for unfollow, mute, and recheck
 
 ```text
 @example_alice — unfollow (outside-interests) · moot · confidence high
@@ -38,11 +38,29 @@ Rules:
 - "Would return to keep" names the concrete thing that flips the verdict back:
   posting in an area, becoming active again.
 - For mute: say what mute does — the tie stays, the posts leave the feed.
-- For block: quote every piece of safety evidence with dates and permalinks,
-  confirm with the user, and note that block also unfollows.
 - For recheck: name the follow-up date.
 - Where the decision table offers the user's call, the card leads with the
   optimistic verdict and names the other in one line.
+
+## Safety flags
+
+Flagged accounts come after the verdict cards, in their own section — a flag
+never mixes with a verdict. For each:
+
+```text
+@example_alice — safety flag (impersonation)
+Evidence: copied display name and avatar of an existing account; post on
+2026-11-02 offering a fake giveaway — quoted with date and permalink.
+Your options: block (severs contact and also unfollows), report to X, or
+unfollow alone (feed removal only). This run performed nothing.
+```
+
+- Quote every piece of safety evidence with dates and permalinks.
+- Name the options with the calibration: block for harassment or
+  impersonation, and for scams or bots that interact with the user; unfollow
+  alone for a harmful account that never interacts; report where platform
+  rules are implicated.
+- The user decides; this run performed nothing.
 
 ## Keeps
 
@@ -53,8 +71,8 @@ the item's date, or the tie. No card, no score, no qualification.
 
 - Held, unreadable, and overridden handles separately, one line each, with
   their reason.
-- Counts: audited, kept, one count per non-keep verdict, held, unreadable,
-  remaining in queue, and the resume point.
+- Counts: audited, kept, one count per non-keep verdict, flagged, held,
+  unreadable, remaining in queue, and the resume point.
 - The line that nothing was changed on X.
 - The next run: the queue continues, or the scheduled rechecks.
 

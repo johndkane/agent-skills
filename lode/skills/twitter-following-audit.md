@@ -3,8 +3,9 @@
 The catalog's Following-list audit skill. It asks for a scope — focus,
 unreviewed, stale, or all — then the user's interests and windows, reads each
 followed account's bio, newest post date, and recent posts, and suggests one
-verdict per account: `keep`, `unfollow`, `mute`, `block`, or `recheck`. A
-verdict is a suggestion the user applies; the run performs no action on X.
+verdict per account: `keep`, `unfollow`, `mute`, or `recheck`. A verdict is a
+suggestion the user applies; the run performs no action on X. Safety findings
+are a separate flag track, never verdicts.
 Instructions live in the skill's own `SKILL.md` (this checkout:
 [`twitter-following-audit/SKILL.md`](../../.agents/skills/twitter-following-audit/SKILL.md));
 human page:
@@ -20,8 +21,8 @@ to `references/twitter-shared.md`).
    user to take.
 2. Optimism is a rule, not a tone. `keep` needs no evidence; every other
    verdict needs a quoted, dated item or a counted dormancy fact; thin,
-   insufficient, or unreadable evidence never lands a negative verdict; block
-   is never suggested for disagreement, drift, or volume.
+   insufficient, or unreadable evidence never lands a negative verdict; the
+   audit never suggests block at all.
 3. The skill never infers disagreement from content. `disagreement` is a
    reason tag only when the user names it. A verdict describes fit between the
    account now and the interests named now — never worth, character,
@@ -33,32 +34,42 @@ to `references/twitter-shared.md`).
 5. The decision table is the single arbiter: alignment in the window means
    `keep`; no alignment plus a tie (moot, follows the user, replied to the
    user, or user-named) means `mute` or `recheck`; no alignment and no tie
-   means `unfollow` or `recheck` with dormancy deciding; quoted safety
-   evidence means `block`, confirmed with the user. Where the table offers the
-   user's call, the optimistic verdict leads and is recorded until the user
-   picks.
-6. Reason tags are neutral and dated: `inactive`, `focus-moved`,
-   `outside-interests`, `volume`, `repost-heavy`, `disagreement`, `safety`. A
-   keep carries a fit line, not a reason tag.
-7. Every non-keep card leads with what the account gives or gave, names what
+   means `unfollow` or `recheck` with dormancy deciding. Where the table
+   offers the user's call, the optimistic verdict leads and is recorded until
+   the user picks.
+6. Safety findings are a separate flag track, not verdicts: quoted, dated,
+   profile-level evidence of bot or follow-farm patterns, scams, harassment
+   toward the user, or impersonation routes the account out of the verdict
+   set whatever its alignment. A flag never carries a verdict and a verdict
+   never carries a flag. The flag card names the user's options — block
+   (severs contact and also unfollows; warranted for harassment or
+   impersonation, reasonable for interacting scams and bots), report where
+   platform rules are implicated, or unfollow alone (the minimum for a
+   harmful account that never interacts) — decided by the user, never
+   performed.
+7. Reason tags are neutral and dated: `inactive`, `focus-moved`,
+   `outside-interests`, `volume`, `repost-heavy`, `disagreement`. Flags carry
+   their own reason (bot/farm, scam, harassment, impersonation). A keep
+   carries a fit line, not a reason tag.
+8. Every non-keep card leads with what the account gives or gave, names what
    would return it to keep, and names the alternative verdict. Unfollow is
    "not now": private, reversible, unannounced by X.
-8. Text is the default evidence mode; image, video-frame, and transcript
+9. Text is the default evidence mode; image, video-frame, and transcript
    evidence is opt-in, capability-tested per run, lower-weight, capped (1
    profile image pair and 3 media items per account, 12 per run), and never
    proof of identity or a sensitive trait.
-9. Windows are part of the audit version: active 90 days (newest post that
-   still reads active), dormant 12 months (silence that reads long-dormant),
-   recheck gap 90 days. Any change to an area, term, strictness, window, or
-   evidence mode bumps the audit version and marks every verdict stale; a
-   scope or batch change does not.
-10. State lives outside the repository at `~/.x-following-audit/<handle>.json`,
+10. Windows are part of the audit version: active 90 days (newest post that
+    still reads active), dormant 12 months (silence that reads long-dormant),
+    recheck gap 90 days. Any change to an area, term, strictness, window, or
+    evidence mode bumps the audit version and marks every verdict stale; a
+    scope or batch change does not.
+11. State lives outside the repository at `~/.x-following-audit/<handle>.json`,
     one file per signed-in account, and holds scope, focus handles, audit
     version, areas and terms, windows, held handles, named ties, per-account
-    verdicts with counts, queue, cursor, and follow-ups — no quotes,
+    verdicts and flags with counts, queue, cursor, and follow-ups — no quotes,
     permalinks, images, or private details. Held handles never receive a
     verdict; an override records the user's final verdict and word.
-11. Step 3 asks in the user's language per the shared asking rules: every
+12. Step 3 asks in the user's language per the shared asking rules: every
     question models the plain wording, states why it is asked and what the
     answer changes, and treats `focus`, `held`, and the verdict labels as
     recorded values, never the question's text. Areas and signal terms are
@@ -80,14 +91,15 @@ flowchart TD
     D -- alignment --> K[keep]
     D -- no alignment + tie --> MU[mute / recheck]
     D -- no alignment, no tie --> UF[unfollow / recheck by dormancy]
-    D -- safety evidence --> B[block, user-confirmed]
+    D -- safety evidence --> FL[Flag track: evidence quoted, user decides block / report / unfollow]
     D -- thin or unreadable --> KN[keep-noted or recheck]
     K --> RP[Summary table, cards with what would return it to keep, keeps as fit lines]
     MU --> RP
     UF --> RP
-    B --> RP
     KN --> RP
+    FL --> FS[Separate flagged section: evidence + options, nothing performed]
     RP --> W[Write state + queue + recheck follow-ups]
+    FS --> W
 ```
 
 ## Why optimism is a rule
@@ -99,7 +111,9 @@ dated fact; a tie moves the verdict toward the connection-preserving options;
 and every card states the way back. The user said the point is deciding
 whether to stay connected for many reasons — activity, changed focus, drifted
 interests — not judging people, so the language describes change, never
-quality, and block is fenced off for safety evidence alone.
+quality, and safety findings are flagged for the user instead of converted
+into a block suggestion — block severs contact, which is a safety decision,
+not a curation choice.
 
 ## Decision inputs
 
@@ -109,7 +123,7 @@ quality, and block is fenced off for safety evidence alone.
 | Tie | `Follows you` on a followed profile, a reply to the user seen in the sample, or a named tie the user recorded |
 | Activity | Newest post date against the active and dormant windows |
 | Feed fit | Repost share and volume counts from the sample |
-| Safety evidence | Quoted, dated, profile-level: bot/farm, scam, harassment, impersonation |
+| Safety evidence | Quoted, dated, profile-level: bot/farm, scam, harassment, impersonation — routes to the flag track, never a verdict |
 
 Confidence comes from the sample size: `high` at 8+ readable items, `medium`
 at 3–7, `low` below 3; non-text-only matches cap at `medium`. It sits beside a

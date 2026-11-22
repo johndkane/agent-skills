@@ -71,9 +71,25 @@ profile wins, and a saved verdict is never reported as current.
       "followsYou": false,
       "repliedToYou": false,
       "note": null
+    },
+    "@example_carol": {
+      "status": "flagged",
+      "auditedOn": "2026-11-21",
+      "auditVersion": 1,
+      "category": "following-only",
+      "verdict": null,
+      "flagReason": "impersonation",
+      "confidence": "high",
+      "lastPostOn": "2026-11-19",
+      "itemsRead": 9,
+      "matchedItems": 0,
+      "repostShare": 0.1,
+      "followsYou": false,
+      "repliedToYou": false,
+      "note": null
     }
   },
-  "queue": [{"handle": "@example_carol"}],
+  "queue": [{"handle": "@example_erin"}],
   "followUps": [
     {"handle": "@example_bob", "why": "recheck: quiet since June", "on": "2027-02-19"}
   ]
@@ -96,9 +112,11 @@ profile wins, and a saved verdict is never reported as current.
 - `cursor` — Following-list progress for `all` and `unreviewed` runs: rows read
   and the last handle seen. Cleared for a focus run.
 - `follows` — one entry per followed handle ever audited, keyed by lowercase
-  handle with `@`. `category` is `moot` or `following-only`. `reason` is a tag
-  from verdicts.md or null. `note` is a short tag of at most 60 characters,
-  never a quote.
+  handle with `@`. `category` is `moot` or `following-only`. `verdict` is
+  `keep`, `unfollow`, `mute`, or `recheck` — null for flagged accounts, whose
+  `flagReason` (`bot`, `scam`, `harassment`, `impersonation`) and quoted
+  evidence stand instead of a verdict. `reason` is a tag from verdicts.md or
+  null. `note` is a short tag of at most 60 characters, never a quote.
 - `queue` — handles in scope the run did not reach.
 - `followUps` — dated rechecks and other follow-ups.
 
@@ -106,7 +124,8 @@ profile wins, and a saved verdict is never reported as current.
 
 | Status | Meaning |
 | --- | --- |
-| `audited` | Current audit version, read within 90 days |
+| `audited` | Current audit version, read within 90 days, verdict assigned |
+| `flagged` | Quoted safety evidence on file; no feed verdict; re-audit only at the user's ask |
 | `stale` | Older than 90 days, or a different `auditVersion` |
 | `unreadable` | Protected or notice-replaced page; nothing inferred |
 | `held` | User-held; never receives a verdict |
