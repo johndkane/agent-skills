@@ -38,6 +38,7 @@ creating its central files.
 | [`twitter-followback`](../../.agents/skills/twitter-followback/SKILL.md) | Follow back real, active followers, with optional non-text checks | `~/.x-followback/` |
 | [`twitter-moot-radar`](../../.agents/skills/twitter-moot-radar/SKILL.md) | Suggest accounts your mutuals follow, matched to your interests, or assess one named account, with optional non-text proof | `~/.x-moot-radar/` |
 | [`twitter-compatibility`](../../.agents/skills/twitter-compatibility/SKILL.md) | Score interaction compatibility with associated accounts or one named account, on chosen subjects and scope, text-first with opt-in image, video-frame, and transcript evidence | `~/.x-compatibility/` |
+| [`twitter-following-audit`](../../.agents/skills/twitter-following-audit/SKILL.md) | Audit the accounts the user follows and suggest keep, unfollow, mute, block, or recheck per account, on the user's interests, optimistic and read-only, text-first with opt-in non-text evidence | `~/.x-following-audit/` |
 
 The links above point at this repository's copy for browsing. A skill is its
 folder, so installing one means copying that folder into a host's skills
@@ -137,6 +138,16 @@ damages the user's account or produces a false claim.
     own: a missing follow-back or zero moot overlap is reported as fact, never used
     to question the request, demand confirmation, or redirect to a different
     account. Only a genuinely ambiguous handle needs a question.
+20. **Ask in the user's language.** Questions exist so the user can correct the
+    run before it acts; a question the user cannot parse collects consent, not
+    confirmation. One decision per question, plain words, the reason for
+    asking, what each answer changes, an example where it helps, and a default
+    or "none" path. Terms of art are translated inline, never assumed — a user
+    who has to guess what "held" or "ties" mean has not been asked anything.
+    Examples come from the user's own world: built from what the run has
+    observed — bio, pinned post, named accounts, state, their words — and
+    offered as a guess to confirm, never a fixed script; with nothing
+    observed, the question names the kind of answer wanted instead.
 
 ## Human cadence
 
@@ -276,4 +287,5 @@ flowchart LR
 - [twitter-followback](../users/twitter-followback.md)
 - [twitter-moot-radar](../users/twitter-moot-radar.md)
 - [twitter-compatibility](../users/twitter-compatibility.md)
+- [twitter-following-audit](../users/twitter-following-audit.md)
 - [Agent instructions](../developers/agent-instructions.md)

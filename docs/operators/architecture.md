@@ -38,6 +38,9 @@ agent-skills/
 │       ├── twitter-compatibility/
 │       │   ├── SKILL.md
 │       │   └── references/
+│       ├── twitter-following-audit/
+│       │   ├── SKILL.md
+│       │   └── references/
 │       └── skill-verify/
 │           └── SKILL.md
 ├── .claude/

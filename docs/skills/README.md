@@ -11,6 +11,7 @@ without costing context on every prompt.
 | [`twitter-followback`](../users/twitter-followback.md) | Researches followers on X and follows back only real, active people, filtering bots, marketing, adult, crypto, and impersonation accounts; text by default with optional, capped image, frame, and transcript checks when you opt in; links handles and cited posts; stops on access failures; opens each run with its state summary | Local agent with browser control |
 | [`twitter-moot-radar`](../users/twitter-moot-radar.md) | Asks for your interests, reads what your mutuals follow, and suggests matching accounts with quoted proof and live follow status — or assesses one named account directly, with moot overlap and follow-back shown as context. Optional image, frame, or transcript proof is labelled and lower-weight; every handle, moot, and quote is linked; stops on access failures; opens each run with its state summary | Local agent with browser control |
 | [`twitter-compatibility`](../users/twitter-compatibility.md) | Asks for the scope — focus, moots, following-only, followers-only, or all — and which subjects and factors matter; reads your feed and each target's posts, replies, reposts, and media, optionally reads image, video-frame, or audio-transcript evidence when an opted-in mode is proven, and scores interaction compatibility 0–100 with counted evidence, confidence, per-area breakdowns, and a replyable entry point; a named focus account is scored whether or not it is associated; read-only, never acts on X | Local agent with browser control |
+| [`twitter-following-audit`](../users/twitter-following-audit.md) | Asks for your interests and a slice of your Following list, reads each account's bio, newest post date, and recent posts, and suggests one verdict per account — keep, unfollow, mute, block, or recheck — with a decision table, reason tags, and ties that temper an unfollow toward mute or recheck; optimistic by design: keep needs no evidence, negatives need dated evidence, block is safety-only, and every card leads with what the account gives you; suggests only, never acts | Local agent with browser control |
 | [`skill-verify`](skill-verify.md) | Checks a skill folder against the catalog rules — including personal-data safety for online skills — and reports pass/fail with evidence | Local agent with file and shell access |
 
 The full instructions for each skill live in its `SKILL.md`; these pages explain
@@ -26,7 +27,11 @@ work. Their contract is
 members and central files. That shared file also carries the group's multimodal
 evidence gate: text is the default, and each enabled image, video-frame, or
 audio-transcript mode is capability-tested per run and reported `available` or
-`unavailable` instead of being silently zeroed.
+`unavailable` instead of being silently zeroed. It also carries the group's
+asking rule: every question a run puts to the user stands alone — plain words,
+the reason for asking, and what each answer changes — and every example in a
+question comes from what the run has observed about that user, never a fixed
+script.
 
 Every skill that drives a browser follows the same
 [human cadence](browser-cadence.md): jittered, proportional waits copied into

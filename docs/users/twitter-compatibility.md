@@ -59,7 +59,8 @@ yourself. The next run then starts fresh, so some work may be repeated.
    words that count as a match for each, how much each subject matters, how
    much each factor counts, whether images or transcripts count, and how many
    accounts to score this run. Everything is read back to you before any
-   scoring.
+   scoring, and every question comes in plain words with the reason for
+   asking and what your answer changes.
 4. **Reads your feed** — your own posts, replies, media, and likes, fresh every
    run. Your replies and likes show what you actually engage with, which is
    what the format factor measures.

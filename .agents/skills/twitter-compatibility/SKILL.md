@@ -41,7 +41,8 @@ Ask the scope up front — `focus`, `moots`, `following-only`, `followers-only`,
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
 It carries the rules shared by every X skill — state line, linked evidence, human
-cadence, access failures, and privacy — and it is part of this skill.
+cadence, access failures, asking the user, and privacy — and it is part of this
+skill.
 
 ## Rules
 
@@ -117,7 +118,10 @@ captcha, or payment; never enter credentials.
 
 ## Step 3 — Confirm the scoring brief
 
-Ask, then restate in one paragraph. The scope is asked first; never infer areas
+Ask one question at a time in the user's words — each with the reason for
+asking and what the answer changes, per the shared asking rules; the labels
+below are recorded values, never the question's wording. Restate the settled
+brief in one paragraph. The scope is asked first; never infer areas
 from the accounts themselves.
 
 1. **Scope** — ask first, with no silent default: `focus` (the accounts the user
@@ -126,11 +130,16 @@ from the accounts themselves.
    them), or `all` associated accounts. A named handle makes the scope `focus`;
    an explicitly named list scope wins. Restate the scope and its counts. If the
    user says "use your judgement", propose `all`.
-2. **Areas** — 3 to 8 concrete, checkable subjects. Push back once on vague ones:
-   "tech" is not checkable; "Rust and systems programming" is.
+2. **Areas** — 3 to 8 concrete, checkable subjects: specific enough to test a
+   post against. Push back once on vague ones. Any example offered comes from
+   what this run observed about the user — their bio, a named focus account's
+   profile, saved state, or their words — as a guess to confirm, never a
+   fixed subject; with nothing observed, name the kind of answer wanted.
 3. **Signal terms** — 5 to 12 lowercase words or short phrases per area (tools,
-   projects, jargon, names) that count as a match. Propose them, then get a yes.
-   This lexicon is the measuring instrument and is frozen in state.
+   projects, jargon, names) that count as a match. Propose them from what this
+   run observed about the user — their bio, a named focus account, saved
+   state, their words — never a generic list; then get a yes. This lexicon is
+   the measuring instrument and is frozen in state.
 4. **Area weights** — 1 to 5 each, default 3.
 5. **Factors** — the six component weights, defaulted by mode. Any weight may
    change; normalize and report the final set.

@@ -16,6 +16,7 @@ needed: choose a skill, get it, and use it.
 | [twitter-followback](users/twitter-followback.md) | Follow back real, active followers |
 | [twitter-moot-radar](users/twitter-moot-radar.md) | Find accounts worth following through your mutuals, or assess one account you name |
 | [twitter-compatibility](users/twitter-compatibility.md) | Score how compatible you are with your associated accounts, or one account you name — moots, following, followers, all, or focus — on subjects you choose |
+| [twitter-following-audit](users/twitter-following-audit.md) | Review the accounts you already follow and get a keep, unfollow, mute, block, or recheck suggestion for each — optimistic, evidence-first, read-only |
 
 ## Operators
 

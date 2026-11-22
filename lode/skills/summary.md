@@ -183,13 +183,17 @@ cannot run.
 
 The X skills follow the progressive-disclosure shape: state schemas live in
 `references/state-file.md`, and the follow-back UI ladder, the suggestion card, and
-the compatibility scoring, multimodal-evidence, and report files live in their own
+the compatibility scoring, multimodal-evidence, and report files, plus the
+following-audit verdict rules and report template, live in their own
 references. Their shared rules live in `references/twitter-shared.md`, copied
 verbatim from
 [`docs/skills/twitter-shared.md`](../../docs/skills/twitter-shared.md); the group
 index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). All
-open a run with a brief state line, link every handle and cited source in their
-output, and stop on an access failure instead of inferring state. Text is the
+open a run with a brief state line, ask every question in the user's language
+— one decision, plain words, the reason for asking, what each answer changes,
+examples from the user's own profile and history — link every handle and cited
+source in their output, and stop on an access failure instead of inferring
+state. Text is the
 default evidence mode; every member offers the same opt-in image, video-frame, and
 audio-transcript gate from the shared file, tests each enabled mode per run, and
 reports `unavailable` instead of zeroing it.
@@ -202,7 +206,9 @@ contract. `twitter-followback` is documented in
 `docs/users/twitter-moot-radar.md` with its entry in
 [twitter-moot-radar.md](twitter-moot-radar.md); `twitter-compatibility` in
 `docs/users/twitter-compatibility.md` with its rubric entry in
-[twitter-compatibility.md](twitter-compatibility.md).
+[twitter-compatibility.md](twitter-compatibility.md); `twitter-following-audit`
+in `docs/users/twitter-following-audit.md` with its verdict entry in
+[twitter-following-audit.md](twitter-following-audit.md).
 
 Invocation syntax is host-specific: Claude Code, Copilot, and Cursor use
 `/skill-name`, OpenCode uses `@skill-id`, Codex uses `$skill-name`, and Gemini CLI

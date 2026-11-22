@@ -11,6 +11,29 @@ interests in force, queue and verdict counts, due follow-ups, and the resume
 point. If no file exists, name the path and say the run starts fresh; if writing
 is unavailable, say that the run is session-only. Summarize; never dump the file.
 
+## Asking the user
+
+Every question a run puts to the user must stand alone: answerable by someone
+who has never read this skill. One decision per question — split anything
+compound. Each question carries its own context: plain words first, then why
+it is being asked and what each answer changes, then a concrete example where
+that helps. Translate every term of art inline, label first and meaning
+second (`moots` — people who follow you back; `held` — accounts I will never
+make suggestions about): the user never decodes skill vocabulary unaided.
+Offer a default or "none" answer so nothing is demanded just to move on, and
+restate the settled brief in plain language once it is agreed.
+
+Examples come from the user's own world, never from a fixed script. Build
+each one from what this run has actually observed about them — the signed-in
+profile's bio and pinned post, anything already read this run (a named
+account's profile, the settings saved in state), and their own words — and
+offer it as something to confirm, never as a fact: "your bio says landscape
+photography — is that the kind of subject you mean?" When nothing observed
+fits, name the kind of answer wanted ("a tool, project, or field you actually
+work with") instead of planting a specific subject the user never mentioned.
+
+If a question cannot meet this, rephrase it before asking.
+
 ## Linked evidence
 
 Whenever the run lists a handle — in the state line, a question, or the report —

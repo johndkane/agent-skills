@@ -56,7 +56,8 @@ yourself. The next run then starts fresh, so some work may be repeated.
 3. **Confirms the brief with you** — the whole moot graph or one named account,
    then 3–8 concrete interests, optional signal words, how strict to be, the
    optional evidence modes, how many suggestions you want, and a time budget. It
-   reads the brief back before starting.
+   reads the brief back before starting, and asks in plain words — every
+   question explains why it's being asked and what your answer changes.
 4. **Builds the moot list** — a moot is confirmed by the "follows you" marker
    on their profile before their list is used, never guessed from a single
    list. Moots are put in order by how close their own interests are to yours.
@@ -196,3 +197,4 @@ account; something you dismissed stays dismissed until you ask to revisit it.
 - [Using skills](invoking.md)
 - [twitter-followback](twitter-followback.md) — follow back real, active followers
 - [twitter-compatibility](twitter-compatibility.md) — score who you interact with easily, and on what
+- [twitter-following-audit](twitter-following-audit.md) — decide who still earns a place in your Following list

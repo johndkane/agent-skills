@@ -44,7 +44,9 @@ work may be repeated.
    looks at what the follow buttons actually say right now instead of assuming.
 3. **Confirms the rules with you** — how many followers to look at, how recent
    is "active", what to skip, what to do about protected accounts, and a time
-   or count budget. It reads the rules back to you before starting.
+   or count budget. It reads the rules back to you before starting, and asks in
+   plain words — every question explains why it's being asked and what your
+   answer changes.
 4. **Picks up where it left off** — reads the progress file and any due
    check-ins before scanning, so nothing gets done twice.
 5. **Builds the queue** — only rows that genuinely follow you: `Follow back`
@@ -180,3 +182,4 @@ follow without re-reading the button.
 - [Using skills](invoking.md)
 - [twitter-moot-radar](twitter-moot-radar.md) — find accounts to follow through your mutuals
 - [twitter-compatibility](twitter-compatibility.md) — score who you interact with easily, and on what
+- [twitter-following-audit](twitter-following-audit.md) — decide who still earns a place in your Following list

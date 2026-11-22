@@ -21,6 +21,7 @@ agent-skills/
 │       ├── twitter-followback/
 │       ├── twitter-moot-radar/
 │       ├── twitter-compatibility/
+│       ├── twitter-following-audit/
 │       └── skill-verify/
 ├── .claude/
 │   └── skills -> ../.agents/skills   # Claude Code

@@ -33,8 +33,8 @@ is never for engagement farming, marketing, or brand growth.
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
 It carries the rules shared by every X skill — state line, linked evidence, human
-cadence, access failures, and privacy — and it is part of this skill, not
-optional background.
+cadence, access failures, asking the user, and privacy — and it is part of this
+skill, not optional background.
 
 ## Rules
 
@@ -86,7 +86,10 @@ passkey, captcha, or payment; never enter credentials.
 
 ## Step 2 — Confirm the criteria
 
-Never assume them. Ask, then restate:
+Never assume them. Ask one question at a time in the user's words — each with
+the reason for asking and what the answer changes, per the shared asking
+rules; the labels below are recorded values, never the question's wording.
+Then restate:
 
 - **Scope** — how many followers, and start fresh or resume.
 - **Real person** — do project, persona, and org-adjacent accounts count?

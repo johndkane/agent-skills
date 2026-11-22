@@ -44,13 +44,15 @@ a reason to question the request or push the user toward a different account.
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
 It carries the rules shared by every X skill — state line, linked evidence, human
-cadence, access failures, and privacy — and it is part of this skill, not
-optional background.
+cadence, access failures, asking the user, and privacy — and it is part of this
+skill, not optional background.
 
 ## Rules
 
 - Interests come from the user, restated as checkable areas before any reading
-  or assessment. "Tech" is not checkable; "Rust and systems programming" is.
+  or assessment. Checkable means specific enough to test a post against — a
+  tool, project, or field. Any example shown to the user comes from what this
+  run observed about them, never a fixed illustration.
 - Read moots' Following lists only — never "Who to follow", Explore, search,
   or a moot's Followers tab.
 - Overlap ranks a graph run: more distinct moots means higher. Two is the default
@@ -108,14 +110,20 @@ passkey, captcha, or payment; never enter credentials.
 Never infer interests from existing follows. If state holds a profile for this
 account, say the state line, show it, and ask whether to keep or change it.
 
-Ask, then restate:
+Ask one question at a time in the user's words — each with the reason for
+asking and what the answer changes, per the shared asking rules; the labels
+below are recorded values, never the question's wording. Then restate:
 
 - **Target** — the whole moot graph (default), or one or more accounts the user
   names. A named account is in scope whatever its relationship: followed or
   unfollowed, follows back or not, moot or not.
 - **Areas** — 3 to 8, concrete and observable; push back once on vague ones.
+  Any example offered comes from what this run observed about the user —
+  their bio, a named account's profile, saved state, or their words — as a
+  guess to confirm, never a fixed subject.
 - **Signal words** (optional) — tools, projects, jargon, names that count as
-  evidence.
+  evidence. Propose them from what this run observed — the user's bio and
+  words, saved state — never a generic list.
 - **Strictness** — must post about the area (default), or adjacent is fine.
 - **Evidence modes** — default `text`. Offer `images` (image-only posts, profile
   avatar and banner), `video` (paused frames), and `audio` (host transcript only);
@@ -134,7 +142,7 @@ Ask, then restate:
   limit. A focus account is still reported, without an evidence-free shortcut.
 
 If the user says "use your judgement", propose the list, bar, budget, and evidence
-modes, and get a yes. Restate the brief in one paragraph.
+modes in plain words, and get a yes. Restate the brief in one paragraph.
 
 ## Step 3 — Build the moot roster
 
