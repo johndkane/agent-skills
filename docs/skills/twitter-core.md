@@ -236,6 +236,15 @@ relearning the flow.
 - **A named target is not a suggestion.** When the user supplies a handle, the
   task is to assess that account. Moot overlap, list membership, and follow-back
   answer "how did it surface", never "is the request valid".
+- **A feed is not all the account's.** Timelines, profile tabs, Following and
+  Followers lists, and post pages interleave ads — promoted posts and accounts —
+  and injected modules: "Who to follow", "You might like", "Discover more",
+  "Other posts you might like". X inserts them into what looks like one
+  account's stream, so an unfiltered read scores the advertiser, not the
+  account. Every member skips these rows: never sampled, counted, quoted,
+  queued, or acted on, and a promoted row is neither a content item nor an
+  empty scroll stop. X renames and re-places them without notice; observe the
+  current labels each run.
 - **A photo is not a person.** Profile images and media can flag spam, a watermark,
   or an interest, but never prove that an account belongs to a real person; never
   infer sensitive traits from them.

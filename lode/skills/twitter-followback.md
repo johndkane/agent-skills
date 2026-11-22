@@ -20,7 +20,8 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
    it, matched by the exact handle.
 4. A protected account ends at `Pending`, never `Following`.
 5. The queue is `Follow back` rows plus `Follow` on a confirmed protected
-   follower. `Follow` without that marker is a stranger: never queued.
+   follower. `Follow` without that marker is a stranger: never queued. A
+   `Promoted` row is an ad, not a follower: never queued or researched.
 6. The live UI wins over saved state; a saved `followed` is not proof.
 7. State lives outside the repository, one file per signed-in account; when the
    write is refused or unavailable, the same structure lives in session state and

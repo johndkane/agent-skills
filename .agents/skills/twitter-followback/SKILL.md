@@ -33,8 +33,8 @@ is never for engagement farming, marketing, or brand growth.
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
 It carries the rules shared by every X skill — state line, linked evidence, human
-cadence, access failures, asking the user, and privacy — and it is part of this
-skill, not optional background.
+cadence, access failures, ads and suggestion rows, asking the user, and privacy —
+and it is part of this skill, not optional background.
 
 ## Rules
 
@@ -45,7 +45,7 @@ skill, not optional background.
   account no longer follows the user — a stranger, never queued.
 - `Following`, `Unfollow`, and `Pending` are already handled — never touch them.
 - Never unfollow, block, report, or message. Never follow from suggestions,
-  "who to follow", or search.
+  "who to follow", search, or a promoted row.
 - Verify before claiming: the exact handle's control must read `Following` or
   `Unfollow` — either label proves the follow — after the full settle window. A
   protected account reaches `Pending` at most — a request, not a follow.
@@ -122,7 +122,8 @@ the protected decision, evidence modes, and budget in one summary.
    Criteria changed: archive the file and start fresh. UI wins in every case.
 2. Collect `Follow back` rows plus `Follow` rows confirmed this run as protected
    followers, keyed by `@handle`, in order. A `Follow` row with no lock icon is
-   someone who no longer follows the user: leave it unqueued and un-researched.
+   someone who no longer follows the user: leave it unqueued and un-researched. A
+   `Promoted` row is an ad, not a follower: skip it the same way.
 3. Deduplicate; the list is virtualised, so collect while scrolling.
 4. Stalls near ~100 rows: jump in large steps with pauses, vary the step, and
    scroll back occasionally.
@@ -277,8 +278,8 @@ write and when resuming; a schema from memory drops the queue or follow-ups.
 - [ ] Run opened with the state line.
 - [ ] Every handle the run lists and every cited post links to what was read.
 - [ ] Access failures flagged, not turned into verdicts.
-- [ ] Queue from follow-back rows only; `Follow` strangers excluded, `Pending`
-      recorded, not queued.
+- [ ] Queue from follow-back rows only; `Follow` strangers and `Promoted` ads
+      excluded, `Pending` recorded, not queued.
 - [ ] Every candidate researched; protected and unreadable limits stated, not
       inferred around.
 - [ ] Every follow exact-handle matched and verified after settling; protected

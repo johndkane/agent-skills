@@ -70,7 +70,9 @@ yourself. The next run then starts fresh, so some work may be repeated.
    posts, or previous settings, offered for you to confirm — never a canned
    one.
 3. **Walks your Following list** — collects who you follow, skips what's
-   already decided, and queues the rest.
+   already decided, and queues the rest. Ads X injects into the list — rows
+   marked `Promoted`, or suggested accounts — are skipped: you don't actually
+   follow them.
 4. **Reads each account** — bio, join date, whether they follow you, the
    newest post date, and a sample of recent posts. It counts matches against
    your subjects, volume, and repost share. Images, video frames, or

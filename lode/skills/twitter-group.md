@@ -17,7 +17,7 @@ applies the group mechanics in [groups](groups.md).
 | File | Role | Copy |
 | --- | --- | --- |
 | [`twitter-core.md`](../../docs/skills/twitter-core.md) | Contract: principles, practices, considerations | None; authoring page |
-| [`twitter-shared.md`](../../docs/skills/twitter-shared.md) | Operative rules: state line, linked evidence, cadence, access failures, persistence fallback, multimodal evidence, privacy | `references/twitter-shared.md` in every member |
+| [`twitter-shared.md`](../../docs/skills/twitter-shared.md) | Operative rules: state line, linked evidence, cadence, access failures, ads and suggestion rows, persistence fallback, multimodal evidence, privacy | `references/twitter-shared.md` in every member |
 | [`skill-groups.md`](../../docs/skills/skill-groups.md) | Group index and naming convention | None |
 
 ## Invariants
@@ -62,6 +62,11 @@ applies the group mechanics in [groups](groups.md).
     authored once in `twitter-shared.md` and copied verbatim; each member's
     brief step states it where the questions are formed. The contract records
     the decision as principle 20.
+11. A promoted row or a suggestion module — an ad, a "who to follow" strip, a
+    "Discover more" block — is never the account's content: no member samples,
+    counts, quotes, queues, or acts on one, and one is neither a content row
+    nor an empty scroll stop. Authored once in `twitter-shared.md` and copied
+    verbatim.
 
 ```mermaid
 flowchart LR

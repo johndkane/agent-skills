@@ -16,7 +16,8 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
 1. Interests come from the user and are restated as checkable areas before any
    reading or assessment.
 2. Only mutuals' Following lists are read — never suggestion modules,
-   Explore, search, or a moot's Followers tab.
+   Explore, search, or a moot's Followers tab. A `Promoted` row injected into
+   a Following list is an ad, not the moot's follow.
 3. A moot is confirmed by the `Follows you` marker before their list is used;
    appearing in the Following list alone is not enough.
 4. Overlap is counted per distinct moot, and the default bar is two on a graph

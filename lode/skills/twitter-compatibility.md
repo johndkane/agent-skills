@@ -25,7 +25,8 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
    that label never blocks or delays scoring.
 3. Both sides are read fresh every run. The source feed is the signed-in user's own
    Posts, Replies, Media, and visible Likes; the target's is the scored account's
-   posts, replies, reposts, and media. State is memory, never evidence.
+   posts, replies, reposts, and media. State is memory, never evidence. Promoted
+   rows and suggestion modules are never part of either side's sample or counts.
 4. Areas, signal terms, area weights, factor weights, evidence modes, targets, and
    budget come from the user and are restated before scoring. The lexicon is the
    measuring instrument.

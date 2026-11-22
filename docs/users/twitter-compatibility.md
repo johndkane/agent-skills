@@ -72,7 +72,9 @@ yourself. The next run then starts fresh, so some work may be repeated.
 6. **Reads each account** — bio, join date, recent posts, replies, reposts,
    quotes, media, and captions or alt text — plus images, video frames, or
    transcripts when those modes are on and proven. Every item is checked
-   against your agreed list of match words.
+   against your agreed list of match words. Rows X injects into a feed —
+   promoted posts and "you might like" blocks — are never counted as the
+   account's.
 7. **Scores** — shared subjects, conversation, format fit, voice fit, recency,
    and access, combined with the weights you approved. Every part of the score
    carries its counts.

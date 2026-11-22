@@ -41,8 +41,8 @@ Ask the scope up front — `focus`, `moots`, `following-only`, `followers-only`,
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
 It carries the rules shared by every X skill — state line, linked evidence, human
-cadence, access failures, asking the user, and privacy — and it is part of this
-skill.
+cadence, access failures, ads and suggestion rows, asking the user, and privacy —
+and it is part of this skill.
 
 ## Rules
 
@@ -177,7 +177,8 @@ content-based and category is reported separately.
 Read the source in this run; do not score from last run's copy.
 
 1. From the source profile, sample up to 40 Posts, 30 Replies, 15 Media, and 15
-   Likes when visible. Deduplicate by URL.
+   Likes when visible. Deduplicate by URL. Promoted rows and injected suggestion
+   modules are not the source's items: never sampled or counted.
 2. Capture per item: kind, visible text (≤280 characters), date, permalink,
    has-media, question mark, first-person language, emoji, thread position. Do not
    store text in state.
@@ -194,7 +195,7 @@ Read the source in this run; do not score from last run's copy.
 1. Read the lists the scope needs: Following and Followers for `moots` and `all`;
    Following for `following-only`; Followers for `followers-only`; `focus` needs
    only the profile pair. Collect handle, display name, bio excerpt, and
-   `Follows you`; dedupe.
+   `Follows you`; dedupe. A `Promoted` row is an ad, not a list member: skip it.
 2. Classify each row:
    - `moot` — in Following and Followers when both lists were read, or `Follows you`
      on a profile the user follows.
@@ -233,7 +234,8 @@ For each target, in queue order:
    post. If the live category no longer matches a selected population, keep the
    state entry but leave it out of this run. A focus target ignores the category.
 2. Sample up to 30 Posts, 20 Replies, 10 Media, and reposts visible in Posts.
-   Deduplicate by URL; one item is one row.
+   Deduplicate by URL; one item is one row. A promoted row or a suggestion
+   module is not a row: skip it; it never counts toward the sample.
 3. Capability-test each enabled mode once per run before counting it: screenshot a
    page whose text you read, read back the image rather than a path, and state a
    visible detail the text lacks; for `video`, read a paused frame that differs from
@@ -363,6 +365,8 @@ card.
 - [ ] Areas, signal terms, both weight sets, targets, and budget confirmed and
       restated.
 - [ ] Source feed read in this run; source metrics computed from it.
+- [ ] Promoted rows and suggestion modules excluded from every sample, count,
+      and queue.
 - [ ] Every target has a confirmed category and a counted sample, or a named
       `insufficient`/`unreadable` reason.
 - [ ] Non-text items counted only under a proven mode; non-text-only matches

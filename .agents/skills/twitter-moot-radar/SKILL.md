@@ -44,8 +44,8 @@ a reason to question the request or push the user toward a different account.
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before starting.
 It carries the rules shared by every X skill — state line, linked evidence, human
-cadence, access failures, asking the user, and privacy — and it is part of this
-skill, not optional background.
+cadence, access failures, ads and suggestion rows, asking the user, and privacy —
+and it is part of this skill, not optional background.
 
 ## Rules
 
@@ -172,7 +172,8 @@ For each moot, in order:
 1. Open `x.com/<moot>/following` directly; confirm whose list it is.
 2. Collect continuously: handle, display name, short bio excerpt. Append the
    moot to each candidate's `moots` set as you go, so overlap grows while the
-   lists are read.
+   lists are read. Skip `Promoted` rows and injected suggestion modules: they
+   are not the moot's follows.
 3. Skip the user, the moots, handles already decided in state, and handles the
    user already follows (a row hint; confirmed in Step 6).
 4. Read the top first — recency reflects current taste. Default to roughly the
@@ -361,7 +362,8 @@ that the next run starts fresh and may repeat decided work.
       non-text proof labelled and never above medium confidence.
 - [ ] Roster from confirmed moots only, labelled, ordered, capped — or skipped
       for a named focus account.
-- [ ] List reads came from Following lists only; overlap counted per candidate.
+- [ ] List reads came from Following lists only, `Promoted` rows and suggestion
+      modules skipped; overlap counted per candidate.
 - [ ] Every suggestion has quoted evidence with date and permalink, and a live
       "not followed" reading.
 - [ ] Protected accounts excluded and reported, not guessed at.

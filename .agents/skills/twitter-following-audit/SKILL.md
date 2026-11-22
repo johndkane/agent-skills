@@ -49,8 +49,8 @@ unfollows, blocks, mutes, follows, likes, reposts, reports, or messages.
 
 Read [references/twitter-shared.md](references/twitter-shared.md) before
 starting. It carries the rules shared by every X skill — state line, linked
-evidence, human cadence, access failures, asking the user, and privacy — and
-it is part of this skill, not optional background.
+evidence, human cadence, access failures, ads and suggestion rows, asking the
+user, and privacy — and it is part of this skill, not optional background.
 
 ## Rules
 
@@ -199,7 +199,8 @@ follow state reported as context.
 
 1. Open the source's Following list and collect continuously while scrolling,
    per the shared cadence: handle, display name, bio excerpt. Two empty scroll
-   stops end the list.
+   stops end the list. A `Promoted` row — an ad or a suggested account — is not
+   a follow: skip it, never queued or audited.
 2. Skip follows that are `held`. Skip follows with a current verdict unless
    the scope is `stale` or the user asks for them this run.
 3. Order: user-named first, then unreviewed in list order, then stale oldest
@@ -221,7 +222,8 @@ For each queued account, in order:
    fact and leave the account out of this run's verdicts.
 2. Sample up to 15 items from Posts (original posts and visible replies),
    recording: kind, visible text (≤200 characters), date, permalink, repost
-   or not. Deduplicate by URL. Record the newest post date.
+   or not. Deduplicate by URL. Record the newest post date. Promoted rows and
+   injected modules are not the account's posts: never sampled or counted.
 3. Match text, captions, and alt text against the frozen signal terms; record
    matched items per area with their permalinks. A repost is secondhand and
    never proves alignment on its own.
@@ -346,8 +348,8 @@ first card.
 - [ ] Areas, signal terms, strictness, held handles, and named ties confirmed.
 - [ ] Evidence modes confirmed; each enabled mode capability-tested or flagged
       `unavailable`; non-text evidence labelled and capped.
-- [ ] Queue came from the Following list this run; categories confirmed on
-      profiles.
+- [ ] Queue came from the Following list this run, `Promoted` rows skipped as
+      ads; categories confirmed on profiles.
 - [ ] Every non-keep verdict carries a reason tag, a quoted dated item or a
       counted dormancy fact, and its tie or lack of one.
 - [ ] Keeps are stated with what earns the slot; optimism wording throughout.

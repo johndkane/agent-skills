@@ -54,7 +54,8 @@ work may be repeated.
    can't see the button label). Collected while scrolling, deduplicated by
    handle. A plain `Follow` without the lock means that person stopped
    following you: a stranger, never queued. Rows showing `Pending` are noted,
-   not queued.
+   not queued. Ads X injects into the list — rows marked `Promoted` — are
+   skipped too: they aren't your followers.
 6. **Researches each candidate** — bio, join date, follower ratio, and recent
    posts. Protected accounts can't be checked this way, so the skill applies
    the rule you chose and says so. If you turned image checks on, it may also

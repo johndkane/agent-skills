@@ -31,7 +31,9 @@ audio-transcript mode is capability-tested per run and reported `available` or
 asking rule: every question a run puts to the user stands alone — plain words,
 the reason for asking, and what each answer changes — and every example in a
 question comes from what the run has observed about that user, never a fixed
-script.
+script. It also carries the ads rule: promoted rows and injected suggestion
+modules — "Who to follow", "Discover more" — are never the account's content,
+so no member samples, counts, quotes, or queues one.
 
 Every skill that drives a browser follows the same
 [human cadence](browser-cadence.md): jittered, proportional waits copied into

@@ -192,8 +192,8 @@ index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). All
 open a run with a brief state line, ask every question in the user's language
 — one decision, plain words, the reason for asking, what each answer changes,
 examples from the user's own profile and history — link every handle and cited
-source in their output, and stop on an access failure instead of inferring
-state. Text is the
+source in their output, stop on an access failure instead of inferring state,
+and treat ads and injected suggestion rows as never the account's content. Text is the
 default evidence mode; every member offers the same opt-in image, video-frame, and
 audio-transcript gate from the shared file, tests each enabled mode per run, and
 reports `unavailable` instead of zeroing it.

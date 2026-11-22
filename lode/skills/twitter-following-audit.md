@@ -77,6 +77,8 @@ to `references/twitter-shared.md`).
     saved state, their words — as a guess to confirm, never a fixed subject
     such as a canned "Rust" example; with nothing observed, the question
     names the kind of answer wanted.
+12. A `Promoted` or suggested row in the Following list is an ad, not a
+    follow: never queued or audited, and never part of a profile's sample.
 
 ## Pipeline
 

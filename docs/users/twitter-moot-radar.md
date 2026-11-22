@@ -65,6 +65,8 @@ yourself. The next run then starts fresh, so some work may be repeated.
 5. **Reads the Following lists** — collects names and short bios
    from your moots' Following tabs only, counting how many distinct moots
    follow each account. Nothing comes from "Who to follow", Explore, or search.
+   Ads and suggestion modules X injects into those lists are skipped as well —
+   they are not what your moot chose to follow.
 6. **Filters early** — obvious bots, salesy accounts, and already-decided names
    are dropped before any profile is opened, so attention goes to plausible
    people.

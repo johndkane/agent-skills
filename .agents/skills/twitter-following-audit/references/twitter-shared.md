@@ -89,6 +89,24 @@ failed, where, how many items remain, and the resume point. A profile-level
 sensitive-content notice stays `unreadable`; a visible rate-limit notice follows
 the throttle rule.
 
+## Ads and suggestion rows
+
+Feeds, profile tabs, Following and Followers lists, and post pages interleave
+content that is not the account's: promoted posts and accounts — marked
+`Promoted` or shown as an ad card — and injected modules such as "Who to
+follow", "You might like", "Discover more", and "Other posts you might like".
+X renames, restyles, and re-places these without notice; read the current
+labels from the page every run.
+
+A promoted or suggested row is never the account's content: never sampled,
+never counted in a metric, score, or verdict, never quoted as evidence, and
+never queued, followed, or researched. A module at the foot of a thread or a
+list is not part of that thread or list. Skip the row and keep scrolling at
+the normal cadence: it is neither a content item nor an empty scroll stop,
+and never an access failure. An ambiguous row — the account's or injected —
+is left out and noted. Skipped promoted rows may be counted for the report,
+but never folded into a sample size.
+
 ## Persistence fallback
 
 Ask once for permission to write the state path. If the user declines, or the path
