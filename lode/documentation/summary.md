@@ -60,6 +60,10 @@ other two directories own operating and changing the repository.
 
 - `README.md` stays high level. Detail lives on the owning `docs/` page; README
   links to it.
+- README's quick start is the visitor's example surface: one concrete install
+  line and one plain-language try-it phrase per end-user skill, each linking to
+  the owning docs page. It never copies a docs page's example set or the
+  per-host syntax matrix.
 - One behavior has one home in `docs/`. Other pages link rather than restate.
 - `docs/` and `lode/` never swap roles. Lode rationale does not move into `docs/`,
   and `docs/` is not an agent scratchpad.

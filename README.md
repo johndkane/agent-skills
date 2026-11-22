@@ -62,13 +62,26 @@ No build step, no package installs, and no need to copy anything by hand.
 
 ## Get started
 
-Point your agent at this repository and tell it what you want:
+Point your agent at this repository and ask for a skill by name:
 
-> Clone `<repo-url>` and install `<skill-name>` for me.
+> Install `twitter-followback` for me, then review my new followers.
 
-Your agent reads the skill's folder and copies it into the directory its own
-app looks at. The folder is the whole skill; keep its name. Which folder each
-app looks at is in [Getting skills](docs/users/getting-skills.md).
+That's the whole install: your agent copies that skill's folder into the
+directory its own app looks at. The folder is the whole skill; keep its name.
+Which folder each app reads is in [Getting skills](docs/users/getting-skills.md),
+and exact per-app syntax is in [Invoking skills](docs/users/invoking.md).
+
+Plain language works in every app. Once a skill is installed, try:
+
+| Say something like | Skill |
+| --- | --- |
+| "Follow back my followers" or "review my new followers" | [twitter-followback](docs/users/twitter-followback.md) |
+| "Who do my moots follow that I don't?" | [twitter-moot-radar](docs/users/twitter-moot-radar.md) |
+| "How compatible am I with @example_alice?" | [twitter-compatibility](docs/users/twitter-compatibility.md) |
+
+Each skill confirms its rules with you before it acts, so there is nothing to
+set up in advance. The X skills need a browser your agent can drive, signed in
+to your own account — see [what they need](docs/users/README.md).
 
 To set up a whole checkout at once:
 
