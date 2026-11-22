@@ -77,7 +77,13 @@ operating and changing the repository.
   chosen model (extension has no server of its own; model side is cloud),
   it acts inside the signed-in session, passwords/2FA/passkeys/payments hand
   back to the human, and pages can try to steer the agent (skills confirm
-  plans and show evidence instead of deciding alone). It also offers the
+  plans and show evidence instead of deciding alone). Two Mermaid diagrams
+  carry the security picture: the request loop (you → app → model in the
+  cloud → app → extension → signed-in browser) after the three-part intro,
+  labeling the only two things that leave the machine (the typed request and
+  task-page text); and the browser-control boundary map (task tabs in reach /
+  sign-ins and payments handed back / private pages and the password outside,
+  plus the page-steering catch) after Step 2's honest bullets. It also offers the
   proactive path — ask the agent "help me set up browser control" — which
   `browser-setup.md` owns (that page invites the same ask up front, not only
   after a skill fails).

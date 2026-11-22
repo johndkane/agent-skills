@@ -19,6 +19,29 @@ The fast path has three parts:
 Then you point the assistant at a skill with one message, and it installs the
 skill and runs it.
 
+Before the steps, the whole picture — what happens when you type a request,
+and what stays on your machine:
+
+```mermaid
+flowchart TB
+    subgraph PC["Your computer — the work happens here, where you can watch"]
+        YOU["You"] -- "1. type what you want" --> APP["OpenCode,<br/>the assistant app"]
+        APP -- "4. does the work: opens tabs, reads,<br/>clicks, types — each step shown to you" --> EXT["OpenCode Browse,<br/>the browser extension"]
+        EXT -- "acts inside your browser" --> BR["Your browser,<br/>signed in to X as you"]
+    end
+    subgraph NET["The internet"]
+        MODEL["The AI model you picked<br/>(even a free one)"]
+    end
+    APP -- "2. your request — and the text of pages it<br/>works on — go to the model to think about" --> MODEL
+    MODEL -- "3. what to do next" --> APP
+```
+
+Reading the arrows: two things ever leave your computer — what you type, and
+the text of the pages the assistant works on. Both go to the AI model you
+picked so it can think about them, and the model sends back what to do next.
+Everything else happens on your machine, in front of you, and the cycle
+repeats until your request is done.
+
 ## Step 1: Install OpenCode
 
 OpenCode comes as a normal desktop app for Windows, macOS, and Linux — one
@@ -85,6 +108,20 @@ browser, so here is the honest version of what you're agreeing to:
   to steer AI tools. That's why the skills here only do what you asked,
   confirm the plan with you first, and bring you anything borderline with
   the evidence instead of deciding alone.
+
+The same boundaries as a picture — the task you give it is the fence:
+
+```mermaid
+flowchart TB
+    CTRL["Browser control — the extension"]
+    CTRL -- "in reach: the tabs it opens for your task" --> REACH["Read the page: text, layout, screenshots.<br/>Scroll, click, and type as your signed-in account."]
+    CTRL -- "handed back to you: whenever a site needs you" --> HAND["Sign-ins — password, 2FA code, passkey —<br/>and payments. It waits until you're done."]
+    CTRL -. "stays outside: never part of the task" .-> OUT["Pages you keep private, like your email<br/>or banking, and your password itself —<br/>never asked for, never typed."]
+    REACH -.-> RISK["One catch: a web page can hide text written to<br/>steer AI assistants. The skills here confirm the plan<br/>with you first and bring you anything borderline<br/>with the evidence instead of deciding alone."]
+```
+
+Browser control reaches the tabs you point it at, hands sign-ins and
+payments back to you, and never asks for your password.
 
 **Not comfortable with this? You don't have to decide now.** You can skip
 the extension entirely and ask your assistant for help instead: type
