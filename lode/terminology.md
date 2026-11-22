@@ -25,6 +25,7 @@
 - **README** — `README.md`, the high-level entry point for a repository visitor: what it is, what it contains, where to start.
 - **Docs** — `docs/`, the human documentation tree, grouped by audience.
 - **Docs audience** — one of `users/`, `operators/`, `developers/`, or `skills/` under `docs/`; each owns its detail, and other pages link to it.
+- **Quickstart** — `docs/users/quickstart.md`, the from-scratch walkthrough: one fast, free path (install OpenCode, optionally add the OpenCode Browse extension so the run uses the existing signed-in browser session, pick a free model, point at a skill URL, ask it to install and use the skill). Surfaced first from `docs/README.md`; linked from the user guide, getting-skills, and the top-level README's Get started. Vendor commands there are dated like `browser-setup.md`.
 - **Lode** — `lode/`, this agent-owned memory and the home of project-specific guidance.
 - **Protected account** — an X account that hides its posts until it approves a follow request.
 - **Moot** — a person the user follows who follows back; a `twitter-moot-radar` source and one `twitter-compatibility` scope.

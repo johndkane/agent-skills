@@ -46,15 +46,16 @@ lode/      -> how this project works
 ```text
 docs/
 ├── README.md        index grouped by audience
-├── users/           user guide, getting skills, invoking, skill guides
+├── users/           quickstart, user guide, getting skills, invoking, skill guides
 ├── operators/       architecture, scripts, adopting
 ├── developers/      agent instructions, lode coding, host differences
 └── skills/          catalog, groups, X core/shared, cadence, skill-verify
 ```
 
-`docs/users/` needs no repository knowledge: it covers choosing a skill, getting
-it, invoking it, and using it. `docs/skills/` is the authoring reference. The
-other two directories own operating and changing the repository.
+`docs/users/` needs no repository knowledge: it covers getting started from
+scratch (the quickstart), choosing a skill, getting it, invoking it, and using
+it. `docs/skills/` is the authoring reference. The other two directories own
+operating and changing the repository.
 
 ## Rules
 
@@ -64,6 +65,14 @@ other two directories own operating and changing the repository.
   line and one plain-language try-it phrase per end-user skill, each linking to
   the owning docs page. It never copies a docs page's example set or the
   per-host syntax matrix.
+- The from-scratch walkthrough has one home:
+  [`docs/users/quickstart.md`](../../docs/users/quickstart.md) — the OpenCode
+  fast path (install OpenCode, optional OpenCode Browse extension for the
+  existing signed-in X session, free model via `/models`, one install-and-use
+  prompt at a skill URL). `docs/README.md` surfaces it first ("Start here");
+  the user guide, getting-skills, and the top-level README's Get started link
+  to it rather than restate it. Its vendor commands and links carry the same
+  "accurate when written" dating rule as `browser-setup.md`.
 - One behavior has one home in `docs/`. Other pages link rather than restate.
 - `docs/` and `lode/` never swap roles. Lode rationale does not move into `docs/`,
   and `docs/` is not an agent scratchpad.

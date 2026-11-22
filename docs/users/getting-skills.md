@@ -4,6 +4,11 @@ A skill is just a folder of instructions. "Getting" one means putting that
 folder where your agent looks — that's the whole installation. Nothing else to
 change or configure.
 
+Starting from scratch — no AI assistant installed yet? Follow
+[From zero to your first skill](quickstart.md) first: it installs OpenCode,
+connects your browser, and runs a first skill end to end. This page is the
+detail behind that walkthrough's install step.
+
 ## Ask your agent
 
 The easiest way: point your agent at the skill and ask.

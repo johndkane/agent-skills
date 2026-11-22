@@ -72,7 +72,13 @@ No build step, no package installs, and no need to copy anything by hand.
 
 ## Get started
 
-Point your agent at this repository and ask for a skill by name:
+Starting from scratch — nothing installed yet? [From zero to your first
+skill](docs/users/quickstart.md) takes a fresh machine to a working skill in
+one pass: install OpenCode, connect your browser, pick a free model, and ask
+for a skill.
+
+Already use an AI assistant? Point it at this repository and ask for a skill
+by name:
 
 > Install `twitter-followback` for me, then review my new followers.
 

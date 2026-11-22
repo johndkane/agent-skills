@@ -4,6 +4,10 @@ A skill is a set of instructions your agent loads when your request matches it.
 This guide helps you pick one, get it into your app, and use it. You don't need
 to know anything about how this repository is built.
 
+Never set up an AI assistant before? Start with
+[From zero to your first skill](quickstart.md) — one fast, free path from a
+fresh machine to a working skill, in plain language.
+
 ## The skills
 
 | Skill | What it does for you | Full guide |
@@ -44,6 +48,10 @@ confirm — never a canned one.
 - **Decide who still earns a place in your Following list** → `twitter-following-audit`.
 
 ## Get and use it
+
+Starting from nothing? [From zero to your first skill](quickstart.md) covers
+the whole setup — install OpenCode, connect your browser, pick a free model,
+and run a skill — in one pass. Otherwise:
 
 1. [Get the skill](getting-skills.md) — ask your agent, or copy one folder.
 2. [Use the skill](invoking.md) — how to call it up in Claude Code, Copilot,

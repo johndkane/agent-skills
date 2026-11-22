@@ -3,6 +3,14 @@
 Human documentation for the `agent-skills` repository, grouped by audience. Every
 page links to its neighbours, so you can read in any order.
 
+## Start here
+
+Starting from scratch — no AI assistant installed yet? Follow
+[From zero to your first skill](users/quickstart.md): install OpenCode, connect
+it to the browser you already use so it can see your X session, pick one of its
+free models, and ask it to install and run a skill. Plain language throughout,
+about fifteen minutes end to end.
+
 ## Users
 
 For people who want a skill for their own account. No repository knowledge is
@@ -10,6 +18,7 @@ needed: choose a skill, get it, and use it.
 
 | Page | What it explains |
 | --- | --- |
+| [Quickstart](users/quickstart.md) | From a fresh machine to your first skill in one pass: OpenCode, browser, free model, one prompt |
 | [User guide](users/README.md) | Which skill to choose and what it needs |
 | [Getting skills](users/getting-skills.md) | Ask your agent, copy the folder, or enable it in your account |
 | [Invoking skills](users/invoking.md) | Explicit syntax for each host, TUI, CLI, and app — and why `/` is not universal |
@@ -71,8 +80,9 @@ Two short rules explain the shape:
 
 ## Reading order
 
-Using a skill: [User guide](users/README.md) →
-[Getting skills](users/getting-skills.md) → [Invoking skills](users/invoking.md).
+Using a skill: [Quickstart](users/quickstart.md) →
+[User guide](users/README.md) → [Getting skills](users/getting-skills.md) →
+[Invoking skills](users/invoking.md).
 
 Managing a checkout: [Architecture](operators/architecture.md) →
 [Scripts](operators/scripts.md) → [Adopting this repo](operators/adopting.md).
