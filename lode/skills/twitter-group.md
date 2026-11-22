@@ -34,7 +34,8 @@ applies the group mechanics in [groups](groups.md).
 5. `skill-verify` checks that a member's copy is byte-identical to the central
    file and that the index lists the member.
 6. A cross-group capability page is named for the capability, not a group, such
-   as [`browser-cadence.md`](../../docs/skills/browser-cadence.md).
+   as [`browser-cadence.md`](../../docs/skills/browser-cadence.md) or
+   [`browser-setup.md`](../../docs/skills/browser-setup.md).
 7. Text is every member's default evidence mode. An enabled multimodal mode is
    capability-tested once per run and reported `available` or `unavailable`; the
    shared file is the one place that rule is authored and it is copied verbatim.
@@ -67,6 +68,15 @@ applies the group mechanics in [groups](groups.md).
     counts, quotes, queues, or acts on one, and one is neither a content row
     nor an empty scroll stop. Authored once in `twitter-shared.md` and copied
     verbatim.
+12. Setup guidance is authored once in `twitter-shared.md` as principles and
+    copied verbatim: a run that cannot get control says what is missing, asks
+    one question on guidance depth (step by step for a new user, short
+    version, or self-setup), names the environment, guides only from official
+    vendor documentation read that run, offers first-party options first,
+    takes the user's yes for every change to the machine, hands login to the
+    user, and continues only on a passed control proof. Vendor commands, URLs,
+    and product names never enter a skill body or the shared file; dated
+    examples live only on `browser-setup.md` and the user setup page.
 
 ```mermaid
 flowchart LR

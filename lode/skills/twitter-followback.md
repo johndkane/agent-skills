@@ -45,6 +45,13 @@ Group files: [`twitter-core`](../../docs/skills/twitter-core.md) (contract),
     transcript evidence can flag stock, watermark, impersonation, or activity, but
     never proves a real person or a sensitive trait; a mode that fails its capability
     test is reported `unavailable`, never scored as a zero.
+15. Setup guidance follows the shared principles: when browser control is
+    missing the run asks one question on depth (step by step for a new user,
+    short version, or self-setup), names the environment, guides only from
+    official vendor documentation read that run, offers first-party options
+    first, takes the user's yes for every change to the machine, hands login
+    to the user, and continues only on a passed control proof. Vendor
+    commands, URLs, and product names are never hard-coded.
 
 ## Cadence
 

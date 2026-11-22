@@ -32,6 +32,7 @@ copy them.
 | Page | Applies to | Why not a group file |
 | --- | --- | --- |
 | [`browser-cadence.md`](browser-cadence.md) | Every browser-driven skill | The capability spans groups, so the name is the capability |
+| [`browser-setup.md`](browser-setup.md) | Every browser-driven skill | Setup guidance for browser control; principles span groups, vendor examples expire |
 
 ## Adding a group
 

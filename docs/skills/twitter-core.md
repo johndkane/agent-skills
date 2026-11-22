@@ -22,11 +22,14 @@ description, its body intro, and its Safety rules.
 | File | Role | Copied into members |
 | --- | --- | --- |
 | `twitter-core.md` | This contract: principles, rationale, and how to change the group | No; it is the authoring page |
-| `twitter-shared.md` | Copy-ready operative rules: state line, linked evidence, cadence, access failures, multimodal evidence, privacy | Yes, verbatim to `references/twitter-shared.md` in every member |
+| `twitter-shared.md` | Copy-ready operative rules: browser setup, state line, linked evidence, cadence, access failures, multimodal evidence, privacy | Yes, verbatim to `references/twitter-shared.md` in every member |
 
 The names carry the group, so a file from another group is never mistaken for
-this one. `browser-cadence.md` is a cross-group capability page, named for the
-capability rather than a group.
+this one. `browser-cadence.md` and `browser-setup.md` are cross-group
+capability pages, named for the capability rather than a group;
+[`browser-setup.md`](browser-setup.md) holds the rationale for the
+principle-based setup guidance and the dated vendor examples that never enter
+a skill.
 
 The group index is [`skill-groups.md`](skill-groups.md). Add a group there before
 creating its central files.
@@ -49,9 +52,16 @@ directory; its own `SKILL.md` carries every rule it needs.
 These are not style preferences. Each one exists because getting it wrong
 damages the user's account or produces a false claim.
 
-1. **Prove browser control first.** Confirm the relay, open a tab you keep, read
+1. **Prove browser control first.** Confirm the tool, open a tab you keep, read
    something from a page, and screenshot it before planning. If control is
-   missing, hand back the prerequisites instead of improvising.
+   missing, run the shared setup-guidance flow instead of improvising: say what
+   is missing, ask whether the user wants to be guided (step by step for a new
+   user, short version, or self-setup), name the environment, read the vendor's
+   official documentation live, offer first-party options first, take the
+   user's yes for every change to their machine, hand login to the user, and
+   continue only when the proof passes. The principles are the contract; the
+   vendor specifics are re-derived from the live docs every run, so no skill
+   hard-codes commands, URLs, or product names that will move.
 2. **The live UI is the source of truth.** X changes labels, layouts, and menus
    without notice. Observe the current vocabulary every run. A memory of last
    run's UI is not evidence.

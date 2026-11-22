@@ -37,7 +37,13 @@ so no member samples, counts, quotes, or queues one.
 
 Every skill that drives a browser follows the same
 [human cadence](browser-cadence.md): jittered, proportional waits copied into
-its own body, with verification and challenge handling left exact.
+its own body, with verification and challenge handling left exact. When a run
+cannot get browser control, it offers the same
+[setup guidance](browser-setup.md) instead of giving up: one question on how
+deeply to guide, official vendor documentation read live that run, first-party
+options first, and the user's yes for every change — principles, never
+hard-coded vendor commands, so no skill goes stale when a vendor moves its
+docs.
 
 ## Anatomy
 

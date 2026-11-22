@@ -24,6 +24,11 @@ The X skills drive a real browser, so they need:
   show you their progress instead — you may just see some work repeated next
   time.
 
+No browser control yet? You don't have to prepare anything: a skill that
+can't get control offers to walk you through setting it up, step by step if
+this is all new to you, using only your app's official documentation — see
+[Setting up browser control](browser-setup.md).
+
 Everything they learn stays on your machine and never enters this repository,
 and everything they report links back to the page it came from. Every question
 one of them asks stands on its own: plain words, the reason for asking, and

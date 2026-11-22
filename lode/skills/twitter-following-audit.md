@@ -82,6 +82,13 @@ to `references/twitter-shared.md`).
     names the kind of answer wanted.
 12. A `Promoted` or suggested row in the Following list is an ad, not a
     follow: never queued or audited, and never part of a profile's sample.
+13. Setup guidance follows the shared principles: when browser control is
+    missing the run asks one question on depth (step by step for a new user,
+    short version, or self-setup), names the environment, guides only from
+    official vendor documentation read that run, offers first-party options
+    first, takes the user's yes for every change to the machine, hands login
+    to the user, and continues only on a passed control proof. Vendor
+    commands, URLs, and product names are never hard-coded.
 
 ## Pipeline
 

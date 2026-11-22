@@ -54,6 +54,15 @@ The progress file isn't a hard requirement: if you say no, or the folder can't
 be written, the skill keeps going and shows you its progress so you can save it
 yourself. The next run then starts fresh, so some work may be repeated.
 
+## Set up browser control
+
+The skill works in your own browser, in a session you're signed in to. If your
+agent doesn't have browser control yet, you don't have to prepare anything:
+the skill notices at the start, offers to walk you through it — step by step
+if this is all new to you — and reads only your app's official documentation.
+Nothing is installed or changed without your yes, and signing in to X is
+always yours. See [Setting up browser control](browser-setup.md).
+
 ## How it works
 
 1. **Checks it can drive the browser** — confirms it's really controlling your
@@ -208,6 +217,7 @@ you.
 - [User guide](README.md)
 - [Getting skills](getting-skills.md)
 - [Using skills](invoking.md)
+- [Setting up browser control](browser-setup.md) — get browser control working first
 - [twitter-compatibility](twitter-compatibility.md) — score how well you'd get along with an account
 - [twitter-moot-radar](twitter-moot-radar.md) — find new people through your moots
 - [twitter-followback](twitter-followback.md) — follow back real, active followers

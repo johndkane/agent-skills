@@ -98,6 +98,13 @@ verify before claiming, persist progress, stop cleanly — is in
   wait, long dwells for reading, an upper-range pause and hover before
   state-changing clicks, no padding for passive checks. Jitter timing, never
   verification; a challenge stops the run.
+- A browser-driven skill proves control first. When control is missing it runs
+  the shared setup-guidance flow — one question on guidance depth, official
+  vendor documentation read live that run, first-party options first, the
+  user's yes for every change, login handed off, proof before continuing —
+  authored as principles in the group's shared reference so no skill hard-codes
+  vendor specifics; dated examples live on
+  [browser setup](../../docs/skills/browser-setup.md) and expire.
 - An online skill stops on an access failure instead of inferring account state.
   Record an unreadable page as a verdict with a reason.
 - Persistence is never a hard stop. When the state-file write is refused or
@@ -172,6 +179,9 @@ cannot run.
       [browser cadence](../../docs/skills/browser-cadence.md) in its body or
       group-shared reference, with verification and challenge handling left
       exact.
+- [ ] A browser-action skill carries the setup-guidance principles in its
+      shared reference — no vendor commands, URLs, or product names in any
+      skill file — and its docs page points new users at the user setup guide.
 - [ ] The `skill-verify` skill ran and reported every required check passing.
 - [ ] The README bullet exists and matches the skill's real requirements.
 - [ ] Online skills keep run data — handles, quotes, screenshots, state — outside
@@ -189,7 +199,9 @@ references. Their shared rules live in `references/twitter-shared.md`, copied
 verbatim from
 [`docs/skills/twitter-shared.md`](../../docs/skills/twitter-shared.md); the group
 index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). All
-open a run with a brief state line, ask every question in the user's language
+open a run with a brief state line, prove browser control first and guide setup
+by the shared principles when it is missing, ask every question in the user's
+language
 — one decision, plain words, the reason for asking, what each answer changes,
 examples from the user's own profile and history — link every handle and cited
 source in their output, stop on an access failure instead of inferring state,

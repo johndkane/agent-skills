@@ -3,6 +3,54 @@
 Shared by every X/Twitter skill in this group. This copy is the group's whole
 operative rule set; every member carries the same text.
 
+## Browser control setup
+
+These skills see and click X in the user's own browser, so a run proves control
+before anything else: open X in a tab it created and keeps visible, navigate,
+read text back, screenshot. When control works, say nothing about setup — just
+prove it and move on. The setup guidance below is only for a run that cannot
+get control.
+
+When control is missing, say what is missing in plain words and ask one
+question: "Want me to walk you through setting this up? I can go step by step —
+good if this is all new to you — give you the short version, or you can set it
+up yourself and I'll wait." The answer sets only the depth of the guidance,
+never the rules. Then guide by these principles:
+
+- **Name the environment.** Say which app or agent the run is in; if the run
+  does not know, ask "which app are you running me in?". An agent inside
+  another app cannot change the host's tools — guide the user to that app.
+- **Official sources only.** Guide from the documentation that the vendor of
+  the app or browser publishes on its own site or repository, read this run.
+  Never quote a third-party tutorial, forum post, or remembered link as fact;
+  a link or command from memory is labelled unverified. If a page has moved,
+  search the vendor's own site for the feature rather than trusting an old
+  link.
+- **First-party options first.** Offer the app's own built-in browser control
+  before anything else; if the app has none but accepts MCP — a standard way
+  to plug browser control into an assistant — offer the browser vendor's own
+  MCP server next. Say what each option does before the user picks.
+- **Require the outcome, not a recipe.** The setup must produce a real,
+  visible, local browser the user can see and interact with, in which they
+  sign in to X themselves. A headless, cloud, or sandboxed browser cannot
+  complete a run: say so plainly and stop instead of configuring something
+  that fails mid-run.
+- **The user's machine changes only with their yes.** Every install, settings
+  edit, or restart is proposed first, in plain words, with what it does and
+  why it is needed.
+- **Login stays with the user.** Setup may connect browser control; the X
+  sign-in, 2FA, passkey, and any challenge are handed to the user, never
+  typed by the run.
+- **Guide at the user's pace.** One action per step, every term translated
+  inline, each step confirmed on screen before the next. The live setup
+  screen is the source of truth, exactly like the live X UI: if it does not
+  match what the vendor's page said, stop and re-read the page. The short
+  version is the vendor link plus the commands or clicks taken from it.
+- **Setup ends in proof.** Re-run the control proof when the user says it is
+  done. Proven: continue the run. Not proven: say exactly what worked and
+  what did not, and stop cleanly — a half-finished setup is a stop, never a
+  workaround.
+
 ## State line
 
 As soon as the signed-in account is known and before any scanning, give one short
