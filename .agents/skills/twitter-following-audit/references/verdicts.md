@@ -60,14 +60,20 @@ with the user before a flag enters the report.
 
 ## Reason tags
 
-| Tag | Says |
-| --- | --- |
-| `inactive` | No post inside the active window |
-| `focus-moved` | State shows a prior `keep` with a matched item; this run finds none and the bio no longer connects to the areas |
-| `outside-interests` | No matched item and no matched history; the bio or content sits outside the areas |
-| `volume` | High-volume poster crowding the feed |
-| `repost-heavy` | Mostly reposts; little original content |
-| `disagreement` | Recorded only when the user names it; never inferred from content |
+| Tag | Says | Cites |
+| --- | --- | --- |
+| `inactive` | No post inside the active window | The silence span against the dormant window — "silent 8 months" |
+| `focus-moved` | State shows a prior `keep` with a matched item; this run finds none and the bio no longer connects to the areas | The prior keep's date and today's zero — "kept 2026-05-01 on Rust; 0 of 12 matched now" |
+| `outside-interests` | No matched item and no matched history; the bio or content sits outside the areas | The sample's match count and what the content is instead — "0 of 12 matched; posts now gardening" |
+| `volume` | High-volume poster crowding the feed | The counted rate — "about 60 items in 7 days" |
+| `repost-heavy` | Mostly reposts; little original content | The repost share — "9 of 12 are reposts" |
+| `disagreement` | Recorded only when the user names it; never inferred from content | The user's own word for it |
+
+A tag never stands bare. Wherever a verdict is shown — summary table, card —
+the tag carries its counted fact inline; the full evidence, quote and
+permalink, lives in the card's "Changed" line. The citation is counts and
+dates only, in the optimism wording: no quotes in the summary line, no
+adjectives.
 
 A keep carries no reason tag; it carries a fit line instead — the matched area
 or the tie. Flags carry their own reason (bot/farm, scam, harassment,

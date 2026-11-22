@@ -13,10 +13,16 @@ state line.
 
 | Handle | Category | Verdict | Reason | Newest post | Confidence |
 | --- | --- | --- | --- | --- | --- |
+| [@example_alice](https://x.com/example_alice) | moot | unfollow | outside-interests — 0 of 12 matched; posts now gardening | 2026-08-02 | high |
+| [@example_bob](https://x.com/example_bob) | following-only | recheck | inactive — silent 8 months | 2026-03-15 | medium |
 
 - Handle linked to `https://x.com/<handle>`; category `moot` or
-  `following-only`; reason tag, or `—` for keep; newest post date read this
-  run; confidence from the sample.
+  `following-only`; the Reason column carries the tag plus the counted fact
+  behind it — the silence span, the match count, the repost share, or the
+  volume rate — never a bare tag; for `inactive` the fact is the silence span,
+  since the date already sits in Newest post; `—` for keep. Newest post date
+  read this run; confidence from the sample. Counts and dates only — the quote
+  and permalink stay in the card.
 
 ## Cards for unfollow, mute, and recheck
 

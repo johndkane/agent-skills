@@ -48,9 +48,12 @@ to `references/twitter-shared.md`).
    harmful account that never interacts) — decided by the user, never
    performed.
 7. Reason tags are neutral and dated: `inactive`, `focus-moved`,
-   `outside-interests`, `volume`, `repost-heavy`, `disagreement`. Flags carry
-   their own reason (bot/farm, scam, harassment, impersonation). A keep
-   carries a fit line, not a reason tag.
+   `outside-interests`, `volume`, `repost-heavy`, `disagreement`. A tag never
+   stands bare: wherever a verdict is shown, the tag carries its counted
+   fact — silence span, match count, repost share, volume rate, or the
+   user's word — with the full quote and permalink only in the card. Flags
+   carry their own reason (bot/farm, scam, harassment, impersonation). A
+   keep carries a fit line, not a reason tag.
 8. Every non-keep card leads with what the account gives or gave, names what
    would return it to keep, and names the alternative verdict. Unfollow is
    "not now": private, reversible, unannounced by X.

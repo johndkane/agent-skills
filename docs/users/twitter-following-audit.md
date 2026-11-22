@@ -110,8 +110,12 @@ The reasons behind a non-keep verdict are facts, not judgements: `inactive`
 your areas and now don't), `outside-interests` (their current content sits
 outside your subjects), `volume` and `repost-heavy` (feed-fit problems), and
 `disagreement` — which is recorded only when **you** name it, never guessed
-from content. Flags (safety findings) carry their own reason — bot or farm,
-scam, harassment, impersonation — and require quoted, dated evidence.
+from content. A reason never travels as a bare label: wherever a verdict
+appears, the tag comes with the fact behind it — how long they've been
+quiet, how many posts matched, what share is reposts — and the card quotes
+the full evidence with dates and links. Flags (safety findings) carry their
+own reason — bot or farm, scam, harassment, impersonation — and require
+quoted, dated evidence.
 
 ## What optimism means here
 

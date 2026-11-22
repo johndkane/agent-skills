@@ -253,8 +253,9 @@ Read [references/verdicts.md](references/verdicts.md) before the first
 verdict; it holds the decision table, the evidence bars, the reason tags, and
 the optimism wording.
 
-1. Assign one verdict per account from the decision table, with one reason
-   tag: `keep`, `unfollow`, `mute`, or `recheck`.
+1. Assign one verdict per account from the decision table — `keep`,
+   `unfollow`, `mute`, or `recheck` — with one reason tag and the counted
+   fact behind it: a reason never stands bare.
 2. Any matched item in the window proves alignment: the verdict is `keep`.
 3. A tie moves an unfollow to mute or recheck; state the tie in the card.
 4. Quoted safety evidence routes the account to the flag track instead of a
@@ -275,7 +276,9 @@ first card.
 1. Open with the scope and its counts, the interests and windows in force,
    evidence modes and capability, the audit version, and the state line.
 2. Verdict summary table: linked handle, category (`moot` or
-   `following-only`), verdict, reason tag, newest post date, confidence.
+   `following-only`), verdict, reason tag with the counted fact behind it —
+   the silence span, match count, repost share, or volume rate — newest post
+   date, confidence.
 3. A card for every unfollow, mute, and recheck: what the account gives or
    gave, what changed with a quoted, dated, linked item or a counted dormancy
    fact, the alternative, and what would return it to keep.
@@ -350,8 +353,9 @@ first card.
       `unavailable`; non-text evidence labelled and capped.
 - [ ] Queue came from the Following list this run, `Promoted` rows skipped as
       ads; categories confirmed on profiles.
-- [ ] Every non-keep verdict carries a reason tag, a quoted dated item or a
-      counted dormancy fact, and its tie or lack of one.
+- [ ] Every non-keep verdict carries a reason tag with its counted fact
+      beside it — a quoted dated item or a counted dormancy fact — and its
+      tie or lack of one.
 - [ ] Keeps are stated with what earns the slot; optimism wording throughout.
 - [ ] Safety findings are flagged with quoted evidence in their own section;
       no verdict mixes with a flag; nothing was performed.
