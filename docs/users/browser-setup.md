@@ -6,10 +6,12 @@ needs browser control: the ability to open tabs, read pages, and click for you
 while you watch. If your setup already has it, the skill just proves it and
 starts — this page is mostly for when it doesn't.
 
-You don't need to know any of this in advance. When a run can't get control,
-it stops and offers to help: a step-by-step walkthrough (good if this is all
-new to you), a short version, or you can set it up yourself while it waits.
-Here is what it will do, and why.
+You don't need to know any of this in advance, and you don't need to wait
+for a skill to hit the problem: just ask your assistant — "help me set up
+browser control" — and it will walk you through the choices. A run that
+can't get control stops and offers the same help on its own: a step-by-step
+walkthrough (good if this is all new to you), a short version, or you can
+set it up yourself while it waits. Here is what it will do, and why.
 
 ## What the skill will do
 

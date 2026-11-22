@@ -67,12 +67,25 @@ operating and changing the repository.
   per-host syntax matrix.
 - The from-scratch walkthrough has one home:
   [`docs/users/quickstart.md`](../../docs/users/quickstart.md) — the OpenCode
-  fast path (install OpenCode, optional OpenCode Browse extension for the
-  existing signed-in X session, free model via `/models`, one install-and-use
-  prompt at a skill URL). `docs/README.md` surfaces it first ("Start here");
-  the user guide, getting-skills, and the top-level README's Get started link
-  to it rather than restate it. Its vendor commands and links carry the same
-  "accurate when written" dating rule as `browser-setup.md`.
+  fast path (install OpenCode via the desktop app first on every platform —
+  Windows `.exe`, macOS `.dmg`, Linux `.deb`/`.rpm`/`.AppImage`; the terminal
+  installer is a macOS/Linux-only alternative since Windows has none; then the
+  optional OpenCode Browse extension for the existing signed-in X session, free
+  model via `/models`, one install-and-use prompt at a skill URL).
+  Step 2 states the browser-control trade-off before the reader connects:
+  the assistant sees the pages it works on and that content goes to the
+  chosen model (extension has no server of its own; model side is cloud),
+  it acts inside the signed-in session, passwords/2FA/passkeys/payments hand
+  back to the human, and pages can try to steer the agent (skills confirm
+  plans and show evidence instead of deciding alone). It also offers the
+  proactive path — ask the agent "help me set up browser control" — which
+  `browser-setup.md` owns (that page invites the same ask up front, not only
+  after a skill fails).
+  `docs/README.md` surfaces it first ("Start here"); the user guide,
+  getting-skills, and the top-level README's Get started link to it rather
+  than restate it. Its vendor commands and links carry the same "accurate when
+  written" dating rule as `browser-setup.md`; the current terminal installer is
+  `https://opencode.ai/v2/install` (verified 2026-11-21).
 - One behavior has one home in `docs/`. Other pages link rather than restate.
 - `docs/` and `lode/` never swap roles. Lode rationale does not move into `docs/`,
   and `docs/` is not an agent scratchpad.

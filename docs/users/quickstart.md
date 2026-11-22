@@ -21,24 +21,34 @@ skill and runs it.
 
 ## Step 1: Install OpenCode
 
-Install it the easy way for your system (accurate when written, November 2026;
-OpenCode's own documentation at [opencode.ai/docs](https://opencode.ai/docs) is
-the source of truth if anything has moved):
+OpenCode comes as a normal desktop app for Windows, macOS, and Linux — one
+download, installed like any other app. That's the way to use: no terminal
+needed on any system. (Accurate when written, November 2026; OpenCode's own
+documentation at [opencode.ai/docs](https://opencode.ai/docs) is the source of
+truth if anything has moved.)
 
-| You're on | Do this |
-| --- | --- |
-| Windows | Install the desktop app — the download is on [opencode.ai](https://opencode.ai). |
-| macOS or Linux | Open the Terminal (the app where you type commands) and run the one-line installer below. |
-
-```bash
-curl -fsSL https://opencode.ai/install | bash
-```
-
-Prefer clicking to typing? OpenCode also comes as a desktop app for Windows,
-macOS, and Linux — same assistant, friendlier wrapper.
+1. Go to [opencode.ai/download](https://opencode.ai/download) and click the
+   download for your system:
+   - **Windows** — the `.exe` installer
+   - **macOS** — the `.dmg`. If it asks which kind of Mac: Apple Silicon for
+     any Mac from late 2020 onward, Intel for older ones
+   - **Linux** — `.deb` for Ubuntu and Debian, `.rpm` for Fedora and Red Hat,
+     or the `.AppImage` for other distributions
+2. Open the downloaded file and install it the way you'd install anything: on
+   Windows, run the installer; on macOS, drag the app into your Applications
+   folder; on Linux, your system's package installer opens.
 
 When it opens, you're looking at a chat window: type at the bottom, watch the
 work happen above. That's the whole interface.
+
+**If you'd rather use the terminal** (macOS or Linux only — Windows has no
+terminal installer): open the Terminal app — on macOS it's in Applications →
+Utilities, on Linux it's in your app menu — paste this line, and press Enter.
+It downloads and installs OpenCode for you in one go:
+
+```bash
+curl -fsSL https://opencode.ai/v2/install | bash
+```
 
 ## Step 2: Connect your browser (one-time, recommended)
 
@@ -50,20 +60,40 @@ official extension once and you're done for good:
 1. In the browser you already use — Chrome, Edge, Brave, and the like —
    install **[OpenCode Browse](https://chromewebstore.google.com/detail/opencode-browse/mfnicocicmmlkpjnaffgihfjhdgjkdjg)**
    from the Chrome Web Store. The extension walks you through the rest of the
-   setup itself.
+   setup itself; if it asks to run a short setup command, that's normal, and
+   your assistant can run it for you.
 2. That's it. From now on the assistant works inside your real browser: your
    tabs, your sign-ins, X included. No keys, no extra accounts.
 
-Two things worth knowing:
+**Worth knowing before you connect.** Browser control is real access to your
+browser, so here is the honest version of what you're agreeing to:
 
-- **Signing in stays yours, always.** Whenever a site needs *you* — a
-  password, a 2FA code — the extension hands the tab back to you and waits
-  until you're done and click continue. Neither OpenCode nor any skill here
+- **It sees the pages it works on.** To do a task, the assistant reads the
+  tabs it opens — text, layout, screenshots. That page content goes to the
+  AI model you picked (even a free one) so it can think about it; the
+  extension itself has no server of its own, but the model side is a cloud
+  service. Point it at the sites you mean it to use — X, for these skills —
+  and not at pages you'd rather keep private, like your email or banking.
+- **It acts as you.** It clicks and types inside your signed-in session, so
+  whatever it does on X is done by your account. Stay nearby while it
+  works; you can take a tab back or stop it at any time.
+- **Sign-ins and payments stay yours, always.** Whenever a site needs *you*
+  — a password, a 2FA code, a passkey, a payment — the extension hands the
+  tab back and waits until you're done. Neither OpenCode nor any skill here
   will ever ask for your X password.
-- **Skipping this is fine.** If you'd rather not install the extension, a
-  skill will notice it can't reach a browser and offer to walk you through
-  your options, step by step if you want — see
-  [Setting up browser control](browser-setup.md).
+- **Web pages can try to trick an assistant.** A page can hide text written
+  to steer AI tools. That's why the skills here only do what you asked,
+  confirm the plan with you first, and bring you anything borderline with
+  the evidence instead of deciding alone.
+
+**Not comfortable with this? You don't have to decide now.** You can skip
+the extension entirely and ask your assistant for help instead: type
+"help me set up browser control" and it will walk you through the
+alternatives — your app's own browser features, or the browser maker's
+official tools — step by step if you want. A skill that can't reach a
+browser will also stop and offer that same help rather than half-work. The
+options it offers are described in
+[Setting up browser control](browser-setup.md).
 
 ## Step 3: Pick a free model
 
