@@ -237,6 +237,15 @@ researched alternatives. It is documented in
 with its entry in
 [deadpan-reductive-observation.md](deadpan-reductive-observation.md).
 
+`resolve-worktree-to-primary` is the catalog's Git worktree-finishing skill:
+it integrates a linked worktree's branch into the primary worktree's
+checked-out branch, resolves conflicts semantically, and cleans up only after
+the integration is proven. It belongs to no group, needs Git and shell access,
+and keeps no runtime state. It is documented in
+[`docs/users/resolve-worktree-to-primary.md`](../../docs/users/resolve-worktree-to-primary.md)
+with its entry in
+[resolve-worktree-to-primary.md](resolve-worktree-to-primary.md).
+
 Invocation syntax is host-specific: Claude Code, Copilot, and Cursor use
 `/skill-name`, OpenCode uses `@skill-id`, Codex uses `$skill-name`, and Gemini CLI
 activates skills through the agent with consent. OpenCode's `/` menu is commands

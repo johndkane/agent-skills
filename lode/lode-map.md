@@ -20,6 +20,7 @@ Index of this lode. Read it before exploring the repository.
 | [skills/skill-verify.md](skills/skill-verify.md) | Pre-handoff skill gate, checks, evidence rules |
 | [skills/software-documentation.md](skills/software-documentation.md) | Documentation-authoring skill: audiences, one home per fact, terminology, current-state currency, diagrams |
 | [skills/deadpan-reductive-observation.md](skills/deadpan-reductive-observation.md) | Style skill: deadpan reductive one-liners — core style, rewrite loop, research mode, alternatives, voice rules |
+| [skills/resolve-worktree-to-primary.md](skills/resolve-worktree-to-primary.md) | Worktree-finishing skill: discovery, consultation policy, strategy ladder, semantic conflict resolution, gated cleanup |
 | [skills/agent-verify.md](skills/agent-verify.md) | Agent and command file gate: host dialects, identity, tools portability, wiring |
 | [agents/summary.md](agents/summary.md) | Subagent and command files, the alias chain, the agent contract |
 | [scripts/summary.md](scripts/summary.md) | Link script behaviour |
@@ -44,6 +45,7 @@ lode/
 │   ├── skill-verify.md
 │   ├── software-documentation.md
 │   ├── deadpan-reductive-observation.md
+│   ├── resolve-worktree-to-primary.md
 │   ├── agent-verify.md
 │   ├── twitter-group.md
 │   ├── twitter-followback.md

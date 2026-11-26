@@ -24,7 +24,8 @@ agent-skills/
 │   │   ├── twitter-following-audit/
 │   │   ├── skill-verify/
 │   │   ├── software-documentation/
-│   │   └── deadpan-reductive-observation/
+│   │   ├── deadpan-reductive-observation/
+│   │   └── resolve-worktree-to-primary/
 │   ├── agents -> ../.zcode/agents    # agent alias
 │   └── commands -> ../.zcode/commands  # command alias
 ├── .zcode/

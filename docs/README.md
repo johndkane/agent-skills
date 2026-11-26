@@ -29,6 +29,7 @@ needed: choose a skill, get it, and use it.
 | [software-documentation](users/software-documentation.md) | Write, restructure, or refresh your project's documentation: one audience per page, one home per fact, always the current state |
 | [deadpan-reductive-observation](users/deadpan-reductive-observation.md) | Turn an observation into a short deadpan reductive one-liner, with researched alternatives on request |
 | [dotnet-practices-reviewer](users/dotnet-practices-reviewer.md) | Read-only reviewer agent for .NET changesets: asynchrony, cancellation, background work, streaming, I/O boundaries, concurrency, modern API use — prioritized findings, never edits |
+| [resolve-worktree-to-primary](users/resolve-worktree-to-primary.md) | Finish a Git linked worktree: integrate its branch into the primary worktree's checkout with the right strategy, resolve conflicts by intent, verify, then clean up — no forced Git, never pushes |
 
 ## Operators
 

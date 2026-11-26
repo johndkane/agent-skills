@@ -45,7 +45,9 @@ agent-skills/
 │   │   │   └── SKILL.md
 │   │   ├── software-documentation/
 │   │   │   └── SKILL.md
-│   │   └── deadpan-reductive-observation/
+│   │   ├── deadpan-reductive-observation/
+│   │   │   └── SKILL.md
+│   │   └── resolve-worktree-to-primary/
 │   │       └── SKILL.md
 │   ├── agents -> ../.zcode/agents    # agent alias
 │   └── commands -> ../.zcode/commands  # command alias

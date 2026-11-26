@@ -71,6 +71,15 @@ and the whole folder is what gets copied into whichever app you use.
   No tools, browser, or account needed.
   [Read more](docs/users/deadpan-reductive-observation.md)
 
+- **[`resolve-worktree-to-primary`](.agents/skills/resolve-worktree-to-primary/SKILL.md)** —
+  finishes work in a Git linked worktree: it integrates the worktree's branch
+  into the branch your primary worktree has checked out, picking fast-forward,
+  squash, rebase, or merge from the repo's own policy and history and resolving
+  conflicts by what each side meant, then proves the integration before removing
+  the worktree and its branch. No destructive Git shortcuts, and it never pushes.
+  Needs Git on PATH.
+  [Read more](docs/users/resolve-worktree-to-primary.md)
+
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the housekeeping
   skill for this repository: it checks that a skill is put together correctly
   (frontmatter, links, size, privacy) and reports what passes and what doesn't,
