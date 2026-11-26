@@ -25,7 +25,7 @@ graph TD
 
 | Name | Path | Default |
 | --- | --- | --- |
-| `claude` | `.claude/skills` | yes |
+| `claude` | `.claude -> .agents` (whole directory) | yes |
 | `copilot` | `.github/skills` | yes |
 | `opencode` | `.opencode/skills` | no |
 | `cursor` | `.cursor/skills` | no |
@@ -34,6 +34,9 @@ graph TD
 
 ## Contract
 
+- Each host carries its own link target, resolved from the link's parent: the
+  skill hosts link `../.agents/skills`; `claude` links the whole `.agents`
+  directory, serving skills, agents, and commands.
 - No arguments wires `claude` and `copilot`.
 - Named environments wire exactly those.
 - `--all`/`-All` wires every host, including the native ones.

@@ -5,9 +5,14 @@
 # Portable by design: copy or merge this file into any repository that hosts
 # these skills, so agent-generated state and secrets cannot be committed there.
 #
-# Do not add .agents/ or any agent link to this file (.claude/skills,
-# .github/skills, .cursor/skills, ...). They are the tracked skill tree and the
+# Do not add .agents/ or any agent link to this file (.claude,
+# .github/skills, .cursor/skills, ...). They are the tracked tree and the
 # links that expose it to each agent.
+
+# ZCode session-plan scratch: drafts land here automatically; curated plans
+# live in lode/plans/. The placeholder keeps the folder in version control.
+.zcode/plans/*
+!.zcode/plans/.gitignore
 
 # Claude Code
 CLAUDE.local.md

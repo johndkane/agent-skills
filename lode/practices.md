@@ -7,7 +7,7 @@ not a copy.
 
 ```text
 .agents/skills/<name>/SKILL.md        source
-.claude/skills -> ../.agents/skills   link
+.claude -> .agents                    link (whole directory)
 ```
 
 Reason: copies drift, and validation then proves only one copy is correct.

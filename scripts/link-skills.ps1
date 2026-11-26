@@ -1,10 +1,11 @@
 <#
 .SYNOPSIS
-    Wires the skill catalog into the directories each agent host reads.
+    Wires the catalog into the directories each agent host reads.
 
 .DESCRIPTION
-    Every link points at the canonical .agents/skills tree, so there is still
-    only one real copy.
+    Every link points into the canonical .agents tree: the skill hosts at
+    .agents/skills, Claude Code at the whole .agents directory (which carries
+    skills, agents, and commands). There is still only one real copy.
 
     With no -Environment, claude and copilot are wired: the two hosts that cannot
     rely on .agents/skills alone. -All wires every supported host.
@@ -55,12 +56,12 @@ if (-not (Test-Path -LiteralPath $source -PathType Container)) {
 }
 
 $hosts = @(
-    [pscustomobject]@{ Key = 'claude'; Path = '.claude\skills'; Label = 'Claude Code'; Default = $true }
-    [pscustomobject]@{ Key = 'copilot'; Path = '.github\skills'; Label = 'GitHub Copilot'; Default = $true }
-    [pscustomobject]@{ Key = 'opencode'; Path = '.opencode\skills'; Label = 'OpenCode'; Default = $false }
-    [pscustomobject]@{ Key = 'cursor'; Path = '.cursor\skills'; Label = 'Cursor'; Default = $false }
-    [pscustomobject]@{ Key = 'gemini'; Path = '.gemini\skills'; Label = 'Gemini CLI'; Default = $false }
-    [pscustomobject]@{ Key = 'codex'; Path = $null; Label = 'Codex'; Default = $false }
+    [pscustomobject]@{ Key = 'claude'; Path = '.claude'; Target = '.agents'; Label = 'Claude Code'; Default = $true }
+    [pscustomobject]@{ Key = 'copilot'; Path = '.github\skills'; Target = '..\.agents\skills'; Label = 'GitHub Copilot'; Default = $true }
+    [pscustomobject]@{ Key = 'opencode'; Path = '.opencode\skills'; Target = '..\.agents\skills'; Label = 'OpenCode'; Default = $false }
+    [pscustomobject]@{ Key = 'cursor'; Path = '.cursor\skills'; Target = '..\.agents\skills'; Label = 'Cursor'; Default = $false }
+    [pscustomobject]@{ Key = 'gemini'; Path = '.gemini\skills'; Target = '..\.agents\skills'; Label = 'Gemini CLI'; Default = $false }
+    [pscustomobject]@{ Key = 'codex'; Path = $null; Target = $null; Label = 'Codex'; Default = $false }
 )
 
 $aliases = @{
@@ -118,7 +119,6 @@ if ($selected.Count -eq 0) {
     exit 1
 }
 
-$relativeTarget = '..\.agents\skills'
 $wired = 0
 
 foreach ($host_ in $selected) {
@@ -130,6 +130,7 @@ foreach ($host_ in $selected) {
 
     $linkPath = Join-Path $repoRoot $host_.Path
     $parent = Split-Path -Parent $linkPath
+    $relativeTarget = $host_.Target
     $resolvedTarget = [System.IO.Path]::GetFullPath((Join-Path $parent $relativeTarget))
 
     if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
@@ -190,9 +191,9 @@ foreach ($host_ in $selected) {
     $wired++
 
     $linkCount = @(Get-ChildItem -LiteralPath $linkPath -Force).Count
-    $sourceCount = @(Get-ChildItem -LiteralPath $source -Force).Count
-    if ($linkCount -ne $sourceCount) {
-        Write-Warning ("{0} exposes {1} entries but the canonical tree has {2}; verify the target." -f $host_.Path, $linkCount, $sourceCount)
+    $targetCount = @(Get-ChildItem -LiteralPath $resolvedTarget -Force).Count
+    if ($linkCount -ne $targetCount) {
+        Write-Warning ("{0} exposes {1} entries but the target has {2}; verify the target." -f $host_.Path, $linkCount, $targetCount)
     }
 }
 

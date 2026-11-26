@@ -14,7 +14,7 @@ Full documentation lives in [`docs/`](docs/README.md).
 
 ## The skills
 
-Everything lives in **[`.agents/skills/`](.agents/skills)** — one folder per
+The skills live in **[`.agents/skills/`](.agents/skills)** — one folder per
 skill. The folder holds a `SKILL.md` (the instructions) plus optional helpers,
 and the whole folder is what gets copied into whichever app you use.
 
@@ -56,10 +56,24 @@ and the whole folder is what gets copied into whichever app you use.
   call. It only suggests — you take every action.
   [Read more](docs/users/twitter-following-audit.md)
 
+- **[`software-documentation`](.agents/skills/software-documentation/SKILL.md)** —
+  writes and keeps a software project's documentation true: one audience per
+  page, one home per fact, a central terminology guide, and pages that describe
+  the system as it is now — updated in the same change as the code they
+  describe. Works on any project; no browser or account needed.
+  [Read more](docs/users/software-documentation.md)
+
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the housekeeping
   skill for this repository: it checks that a skill is put together correctly
   (frontmatter, links, size, privacy) and reports what passes and what doesn't,
   with evidence. [Read more](docs/skills/skill-verify.md)
+
+- **[`agent-verify`](.agents/skills/agent-verify/SKILL.md)** — the housekeeping
+  skill for the agent layer: it checks an agent or command file against the
+  official host specs (identity, tools portability, privacy), the catalog
+  wiring, and the alias chain, and reports pass/fail with evidence. No official
+  validator exists for agents, so its spec checks are manual and honest about
+  it. [Read more](docs/skills/agent-verify.md)
 
 The X/Twitter skills are for real people tending their own personal accounts —
 never for engagement farming, marketing, or brand growth.
@@ -67,6 +81,14 @@ never for engagement farming, marketing, or brand growth.
 Skills that share behavior form a group with central files named for the group;
 the [group index](docs/skills/skill-groups.md) lists the members and the shared
 rules copied into each.
+
+The catalog also carries **agents**: read-only subagent definitions in
+`.zcode/agents/` with their slash commands in `.zcode/commands/`, aliased under
+`.agents/`, `.claude/`, and `.github/` so Claude Code, GitHub Copilot, and ZCode
+all see the same files. The first is
+[`dotnet-practices-reviewer`](docs/users/dotnet-practices-reviewer.md) — a
+read-only reviewer for .NET asynchrony and modern-API use in repositories that
+keep its project's conventions.
 
 No build step, no package installs, and no need to copy anything by hand.
 
@@ -116,14 +138,15 @@ a clone arrives without its links.
 
 ## How it works
 
-`.agents/skills` is the one real copy that most apps read directly: OpenCode,
-Copilot, Codex, Cursor, and Gemini CLI all look there. Claude Code doesn't, and
-Copilot's GitHub-hosted surfaces prefer `.github/skills`, so the repo keeps one
-copy and links the two gaps:
+`.agents/skills` is the one real skill copy that most apps read directly:
+OpenCode, Codex, Cursor, and Gemini CLI all look there. Agents and commands live
+in `.zcode/agents/` and `.zcode/commands/`, aliased under `.agents/`. Claude
+Code reads none of those, and Copilot's GitHub-hosted surfaces prefer
+`.github/skills`, so the repo keeps one copy of everything and links the gaps:
 
 ```
-.agents/skills/                     # the real files
-.claude/skills -> ../.agents/skills # Claude Code
+.agents/                            # the real tree: skills, agents, commands
+.claude -> .agents                  # Claude Code (one link for all three)
 .github/skills -> ../.agents/skills # GitHub Copilot
 ```
 
@@ -145,9 +168,12 @@ why the tree is shaped this way and what each app reads.
 ## Using this as a skeleton
 
 This repo is meant to be dropped into another project, not only used standalone.
-Alongside `.agents/skills/` and the two links, take `.gitignore` (agent-local
-state and secrets) and `.gitattributes` (consistent line endings), then recreate
-the links with either script. See [Adopting this repo](docs/operators/adopting.md).
+Alongside `.agents/skills/`, the host links, and the `.zcode/` agent tree, take
+`.gitignore` (agent-local state and secrets) and `.gitattributes` (consistent
+line endings), then recreate the links with either script. The `agents/`,
+`prompts/`, and `.zcode/plans/` folders carry an empty `.gitignore` placeholder
+so a fresh clone keeps them. See
+[Adopting this repo](docs/operators/adopting.md).
 
 Maintaining this repository? See the
 [developer documentation](docs/developers/agent-instructions.md) for the agent

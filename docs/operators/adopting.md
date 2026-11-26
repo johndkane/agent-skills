@@ -52,6 +52,16 @@ there rather than merging this one.
 See [Scripts](scripts.md) for environments, flags, and the recovery path when a
 clone arrives without symlinks.
 
+## The agent layer
+
+The skills table above is the minimum. To carry agents and commands too, copy
+`.zcode/agents/` and `.zcode/commands/` into the destination and add the
+committed `.agents/agents` and `.agents/commands` aliases beside them, then
+create the whole-directory `.claude -> .agents` link — the default script run
+does this. The empty `agents/`, `prompts/`, and `.zcode/plans/` folders carry a
+placeholder `.gitignore` each so a fresh clone keeps them; copy those as-is.
+[Architecture](architecture.md) shows the whole chain.
+
 ## Validate
 
 ```bash

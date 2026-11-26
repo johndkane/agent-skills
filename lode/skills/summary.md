@@ -222,6 +222,12 @@ contract. `twitter-followback` is documented in
 in `docs/users/twitter-following-audit.md` with its verdict entry in
 [twitter-following-audit.md](twitter-following-audit.md).
 
+`software-documentation` is the catalog's first general authoring skill: it
+writes and maintains documentation for any software project, belongs to no
+group, and needs no browser or runtime state. It is documented in
+[`docs/users/software-documentation.md`](../../docs/users/software-documentation.md)
+with its entry in [software-documentation.md](software-documentation.md).
+
 Invocation syntax is host-specific: Claude Code, Copilot, and Cursor use
 `/skill-name`, OpenCode uses `@skill-id`, Codex uses `$skill-name`, and Gemini CLI
 activates skills through the agent with consent. OpenCode's `/` menu is commands

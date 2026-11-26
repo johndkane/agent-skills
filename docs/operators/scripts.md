@@ -8,8 +8,14 @@ behaviourally identical; pick the one your shell can run.
 | [`link-skills.sh`](../../scripts/link-skills.sh) | macOS, Linux, Git Bash, WSL |
 | [`link-skills.ps1`](../../scripts/link-skills.ps1) | Windows PowerShell or pwsh |
 
-Every link they create is relative and points at `../.agents/skills`, so the
-repository still works if it is cloned somewhere else.
+Every link they create is relative and points into the canonical `.agents`
+tree — the skill hosts at `../.agents/skills`, Claude Code at `.agents` itself —
+so the repository still works if it is cloned somewhere else.
+
+The scripts wire **skills only**. The agent and command links (`agents` and
+`commands` under `.agents/`, `.claude/`, and `.github/`) are committed directly
+in the repository and are neither created nor repaired here — see
+[Architecture](architecture.md#agents-and-commands) for that alias chain.
 
 ## Usage
 
@@ -33,7 +39,7 @@ repository still works if it is cloned somewhere else.
 
 | Name | Path wired | Default |
 | --- | --- | --- |
-| `claude` | `.claude/skills` | Yes |
+| `claude` | `.claude -> .agents` (whole directory: skills, agents, commands) | Yes |
 | `copilot` | `.github/skills` | Yes |
 | `opencode` | `.opencode/skills` | No |
 | `cursor` | `.cursor/skills` | No |

@@ -19,7 +19,7 @@
 - **Frontmatter** — the YAML block at the top of `SKILL.md`.
 - **Description** — the frontmatter field hosts read before deciding to load a skill.
 - **skills-ref** — the official reference validator from the Agent Skills project; it checks frontmatter and naming only.
-- **Repo gate** — a skill that enforces this repository's catalog rules on top of the official validator; `skill-verify` is the only one.
+- **Repo gate** — a skill that enforces this repository's catalog rules; `skill-verify` gates skills on top of the official `skills-ref` validator, and `agent-verify` gates agent and command files manually against the official host specs, because no validator exists for agent files.
 - **AGENTS.md** — repository-agnostic agent instructions: how to work, git and privacy rules, verification, and documentation surfaces; it carries no project details.
 - **Project guidance** — the repository-specific rules kept in `lode/`: layout, invariants, skills, scripts, commands, and validation.
 - **README** — `README.md`, the high-level entry point for a repository visitor: what it is, what it contains, where to start.
@@ -84,5 +84,12 @@
 - **Human cadence** — jittered waits, scroll steps, pointer moves, and dwell times drawn from ranges so a run does not read as a fixed click rhythm.
 - **X core contract** — [`docs/skills/twitter-core.md`](../docs/skills/twitter-core.md), the authoring home for rules shared by every browser-driven X skill; skill bodies mirror it and never link to it.
 - **Personal scope** — the X group's positioning: every member serves a real person on their own personal X account; never engagement farming, marketing, or brand work. Stated in each description, body intro, and Safety section; words with the negative marketing or engagement flavor never describe the skills' own behavior (read/collect/scan, "secondhand", "selling"), while exclusion labels and disclaimers keep their standard names.
+
+- **Software-documentation rules** — the authoring contract `software-documentation` applies to any project's docs: one audience per page, one home per fact, a central terminology guide, current-state-only currency, diagrams beside the owning page, plain portable markdown, and doc comments on public contracts only; the default `docs/` placement yields to an existing layout or the user's choice.
+
+- **Subagent definition** — a single markdown file with `name` (kebab-case, matching the file stem), `description` (what, when, not-for), and `tools` in `.zcode/agents/`; one real copy, aliased to `.agents/agents`, `.claude/agents`, and `.github/agents`; stock for a stated project shape, never a universal reviewer.
+- **Slash command** — a markdown file in `.zcode/commands/` that invokes one agent or procedure, aliased beside the agents; it carries the fallback for runtimes without subagents: read the definition and execute the procedure directly.
+- **Agent alias chain** — `.zcode/agents` → `.agents/agents` → `.github/agents`, with Claude Code served by the whole-directory `.claude → .agents` symlink (commands likewise); committed relative links recorded as mode `120000`, never replaced by copies; `scripts/link-skills.*` create and repair the `.claude` and skill links.
+- **Placeholder .gitignore** — an empty tracked `.gitignore` that retains an otherwise-empty agent-support directory (`agents/`, `prompts/`, `.zcode/plans/`) in the remote; `.zcode/plans/` drafts are ignored around it.
 
 Related: [summary](summary.md), [practices](practices.md).

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 #
-# Wires the skill catalog into the directories each agent host reads. Every link
-# points at the canonical .agents/skills tree.
+# Wires the catalog into the directories each agent host reads. Every link
+# points into the canonical .agents tree: the skill hosts at .agents/skills,
+# Claude Code at the whole .agents directory (which carries skills, agents, and
+# commands).
 #
 # With no environment argument, claude and copilot are wired: the two hosts that
 # cannot rely on .agents/skills alone. --all wires every supported host.
@@ -12,14 +14,16 @@ script_dir="$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd -P -- "$script_dir/.." && pwd)"
 source_dir="$repo_root/.agents/skills"
 
-# key|path|label -- an empty path means the host reads .agents/skills natively.
+# key|path|target|label -- an empty path means the host reads .agents/skills
+# natively; target is the relative link destination, resolved from the link's
+# parent directory.
 hosts="
-claude|.claude/skills|Claude Code
-copilot|.github/skills|GitHub Copilot
-opencode|.opencode/skills|OpenCode
-cursor|.cursor/skills|Cursor
-gemini|.gemini/skills|Gemini CLI
-codex||Codex
+claude|.claude|.agents|Claude Code
+copilot|.github/skills|../.agents/skills|GitHub Copilot
+opencode|.opencode/skills|../.agents/skills|OpenCode
+cursor|.cursor/skills|../.agents/skills|Cursor
+gemini|.gemini/skills|../.agents/skills|Gemini CLI
+codex|||Codex
 "
 
 usage() {
@@ -27,10 +31,11 @@ usage() {
 Usage: link-skills.sh [environment ...] [--all] [--force]
 
 Wires the catalog into the directories each agent host reads. Every link points
-at the canonical .agents/skills tree, so there is still only one real copy.
+into the canonical .agents tree, so there is still only one real copy.
 
 Environments:
-  claude     .claude/skills      wired by default
+  claude     .claude -> .agents  wired by default (whole directory: skills,
+                                 agents, and commands)
   copilot    .github/skills      wired by default
   opencode   .opencode/skills
   cursor     .cursor/skills
@@ -134,7 +139,7 @@ count_entries() {
 
 wired=0
 
-while IFS='|' read -r key rel_path label; do
+while IFS='|' read -r key rel_path link_target label; do
     [ -n "$key" ] || continue
     should_wire "$key" || continue
 
@@ -148,9 +153,9 @@ while IFS='|' read -r key rel_path label; do
     parent="$(dirname -- "$link_path")"
     mkdir -p -- "$parent"
 
-    expected="$(resolve_target "$parent" "../.agents/skills" || true)"
+    expected="$(resolve_target "$parent" "$link_target" || true)"
     if [ -z "$expected" ]; then
-        echo "error: link target does not exist: ../.agents/skills (from $rel_path)" >&2
+        echo "error: link target does not exist: $link_target (from $rel_path)" >&2
         exit 1
     fi
 
@@ -162,7 +167,7 @@ while IFS='|' read -r key rel_path label; do
         esac
 
         if [ "$current" = "$expected" ]; then
-            echo "ok      $rel_path -> ../.agents/skills  [$label]"
+            echo "ok      $rel_path -> $link_target  [$label]"
             wired=$((wired + 1))
             continue
         fi
@@ -176,7 +181,7 @@ while IFS='|' read -r key rel_path label; do
     elif [ -e "$link_path" ]; then
         # A checkout with core.symlinks=false writes the target as a plain file.
         placeholder=0
-        if [ -f "$link_path" ] && [ "$(tr -d '\r\n' < "$link_path")" = "../.agents/skills" ]; then
+        if [ -f "$link_path" ] && [ "$(tr -d '\r\n' < "$link_path")" = "$link_target" ]; then
             placeholder=1
         fi
 
@@ -188,19 +193,19 @@ while IFS='|' read -r key rel_path label; do
         rm -rf -- "$link_path"
     fi
 
-    if ! ln -s "../.agents/skills" "$link_path"; then
+    if ! ln -s "$link_target" "$link_path"; then
         echo "error: could not create the link at $rel_path." >&2
         echo "       On Windows use scripts/link-skills.ps1. A filesystem without" >&2
         echo "       symlink support cannot host this layout." >&2
         exit 1
     fi
-    echo "linked  $rel_path -> ../.agents/skills  [$label]"
+    echo "linked  $rel_path -> $link_target  [$label]"
     wired=$((wired + 1))
 
     link_count="$(count_entries "$link_path")"
-    source_count="$(count_entries "$source_dir")"
-    if [ "$link_count" -ne "$source_count" ]; then
-        echo "warn: $rel_path exposes $link_count entries; canonical tree has $source_count." >&2
+    target_count="$(count_entries "$expected")"
+    if [ "$link_count" -ne "$target_count" ]; then
+        echo "warn: $rel_path exposes $link_count entries; target has $target_count." >&2
     fi
 done <<< "$hosts"
 

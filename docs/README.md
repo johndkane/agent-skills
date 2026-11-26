@@ -26,6 +26,8 @@ needed: choose a skill, get it, and use it.
 | [twitter-moot-radar](users/twitter-moot-radar.md) | Find accounts worth following through your mutuals, or assess one account you name |
 | [twitter-compatibility](users/twitter-compatibility.md) | Score how compatible you are with your associated accounts, or one account you name — moots, following, followers, all, or focus — on subjects you choose |
 | [twitter-following-audit](users/twitter-following-audit.md) | Review the accounts you already follow and get a keep, unfollow, mute, or recheck suggestion for each, with safety problems flagged for you — optimistic, evidence-first, read-only |
+| [software-documentation](users/software-documentation.md) | Write, restructure, or refresh your project's documentation: one audience per page, one home per fact, always the current state |
+| [dotnet-practices-reviewer](users/dotnet-practices-reviewer.md) | Read-only reviewer agent for .NET changesets: asynchrony, cancellation, background work, streaming, I/O boundaries, concurrency, modern API use — prioritized findings, never edits |
 
 ## Operators
 
@@ -53,6 +55,7 @@ detail an operator does not need.
 | [Shared rules for X skills](skills/twitter-shared.md) | Operative rules copied verbatim into each X skill |
 | [Browser cadence](skills/browser-cadence.md) | How browser-action skills pace themselves with jittered, proportional waits |
 | [skill-verify](skills/skill-verify.md) | The repository's skill verification gate |
+| [agent-verify](skills/agent-verify.md) | The agent layer's verification gate — host specs, wiring, alias chain |
 
 ## Where things live
 
@@ -64,8 +67,9 @@ docs/
 ├── developers/                  repo rules, lode, host detail
 └── skills/                      skill authoring reference
 .agents/skills/<name>/SKILL.md   the only real copy of a skill
-.claude/skills                   link for Claude Code
-.github/skills                   link for GitHub Copilot
+.zcode/agents + commands         the real agent and command files
+.claude -> .agents               link for Claude Code (skills, agents, commands)
+.github/skills + agents          links for GitHub Copilot
 scripts/                         link scripts for every platform
 AGENTS.md                        generic agent guidance
 lode/                            project-specific guidance and agent memory
