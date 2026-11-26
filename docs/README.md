@@ -27,6 +27,7 @@ needed: choose a skill, get it, and use it.
 | [twitter-compatibility](users/twitter-compatibility.md) | Score how compatible you are with your associated accounts, or one account you name — moots, following, followers, all, or focus — on subjects you choose |
 | [twitter-following-audit](users/twitter-following-audit.md) | Review the accounts you already follow and get a keep, unfollow, mute, or recheck suggestion for each, with safety problems flagged for you — optimistic, evidence-first, read-only |
 | [software-documentation](users/software-documentation.md) | Write, restructure, or refresh your project's documentation: one audience per page, one home per fact, always the current state |
+| [deadpan-reductive-observation](users/deadpan-reductive-observation.md) | Turn an observation into a short deadpan reductive one-liner, with researched alternatives on request |
 | [dotnet-practices-reviewer](users/dotnet-practices-reviewer.md) | Read-only reviewer agent for .NET changesets: asynchrony, cancellation, background work, streaming, I/O boundaries, concurrency, modern API use — prioritized findings, never edits |
 
 ## Operators

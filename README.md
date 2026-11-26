@@ -63,6 +63,14 @@ and the whole folder is what gets copied into whichever app you use.
   describe. Works on any project; no browser or account needed.
   [Read more](docs/users/software-documentation.md)
 
+- **[`deadpan-reductive-observation`](.agents/skills/deadpan-reductive-observation/SKILL.md)** —
+  turns an observation into one short, deadpan, reductive one-liner — "a video
+  meeting is just six people watching one person discover the mute button".
+  The humor is the accuracy of the reduction, never a punchline. Ask for
+  alternatives and it researches the subject for genuinely different angles.
+  No tools, browser, or account needed.
+  [Read more](docs/users/deadpan-reductive-observation.md)
+
 - **[`skill-verify`](.agents/skills/skill-verify/SKILL.md)** — the housekeeping
   skill for this repository: it checks that a skill is put together correctly
   (frontmatter, links, size, privacy) and reports what passes and what doesn't,

@@ -87,6 +87,8 @@
 
 - **Software-documentation rules** — the authoring contract `software-documentation` applies to any project's docs: one audience per page, one home per fact, a central terminology guide, current-state-only currency, diagrams beside the owning page, plain portable markdown, and doc comments on public contracts only; the default `docs/` placement yields to an existing layout or the user's choice.
 
+- **Deadpan reductive one-liner** — `deadpan-reductive-observation`'s output style: one concise, confident sentence that reduces a subject to an unexpectedly mundane, literal, or absurd description of what it effectively consists of; the humor is the accuracy of the reduction, never a labeled joke or punchline. Researched alternatives are requested, not default, and never invent facts.
+
 - **Subagent definition** — a single markdown file with `name` (kebab-case, matching the file stem), `description` (what, when, not-for), and `tools` in `.zcode/agents/`; one real copy, aliased to `.agents/agents`, `.claude/agents`, and `.github/agents`; stock for a stated project shape, never a universal reviewer.
 - **Slash command** — a markdown file in `.zcode/commands/` that invokes one agent or procedure, aliased beside the agents; it carries the fallback for runtimes without subagents: read the definition and execute the procedure directly.
 - **Agent alias chain** — `.zcode/agents` → `.agents/agents` → `.github/agents`, with Claude Code served by the whole-directory `.claude → .agents` symlink (commands likewise); committed relative links recorded as mode `120000`, never replaced by copies; `scripts/link-skills.*` create and repair the `.claude` and skill links.

@@ -43,7 +43,9 @@ agent-skills/
 │   │   │   └── references/
 │   │   ├── skill-verify/
 │   │   │   └── SKILL.md
-│   │   └── software-documentation/
+│   │   ├── software-documentation/
+│   │   │   └── SKILL.md
+│   │   └── deadpan-reductive-observation/
 │   │       └── SKILL.md
 │   ├── agents -> ../.zcode/agents    # agent alias
 │   └── commands -> ../.zcode/commands  # command alias

@@ -23,7 +23,8 @@ agent-skills/
 │   │   ├── twitter-compatibility/
 │   │   ├── twitter-following-audit/
 │   │   ├── skill-verify/
-│   │   └── software-documentation/
+│   │   ├── software-documentation/
+│   │   └── deadpan-reductive-observation/
 │   ├── agents -> ../.zcode/agents    # agent alias
 │   └── commands -> ../.zcode/commands  # command alias
 ├── .zcode/

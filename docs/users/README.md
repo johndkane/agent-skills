@@ -17,6 +17,7 @@ fresh machine to a working skill, in plain language.
 | `twitter-compatibility` | Scores how well you'd get along with accounts on X about the things you care about — your moots, people you follow, people who follow you, or one account you name. It reads both feeds, counts real posts and replies, and returns a 0–100 score with the evidence behind every point. Read-only: it never likes, replies, follows, or messages anyone. | [twitter-compatibility](twitter-compatibility.md) |
 | `twitter-following-audit` | Reviews the accounts you already follow and suggests what to do with each: keep, unfollow, mute, or look again later. Optimistic by design — keep is the default, every other suggestion carries dated evidence, and unfollow is about fit, never a judgement of the person. Safety problems are flagged with evidence for you to decide. It only suggests; every action is yours. | [twitter-following-audit](twitter-following-audit.md) |
 | `software-documentation` | Writes and keeps your project's documentation true — one audience per page, one home per fact, a terminology guide, and pages that say what the system does now, updated in the same change as the code. No browser or account needed. | [software-documentation](software-documentation.md) |
+| `deadpan-reductive-observation` | Turns an observation into one short, deadpan, reductive one-liner that feels obvious in retrospect — "a video meeting is just six people watching one person discover the mute button". Ask for alternatives and it researches the subject for genuinely different angles. No tools, browser, or account needed. | [deadpan-reductive-observation](deadpan-reductive-observation.md) |
 | `dotnet-practices-reviewer` | A read-only reviewer agent for .NET changesets. It judges async composition, cancellation, background work, streaming, I/O boundaries, concurrency shape, and modern API use against Microsoft guidance and the project's built-in mechanisms, and returns prioritized findings — it never edits files. | [dotnet-practices-reviewer](dotnet-practices-reviewer.md) |
 
 The reviewer agent is a subagent definition rather than a skill: your app
@@ -53,6 +54,7 @@ confirm — never a canned one.
 - **See who you'd click with, and about what** → `twitter-compatibility`.
 - **Decide who still earns a place in your Following list** → `twitter-following-audit`.
 - **Write or fix your project's documentation** → `software-documentation`.
+- **Turn an observation into a deadpan one-liner** → `deadpan-reductive-observation`.
 - **Review a .NET changeset for async and modern-API correctness** → `dotnet-practices-reviewer`.
 
 ## Get and use it

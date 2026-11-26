@@ -19,6 +19,7 @@ Index of this lode. Read it before exploring the repository.
 | [skills/twitter-following-audit.md](skills/twitter-following-audit.md) | Following audit, verdict set and decision table, safety-flag track, optimism rule, windows, reason tags, state |
 | [skills/skill-verify.md](skills/skill-verify.md) | Pre-handoff skill gate, checks, evidence rules |
 | [skills/software-documentation.md](skills/software-documentation.md) | Documentation-authoring skill: audiences, one home per fact, terminology, current-state currency, diagrams |
+| [skills/deadpan-reductive-observation.md](skills/deadpan-reductive-observation.md) | Style skill: deadpan reductive one-liners — core style, rewrite loop, research mode, alternatives, voice rules |
 | [skills/agent-verify.md](skills/agent-verify.md) | Agent and command file gate: host dialects, identity, tools portability, wiring |
 | [agents/summary.md](agents/summary.md) | Subagent and command files, the alias chain, the agent contract |
 | [scripts/summary.md](scripts/summary.md) | Link script behaviour |
@@ -42,6 +43,7 @@ lode/
 │   ├── groups.md
 │   ├── skill-verify.md
 │   ├── software-documentation.md
+│   ├── deadpan-reductive-observation.md
 │   ├── agent-verify.md
 │   ├── twitter-group.md
 │   ├── twitter-followback.md
