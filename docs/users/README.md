@@ -30,7 +30,9 @@ loads it when a review is delegated to it, or when its
 The X skills drive a real browser, so they need:
 
 - an agent with browser control, and a browser already signed in to X;
-- to run on your machine — cloud or sandboxed sessions can't run them;
+- a browser you can watch and take over — your own is normal; a cloud agent's
+  built-in browser works only if the skill asks first and you say yes for that
+  run;
 - optionally, permission to save a small progress file in your home folder, so
   long sessions can pick up later. If you'd rather not, they keep going and
   show you their progress instead — you may just see some work repeated next

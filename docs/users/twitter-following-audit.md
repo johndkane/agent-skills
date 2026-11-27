@@ -45,7 +45,7 @@ language or use your app's skill syntax; see [Using skills](invoking.md).
 | --- | --- |
 | Browser control | Every read happens in the real X app, in your browser |
 | A browser already signed in to X | The skill never touches passwords or codes |
-| A local session | Cloud, sandboxed, and headless sessions can't run it |
+| A browser you can watch and take over | Your own browser is normal; a cloud agent's own browser works too if the skill asks first and you say yes for the run; a headless browser you can't see can't run it |
 | Your Following list | The population it audits; a named account is checked on its own profile instead |
 | Image, video, and audio checks (optional) | Need a setup that can actually show images, video frames, or produce transcripts; if yours can't, the skill says so and works with text only |
 | A progress file on your machine | Keeps the agreed settings, verdicts, and waiting list in `~/.x-following-audit/`; without one it still works, it just can't resume |

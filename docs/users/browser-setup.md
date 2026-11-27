@@ -41,9 +41,13 @@ set it up yourself while it waits. Here is what it will do, and why.
   with — not a hidden window.
 - **You are signed in to X in it**, with your own password and 2FA. The skill
   never touches credentials.
-- **Local only.** A cloud or sandboxed session — where the agent runs on
-  someone else's machine — can't run these skills at all. If that's your
-  setup, the skill says so plainly instead of half-working.
+- **A browser you can watch.** You can see what the agent does and take the
+  browser over at any moment. A browser on your own machine is the normal
+  case. A browser on the agent's side — for example a cloud agent's built-in
+  browser — works too, but only if the skill asks first and you say yes for
+  that run: your X session then lives on that machine while it works, and
+  signing in from a datacenter can draw more login checks. A headless browser
+  you can't see can't run these skills at all.
 
 ## Finding the official guide yourself
 
@@ -69,7 +73,9 @@ instead of trusting the old link.
 | --- | --- | --- |
 | ZCode (Z.ai) | Settings → MCP Servers; bundled browser automation | zcode.z.ai/en/docs |
 | Claude Code (Anthropic) | Claude in Chrome, or MCP servers | code.claude.com/docs/en/chrome, code.claude.com/docs/en/mcp |
-| Codex CLI (OpenAI) | MCP servers | developers.openai.com/codex/mcp |
+| Codex CLI (OpenAI) | Official Chrome extension, or MCP servers | developers.openai.com/learn/codex, developers.openai.com/codex/mcp |
+| Devin (Cognition) | Built-in browser: watch and take over from the session; you sign in; profiles can be saved | docs.devin.ai/work-with-devin/devin-session-tools, docs.devin.ai/work-with-devin/browser-auth |
+| ChatGPT desktop app (OpenAI) | Built-in browser tool (separate profile — sign in inside the task) | learn.chatgpt.com/docs/browser |
 | Gemini CLI (Google) | MCP servers | github.com/google-gemini/gemini-cli |
 | OpenCode | MCP servers in config | opencode.ai/docs/config |
 | Cursor | Tools & Integrations → MCP | cursor.com/docs/mcp |
@@ -83,8 +89,11 @@ instead of trusting the old link.
   setup. Sign in yourself; the skill waits and never asks for your password.
 - **"Pages won't load"** — a hidden or background tab pauses rendering. Keep
   the browser window visible.
-- **"It says the session can't run it"** — the agent is running in the cloud
-  or a sandbox. Run it locally on your machine.
+- **"It says browser control is blocked"** — the app's sandbox or approval
+  settings are stopping the browser, a known situation. The skill should name
+  what is blocked and walk you through the fix — a setting or your app's
+  official browser extension — and never try to sneak past it. If it still
+  can't get control, run it where browser control works.
 - **"It asks to install something"** — read the one-line description first;
   installs happen only with your yes, and you can always say no and set it
   up yourself instead.

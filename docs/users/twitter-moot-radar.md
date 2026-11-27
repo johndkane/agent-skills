@@ -38,7 +38,7 @@ approval, name by name.
 | --- | --- |
 | Browser control | Every read and action happens in the real X app, in your browser |
 | A browser already signed in to X | The skill never touches passwords or codes |
-| A local session | Cloud, sandboxed, and headless sessions can't run it |
+| A browser you can watch and take over | Your own browser is normal; a cloud agent's own browser works too if the skill asks first and you say yes for the run; a headless browser you can't see can't run it |
 | Image, video, and audio checks (optional) | Need a setup that can actually show images, video frames, or produce transcripts; if yours can't, the skill says so and works with text only |
 | A progress file on your machine | Keeps your moot list, its findings, and your decisions in `~/.x-moot-radar/`; without one it still works, it just can't resume |
 

@@ -17,12 +17,13 @@ description: >-
   for brands or marketers. Not for mass unfollowing, growth hacking, or
   engagement farming.
 compatibility: >-
-  Needs interactive browser control and a browser session already signed in to
-  X, plus optional local file write for cross-run state. For optional image,
-  video-frame, or transcript evidence, the model and browser tool must return
-  it; otherwise the run stays text-only. Must run locally on the user's
-  machine; cloud, sandboxed, or headless sessions without browser access
-  cannot complete it. Without browser control, the run offers guided setup.
+  Needs interactive browser control: a real browser the user can watch and
+  take over, signed in to X by the user, via the host's own browser tool, a
+  browser-control extension, or an MCP browser server. A browser off the
+  user's machine needs the user's yes; a blocked sandbox is named, never
+  fought. Optional local file write for cross-run state. Optional image,
+  video-frame, or transcript evidence needs a model and browser tool that
+  returns it, else text-only. Without control, guided setup.
 ---
 
 # X/Twitter Following Audit
@@ -88,10 +89,12 @@ background.
 
 ## Step 0 — Confirm browser control
 
-1. Check the browser tool's status; no tabs is fine — open one.
+1. Discover the host's browser mechanism — its own browser tool, a
+   browser-control extension, or an MCP browser server — and check its status;
+   no tabs is fine — open one.
 2. Open X in a tab you created and keep it visible; hidden tabs pause rendering.
 3. Prove control: navigate, read text back, screenshot.
-4. Control missing: run the shared browser-setup flow in
+4. Control missing or blocked: run the shared browser-setup flow in
    [references/twitter-shared.md](references/twitter-shared.md) — offer a
    step-by-step walk-through, the short version, or self-setup; guide from
    official vendor documentation read this run; continue only on a passed

@@ -29,6 +29,10 @@ Session scraps belong in `lode/tmp/`, which is git-ignored.
   separately.
 - Persist progress and follow-ups outside the repository so long tasks resume;
   prefer a clean stop and hand-off over pushing through a limit.
+- Conversations plan and triage; the repository records current state. Nothing
+  that references a conversation — discussions, decisions, reports, feedback,
+  or the people, accounts, and environments behind them — enters a file or
+  commit; documentation reads as if the conversation never happened.
 - On a destructive, irreversible, or external action, stop and ask.
 - Git writes stay opt-in even while others commit.
 
@@ -169,4 +173,6 @@ if the lode/ does not exist, ask the user if you should create one.
       project detail here.
 - [ ] No secrets, credentials, `.env` contents, or generated artifacts.
 - [ ] No real names, handles, emails, addresses, or private data; placeholders only.
+- [ ] No conversation-sourced content: no references to discussions, reports,
+      feedback, or the people, accounts, and environments behind them.
 - [ ] Runtime/account data outside the repository; git writes only on request.

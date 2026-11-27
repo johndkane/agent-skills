@@ -68,12 +68,19 @@ applies the group mechanics in [groups](groups.md).
     counts, quotes, queues, or acts on one, and one is neither a content row
     nor an empty scroll stop. Authored once in `twitter-shared.md` and copied
     verbatim.
-12. Setup guidance is authored once in `twitter-shared.md` as principles and
-    copied verbatim: a run that cannot get control says what is missing, asks
-    one question on guidance depth (step by step for a new user, short
-    version, or self-setup), names the environment, guides only from official
-    vendor documentation read that run, offers first-party options first,
-    takes the user's yes for every change to the machine, hands login to the
+12. Browser control is outcome-based, authored once in `twitter-shared.md` as
+    principles and copied verbatim: a run discovers the host's browser
+    mechanism (its own browser tool, a browser-control extension, or an MCP
+    browser server) and proves control through it — real pages it can navigate
+    and read, a view the user can watch and take over, a session the user
+    signs in to themselves. A run that cannot get control, or is blocked by
+    the host's sandbox or approval mode, says what is missing in plain words
+    and treats the block as setup, never fought or retried past; it asks one
+    question on guidance depth (step by step for a new user, short version, or
+    self-setup), names the environment, guides only from official vendor
+    documentation read that run, offers first-party options first, takes the
+    user's yes for every change to the machine, asks one plain consent
+    question before a browser not on the user's machine, hands login to the
     user, and continues only on a passed control proof. Vendor commands, URLs,
     and product names never enter a skill body or the shared file; dated
     examples live only on `browser-setup.md` and the user setup page.

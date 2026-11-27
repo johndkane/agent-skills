@@ -52,16 +52,26 @@ directory; its own `SKILL.md` carries every rule it needs.
 These are not style preferences. Each one exists because getting it wrong
 damages the user's account or produces a false claim.
 
-1. **Prove browser control first.** Confirm the tool, open a tab you keep, read
-   something from a page, and screenshot it before planning. If control is
-   missing, run the shared setup-guidance flow instead of improvising: say what
-   is missing, ask whether the user wants to be guided (step by step for a new
-   user, short version, or self-setup), name the environment, read the vendor's
-   official documentation live, offer first-party options first, take the
-   user's yes for every change to their machine, hand login to the user, and
-   continue only when the proof passes. The principles are the contract; the
-   vendor specifics are re-derived from the live docs every run, so no skill
-   hard-codes commands, URLs, or product names that will move.
+1. **Prove browser control first.** Discover the host's browser mechanism —
+   its own browser tool, a browser-control extension, or an MCP browser
+   server — then confirm the tool, open a tab you keep, read something from a
+   page, and screenshot it before planning. What counts is the outcome, not
+   the mechanism: real pages you can navigate and read, a view the user can
+   watch and take over, and a session the user signs in to themselves. A
+   browser on the agent's cloud machine is legitimate only with the user's
+   explicit yes, because the X session lives on that machine while it works
+   and a datacenter sign-in can draw more login challenges. If control is
+   missing, run the shared setup-guidance flow instead of improvising: say
+   what is missing, ask whether the user wants to be guided (step by step for
+   a new user, short version, or self-setup), name the environment, read the
+   vendor's official documentation live, offer first-party options first,
+   take the user's yes for every change to their machine, hand login to the
+   user, and continue only when the proof passes. A host sandbox or approval
+   mode that blocks browser control is named in plain words and treated as
+   setup — never fought, never worked around. The principles are the
+   contract; the vendor specifics are re-derived from the live docs every
+   run, so no skill hard-codes commands, URLs, or product names that will
+   move.
 2. **The live UI is the source of truth.** X changes labels, layouts, and menus
    without notice. Observe the current vocabulary every run. A memory of last
    run's UI is not evidence.

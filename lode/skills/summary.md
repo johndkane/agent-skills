@@ -98,12 +98,15 @@ verify before claiming, persist progress, stop cleanly — is in
   wait, long dwells for reading, an upper-range pause and hover before
   state-changing clicks, no padding for passive checks. Jitter timing, never
   verification; a challenge stops the run.
-- A browser-driven skill proves control first. When control is missing it runs
-  the shared setup-guidance flow — one question on guidance depth, official
-  vendor documentation read live that run, first-party options first, the
-  user's yes for every change, login handed off, proof before continuing —
-  authored as principles in the group's shared reference so no skill hard-codes
-  vendor specifics; dated examples live on
+- A browser-driven skill proves control first through the host's browser
+  mechanism — its own browser tool, a browser-control extension, or an MCP
+  browser server. When control is missing or blocked it runs the shared
+  setup-guidance flow — one question on guidance depth, official vendor
+  documentation read live that run, first-party options first, the user's yes
+  for every change, a plain consent question before any browser not on the
+  user's machine, a blocked sandbox named and never fought, login handed off,
+  proof before continuing — authored as principles in the group's shared
+  reference so no skill hard-codes vendor specifics; dated examples live on
   [browser setup](../../docs/skills/browser-setup.md) and expire.
 - An online skill stops on an access failure instead of inferring account state.
   Record an unreadable page as a verdict with a reason.
@@ -199,8 +202,9 @@ references. Their shared rules live in `references/twitter-shared.md`, copied
 verbatim from
 [`docs/skills/twitter-shared.md`](../../docs/skills/twitter-shared.md); the group
 index is [`docs/skills/skill-groups.md`](../../docs/skills/skill-groups.md). All
-open a run with a brief state line, prove browser control first and guide setup
-by the shared principles when it is missing, ask every question in the user's
+open a run with a brief state line, prove browser control first through the
+host's browser mechanism and guide setup by the shared principles when it is
+missing or blocked, ask every question in the user's
 language
 — one decision, plain words, the reason for asking, what each answer changes,
 examples from the user's own profile and history — link every handle and cited

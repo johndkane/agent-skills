@@ -140,6 +140,27 @@ refused or unavailable, the run continues on session state of the same shape,
 prints it for the user to verify, and accepts that the next run may repeat work;
 persistence is never a reason to stop.
 
+## Conversations never become content
+
+A conversation plans and triages; the repository records current state. Reports,
+feedback, decisions, and the people, accounts, and environments behind them stay
+in the conversation. Files and commits read as if the discussion never happened.
+The repository's only dated content is a deliberately dated snapshot section
+([`docs/skills/browser-setup.md`](../docs/skills/browser-setup.md)), sourced
+from public vendor documentation.
+
+```bash
+# sweep before handing off; excludes the sweep's own definition below
+git grep -n -i -e "as discussed" -e "we decided" -e "this conversation" \
+  -e "this session" -e "user reported" -e "the reporter" -e "in my testing" \
+  -- . ":(exclude)lode/practices.md"
+```
+
+Reason: the repository is public and permanent; a conversation is neither.
+Discussion-sourced text embeds a decision the reader cannot verify and a private
+context that outlives its accuracy. The report that prompts a change is triage;
+the change itself must stand alone.
+
 ## Expect mid-session changes
 
 The human may edit, commit, or restructure the repository while an agent works.

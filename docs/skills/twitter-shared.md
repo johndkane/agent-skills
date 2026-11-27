@@ -5,17 +5,24 @@ operative rule set; every member carries the same text.
 
 ## Browser control setup
 
-These skills see and click X in the user's own browser, so a run proves control
-before anything else: open X in a tab it created and keeps visible, navigate,
-read text back, screenshot. When control works, say nothing about setup — just
-prove it and move on. The setup guidance below is only for a run that cannot
-get control.
+These skills see and click X in a real browser the user can watch, so a run
+proves control before anything else: open X in a tab the run created and the
+user can see, navigate, read text back, screenshot. When control works, say
+nothing about setup — just prove it and move on. The setup guidance below is
+only for a run that cannot get control.
 
-When control is missing, say what is missing in plain words and ask one
-question: "Want me to walk you through setting this up? I can go step by step —
-good if this is all new to you — give you the short version, or you can set it
-up yourself and I'll wait." The answer sets only the depth of the guidance,
-never the rules. Then guide by these principles:
+First discover the browser mechanism the host offers, and prove control
+through it. Any of these counts: the host's own browser tool; a
+browser-control extension the host uses to drive a real browser; or an MCP
+browser server. What counts is the outcome, not the mechanism: real pages the
+run can navigate and read, a view the user can watch and take over, and a
+session the user signs in to themselves.
+
+When control is missing or blocked, say what is missing in plain words and ask
+one question: "Want me to walk you through setting this up? I can go step by
+step — good if this is all new to you — give you the short version, or you can
+set it up yourself and I'll wait." The answer sets only the depth of the
+guidance, never the rules. Then guide by these principles:
 
 - **Name the environment.** Say which app or agent the run is in; if the run
   does not know, ask "which app are you running me in?". An agent inside
@@ -27,14 +34,25 @@ never the rules. Then guide by these principles:
   search the vendor's own site for the feature rather than trusting an old
   link.
 - **First-party options first.** Offer the app's own built-in browser control
-  before anything else; if the app has none but accepts MCP — a standard way
-  to plug browser control into an assistant — offer the browser vendor's own
-  MCP server next. Say what each option does before the user picks.
-- **Require the outcome, not a recipe.** The setup must produce a real,
-  visible, local browser the user can see and interact with, in which they
-  sign in to X themselves. A headless, cloud, or sandboxed browser cannot
-  complete a run: say so plainly and stop instead of configuring something
-  that fails mid-run.
+  — its browser tool or its official browser extension — before anything
+  else; if the app has none but accepts MCP — a standard way to plug browser
+  control into an assistant — offer the browser vendor's own MCP server next.
+  Say what each option does before the user picks.
+- **Require the outcome, not a recipe.** The setup must produce a real browser
+  the user can see and take over, in which they sign in to X themselves. A
+  headless browser with no view the user can watch cannot complete a run: say
+  so plainly and stop instead of configuring something that fails mid-run.
+  When the only workable browser is not on the user's machine — the agent
+  itself runs in the cloud — ask one plain question first: the run's X session
+  would live on that machine while it works, and signing in from it can draw
+  more login challenges. The user either approves it for this run or sets up a
+  browser on their own machine instead.
+- **Name a sandbox, never fight one.** If the host's sandbox or approval mode
+  blocks browser control, say what is blocked in plain words and treat it as
+  setup: the user adjusts the host's settings or installs the host's official
+  browser bridge, guided from vendor documentation. Never install a browser
+  inside the sandbox, weaken or evade the sandbox, or retry silently past the
+  same block.
 - **The user's machine changes only with their yes.** Every install, settings
   edit, or restart is proposed first, in plain words, with what it does and
   why it is needed.

@@ -78,6 +78,15 @@ or `example.com`. Real identity and account data belong in runtime state outside
 the repository. The full rule is in
 [`AGENTS.md`](../../AGENTS.md#secrets-and-personal-data).
 
+## Conversations stay out of the repository
+
+Conversations with an agent exist to plan and triage; the repository records
+current state. Reports, feedback, decisions, and the people or environments
+behind them never enter files or commits — documentation reads as if the
+discussion never happened. The rule is in
+[`AGENTS.md`](../../AGENTS.md#working-rules), with the hand-off sweep in the
+[practices](../../lode/practices.md).
+
 ## Documentation surfaces
 
 | Surface | Owner | Purpose |

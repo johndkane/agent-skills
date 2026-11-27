@@ -19,13 +19,19 @@ never names a vendor command, flag, URL, or menu path. Instead the run:
    or asks which app that is.
 2. Reads that vendor's own documentation **live, this run**, and guides from
    what it actually says. A remembered link or command is labelled unverified.
-3. Offers first-party options first: the app's built-in browser control, then
-   the browser vendor's own MCP server, each translated inline for a new user.
-4. Requires the outcome, not a recipe: a real, visible, local browser in which
-   the user signs in themselves.
-5. Gets the user's yes before every change to their machine, and hands off
+3. Offers first-party options first: the app's built-in browser control — its
+   browser tool or its official browser extension — then the browser vendor's
+   own MCP server, each translated inline for a new user.
+4. Requires the outcome, not a recipe: a real browser the user can watch and
+   take over, in which they sign in themselves. A browser on the agent's cloud
+   machine is allowed only with the user's explicit yes for that run, asked in
+   plain words; a headless browser with no view the user can watch is a stop.
+5. Names a sandbox, never fights one: if the host's sandbox or approval mode
+   blocks browser control, that is setup guidance (a host setting or the
+   host's official browser bridge), never something to evade or retry past.
+6. Gets the user's yes before every change to their machine, and hands off
    login and challenges.
-6. Closes on proof: the run continues only when the same control proof passes.
+7. Closes on proof: the run continues only when the same control proof passes.
 
 ```mermaid
 flowchart LR
@@ -61,12 +67,27 @@ before quoting any of them anywhere; expect these to expire.
 | Browser control via MCP (multi-browser automation) | Microsoft (Playwright MCP) | github.com/microsoft/playwright-mcp |
 | Chrome control via MCP | Chrome DevTools team (Chrome DevTools MCP) | github.com/ChromeDevTools/chrome-devtools-mcp |
 | MCP servers in Claude Code; Claude in Chrome extension | Anthropic | code.claude.com/docs/en/mcp, code.claude.com/docs/en/chrome |
+| Native browser tool: sessions the user can watch and take over, sign-ins completed by the user, saved browser profiles | Cognition (Devin) | docs.devin.ai/work-with-devin/devin-session-tools, docs.devin.ai/work-with-devin/browser-auth |
+| Browser tool in the ChatGPT desktop app and cloud ("Browser isn't available in Codex CLI or the Codex IDE extension"); Codex browser automation via the official Chrome extension | OpenAI | learn.chatgpt.com/docs/browser, developers.openai.com/learn/codex |
 | MCP servers in Codex CLI | OpenAI | developers.openai.com/codex/mcp |
 | MCP servers in Gemini CLI | Google | github.com/google-gemini/gemini-cli (docs/tools/mcp-server.md) |
 | MCP servers in OpenCode | OpenCode | opencode.ai/docs/config |
 | MCP servers in Cursor | Cursor | cursor.com/docs/mcp |
 | MCP servers in VS Code with Copilot | Microsoft | code.visualstudio.com/docs/copilot/chat/mcp-servers |
 | MCP servers and bundled browser automation in ZCode | Z.ai | zcode.z.ai/en/docs/welcome, zcode.z.ai/en/docs/mcp-services |
+
+Snapshot notes, recorded with the table above and equally subject to expiry:
+
+- **Codex CLI on Linux**: browser automation runs through the CLI's sandbox
+  layer (Landlock/bubblewrap/AppArmor), and browser failures under it are a
+  known, documented failure class (github.com/openai/codex issues #6828,
+  #29242). A run that hits this names the block and treats it as setup —
+  the user relaxes the host's approval mode or installs the official Chrome
+  extension — it never retries silently past it.
+- **Cloud agents (Devin)**: the browser is the agent's own, on the vendor's
+  machine, watched and taken over from the session UI; sign-ins are completed
+  by the user there, and saved profiles persist them across sessions. The
+  consent question decides whether the run proceeds there.
 
 The human-facing walkthrough for new users is
 [`docs/users/browser-setup.md`](../users/browser-setup.md), which carries the
